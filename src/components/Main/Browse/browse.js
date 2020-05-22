@@ -2,6 +2,9 @@ import React from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import ImageButton from "./ImageButton/image-button";
 import LittleImageButton from "./ImageButton/little-image-button";
+import PopularSkills from "./PopularSkill/popular-skill";
+import Path from "./Paths/path";
+import TopAuthor from "./TopAuthors/top-author";
 
 const Browse = () => {
     const dat = [
@@ -42,6 +45,9 @@ const Browse = () => {
             <ScrollView horizontal={true} style={{marginBottom:20,}}>
                 {getLittleScrollView(dat)}
             </ScrollView>
+            <PopularSkills/>
+            <Path/>
+            <TopAuthor/>
         </ScrollView>
 
     );
