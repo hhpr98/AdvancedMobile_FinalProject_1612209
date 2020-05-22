@@ -4,13 +4,14 @@ import Home from "./src/components/Main/Home/home";
 import Download from "./src/components/Main/Download/download";
 import Browse from "./src/components/Main/Browse/browse";
 import Search from "./src/components/Main/Search/search";
+import Login from "./src/components/Authen/Login/login";
 
 export default function App() {
     return (
         <>
             <StatusBar barStyle="light-content"/>
             <SafeAreaView style={styles.main}>
-                <Browse/>
+                <Login/>
             </SafeAreaView>
         </>
     );
