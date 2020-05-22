@@ -5,6 +5,7 @@ import LittleImageButton from "./ImageButton/little-image-button";
 import PopularSkills from "./PopularSkill/popular-skill";
 import Path from "./Paths/path";
 import TopAuthor from "./TopAuthors/top-author";
+import SignInRequired from "./SignInRequired/sign-in-required";
 
 const Browse = () => {
     const dat = [
@@ -40,6 +41,7 @@ const Browse = () => {
 
     return (
         <ScrollView style={styles.browse}>
+            <SignInRequired/>
             <ImageButton title1='NEW' title2='RELEASES'/>
             <ImageButton title1='RECOMMENDED' title2='FOR YOU'/>
             <ScrollView horizontal={true} style={{marginBottom:20,}}>
