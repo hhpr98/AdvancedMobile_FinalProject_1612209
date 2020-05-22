@@ -1,21 +1,22 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {ScrollView, View, Text, StyleSheet} from 'react-native';
+import SectionCourses from "./SectionCourses/section-courses";
 
 const Home = () => {
     return (
-        <View>
-
-        </View>
+        <ScrollView style={styles.home}>
+            <SectionCourses title='Software development'/>
+            <SectionCourses title='IT operations'/>
+            <SectionCourses title='Data professional'/>
+            <SectionCourses title='Security professional'/>
+        </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
+    home: {
+        backgroundColor: 'black',
+    }
 });
 
 export default Home;
