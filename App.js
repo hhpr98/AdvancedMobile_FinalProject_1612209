@@ -9,7 +9,7 @@ export default function App() {
         <>
             <StatusBar barStyle="light-content"/>
             <SafeAreaView style={styles.main}>
-                <Home/>
+                <Browse/>
             </SafeAreaView>
         </>
     );
