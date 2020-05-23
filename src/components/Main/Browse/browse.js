@@ -7,7 +7,7 @@ import Path from "./Paths/path";
 import TopAuthor from "./TopAuthors/top-author";
 import SignInRequired from "./SignInRequired/sign-in-required";
 
-const Browse = () => {
+const Browse = (props) => {
     const dat = [
         {
             d1: 'CONFERENCES',
@@ -41,7 +41,7 @@ const Browse = () => {
 
     return (
         <ScrollView style={styles.browse}>
-            <SignInRequired/>
+            <SignInRequired navigation={props.navigation}/>
             <ImageButton title1='NEW' title2='RELEASES'/>
             <ImageButton title1='RECOMMENDED' title2='FOR YOU'/>
             <ScrollView horizontal={true} style={{marginBottom:20,}}>

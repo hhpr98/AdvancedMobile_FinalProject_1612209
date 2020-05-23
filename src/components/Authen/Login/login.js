@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, Image, TextInput, TouchableOpacity} from 'react-native';
 
-const Login = () => {
+const Login = (props) => {
     const [user,setUser] = useState('');
     const [password,setPassword] = useState('');
 
@@ -34,11 +34,15 @@ const Login = () => {
 
                 <View style={styles.viewInsert2}/>
 
-                <TouchableOpacity style={styles.buttonSignIn}>
+                <TouchableOpacity style={styles.buttonSignIn}
+                                  onPress={()=>props.navigation.navigate('Home')}
+                >
                     <Text style={styles.textSignIn}>SIGN IN</Text>
                 </TouchableOpacity>
                 <View style={styles.viewInsert}/>
-                <TouchableOpacity style={styles.buttonForgotAndSignUp}>
+                <TouchableOpacity style={styles.buttonForgotAndSignUp}
+                                  onPress={()=>props.navigation.navigate('ForgotPassword')}
+                >
                     <Text style={styles.textOrther}>FORGOT PASSWORD</Text>
                 </TouchableOpacity>
                 <View style={styles.viewInsert}/>
@@ -46,7 +50,9 @@ const Login = () => {
                     <Text style={styles.textOrther}>USE SINGLE SIGN-ON (SSO)</Text>
                 </TouchableOpacity>
                 <View style={styles.viewInsert}/>
-                <TouchableOpacity style={styles.buttonForgotAndSignUp}>
+                <TouchableOpacity style={styles.buttonForgotAndSignUp}
+                                  onPress={()=>props.navigation.navigate('Register')}
+                >
                     <Text style={styles.textOrther}>SIGN UP FREE</Text>
                 </TouchableOpacity>
 

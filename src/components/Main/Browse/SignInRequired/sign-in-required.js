@@ -1,14 +1,17 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
-const SignInRequired = () => {
+const SignInRequired = (props) => {
 
     return (
         <View style={styles.view}>
             <Text style={styles.text1}>Sign in to skill up today</Text>
             <Text style={styles.text2}>Keep your skills up-to-date with access to </Text>
             <Text style={styles.text2}>thounsands of courses by industry experts.</Text>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity
+                style={styles.button}
+                onPress={() => props.navigation.navigate('Login')}
+            >
                 <Text style={styles.text3}>SIGN IN TO START WATCHING</Text>
             </TouchableOpacity>
         </View>
