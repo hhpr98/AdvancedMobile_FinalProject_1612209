@@ -48,7 +48,7 @@ const SectionCourses = (props) => {
     };
 
     return (
-        <View>
+        <View style={styles.cons}>
             <View style={styles.view}>
                 <Text style={styles.textTitle}>{props.title}</Text>
                 <TouchableOpacity>
@@ -65,6 +65,9 @@ const SectionCourses = (props) => {
 };
 
 const styles = StyleSheet.create({
+    cons: {
+        marginBottom: 10,
+    },
     view: {
         flexDirection:'row',
         marginLeft: 10,

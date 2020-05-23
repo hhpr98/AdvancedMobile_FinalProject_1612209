@@ -19,7 +19,6 @@ const Home = () => {
 const styles = StyleSheet.create({
     home: {
         backgroundColor: 'black',
-
     }
 });
 
