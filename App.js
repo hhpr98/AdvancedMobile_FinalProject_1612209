@@ -15,6 +15,7 @@ import ForgotPassword from "./src/components/Authen/ForgotPassword/forgot-passwo
 import Profile from "./src/components/Profile/profile";
 import Setting from "./src/components/RelativeComponent/Settings/settings";
 import CourseDetail from "./src/components/Courses/CourseDetail/course-detail";
+import Subscription from "./src/components/RelativeComponent/Subcription/subcription";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -103,6 +104,7 @@ export default function App() {
                     <Stack.Screen name="Register" component={Register}/>
                     <Stack.Screen name="Profile" component={Profile}/>
                     <Stack.Screen name="CourseDetail" component={CourseDetail}/>
+                    <Stack.Screen name="Subscription" component={Subscription}/>
                 </Stack.Navigator>
             </NavigationContainer>
         </>

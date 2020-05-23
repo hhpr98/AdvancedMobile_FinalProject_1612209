@@ -12,8 +12,10 @@ const Setting = (props) => {
                 <Text style={styles.textHead}>Nguyễn Hữu Hòa</Text>
             </TouchableOpacity>
             <Text style={styles.textBig}>Account</Text>
-            <Text style={styles.textBig}>Subcription</Text>
-            <Text style={styles.textLittle}>My youtube channel</Text>
+            <TouchableOpacity onPress={()=>props.navigation.navigate('Subscription')}>
+                <Text style={styles.textBig}>Subcription</Text>
+                <Text style={styles.textLittle}>My youtube channel</Text>
+            </TouchableOpacity>
             <Text style={styles.textBig}>Comunicate Preferences</Text>
             <View style={styles.line}/>
             <Text style={styles.textBig}>Default caption language</Text>
