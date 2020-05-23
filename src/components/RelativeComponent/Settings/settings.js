@@ -1,18 +1,21 @@
 import React from 'react';
 import {StyleSheet, View, Text, Image, ScrollView, TouchableOpacity} from 'react-native';
 
-const Setting = () => {
+const Setting = (props) => {
     return (
         <ScrollView style={styles.home}>
-            <View style={styles.head}>
-                <Image source={require('../../../../assets/ic_people_author.png')} style={styles.image}/>
+            <TouchableOpacity style={styles.head} onPress={()=>props.navigation.navigate('Profile')}>
+                <Image
+                    source={require('../../../../assets/ic_people_author.png')}
+                    style={styles.image}
+                />
                 <Text style={styles.textHead}>Nguyễn Hữu Hòa</Text>
-            </View>
+            </TouchableOpacity>
             <Text style={styles.textBig}>Account</Text>
             <Text style={styles.textBig}>Subcription</Text>
             <Text style={styles.textLittle}>My youtube channel</Text>
             <Text style={styles.textBig}>Comunicate Preferences</Text>
-            <View style={styles.line}></View>
+            <View style={styles.line}/>
             <Text style={styles.textBig}>Default caption language</Text>
             <Text style={styles.textLittle}>English</Text>
             <Text style={styles.textBig}>Require Wi-Fi for streaming</Text>
@@ -26,12 +29,12 @@ const Setting = () => {
             <Text style={styles.textBig}>Caption</Text>
             <Text style={styles.textBig}>Notifications</Text>
             <Text style={styles.textBig}>Advanced Options</Text>
-            <View style={styles.line}></View>
+            <View style={styles.line}/>
             <Text style={styles.textBig}>App version</Text>
             <Text style={styles.textLittle}>0.1.3</Text>
-            <View style={styles.line}></View>
+            <View style={styles.line}/>
 
-            <TouchableOpacity style={styles.buttonSignOut}>
+            <TouchableOpacity style={styles.buttonSignOut} onPress={()=>alert('Sign out clicked !')}>
                 <Text style={styles.textSignOut}>SIGN OUT</Text>
             </TouchableOpacity>
         </ScrollView>

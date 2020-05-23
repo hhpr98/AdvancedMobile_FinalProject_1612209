@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {SafeAreaView, StatusBar, StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, StatusBar, StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -14,6 +14,7 @@ import Register from "./src/components/Authen/Register/register";
 import ForgotPassword from "./src/components/Authen/ForgotPassword/forgot-password";
 import Profile from "./src/components/Profile/profile";
 import Setting from "./src/components/RelativeComponent/Settings/settings";
+import CourseDetail from "./src/components/Courses/CourseDetail/course-detail";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -40,6 +41,9 @@ export default function App() {
                         else if (route.name === 'Search') {
                             iconName = focused ? 'ios-search' : 'md-search';
                         }
+                        else if (route.name === 'Setting') {
+                            iconName = focused ? 'md-settings' : 'ios-settings';
+                        }
 
                         // You can return any component that you like here!
                         return <Ionicons name={iconName} size={size} color={color} />;
@@ -56,6 +60,7 @@ export default function App() {
                 <Tab.Screen name="Download" component={Download} />
                 <Tab.Screen name="Browse" component={Browse} />
                 <Tab.Screen name="Search" component={Search} />
+                <Tab.Screen name="Setting" component={Setting} />
             </Tab.Navigator>
         )
     };
@@ -64,71 +69,40 @@ export default function App() {
         <>
             <StatusBar barStyle="light-content"/>
             <NavigationContainer style={styles.main}>
-                <Stack.Navigator>
-                    <Stack.Screen
-                        options={{
-                            //title: tabName,
-                            headerStyle: {
-                                backgroundColor: '#282828',
-                            },
-                            headerTintColor: '#fff',
-                            headerTitleStyle: {
-                                fontWeight: 'bold',
-                            },
-                        }}
-                        name="Home"
-                        component={tabBar} />
-                    <Stack.Screen
-                        options={{
-                            headerStyle: {
-                                backgroundColor: '#282828',
-                            },
-                            headerTintColor: '#fff',
-                            headerTitleStyle: {
-                                fontWeight: 'bold',
-                            },
-                        }}
-                        name="Login"
-                        component={Login}/>
-                    <Stack.Screen
-                        options={{
-                            headerStyle: {
-                                backgroundColor: '#282828',
-                            },
-                            headerTintColor: '#fff',
-                            headerTitleStyle: {
-                                fontWeight: 'bold',
-                            },
-                        }}
-                        name="ForgotPassword"
-                        component={ForgotPassword}
-                    />
-                    <Stack.Screen
-                        options={{
-                            headerStyle: {
-                                backgroundColor: '#282828',
-                            },
-                            headerTintColor: '#fff',
-                            headerTitleStyle: {
-                                fontWeight: 'bold',
-                            },
-                        }}
-                        name="Register"
-                        component={Register}
-                    />
-                    <Stack.Screen
-                        options={{
-                            headerStyle: {
-                                backgroundColor: '#282828',
-                            },
-                            headerTintColor: '#fff',
-                            headerTitleStyle: {
-                                fontWeight: 'bold',
-                            },
-                        }}
-                        name="Profile"
-                        component={Profile}
-                    />
+                <Stack.Navigator
+                    screenOptions={{
+                    //title: tabName,
+                    headerStyle: {
+                        backgroundColor: '#282828',
+                    },
+                    headerTintColor: '#fff',
+                    headerTitleStyle: {
+                        fontWeight: 'bold',
+                    },
+                    /*headerRight: () => {
+                        return (
+                            <TouchableOpacity
+                                onPress={() => {this.props.navigation.navigate('Profile')}}
+                            >
+                                <Image
+                                    source={require('./assets/ic_people_author.png')}
+                                    style={{
+                                        height:35,
+                                        width:35,
+                                        borderRadius:50,
+                                        backgroundColor: 'lightblue',
+                                        marginRight: 20,
+                                    }}/>
+                            </TouchableOpacity>
+                        );
+                    }*/
+                    }}>
+                    <Stack.Screen name="Home" component={tabBar}/>
+                    <Stack.Screen name="Login" component={Login}/>
+                    <Stack.Screen name="ForgotPassword" component={ForgotPassword}/>
+                    <Stack.Screen name="Register" component={Register}/>
+                    <Stack.Screen name="Profile" component={Profile}/>
+                    <Stack.Screen name="CourseDetail" component={CourseDetail}/>
                 </Stack.Navigator>
             </NavigationContainer>
         </>

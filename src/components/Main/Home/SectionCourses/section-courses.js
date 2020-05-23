@@ -43,7 +43,11 @@ const SectionCourses = (props) => {
     ];
 
     const renderListItems = (courses) => {
-        return courses.map( item => <SectionCoursesItem item={item}/>);
+        return courses.map( item =>
+            <TouchableOpacity onPress={()=>props.navigation.navigate('CourseDetail',item)}>
+                <SectionCoursesItem item={item}/>
+            </TouchableOpacity>
+        );
         //return courses.map( item => alert('have one courses'));
     };
 
@@ -51,7 +55,7 @@ const SectionCourses = (props) => {
         <View style={styles.cons}>
             <View style={styles.view}>
                 <Text style={styles.textTitle}>{props.title}</Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>alert('See all clicked !')}>
                     <Text style={styles.textButton}>See all ></Text>
                 </TouchableOpacity>
             </View>
