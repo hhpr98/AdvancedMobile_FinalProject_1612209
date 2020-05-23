@@ -8,13 +8,14 @@ import Login from "./src/components/Authen/Login/login";
 import Register from "./src/components/Authen/Register/register";
 import ForgotPassword from "./src/components/Authen/ForgotPassword/forgot-password";
 import Profile from "./src/components/Profile/profile";
+import Setting from "./src/components/RelativeComponent/Settings/settings";
 
 export default function App() {
     return (
         <>
             <StatusBar barStyle="light-content"/>
             <SafeAreaView style={styles.main}>
-                <Profile/>
+                <Setting/>
             </SafeAreaView>
         </>
     );
