@@ -16,6 +16,7 @@ import Profile from "./src/components/Profile/profile";
 import Setting from "./src/components/RelativeComponent/Settings/settings";
 import CourseDetail from "./src/components/Courses/CourseDetail/course-detail";
 import Subscription from "./src/components/RelativeComponent/Subcription/subcription";
+import Contact from "./src/components/RelativeComponent/Contact/contact";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -105,6 +106,7 @@ export default function App() {
                     <Stack.Screen name="Profile" component={Profile}/>
                     <Stack.Screen name="CourseDetail" component={CourseDetail}/>
                     <Stack.Screen name="Subscription" component={Subscription}/>
+                    <Stack.Screen name="Contact" component={Contact}/>
                 </Stack.Navigator>
             </NavigationContainer>
         </>
