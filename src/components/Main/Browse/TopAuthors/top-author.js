@@ -6,7 +6,7 @@ const TopAuthor = () => {
 
     const getAuthorList = (authors) => {
         return authors.map(item =>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>alert(item)}>
                 <Image style={styles.image} source={require('../../../../../assets/ic_people_author.png')}/>
                 <Text style={styles.textAuthor}>{item}</Text>
             </TouchableOpacity>

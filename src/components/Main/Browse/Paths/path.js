@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
 import PathItem from "./PathItem/path-item";
 
-const Path = () => {
+const Path = (props) => {
     const data = [
         {
             name: 'Security in Google Cloud',
@@ -27,14 +27,18 @@ const Path = () => {
     ];
 
     const getPathItem = (paths) => {
-        return paths.map(item => <PathItem item={item}/>)
+        return paths.map(item =>
+        <TouchableOpacity onPress={()=>alert('path clicked!')}>
+            <PathItem item={item}/>
+        </TouchableOpacity>
+    )
     };
 
     return (
         <View>
             <View style={styles.view}>
                 <Text style={styles.textTitle}>Path</Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>alert('See all clicked!')}>
                     <Text style={styles.textButton}>See all ></Text>
                 </TouchableOpacity>
             </View>

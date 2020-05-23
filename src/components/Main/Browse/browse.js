@@ -48,8 +48,8 @@ const Browse = (props) => {
                 {getLittleScrollView(dat)}
             </ScrollView>
             <PopularSkills/>
-            <Path/>
-            <TopAuthor/>
+            <Path navigation={props.navigation}/>
+            <TopAuthor navigation={props.navigation}/>
         </ScrollView>
 
     );
