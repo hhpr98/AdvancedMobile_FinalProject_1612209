@@ -10,9 +10,16 @@ const SectionCoursesItem = (props) => {
       return item.imageURL;
     };
 
+    /*
+    <Image source={require('../../../../../assets/icons8_java.png')} style={styles.image}/>
+     */
+
     return (
         <View style={styles.item}>
-            <Image source={require('../../../../../assets/icons8_java.png')} style={styles.image}/>
+            <Image
+                source={{uri: getImageURL(props.item)}}
+                style={styles.image}
+            />
             <View style={{margin:5,}}>
                 <Text style={styles.text1}>{props.item.title}</Text>
                 <Text style={styles.text2}>{props.item.author}</Text>
@@ -40,7 +47,8 @@ const styles = StyleSheet.create({
     },
     image: {
         width: 200,
-        height: 100
+        height: 100,
+        resizeMode: 'stretch',
     }
 });
 
