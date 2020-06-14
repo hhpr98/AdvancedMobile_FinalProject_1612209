@@ -57,7 +57,7 @@ const Favorite = () => {
     return (
         <View style={styles.home}>
             <View style={{flexDirection:'row',justifyContent: 'space-around',}}>
-                <Text style={styles.text1}>3 courses (440MB)</Text>
+                <Text style={styles.text1}>4 courses (440MB)</Text>
                 <TouchableOpacity
                     onPress={()=>alert('remove!')}
                 >
