@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Text, Image, ScrollView, TouchableOpacity} from 'react-native';
+import ToggleSwitch from 'toggle-switch-react-native';
 
 const Setting = (props) => {
     return (
@@ -24,6 +25,15 @@ const Setting = (props) => {
             <Text style={styles.textBig}>Default caption language</Text>
             <Text style={styles.textLittle}>English</Text>
             <Text style={styles.textBig}>Require Wi-Fi for streaming</Text>
+            <ToggleSwitch
+                isOn={false}
+                onColor="green"
+                offColor="red"
+                label="Example label"
+                labelStyle={{ color: "black", fontWeight: "900" }}
+                size="small"
+                onToggle={isOn => console.log("changed to : ", isOn)}
+            />
             <Text style={styles.textBig}>Require Wi-Fi for downloading</Text>
             <Text style={styles.textBig}>Recommended content push notifications</Text>
             <Text style={styles.textLittle}>Receive notifications about recommended contents.</Text>
