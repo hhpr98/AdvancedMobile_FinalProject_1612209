@@ -17,6 +17,7 @@ import Setting from "./src/components/RelativeComponent/Settings/settings";
 import CourseDetail from "./src/components/Courses/CourseDetail/course-detail";
 import Subscription from "./src/components/RelativeComponent/Subcription/subcription";
 import Contact from "./src/components/RelativeComponent/Contact/contact";
+import Favorite from "./src/components/Main/Favorite/favorite";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -36,6 +37,9 @@ export default function App() {
                         }
                         else if (route.name === 'Download') {
                             iconName = focused ? 'md-cloud-download' : 'md-download';
+                        }
+                        else if (route.name == 'Favorite') {
+                            iconName = focused ? 'ios-heart' : 'md-heart';
                         }
                         else if (route.name === 'Browse') {
                             iconName = focused ? 'ios-list-box' : 'ios-list';
@@ -59,7 +63,7 @@ export default function App() {
                 }}
             >
                 <Tab.Screen name="Home" component={Home} />
-                <Tab.Screen name="Download" component={Download} />
+                <Tab.Screen name="Favorite" component={Favorite} />
                 <Tab.Screen name="Browse" component={Browse} />
                 <Tab.Screen name="Search" component={Search} />
                 <Tab.Screen name="Setting" component={Setting} />
