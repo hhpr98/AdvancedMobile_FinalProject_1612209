@@ -24,17 +24,28 @@ const Setting = (props) => {
             <View style={styles.line}/>
             <Text style={styles.textBig}>Default caption language</Text>
             <Text style={styles.textLittle}>English</Text>
-            <Text style={styles.textBig}>Require Wi-Fi for streaming</Text>
-            <ToggleSwitch
-                isOn={false}
-                onColor="green"
-                offColor="red"
-                label="Example label"
-                labelStyle={{ color: "black", fontWeight: "900" }}
-                size="small"
-                onToggle={isOn => console.log("changed to : ", isOn)}
-            />
-            <Text style={styles.textBig}>Require Wi-Fi for downloading</Text>
+            <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+                <Text style={styles.textBig}>Require Wi-Fi for streaming</Text>
+                <ToggleSwitch style={{marginRight: 50,}}
+                              isOn={true}
+                              onColor="#3399FF"
+                              offColor="black"
+                              labelStyle={styles.textBig}
+                              size="small"
+                              onToggle={isOn => isOn = !isOn}
+                />
+            </View>
+            <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+                <Text style={styles.textBig}>Require Wi-Fi for downloading</Text>
+                <ToggleSwitch style={{marginRight: 50,}}
+                              isOn={true}
+                              onColor="#3399FF"
+                              offColor="black"
+                              labelStyle={styles.textBig}
+                              size="small"
+                              onToggle={isOn => isOn = !isOn}
+                />
+            </View>
             <Text style={styles.textBig}>Recommended content push notifications</Text>
             <Text style={styles.textLittle}>Receive notifications about recommended contents.</Text>
             <Text style={styles.textBig}>Show quiz at the end of video</Text>
