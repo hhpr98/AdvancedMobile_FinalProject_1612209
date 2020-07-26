@@ -95,12 +95,12 @@ const CourseDetail = (props) => {
             <Text style={styles.textInfor}>{item.level} . {item.released} . {item.duration}</Text>
             <Text style={styles.textContent}>This course is free for you. Let's enjoy it. Good luck for you!</Text>
             <TouchableOpacity style={styles.button}
-                              onPress={()=>alert('clicked !')}
+                              onPress={() => alert('clicked !')}
             >
                 <Text style={styles.textSignIn}>Take a learning check</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button}
-                              onPress={()=>alert('clicked !')}
+                              onPress={() => alert('clicked !')}
             >
                 <Text style={styles.textSignIn}>View related paths & courses</Text>
             </TouchableOpacity>
@@ -151,16 +151,16 @@ const styles = StyleSheet.create({
     textContent: {
         color: 'white',
         fontSize: 17,
-        margin:20,
+        margin: 20,
     },
     button: {
         backgroundColor: '#3399FF',
         height: 40,
         borderRadius: 5,
         justifyContent: 'center',
-        marginLeft:30,
-        marginRight:30,
-        marginBottom:30,
+        marginLeft: 30,
+        marginRight: 30,
+        marginBottom: 30,
     },
     textSignIn: {
         color: 'white',

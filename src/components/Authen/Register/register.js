@@ -2,15 +2,15 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView} from 'react-native';
 
 const Register = (props) => {
-    const [email,setEmail] = useState('');
-    const [firstname,setFirstname] = useState('');
-    const [lastname,setLastname] = useState('');
-    const [company,setCompany] = useState('');
-    const [phone,setPhone] = useState('');
-    const [country,setCountry] = useState('');
-    const [user,setUser] = useState('');
-    const [password,setPassword] = useState('');
-    const [rePassword,setRePassword] = useState('');
+    const [email, setEmail] = useState('');
+    const [firstname, setFirstname] = useState('');
+    const [lastname, setLastname] = useState('');
+    const [company, setCompany] = useState('');
+    const [phone, setPhone] = useState('');
+    const [country, setCountry] = useState('');
+    const [user, setUser] = useState('');
+    const [password, setPassword] = useState('');
+    const [rePassword, setRePassword] = useState('');
 
     return (
         <View style={styles.home}>
@@ -140,8 +140,8 @@ const Register = (props) => {
 
 const styles = StyleSheet.create({
     home: {
-        flexDirection:'column',
-        flex:1,
+        flexDirection: 'column',
+        flex: 1,
         backgroundColor: 'black'
     },
     view: {
@@ -190,9 +190,9 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 30,
-        margin:10,
-        color:'white',
-        borderBottomColor:'#3399FF',
+        margin: 10,
+        color: 'white',
+        borderBottomColor: '#3399FF',
         borderBottomWidth: 2,
         fontSize: 21,
     },
