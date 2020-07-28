@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, Image, TextInput, TouchableOpacity} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
 
 const ForgotPassword = (props) => {
     const [email, setEmail] = useState('');
@@ -10,12 +10,12 @@ const ForgotPassword = (props) => {
 
                 <Text style={styles.textHeader}>Forgot password</Text>
 
-                <View style={styles.viewInsert2}/>
+                <View style={styles.viewInsert2} />
 
                 <Text style={styles.textFooter}>Enter your email address and we'll send you link to reset your
                     password</Text>
 
-                <View style={styles.viewInsert2}/>
+                <View style={styles.viewInsert2} />
 
                 <View style={styles.viewBorder}>
                     <Text style={styles.text}>Email</Text>
@@ -26,19 +26,19 @@ const ForgotPassword = (props) => {
                     />
                 </View>
 
-                <View style={styles.viewInsert2}/>
+                <View style={styles.viewInsert2} />
 
                 <TouchableOpacity style={styles.buttonSignIn}>
                     <Text style={styles.textSignIn}>SEND EMAIL</Text>
                 </TouchableOpacity>
 
-                <View style={styles.viewInsert}/>
+                <View style={styles.viewInsert} />
 
                 <TouchableOpacity style={styles.buttonCancel}>
                     <Text style={styles.textSignIn}>CANCEL</Text>
                 </TouchableOpacity>
 
-                <View style={styles.viewInsert2}/>
+                <View style={styles.viewInsert2} />
 
             </View>
         </View>

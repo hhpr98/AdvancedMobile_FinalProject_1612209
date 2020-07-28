@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, ImageBackground, StyleSheet, TouchableOpacity, Text} from 'react-native';
+import { ImageBackground, StyleSheet, TouchableOpacity, Text } from 'react-native';
 
 const LittleImageButton = (props) => {
 

@@ -1,11 +1,11 @@
 import React from 'react';
-import {StyleSheet, View, Text, Image, ScrollView, TouchableOpacity} from 'react-native';
+import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
 import ToggleSwitch from 'toggle-switch-react-native';
 
 const Setting = (props) => {
     return (
         <ScrollView style={styles.home}>
-            <TouchableOpacity style={styles.head} onPress={()=>props.navigation.navigate('Profile')}>
+            <TouchableOpacity style={styles.head} onPress={() => props.navigation.navigate('Profile')}>
                 <Image
                     source={require('../../../../assets/ic_people_author.png')}
                     style={styles.image}
@@ -13,37 +13,37 @@ const Setting = (props) => {
                 <Text style={styles.textHead}>Nguyễn Hữu Hòa</Text>
             </TouchableOpacity>
             <Text style={styles.textBig}>Account</Text>
-            <TouchableOpacity onPress={()=>props.navigation.navigate('Subscription')}>
+            <TouchableOpacity onPress={() => props.navigation.navigate('Subscription')}>
                 <Text style={styles.textBig}>Subcription</Text>
                 <Text style={styles.textLittle}>My youtube channel</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={()=>props.navigation.navigate('Contact')}>
+            <TouchableOpacity onPress={() => props.navigation.navigate('Contact')}>
                 <Text style={styles.textBig}>Contact</Text>
             </TouchableOpacity>
             <Text style={styles.textBig}>Comunicate Preferences</Text>
-            <View style={styles.line}/>
+            <View style={styles.line} />
             <Text style={styles.textBig}>Default caption language</Text>
             <Text style={styles.textLittle}>English</Text>
-            <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                 <Text style={styles.textBig}>Require Wi-Fi for streaming</Text>
-                <ToggleSwitch style={{marginRight: 50,}}
-                              isOn={true}
-                              onColor="#3399FF"
-                              offColor="black"
-                              labelStyle={styles.textBig}
-                              size="small"
-                              onToggle={isOn => isOn = !isOn}
+                <ToggleSwitch style={{ marginRight: 50, }}
+                    isOn={true}
+                    onColor="#3399FF"
+                    offColor="black"
+                    labelStyle={styles.textBig}
+                    size="small"
+                    onToggle={isOn => isOn = !isOn}
                 />
             </View>
-            <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                 <Text style={styles.textBig}>Require Wi-Fi for downloading</Text>
-                <ToggleSwitch style={{marginRight: 50,}}
-                              isOn={true}
-                              onColor="#3399FF"
-                              offColor="black"
-                              labelStyle={styles.textBig}
-                              size="small"
-                              onToggle={isOn => isOn = !isOn}
+                <ToggleSwitch style={{ marginRight: 50, }}
+                    isOn={true}
+                    onColor="#3399FF"
+                    offColor="black"
+                    labelStyle={styles.textBig}
+                    size="small"
+                    onToggle={isOn => isOn = !isOn}
                 />
             </View>
             <Text style={styles.textBig}>Recommended content push notifications</Text>
@@ -55,12 +55,12 @@ const Setting = (props) => {
             <Text style={styles.textBig}>Caption</Text>
             <Text style={styles.textBig}>Notifications</Text>
             <Text style={styles.textBig}>Advanced Options</Text>
-            <View style={styles.line}/>
+            <View style={styles.line} />
             <Text style={styles.textBig}>App version</Text>
             <Text style={styles.textLittle}>0.1.3</Text>
-            <View style={styles.line}/>
+            <View style={styles.line} />
 
-            <TouchableOpacity style={styles.buttonSignOut} onPress={()=>alert('Sign out clicked !')}>
+            <TouchableOpacity style={styles.buttonSignOut} onPress={() => alert('Sign out clicked !')}>
                 <Text style={styles.textSignOut}>SIGN OUT</Text>
             </TouchableOpacity>
         </ScrollView>

@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, Image, TextInput, TouchableOpacity} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
 
 const Login = (props) => {
     const [user, setUser] = useState('');
@@ -9,7 +9,7 @@ const Login = (props) => {
         <View style={styles.home}>
             <View style={styles.view}>
 
-                <View style={styles.viewInsert2}/>
+                <View style={styles.viewInsert2} />
 
                 <View style={styles.viewBorder}>
                     <Text style={styles.text}>Username (or Email)</Text>
@@ -20,7 +20,7 @@ const Login = (props) => {
                     />
                 </View>
 
-                <View style={styles.viewInsert}/>
+                <View style={styles.viewInsert} />
 
                 <View style={styles.viewBorder}>
                     <Text style={styles.text}>Password</Text>
@@ -32,26 +32,26 @@ const Login = (props) => {
                     </TextInput>
                 </View>
 
-                <View style={styles.viewInsert2}/>
+                <View style={styles.viewInsert2} />
 
                 <TouchableOpacity style={styles.buttonSignIn}
-                                  onPress={() => props.navigation.navigate('Home')}
+                    onPress={() => props.navigation.navigate('Home')}
                 >
                     <Text style={styles.textSignIn}>SIGN IN</Text>
                 </TouchableOpacity>
-                <View style={styles.viewInsert}/>
+                <View style={styles.viewInsert} />
                 <TouchableOpacity style={styles.buttonForgotAndSignUp}
-                                  onPress={() => props.navigation.navigate('ForgotPassword')}
+                    onPress={() => props.navigation.navigate('ForgotPassword')}
                 >
                     <Text style={styles.textOrther}>FORGOT PASSWORD</Text>
                 </TouchableOpacity>
-                <View style={styles.viewInsert}/>
+                <View style={styles.viewInsert} />
                 <TouchableOpacity style={styles.buttonSSO}>
                     <Text style={styles.textOrther}>USE SINGLE SIGN-ON (SSO)</Text>
                 </TouchableOpacity>
-                <View style={styles.viewInsert}/>
+                <View style={styles.viewInsert} />
                 <TouchableOpacity style={styles.buttonForgotAndSignUp}
-                                  onPress={() => props.navigation.navigate('Register')}
+                    onPress={() => props.navigation.navigate('Register')}
                 >
                     <Text style={styles.textOrther}>SIGN UP FREE</Text>
                 </TouchableOpacity>
