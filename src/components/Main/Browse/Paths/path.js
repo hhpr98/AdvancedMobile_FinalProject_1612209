@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import PathItem from "./PathItem/path-item";
 
 const Path = (props) => {
@@ -29,7 +29,7 @@ const Path = (props) => {
     const getPathItem = (paths) => {
         return paths.map(item =>
             <TouchableOpacity onPress={() => alert('path clicked!')}>
-                <PathItem item={item}/>
+                <PathItem item={item} />
             </TouchableOpacity>
         )
     };

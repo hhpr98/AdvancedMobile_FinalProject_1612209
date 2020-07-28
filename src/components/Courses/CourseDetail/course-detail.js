@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text, Image, TouchableOpacity, ScrollView} from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import CourseDetailItem from "./CourseDetailItem/course-detail-item";
 
 const CourseDetail = (props) => {
@@ -79,7 +79,7 @@ const CourseDetail = (props) => {
 
     const renderCourseDetailItem = (items) => {
         return (
-            items.map(item => <CourseDetailItem item={item}/>)
+            items.map(item => <CourseDetailItem item={item} />)
         );
     };
 
@@ -89,18 +89,18 @@ const CourseDetail = (props) => {
                 <Text style={styles.text}>{item.title}</Text>
             </View>
             <View style={styles.viewAuthor}>
-                <Image source={require('../../../../assets/ic_people_author.png')} style={styles.image}/>
+                <Image source={require('../../../../assets/ic_people_author.png')} style={styles.image} />
                 <Text style={styles.textAuthor}>{item.author}</Text>
             </View>
             <Text style={styles.textInfor}>{item.level} . {item.released} . {item.duration}</Text>
             <Text style={styles.textContent}>This course is free for you. Let's enjoy it. Good luck for you!</Text>
             <TouchableOpacity style={styles.button}
-                              onPress={() => alert('clicked !')}
+                onPress={() => alert('clicked !')}
             >
                 <Text style={styles.textSignIn}>Take a learning check</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button}
-                              onPress={() => alert('clicked !')}
+                onPress={() => alert('clicked !')}
             >
                 <Text style={styles.textSignIn}>View related paths & courses</Text>
             </TouchableOpacity>

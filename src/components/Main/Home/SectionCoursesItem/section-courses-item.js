@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, Text, Image} from 'react-native';
+import { View, StyleSheet, Text, Image } from 'react-native';
 
 const SectionCoursesItem = (props) => {
     const getCourseString = (item) => {
@@ -7,7 +7,7 @@ const SectionCoursesItem = (props) => {
     };
 
     const getImageURL = (item) => {
-      return item.imageURL;
+        return item.imageURL;
     };
 
     /*
@@ -17,10 +17,10 @@ const SectionCoursesItem = (props) => {
     return (
         <View style={styles.item}>
             <Image
-                source={{uri: getImageURL(props.item)}}
+                source={{ uri: getImageURL(props.item) }}
                 style={styles.image}
             />
-            <View style={{margin:5,}}>
+            <View style={{ margin: 5, }}>
                 <Text style={styles.text1}>{props.item.title}</Text>
                 <Text style={styles.text2}>{props.item.author}</Text>
                 <Text style={styles.text2}>{getCourseString(props.item)}</Text>
@@ -31,19 +31,19 @@ const SectionCoursesItem = (props) => {
 
 const styles = StyleSheet.create({
     item: {
-        margin:5,
+        margin: 5,
         width: 200,
         height: 200,
         backgroundColor: '#333333'
     },
     text1: {
-        fontWeight:'bold',
-        fontSize:17,
-        color:'white',
+        fontWeight: 'bold',
+        fontSize: 17,
+        color: 'white',
     },
     text2: {
-        fontSize:12,
-        color:'white',
+        fontSize: 12,
+        color: 'white',
     },
     image: {
         width: 200,

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, ScrollView, Button, TouchableOpacity, StyleSheet} from 'react-native';
+import { View, Text, ScrollView, Button, TouchableOpacity, StyleSheet } from 'react-native';
 import SectionCoursesItem from "../SectionCoursesItem/section-courses-item";
 
 const SectionCourses = (props) => {
@@ -43,9 +43,9 @@ const SectionCourses = (props) => {
     ];
 
     const renderListItems = (courses) => {
-        return courses.map( item =>
-            <TouchableOpacity onPress={()=>props.navigation.navigate('CourseDetail',item)}>
-                <SectionCoursesItem item={item}/>
+        return courses.map(item =>
+            <TouchableOpacity onPress={() => props.navigation.navigate('CourseDetail', item)}>
+                <SectionCoursesItem item={item} />
             </TouchableOpacity>
         );
         //return courses.map( item => alert('have one courses'));
@@ -55,7 +55,7 @@ const SectionCourses = (props) => {
         <View style={styles.cons}>
             <View style={styles.view}>
                 <Text style={styles.textTitle}>{props.title}</Text>
-                <TouchableOpacity onPress={()=>alert('See all clicked !')}>
+                <TouchableOpacity onPress={() => alert('See all clicked !')}>
                     <Text style={styles.textButton}>See all ></Text>
                 </TouchableOpacity>
             </View>
@@ -73,18 +73,18 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     view: {
-        flexDirection:'row',
+        flexDirection: 'row',
         marginLeft: 10,
-        justifyContent:'space-between',
+        justifyContent: 'space-between',
     },
     textTitle: {
-        fontWeight:'bold',
-        fontSize:17,
+        fontWeight: 'bold',
+        fontSize: 17,
         color: 'white',
         marginLeft: 10,
     },
     textButton: {
-        fontSize:12,
+        fontSize: 12,
         color: 'white',
         marginRight: 10,
     }

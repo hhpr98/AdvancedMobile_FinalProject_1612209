@@ -1,11 +1,11 @@
 import React from 'react';
-import {StyleSheet, View, Text, Image} from 'react-native';
+import { StyleSheet, View, Text, Image } from 'react-native';
 
 const Profile = () => {
     return (
         <View style={styles.home}>
             <View style={styles.head}>
-                <Image source={require('../../../assets/ic_people_author.png')} style={styles.image}/>
+                <Image source={require('../../../assets/ic_people_author.png')} style={styles.image} />
                 <Text style={styles.textHead}>Nguyễn Hữu Hòa</Text>
             </View>
             <Text style={styles.text1}>Activity insights (last 30 days)</Text>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
 const CourseFavoriteItem = (props) => {
 
@@ -10,10 +10,10 @@ const CourseFavoriteItem = (props) => {
     return (
         <View style={styles.home}>
             <Image
-                source={{uri: props.item.imageURL}}
+                source={{ uri: props.item.imageURL }}
                 style={styles.image}
             />
-            <View style={{margin:5,marginRight:30,}}>
+            <View style={{ margin: 5, marginRight: 30, }}>
                 <Text style={styles.text1}>{props.item.title}</Text>
                 <Text style={styles.text2}>{props.item.author}</Text>
                 <Text style={styles.text2}>{getCourseString(props.item)}</Text>
@@ -24,17 +24,17 @@ const CourseFavoriteItem = (props) => {
 
 const styles = StyleSheet.create({
     home: {
-        flex:1,
+        flex: 1,
         backgroundColor: 'black',
-        flexDirection:'row',
-        marginTop:20,
-        borderBottomColor:'white',
-        borderBottomWidth:1,
+        flexDirection: 'row',
+        marginTop: 20,
+        borderBottomColor: 'white',
+        borderBottomWidth: 1,
     },
     image: {
         width: 150,
         height: 100,
-        marginBottom:10,
+        marginBottom: 10,
     },
     text1: {
         color: 'white',

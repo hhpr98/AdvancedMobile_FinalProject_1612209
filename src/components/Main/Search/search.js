@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity } from 'react-native';
 import CourseFavoriteItem from "../Favorite/CourseFavorite/course-favorite-item";
 
 const Search = () => {
-    const [text,setText] = useState('Search...');
+    const [text, setText] = useState('Search...');
 
     const onFocusText = () => {
         setText('');
@@ -31,18 +31,18 @@ const Search = () => {
     ];
 
     const renderListItems = (courses) => {
-        return courses.map( item =>
+        return courses.map(item =>
             <TouchableOpacity
-                //onPress={()=>props.navigation.navigate('CourseDetail',item)}
+            //onPress={()=>props.navigation.navigate('CourseDetail',item)}
             >
-                <CourseFavoriteItem item={item}/>
+                <CourseFavoriteItem item={item} />
             </TouchableOpacity>
         );
     };
 
     return (
         <View style={styles.home}>
-            <View style={{backgroundColor: '#222222', }}>
+            <View style={{ backgroundColor: '#222222', }}>
                 <TextInput
                     style={styles.input}
                     onChangeText={text => setText(text)}
@@ -58,17 +58,17 @@ const Search = () => {
 
 const styles = StyleSheet.create({
     home: {
-        flexDirection:'column',
-        flex:1,
+        flexDirection: 'column',
+        flex: 1,
         backgroundColor: 'black'
     },
     input: {
         height: 40,
         //borderColor: 'gray',
         //borderWidth: 1,
-        margin:10,
-        color:'white',
-        borderBottomColor:'lightgray',
+        margin: 10,
+        color: 'white',
+        borderBottomColor: 'lightgray',
         borderBottomWidth: 3,
     }
 });

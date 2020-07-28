@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 
 const Register = (props) => {
     const [email, setEmail] = useState('');
@@ -18,7 +18,7 @@ const Register = (props) => {
 
                 <Text style={styles.textHeader}>Create your free account</Text>
 
-                <View style={styles.viewInsert}/>
+                <View style={styles.viewInsert} />
 
                 <View style={styles.viewBorder}>
                     <Text style={styles.text}>Email *</Text>
@@ -29,7 +29,7 @@ const Register = (props) => {
                     />
                 </View>
 
-                <View style={styles.viewInsert}/>
+                <View style={styles.viewInsert} />
 
                 <View style={styles.viewBorder}>
                     <Text style={styles.text}>Firstname *</Text>
@@ -41,7 +41,7 @@ const Register = (props) => {
                     </TextInput>
                 </View>
 
-                <View style={styles.viewInsert}/>
+                <View style={styles.viewInsert} />
 
                 <View style={styles.viewBorder}>
                     <Text style={styles.text}>Lastname *</Text>
@@ -52,7 +52,7 @@ const Register = (props) => {
                     />
                 </View>
 
-                <View style={styles.viewInsert}/>
+                <View style={styles.viewInsert} />
 
                 <View style={styles.viewBorder}>
                     <Text style={styles.text}>Company *</Text>
@@ -63,7 +63,7 @@ const Register = (props) => {
                     />
                 </View>
 
-                <View style={styles.viewInsert}/>
+                <View style={styles.viewInsert} />
 
                 <View style={styles.viewBorder}>
                     <Text style={styles.text}>Phone</Text>
@@ -74,7 +74,7 @@ const Register = (props) => {
                     />
                 </View>
 
-                <View style={styles.viewInsert}/>
+                <View style={styles.viewInsert} />
 
                 <View style={styles.viewBorder}>
                     <Text style={styles.text}>Country *</Text>
@@ -85,7 +85,7 @@ const Register = (props) => {
                     />
                 </View>
 
-                <View style={styles.viewInsert}/>
+                <View style={styles.viewInsert} />
 
                 <View style={styles.viewBorder}>
                     <Text style={styles.text}>Username *</Text>
@@ -96,7 +96,7 @@ const Register = (props) => {
                     />
                 </View>
 
-                <View style={styles.viewInsert}/>
+                <View style={styles.viewInsert} />
 
                 <View style={styles.viewBorder}>
                     <Text style={styles.text}>Password *</Text>
@@ -108,7 +108,7 @@ const Register = (props) => {
                     </TextInput>
                 </View>
 
-                <View style={styles.viewInsert}/>
+                <View style={styles.viewInsert} />
 
 
                 <View style={styles.viewBorder}>
@@ -121,17 +121,17 @@ const Register = (props) => {
                     </TextInput>
                 </View>
 
-                <View style={styles.viewInsert}/>
+                <View style={styles.viewInsert} />
 
                 <Text style={styles.textFooter}>* Required field</Text>
 
-                <View style={styles.viewInsert2}/>
+                <View style={styles.viewInsert2} />
 
                 <TouchableOpacity style={styles.buttonSignIn}>
                     <Text style={styles.textSignIn}>REGISTER</Text>
                 </TouchableOpacity>
 
-                <View style={styles.viewInsert2}/>
+                <View style={styles.viewInsert2} />
 
             </ScrollView>
         </View>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity, ScrollView} from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 import SectionCoursesItem from "../Home/SectionCoursesItem/section-courses-item";
 import CourseFavoriteItem from "./CourseFavorite/course-favorite-item";
 
@@ -45,21 +45,21 @@ const Favorite = () => {
     ];
 
     const renderListItems = (courses) => {
-        return courses.map( item =>
+        return courses.map(item =>
             <TouchableOpacity
-                //onPress={()=>props.navigation.navigate('CourseDetail',item)}
+            //onPress={()=>props.navigation.navigate('CourseDetail',item)}
             >
-                <CourseFavoriteItem item={item}/>
+                <CourseFavoriteItem item={item} />
             </TouchableOpacity>
         );
     };
 
     return (
         <View style={styles.home}>
-            <View style={{flexDirection:'row',justifyContent: 'space-around',}}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-around', }}>
                 <Text style={styles.text1}>4 courses (440MB)</Text>
                 <TouchableOpacity
-                    onPress={()=>alert('remove!')}
+                    onPress={() => alert('remove!')}
                 >
                     <Text style={styles.textButton}>Remove all</Text>
                 </TouchableOpacity>
@@ -74,7 +74,7 @@ const Favorite = () => {
 
 const styles = StyleSheet.create({
     home: {
-        flex:1,
+        flex: 1,
         backgroundColor: 'black',
         //flexDirection:'column',
         //display:'flex',

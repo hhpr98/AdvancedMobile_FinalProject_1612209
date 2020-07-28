@@ -1,13 +1,13 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 
 const CourseDetailItem = (props) => {
     const renderMiniItem = (val) => {
         return val.map(item =>
             //console.log(item)
-            <View style={{flexDirection: 'row', justifyContent: 'space-between', margin: 10}}>
-                <Text style={{color: 'white'}}>{item.name}</Text>
-                <Text style={{color: 'white'}}>{item.len}</Text>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', margin: 10 }}>
+                <Text style={{ color: 'white' }}>{item.name}</Text>
+                <Text style={{ color: 'white' }}>{item.len}</Text>
             </View>
         );
     };

@@ -1,12 +1,12 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 const PopularSkillsItem = (props) => {
 
     return (
         <View style={styles.view}>
             <TouchableOpacity
-               //onPress={()=>alert('Oh, No anything!')}
+            //onPress={()=>alert('Oh, No anything!')}
             >
                 <Text style={styles.text}>{props.content}</Text>
             </TouchableOpacity>

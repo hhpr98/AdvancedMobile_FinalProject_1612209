@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 const SignInRequired = (props) => {
 
@@ -20,13 +20,13 @@ const SignInRequired = (props) => {
 
 const styles = StyleSheet.create({
     view: {
-        margin:20,
+        margin: 20,
     },
     text1: {
         color: 'white',
         fontWeight: 'bold',
         fontSize: 19,
-        marginBottom:5,
+        marginBottom: 5,
     },
     text2: {
         color: 'white',

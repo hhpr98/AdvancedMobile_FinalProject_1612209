@@ -1,23 +1,23 @@
 import React from 'react';
-import {StyleSheet, View, Text, Image} from 'react-native';
+import { StyleSheet, View, Text, Image } from 'react-native';
 
 const Subscription = () => {
     return (
         <View style={styles.home}>
             <View style={styles.head}>
-                <Image source={require('../../../../assets/ic_people_author.png')} style={styles.image}/>
+                <Image source={require('../../../../assets/ic_people_author.png')} style={styles.image} />
                 <Text style={styles.textHead}>Nguyễn Hữu Hòa</Text>
             </View>
             <View style={styles.v}>
-                <Image source={require('../../../../assets/ic_youtube.png')} style={styles.image2}/>
+                <Image source={require('../../../../assets/ic_youtube.png')} style={styles.image2} />
                 <Text style={styles.text1}>youtube.com/nguyenhuuhoa1998</Text>
             </View>
             <View style={styles.v}>
-                <Image source={require('../../../../assets/ic_facebook.png')} style={styles.image2}/>
+                <Image source={require('../../../../assets/ic_facebook.png')} style={styles.image2} />
                 <Text style={styles.text1}>fb.com/nguyenhuuhoa15.04.1998</Text>
             </View>
             <View style={styles.v}>
-                <Image source={require('../../../../assets/ic_twitter.png')} style={styles.image2}/>
+                <Image source={require('../../../../assets/ic_twitter.png')} style={styles.image2} />
                 <Text style={styles.text1}>tf.com/hoanguyenhuu</Text>
             </View>
 
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         fontSize: 13,
         fontWeight: 'bold',
         alignSelf: 'center',
-        marginLeft:20,
+        marginLeft: 20,
 
     },
     image: {
