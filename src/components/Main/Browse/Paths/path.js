@@ -28,17 +28,17 @@ const Path = (props) => {
 
     const getPathItem = (paths) => {
         return paths.map(item =>
-        <TouchableOpacity onPress={()=>alert('path clicked!')}>
-            <PathItem item={item}/>
-        </TouchableOpacity>
-    )
+            <TouchableOpacity onPress={() => alert('path clicked!')}>
+                <PathItem item={item}/>
+            </TouchableOpacity>
+        )
     };
 
     return (
         <View>
             <View style={styles.view}>
                 <Text style={styles.textTitle}>Path</Text>
-                <TouchableOpacity onPress={()=>alert('See all clicked!')}>
+                <TouchableOpacity onPress={() => alert('See all clicked!')}>
                     <Text style={styles.textButton}>See all ></Text>
                 </TouchableOpacity>
             </View>
@@ -52,18 +52,18 @@ const Path = (props) => {
 
 const styles = StyleSheet.create({
     view: {
-        flexDirection:'row',
+        flexDirection: 'row',
         marginLeft: 10,
-        justifyContent:'space-between',
+        justifyContent: 'space-between',
     },
     textTitle: {
-        fontWeight:'bold',
-        fontSize:17,
+        fontWeight: 'bold',
+        fontSize: 17,
         color: 'white',
         marginLeft: 10,
     },
     textButton: {
-        fontSize:12,
+        fontSize: 12,
         color: 'white',
         marginRight: 10,
     }

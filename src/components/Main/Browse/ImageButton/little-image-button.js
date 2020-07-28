@@ -14,11 +14,11 @@ const LittleImageButton = (props) => {
 
 const styles = StyleSheet.create({
     image: {
-        height:80,
-        width:160,
+        height: 80,
+        width: 160,
         resizeMode: 'cover',
         justifyContent: 'center',
-        margin:5,
+        margin: 5,
     },
     touch: {
         justifyContent: 'center',
