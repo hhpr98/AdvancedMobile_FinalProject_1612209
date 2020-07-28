@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, Image, TextInput, TouchableOpacity} from 'react-native';
 
 const ForgotPassword = (props) => {
-    const [email,setEmail] = useState('');
+    const [email, setEmail] = useState('');
 
     return (
         <View style={styles.home}>
@@ -12,7 +12,8 @@ const ForgotPassword = (props) => {
 
                 <View style={styles.viewInsert2}/>
 
-                <Text style={styles.textFooter}>Enter your email address and we'll send you link to reset your password</Text>
+                <Text style={styles.textFooter}>Enter your email address and we'll send you link to reset your
+                    password</Text>
 
                 <View style={styles.viewInsert2}/>
 
@@ -46,8 +47,8 @@ const ForgotPassword = (props) => {
 
 const styles = StyleSheet.create({
     home: {
-        flexDirection:'column',
-        flex:1,
+        flexDirection: 'column',
+        flex: 1,
         backgroundColor: 'black'
     },
     view: {
@@ -91,9 +92,9 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 30,
-        margin:10,
-        color:'white',
-        borderBottomColor:'#3399FF',
+        margin: 10,
+        color: 'white',
+        borderBottomColor: '#3399FF',
         borderBottomWidth: 2,
         fontSize: 21,
     },

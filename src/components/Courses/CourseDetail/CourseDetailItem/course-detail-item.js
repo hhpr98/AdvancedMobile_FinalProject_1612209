@@ -5,9 +5,9 @@ const CourseDetailItem = (props) => {
     const renderMiniItem = (val) => {
         return val.map(item =>
             //console.log(item)
-            <View style={{flexDirection: 'row', justifyContent: 'space-between',margin:10}}>
-                <Text style={{color:'white'}}>{item.name}</Text>
-                <Text style={{color:'white'}}>{item.len}</Text>
+            <View style={{flexDirection: 'row', justifyContent: 'space-between', margin: 10}}>
+                <Text style={{color: 'white'}}>{item.name}</Text>
+                <Text style={{color: 'white'}}>{item.len}</Text>
             </View>
         );
     };
@@ -31,26 +31,26 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginTop: 20,
     },
-   textID: {
-       color: 'white',
-       backgroundColor: '#333333',
-       width: 50,
-       height: 50,
-       borderBottomWidth:3,
-       borderBottomColor: 'green',
-       marginLeft: 20,
-       textAlign:'center',
-       textAlignVertical: 'center'
-   },
+    textID: {
+        color: 'white',
+        backgroundColor: '#333333',
+        width: 50,
+        height: 50,
+        borderBottomWidth: 3,
+        borderBottomColor: 'green',
+        marginLeft: 20,
+        textAlign: 'center',
+        textAlignVertical: 'center'
+    },
     text1: {
         color: 'white',
         fontSize: 17,
-        marginLeft:20,
+        marginLeft: 20,
     },
     text2: {
         color: 'white',
         fontSize: 13,
-        marginLeft:20,
+        marginLeft: 20,
     },
 });
 

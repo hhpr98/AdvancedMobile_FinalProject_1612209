@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, Image, TextInput, TouchableOpacity} from 'react-native';
 
 const Login = (props) => {
-    const [user,setUser] = useState('');
-    const [password,setPassword] = useState('');
+    const [user, setUser] = useState('');
+    const [password, setPassword] = useState('');
 
     return (
         <View style={styles.home}>
@@ -35,13 +35,13 @@ const Login = (props) => {
                 <View style={styles.viewInsert2}/>
 
                 <TouchableOpacity style={styles.buttonSignIn}
-                                  onPress={()=>props.navigation.navigate('Home')}
+                                  onPress={() => props.navigation.navigate('Home')}
                 >
                     <Text style={styles.textSignIn}>SIGN IN</Text>
                 </TouchableOpacity>
                 <View style={styles.viewInsert}/>
                 <TouchableOpacity style={styles.buttonForgotAndSignUp}
-                                  onPress={()=>props.navigation.navigate('ForgotPassword')}
+                                  onPress={() => props.navigation.navigate('ForgotPassword')}
                 >
                     <Text style={styles.textOrther}>FORGOT PASSWORD</Text>
                 </TouchableOpacity>
@@ -51,7 +51,7 @@ const Login = (props) => {
                 </TouchableOpacity>
                 <View style={styles.viewInsert}/>
                 <TouchableOpacity style={styles.buttonForgotAndSignUp}
-                                  onPress={()=>props.navigation.navigate('Register')}
+                                  onPress={() => props.navigation.navigate('Register')}
                 >
                     <Text style={styles.textOrther}>SIGN UP FREE</Text>
                 </TouchableOpacity>
@@ -64,8 +64,8 @@ const Login = (props) => {
 
 const styles = StyleSheet.create({
     home: {
-        flexDirection:'column',
-        flex:1,
+        flexDirection: 'column',
+        flex: 1,
         backgroundColor: 'black'
     },
     view: {
@@ -103,9 +103,9 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 30,
-        margin:10,
-        color:'white',
-        borderBottomColor:'#3399FF',
+        margin: 10,
+        color: 'white',
+        borderBottomColor: '#3399FF',
         borderBottomWidth: 2,
         fontSize: 21,
     },

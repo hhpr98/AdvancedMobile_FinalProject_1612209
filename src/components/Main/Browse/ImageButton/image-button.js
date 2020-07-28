@@ -15,10 +15,10 @@ const ImageButton = (props) => {
 
 const styles = StyleSheet.create({
     image: {
-        height:160,
+        height: 160,
         resizeMode: 'cover',
         justifyContent: 'center',
-        margin:5,
+        margin: 5,
     },
     touch: {
         justifyContent: 'center',
