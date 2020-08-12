@@ -1,77 +1,86 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
 import ToggleSwitch from 'toggle-switch-react-native';
+import { ThemeContext } from "../../../../App";
 
 const Setting = (props) => {
     return (
-        <ScrollView style={styles.home}>
-            <TouchableOpacity style={styles.head} onPress={() => props.navigation.navigate('Profile')}>
-                <Image
-                    source={require('../../../../assets/ic_people_author.png')}
-                    style={styles.image}
-                />
-                <Text style={styles.textHead}>Nguyễn Hữu Hòa</Text>
-            </TouchableOpacity>
-            <Text style={styles.textBig}>Account</Text>
-            <TouchableOpacity onPress={() => props.navigation.navigate('Subscription')}>
-                <Text style={styles.textBig}>Subcription</Text>
-                <Text style={styles.textLittle}>My youtube channel</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => props.navigation.navigate('Contact')}>
-                <Text style={styles.textBig}>Contact</Text>
-            </TouchableOpacity>
-            <Text style={styles.textBig}>Comunicate Preferences</Text>
-            <View style={styles.line} />
-            <Text style={styles.textBig}>Default caption language</Text>
-            <Text style={styles.textLittle}>English</Text>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <Text style={styles.textBig}>Require Wi-Fi for streaming</Text>
-                <ToggleSwitch style={{ marginRight: 50, }}
-                    isOn={true}
-                    onColor="#3399FF"
-                    offColor="black"
-                    labelStyle={styles.textBig}
-                    size="small"
-                    onToggle={isOn => isOn = !isOn}
-                />
-            </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <Text style={styles.textBig}>Require Wi-Fi for downloading</Text>
-                <ToggleSwitch style={{ marginRight: 50, }}
-                    isOn={true}
-                    onColor="#3399FF"
-                    offColor="black"
-                    labelStyle={styles.textBig}
-                    size="small"
-                    onToggle={isOn => isOn = !isOn}
-                />
-            </View>
-            <Text style={styles.textBig}>Recommended content push notifications</Text>
-            <Text style={styles.textLittle}>Receive notifications about recommended contents.</Text>
-            <Text style={styles.textBig}>Show quiz at the end of video</Text>
-            <Text style={styles.textBig}>Download location</Text>
-            <Text style={styles.textLittle}>Default location (30.5GB free of 64GB)</Text>
-            <Text style={styles.textBig}>Default caption language</Text>
-            <Text style={styles.textBig}>Caption</Text>
-            <Text style={styles.textBig}>Notifications</Text>
-            <Text style={styles.textBig}>Advanced Options</Text>
-            <View style={styles.line} />
-            <Text style={styles.textBig}>App version</Text>
-            <Text style={styles.textLittle}>0.1.3</Text>
-            <View style={styles.line} />
+        <ThemeContext.Consumer>
+            {
+                ({ theme, setTheme }) => {
+                    return (
+                        <ScrollView style={{ ...styles.home, backgroundColor: theme.background }}>
+                            <TouchableOpacity style={styles.head} onPress={() => props.navigation.navigate('Profile')}>
+                                <Image
+                                    source={require('../../../../assets/ic_people_author.png')}
+                                    style={{ ...styles.image, backgroundColor: theme.foreground }}
+                                />
+                                <Text style={{ ...styles.textHead, color: theme.foreground }}>Nguyễn Hữu Hòa</Text>
+                            </TouchableOpacity>
+                            <Text style={{ ...styles.textBig, color: theme.foreground }}>Account</Text>
+                            <TouchableOpacity onPress={() => props.navigation.navigate('Subscription')}>
+                                <Text style={{ ...styles.textBig, color: theme.foreground }}>Subcription</Text>
+                                <Text style={{ ...styles.textLittle, color: theme.foreground }}>My youtube channel</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => props.navigation.navigate('Contact')}>
+                                <Text style={{ ...styles.textBig, color: theme.foreground }}>Contact</Text>
+                            </TouchableOpacity>
+                            <Text style={{ ...styles.textBig, color: theme.foreground }}>Comunicate Preferences</Text>
+                            <View style={{ ...styles.line, borderColor: theme.background, borderBottomColor: theme.foreground }} />
+                            <Text style={{ ...styles.textBig, color: theme.foreground }}>Default caption language</Text>
+                            <Text style={{ ...styles.textLittle, color: theme.foreground }}>English</Text>
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                <Text style={{ ...styles.textBig, color: theme.foreground }}>Require Wi-Fi for streaming</Text>
+                                <ToggleSwitch style={{ marginRight: 50, }}
+                                    isOn={true}
+                                    onColor="#3399FF"
+                                    offColor="black"
+                                    labelStyle={{ ...styles.textBig, color: theme.foreground }}
+                                    size="small"
+                                    onToggle={isOn => isOn = !isOn}
+                                />
+                            </View>
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                <Text style={{ ...styles.textBig, color: theme.foreground }}>Require Wi-Fi for downloading</Text>
+                                <ToggleSwitch style={{ marginRight: 50, }}
+                                    isOn={true}
+                                    onColor="#3399FF"
+                                    offColor="black"
+                                    labelStyle={{ ...styles.textBig, color: theme.foreground }}
+                                    size="small"
+                                    onToggle={isOn => isOn = !isOn}
+                                />
+                            </View>
+                            <Text style={{ ...styles.textBig, color: theme.foreground }}>Recommended content push notifications</Text>
+                            <Text style={{ ...styles.textLittle, color: theme.foreground }}>Receive notifications about recommended contents.</Text>
+                            <Text style={{ ...styles.textBig, color: theme.foreground }}>Show quiz at the end of video</Text>
+                            <Text style={{ ...styles.textBig, color: theme.foreground }}>Download location</Text>
+                            <Text style={{ ...styles.textLittle, color: theme.foreground }}>Default location (30.5GB free of 64GB)</Text>
+                            <Text style={{ ...styles.textBig, color: theme.foreground }}>Default caption language</Text>
+                            <Text style={{ ...styles.textBig, color: theme.foreground }}>Caption</Text>
+                            <Text style={{ ...styles.textBig, color: theme.foreground }}>Notifications</Text>
+                            <Text style={{ ...styles.textBig, color: theme.foreground }}>Advanced Options</Text>
+                            <View style={{ ...styles.line, borderColor: theme.background, borderBottomColor: theme.foreground }} />
+                            <Text style={{ ...styles.textBig, color: theme.foreground }}>App version</Text>
+                            <Text style={{ ...styles.textLittle, color: theme.foreground }}>0.1.3</Text>
+                            <View style={{ ...styles.line, borderColor: theme.background, borderBottomColor: theme.foreground }} />
 
-            <TouchableOpacity style={styles.buttonSignOut} onPress={() => props.navigation.navigate("Login")}>
-                <Text style={styles.textSignOut}>SIGN OUT</Text>
-            </TouchableOpacity>
-        </ScrollView>
-    );
+                            <TouchableOpacity style={styles.buttonSignOut} onPress={() => props.navigation.navigate("Login")}>
+                                <Text style={styles.textSignOut}>SIGN OUT</Text>
+                            </TouchableOpacity>
+                        </ScrollView>
+                    );
+                }
+            }
+        </ThemeContext.Consumer>
+    )
 };
 
 const styles = StyleSheet.create({
     home: {
         flexDirection: 'column',
         flex: 1,
-        backgroundColor: 'black'
+        //backgroundColor: 'black'
     },
     head: {
         marginTop: 20,
@@ -81,21 +90,21 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     textHead: {
-        color: 'white',
+        //color: 'white',
         fontSize: 19,
         fontWeight: 'bold',
         alignSelf: 'center',
         marginLeft: 20,
     },
     textBig: {
-        color: 'white',
+        //color: 'white',
         fontSize: 16,
         alignSelf: 'flex-start',
         marginTop: 20,
         marginLeft: 30,
     },
     textLittle: {
-        color: 'white',
+        //color: 'white',
         fontSize: 12,
         alignSelf: 'flex-start',
         marginLeft: 30,
@@ -104,11 +113,12 @@ const styles = StyleSheet.create({
         width: 40,
         height: 40,
         borderRadius: 40,
-        backgroundColor: '#333333'
+        //backgroundColor: '#333333'
     },
     line: {
         color: 'white',
-        borderBottomColor: '#333333',
+        //borderColor: 'black',
+        //borderBottomColor: '#333333',
         borderWidth: 0.5,
         height: 20,
         marginLeft: 20,

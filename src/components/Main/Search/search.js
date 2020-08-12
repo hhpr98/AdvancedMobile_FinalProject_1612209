@@ -47,9 +47,9 @@ const Search = () => {
                 ({ theme }) => {
                     return (
                         <View style={{ ...styles.home, backgroundColor: theme.background }}>
-                            <View style={{ backgroundColor: '#222222', }}>
+                            <View style={{ backgroundColor: theme.foreground, }}>
                                 <TextInput
-                                    style={styles.input}
+                                    style={{ ...styles.input, color: theme.background }}
                                     onChangeText={text => setText(text)}
                                     value={text}
                                 />
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     input: {
         height: 40,
         margin: 10,
-        color: 'white',
+        //color: 'white',
         borderBottomColor: 'lightgray',
         borderBottomWidth: 3,
     }

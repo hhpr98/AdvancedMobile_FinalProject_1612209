@@ -1,29 +1,38 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image } from 'react-native';
+import { ThemeContext } from "../../../App";
 
 const Profile = () => {
     return (
-        <View style={styles.home}>
-            <View style={styles.head}>
-                <Image source={require('../../../assets/ic_people_author.png')} style={styles.image} />
-                <Text style={styles.textHead}>Nguyễn Hữu Hòa</Text>
-            </View>
-            <Text style={styles.text1}>Activity insights (last 30 days)</Text>
-            <Text style={styles.text2}>TOTAL ACTIVE DAYS</Text>
-            <Text style={styles.text3}>0</Text>
-            <Text style={styles.text2}>MOST ACTIVE TIME OF DAYS</Text>
-            <Text style={styles.text3}>7:00 AM</Text>
-            <Text style={styles.text2}>MOST VIEWD SUBJECT</Text>
-            <Text style={styles.text3}>N/A</Text>
-        </View>
-    );
+        <ThemeContext.Consumer>
+            {
+                ({ theme }) => {
+                    return (
+                        <View style={{ ...styles.home, backgroundColor: theme.background }}>
+                            <View style={styles.head}>
+                                <Image source={require('../../../assets/ic_people_author.png')} style={{ ...styles.image, backgroundColor: theme.foreground }} />
+                                <Text style={{ ...styles.textHead, color: theme.foreground }}>Nguyễn Hữu Hòa</Text>
+                            </View>
+                            <Text style={{ ...styles.text1, color: theme.foreground }}>Activity insights (last 30 days)</Text>
+                            <Text style={{ ...styles.text2, color: theme.foreground }}>TOTAL ACTIVE DAYS</Text>
+                            <Text style={{ ...styles.text3, color: theme.foreground }}>0</Text>
+                            <Text style={{ ...styles.text2, color: theme.foreground }}>MOST ACTIVE TIME OF DAYS</Text>
+                            <Text style={{ ...styles.text3, color: theme.foreground }}>7:00 AM</Text>
+                            <Text style={{ ...styles.text2, color: theme.foreground }}>MOST VIEWD SUBJECT</Text>
+                            <Text style={{ ...styles.text3, color: theme.foreground }}>N/A</Text>
+                        </View>
+                    );
+                }
+            }
+        </ThemeContext.Consumer>
+    )
 };
 
 const styles = StyleSheet.create({
     home: {
         flexDirection: 'column',
         flex: 1,
-        backgroundColor: 'black'
+        //backgroundColor: 'black'
     },
     head: {
         marginTop: 20,
@@ -32,13 +41,13 @@ const styles = StyleSheet.create({
         marginLeft: -10,
     },
     textHead: {
-        color: 'white',
+        //color: 'white',
         fontSize: 19,
         fontWeight: 'bold',
         alignSelf: 'center',
     },
     text1: {
-        color: 'white',
+        //color: 'white',
         fontSize: 16,
         fontWeight: 'bold',
         alignSelf: 'center',
@@ -46,13 +55,13 @@ const styles = StyleSheet.create({
         marginBottom: 30,
     },
     text2: {
-        color: 'white',
+        //color: 'white',
         fontSize: 13,
         alignSelf: 'flex-start',
         marginLeft: 20,
     },
     text3: {
-        color: 'white',
+        //color: 'white',
         fontSize: 19,
         fontWeight: 'bold',
         alignSelf: 'flex-start',
@@ -63,7 +72,7 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100,
         borderRadius: 100,
-        backgroundColor: '#333333'
+        //backgroundColor: '#333333'
     }
 });
 
