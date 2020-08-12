@@ -18,6 +18,7 @@ import CourseDetail from "./src/components/Courses/CourseDetail/course-detail";
 import Subscription from "./src/components/RelativeComponent/Subcription/subcription";
 import Contact from "./src/components/RelativeComponent/Contact/contact";
 import Favorite from "./src/components/Main/Favorite/favorite";
+import SplashScreen from "./src/components/RelativeComponent/Splash/splash";
 
 const Tab = createBottomTabNavigator();
 const HomeStack = createStackNavigator();
@@ -174,7 +175,7 @@ const TabBar = () => {
     )
 };
 
-export default function App() {
+export default App = (props) => {
     return (
         <>
             <StatusBar barStyle="light-content" />

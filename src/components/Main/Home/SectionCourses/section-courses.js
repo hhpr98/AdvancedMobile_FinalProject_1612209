@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView, Button, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import SectionCoursesItem from "../SectionCoursesItem/section-courses-item";
 
 const SectionCourses = (props) => {
