@@ -19,7 +19,9 @@ import Subscription from "./src/components/RelativeComponent/Subcription/subcrip
 import Contact from "./src/components/RelativeComponent/Contact/contact";
 import Favorite from "./src/components/Main/Favorite/favorite";
 import SplashScreen from "./src/components/RelativeComponent/Splash/splash";
+import ScreenKey from "./src/libs/ScreenKey";
 
+const BeginStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const HomeStack = createStackNavigator();
 const FavoriteStack = createStackNavigator();
@@ -129,6 +131,28 @@ const SettingStackNavigation = () => {
     )
 }
 
+const BeginStackNavigation = () => {
+    return (
+        <BeginStack.Navigator
+            screenOptions={{
+                headerStyle: {
+                    backgroundColor: '#282828',
+                },
+                headerTintColor: '#fff',
+                headerTitleStyle: {
+                    fontWeight: 'bold',
+                },
+            }}
+            screenOptions={{
+                headerShown: false
+            }}
+            initialRouteName="SplashScreen"
+        >
+            <BeginStack.Screen name="SplashScreen" component={SplashScreen} />
+        </BeginStack.Navigator>
+    )
+}
+
 const TabBar = () => {
     return (
         <Tab.Navigator
@@ -136,22 +160,22 @@ const TabBar = () => {
                 tabBarIcon: ({ focused, color, size }) => {
                     let iconName;
 
-                    if (route.name === 'Home') {
+                    if (route.name === 'TabHome') {
                         iconName = focused ? 'ios-home' : 'md-home';
                     }
-                    else if (route.name === 'Download') {
+                    else if (route.name === 'TabDownload') {
                         iconName = focused ? 'md-cloud-download' : 'md-download';
                     }
-                    else if (route.name == 'Favorite') {
+                    else if (route.name == 'TabFavorite') {
                         iconName = focused ? 'ios-heart' : 'md-heart';
                     }
-                    else if (route.name === 'Browse') {
+                    else if (route.name === 'TabBrowse') {
                         iconName = focused ? 'ios-list-box' : 'ios-list';
                     }
-                    else if (route.name === 'Search') {
+                    else if (route.name === 'TabSearch') {
                         iconName = focused ? 'ios-search' : 'md-search';
                     }
-                    else if (route.name === 'Setting') {
+                    else if (route.name === 'TabSetting') {
                         iconName = focused ? 'md-settings' : 'ios-settings';
                     }
 
@@ -175,12 +199,23 @@ const TabBar = () => {
     )
 };
 
-export default App = (props) => {
+export default function App(props) {
+
+    const [isLoading, setIsLoading] = useState(true);
+
     return (
         <>
             <StatusBar barStyle="light-content" />
             <NavigationContainer style={styles.main}>
-                <TabBar />
+                {
+                    isLoading ?
+                        (
+                            <BeginStackNavigation />
+                        ) :
+                        (
+                            <TabBar />
+                        )
+                }
             </NavigationContainer>
         </>
     );

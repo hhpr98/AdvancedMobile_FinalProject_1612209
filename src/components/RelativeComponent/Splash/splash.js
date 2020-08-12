@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Image, Text } from "react-native";
 
-export default function SplashScreen() {
+export default SplashScreen = (props) => {
     const [loading, setLoading] = useState(0);
 
     return (
