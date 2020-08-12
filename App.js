@@ -21,6 +21,7 @@ import Favorite from "./src/components/Main/Favorite/favorite";
 import SplashScreen from "./src/components/RelativeComponent/Splash/splash";
 import ScreenKey from "./src/libs/ScreenKey";
 import { themes } from "./src/libs/themes";
+import { DataProvider } from "./src/Provider/DataProvider";
 
 const MainStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -212,9 +213,11 @@ export default function App(props) {
     return (
         <ThemeContext.Provider value={{ theme, setTheme }}>
             <StatusBar barStyle="light-content" />
-            <NavigationContainer style={styles.main}>
-                <MainStackNavigation />
-            </NavigationContainer>
+            <DataProvider>
+                <NavigationContainer style={styles.main}>
+                    <MainStackNavigation />
+                </NavigationContainer>
+            </DataProvider>
         </ThemeContext.Provider>
     );
 };
