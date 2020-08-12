@@ -21,6 +21,10 @@ import Favorite from "./src/components/Main/Favorite/favorite";
 
 const Tab = createBottomTabNavigator();
 const HomeStack = createStackNavigator();
+const FavoriteStack = createStackNavigator();
+const BrowseStack = createStackNavigator();
+const SearchStack = createStackNavigator();
+const SettingStack = createStackNavigator();
 
 const TabBar = () => {
     return (
@@ -59,18 +63,18 @@ const TabBar = () => {
                 inactiveBackgroundColor: 'black',
             }}
         >
-            <Tab.Screen name="Home" component={Home} option={{title: "Home"}}/>
-            <Tab.Screen name="Favorite" component={Favorite} option={{title: "Favorite"}}/>
-            <Tab.Screen name="Browse" component={Browse} option={{title: "Browse"}}/>
-            <Tab.Screen name="Search" component={Search} option={{title: "Search"}}/>
-            <Tab.Screen name="Setting" component={Setting} option={{title: "Setting"}}/>
+            <Tab.Screen name="Home" component={HomeStackNavigation} option={{ title: "Home" }} />
+            <Tab.Screen name="Favorite" component={FavoriteStackNavigation} option={{ title: "Favorite" }} />
+            <Tab.Screen name="Browse" component={Browse} option={{ title: "Browse" }} />
+            <Tab.Screen name="Search" component={Search} option={{ title: "Search" }} />
+            <Tab.Screen name="Setting" component={Setting} option={{ title: "Setting" }} />
         </Tab.Navigator>
     )
 };
 
-const HomeScreenNavigation = () => {
+const HomeStackNavigation = () => {
     return (
-        <Stack.Navigator
+        <HomeStack.Navigator
             screenOptions={{
                 headerStyle: {
                     backgroundColor: '#282828',
@@ -79,15 +83,37 @@ const HomeScreenNavigation = () => {
                 headerTitleStyle: {
                     fontWeight: 'bold',
                 },
-            }}>
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
-            <Stack.Screen name="Register" component={Register} />
-            <Stack.Screen name="Profile" component={Profile} />
-            <Stack.Screen name="CourseDetail" component={CourseDetail} />
-            <Stack.Screen name="Subscription" component={Subscription} />
-            <Stack.Screen name="Contact" component={Contact} />
-        </Stack.Navigator>
+            }}
+            initialRouteName="Home"
+        >
+            {/* <HomeStack.Screen name="Login" component={Login} /> */}
+            {/* <HomeStack.Screen name="ForgotPassword" component={ForgotPassword} /> */}
+            {/* <HomeStack.Screen name="Register" component={Register} /> */}
+            {/* <HomeStack.Screen name="Profile" component={Profile} /> */}
+            <HomeStack.Screen name="Home" component={Home} />
+            <HomeStack.Screen name="CourseDetail" component={CourseDetail} />
+            {/* <HomeStack.Screen name="Subscription" component={Subscription} /> */}
+            {/* <HomeStack.Screen name="Contact" component={Contact} /> */}
+        </HomeStack.Navigator>
+    )
+}
+
+const FavoriteStackNavigation = () => {
+    return (
+        <HomeStack.Navigator
+            screenOptions={{
+                headerStyle: {
+                    backgroundColor: '#282828',
+                },
+                headerTintColor: '#fff',
+                headerTitleStyle: {
+                    fontWeight: 'bold',
+                },
+            }}
+            initialRouteName="Favorite"
+        >
+            <HomeStack.Screen name="Favorite" component={Favorite} />
+        </HomeStack.Navigator>
     )
 }
 
@@ -97,7 +123,7 @@ export default function App() {
         <>
             <StatusBar barStyle="light-content" />
             <NavigationContainer style={styles.main}>
-                <TabBar/>
+                <TabBar />
             </NavigationContainer>
         </>
     );
