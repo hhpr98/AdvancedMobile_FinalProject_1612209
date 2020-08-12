@@ -1,10 +1,12 @@
 export const themes = {
     dark: {
         foreground: "white",
-        background: "black"
+        background: "black",
+        boderRadiusLogin: 5,
     },
     light: {
         foreground: "black",
-        background: "white"
+        background: "white",
+        boderRadiusLogin: 0,
     }
 }
