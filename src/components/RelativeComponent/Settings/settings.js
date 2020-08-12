@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
 import ToggleSwitch from 'toggle-switch-react-native';
 import { ThemeContext } from "../../../../App";
+import RNPickerSelect from 'react-native-picker-select';
+import { themes } from "../../../libs/themes";
 
 const Setting = (props) => {
+
+    const [wifiStreamToggle, setWifiStreamToggle] = useState(true);
+    const [downloadStreamToggle, setDownloadStreamToggle] = useState(true);
+
     return (
         <ThemeContext.Consumer>
             {
@@ -25,6 +31,20 @@ const Setting = (props) => {
                             <TouchableOpacity onPress={() => props.navigation.navigate('Contact')}>
                                 <Text style={{ ...styles.textBig, color: theme.foreground }}>Contact</Text>
                             </TouchableOpacity>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    if (theme.foreground === "white") {
+                                        // console.log("DARKKK");
+                                        setTheme(themes.light);
+                                    }
+                                    else {
+                                        setTheme(themes.dark);
+                                    }
+                                }}
+                            >
+                                <Text style={{ ...styles.textBig, color: theme.foreground }}>Theme</Text>
+                                <Text style={{ ...styles.textLittle, color: theme.foreground }}>Click to change theme</Text>
+                            </TouchableOpacity>
                             <Text style={{ ...styles.textBig, color: theme.foreground }}>Comunicate Preferences</Text>
                             <View style={{ ...styles.line, borderColor: theme.background, borderBottomColor: theme.foreground }} />
                             <Text style={{ ...styles.textBig, color: theme.foreground }}>Default caption language</Text>
@@ -32,23 +52,23 @@ const Setting = (props) => {
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                 <Text style={{ ...styles.textBig, color: theme.foreground }}>Require Wi-Fi for streaming</Text>
                                 <ToggleSwitch style={{ marginRight: 50, }}
-                                    isOn={true}
+                                    isOn={wifiStreamToggle}
                                     onColor="#3399FF"
                                     offColor="black"
                                     labelStyle={{ ...styles.textBig, color: theme.foreground }}
                                     size="small"
-                                    onToggle={isOn => isOn = !isOn}
+                                    onToggle={() => setWifiStreamToggle(!wifiStreamToggle)}
                                 />
                             </View>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                 <Text style={{ ...styles.textBig, color: theme.foreground }}>Require Wi-Fi for downloading</Text>
                                 <ToggleSwitch style={{ marginRight: 50, }}
-                                    isOn={true}
+                                    isOn={downloadStreamToggle}
                                     onColor="#3399FF"
                                     offColor="black"
                                     labelStyle={{ ...styles.textBig, color: theme.foreground }}
                                     size="small"
-                                    onToggle={isOn => isOn = !isOn}
+                                    onToggle={() => setDownloadStreamToggle(!downloadStreamToggle)}
                                 />
                             </View>
                             <Text style={{ ...styles.textBig, color: theme.foreground }}>Recommended content push notifications</Text>
