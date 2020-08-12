@@ -28,8 +28,8 @@ const Login = (props) => {
                                 <View style={{ ...styles.viewBorder, backgroundColor: theme.background, borderRadius: theme.boderRadiusLogin }}>
                                     <Text style={styles.text}>Username (or Email)</Text>
                                     <TextInput
-                                        style={styles.input}
-                                        placeholder="username"
+                                        style={{ ...styles.input, color: theme.forecolor }}
+                                        //placeholder="username"
                                         placeholderTextColor="#4B4541"
                                         onChangeText={user => setUser(user)}
                                     />
@@ -40,9 +40,9 @@ const Login = (props) => {
                                 <View style={{ ...styles.viewBorder, backgroundColor: theme.background, borderRadius: theme.boderRadiusLogin }}>
                                     <Text style={styles.text}>Password</Text>
                                     <TextInput
-                                        style={styles.input}
+                                        style={{ ...styles.input, color: theme.forecolor }}
                                         secureTextEntry={true}
-                                        placeholder="***"
+                                        //placeholder="***"
                                         placeholderTextColor="#4B4541"
                                         onChangeText={password => setPassword(password)}
                                     >
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
     },
     viewBorder: {
-        //backgroundColor: 'black',
+        // backgroundColor: 'black',
         //borderRadius: 5,
     },
     viewInsert: {
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     input: {
         height: 30,
         margin: 10,
-        color: 'white',
+        //color: 'white',
         borderBottomColor: '#3399FF',
         borderBottomWidth: 2,
         fontSize: 21,
