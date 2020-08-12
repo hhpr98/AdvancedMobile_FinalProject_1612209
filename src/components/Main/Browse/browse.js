@@ -41,7 +41,7 @@ const Browse = (props) => {
 
     return (
         <ScrollView style={styles.browse}>
-            <SignInRequired navigation={props.navigation} />
+            {/* <SignInRequired navigation={props.navigation} /> */}
             <ImageButton title1='NEW' title2='RELEASES' />
             <ImageButton title1='RECOMMENDED' title2='FOR YOU' />
             <ScrollView horizontal={true} style={{ marginBottom: 20, }}>

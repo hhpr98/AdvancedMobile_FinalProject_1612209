@@ -60,7 +60,7 @@ const Setting = (props) => {
             <Text style={styles.textLittle}>0.1.3</Text>
             <View style={styles.line} />
 
-            <TouchableOpacity style={styles.buttonSignOut} onPress={() => alert('Sign out clicked !')}>
+            <TouchableOpacity style={styles.buttonSignOut} onPress={() => props.navigation.navigate("Login")}>
                 <Text style={styles.textSignOut}>SIGN OUT</Text>
             </TouchableOpacity>
         </ScrollView>
