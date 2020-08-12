@@ -22,7 +22,7 @@ import SplashScreen from "./src/components/RelativeComponent/Splash/splash";
 import ScreenKey from "./src/libs/ScreenKey";
 import { themes } from "./src/libs/themes";
 
-const BeginStack = createStackNavigator();
+const MainStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const HomeStack = createStackNavigator();
 const FavoriteStack = createStackNavigator();
@@ -175,9 +175,9 @@ const TabBar = (props) => {
     )
 };
 
-const BeginStackNavigation = () => {
+const MainStackNavigation = () => {
     return (
-        <BeginStack.Navigator
+        <MainStack.Navigator
             screenOptions={{
                 headerStyle: {
                     backgroundColor: '#282828',
@@ -192,30 +192,28 @@ const BeginStackNavigation = () => {
             }}
             initialRouteName="SplashScreen"
         >
-            <BeginStack.Screen name="SplashScreen" component={SplashScreen} />
-            <HomeStack.Screen name="Login" component={Login} />
-            <HomeStack.Screen name="ForgotPassword" component={ForgotPassword} />
-            <HomeStack.Screen name="Register" component={Register} />
-            <BeginStack.Screen name="TabBar" component={TabBar} />
-        </BeginStack.Navigator>
+            <MainStack.Screen name="SplashScreen" component={SplashScreen} />
+            <MainStack.Screen name="Login" component={Login} />
+            <MainStack.Screen name="ForgotPassword" component={ForgotPassword} />
+            <MainStack.Screen name="Register" component={Register} />
+            <MainStack.Screen name="TabBar" component={TabBar} />
+        </MainStack.Navigator>
     )
 }
 
-export const ThemContext = React.createContext();
+export const ThemeContext = React.createContext();
 
 export default function App(props) {
 
     const [theme, setTheme] = useState(themes.light);
 
     return (
-        <>
+        <ThemeContext.Provider value={{ theme, setTheme }}>
             <StatusBar barStyle="light-content" />
-            <ThemContext.Provider value={{ theme, setTheme }}>
-                <NavigationContainer style={styles.main}>
-                    <BeginStackNavigation />
-                </NavigationContainer>
-            </ThemContext.Provider>
-        </>
+            <NavigationContainer style={styles.main}>
+                <MainStackNavigation />
+            </NavigationContainer>
+        </ThemeContext.Provider>
     );
 };
 
