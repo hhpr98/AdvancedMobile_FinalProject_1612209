@@ -1,64 +1,85 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { ThemeContext } from "../../../../App";
 
 const Login = (props) => {
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
 
+    const signInClick = () => {
+        if (user === "admin" && password === "123") {
+            props.navigation.navigate('TabBar');
+        } else {
+            alert("Wrong username or password!");
+        }
+    }
+
     return (
-        <View style={styles.home}>
-            <View style={styles.view}>
+        <ThemeContext.Consumer>
+            {
+                ({ theme, setTheme }) => {
+                    // console.log(theme);
+                    return (
+                        <View style={{ ...styles.home, backgroundColor: theme.background }}>
+                            <View style={styles.view}>
 
-                <View style={styles.viewInsert2} />
+                                <View style={{ ...styles.viewInsert2, backgroundColor: theme.background }} />
 
-                <View style={styles.viewBorder}>
-                    <Text style={styles.text}>Username (or Email)</Text>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={user => setUser(user)}
-                        value={user}
-                    />
-                </View>
+                                <View style={{ ...styles.viewBorder, backgroundColor: theme.background, borderRadius: theme.boderRadiusLogin }}>
+                                    <Text style={styles.text}>Username (or Email)</Text>
+                                    <TextInput
+                                        style={{ ...styles.input, color: theme.foreground }}
+                                        //placeholder="username"
+                                        placeholderTextColor="#4B4541"
+                                        onChangeText={user => setUser(user)}
+                                    />
+                                </View>
 
-                <View style={styles.viewInsert} />
+                                <View style={{ ...styles.viewInsert, backgroundColor: theme.background }} />
 
-                <View style={styles.viewBorder}>
-                    <Text style={styles.text}>Password</Text>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={password => setPassword(password)}
-                    >
-                        {password.split('').map(c => c === ' ' ? ' ' : '*')}
-                    </TextInput>
-                </View>
+                                <View style={{ ...styles.viewBorder, backgroundColor: theme.background, borderRadius: theme.boderRadiusLogin }}>
+                                    <Text style={styles.text}>Password</Text>
+                                    <TextInput
+                                        style={{ ...styles.input, color: theme.foreground }}
+                                        secureTextEntry={true}
+                                        //placeholder="***"
+                                        placeholderTextColor="#4B4541"
+                                        onChangeText={password => setPassword(password)}
+                                    >
+                                    </TextInput>
+                                </View>
 
-                <View style={styles.viewInsert2} />
+                                <View style={{ ...styles.viewInsert2, backgroundColor: theme.background }} />
 
-                <TouchableOpacity style={styles.buttonSignIn}
-                    onPress={() => props.navigation.navigate('Home')}
-                >
-                    <Text style={styles.textSignIn}>SIGN IN</Text>
-                </TouchableOpacity>
-                <View style={styles.viewInsert} />
-                <TouchableOpacity style={styles.buttonForgotAndSignUp}
-                    onPress={() => props.navigation.navigate('ForgotPassword')}
-                >
-                    <Text style={styles.textOrther}>FORGOT PASSWORD</Text>
-                </TouchableOpacity>
-                <View style={styles.viewInsert} />
-                <TouchableOpacity style={styles.buttonSSO}>
-                    <Text style={styles.textOrther}>USE SINGLE SIGN-ON (SSO)</Text>
-                </TouchableOpacity>
-                <View style={styles.viewInsert} />
-                <TouchableOpacity style={styles.buttonForgotAndSignUp}
-                    onPress={() => props.navigation.navigate('Register')}
-                >
-                    <Text style={styles.textOrther}>SIGN UP FREE</Text>
-                </TouchableOpacity>
+                                <TouchableOpacity style={{ ...styles.buttonSignIn, borderRadius: theme.boderRadiusLogin }}
+                                    onPress={() => signInClick()}
+                                >
+                                    <Text style={styles.textSignIn}>SIGN IN</Text>
+                                </TouchableOpacity>
+                                <View style={{ ...styles.viewInsert, backgroundColor: theme.background }} />
+                                <TouchableOpacity style={{ ...styles.buttonForgotAndSignUp, backgroundColor: theme.background, borderRadius: theme.boderRadiusLogin }}
+                                    onPress={() => props.navigation.navigate('ForgotPassword')}
+                                >
+                                    <Text style={styles.textOrther}>FORGOT PASSWORD</Text>
+                                </TouchableOpacity>
+                                <View style={{ ...styles.viewInsert, backgroundColor: theme.background }} />
+                                <TouchableOpacity style={{ ...styles.buttonSSO, backgroundColor: theme.background, borderRadius: theme.boderRadiusLogin }}>
+                                    <Text style={styles.textOrther}>USE SINGLE SIGN-ON (SSO)</Text>
+                                </TouchableOpacity>
+                                <View style={{ ...styles.viewInsert, backgroundColor: theme.background }} />
+                                <TouchableOpacity style={{ ...styles.buttonForgotAndSignUp, backgroundColor: theme.background, borderRadius: theme.boderRadiusLogin }}
+                                    onPress={() => props.navigation.navigate('Register')}
+                                >
+                                    <Text style={styles.textOrther}>SIGN UP FREE</Text>
+                                </TouchableOpacity>
 
-            </View>
+                            </View>
 
-        </View>
+                        </View>
+                    );
+                }
+            }
+        </ThemeContext.Consumer>
     );
 };
 
@@ -66,7 +87,7 @@ const styles = StyleSheet.create({
     home: {
         flexDirection: 'column',
         flex: 1,
-        backgroundColor: 'black'
+        //backgroundColor: 'black'
     },
     view: {
         backgroundColor: 'black',
@@ -76,15 +97,15 @@ const styles = StyleSheet.create({
         borderRadius: 5,
     },
     viewBorder: {
-        backgroundColor: '#222222',
-        borderRadius: 5,
+        // backgroundColor: 'black',
+        //borderRadius: 5,
     },
     viewInsert: {
-        backgroundColor: 'black',
+        //backgroundColor: 'black',
         height: 10,
     },
     viewInsert2: {
-        backgroundColor: 'black',
+        //backgroundColor: 'black',
         height: 50,
     },
     text: {
@@ -104,7 +125,7 @@ const styles = StyleSheet.create({
     input: {
         height: 30,
         margin: 10,
-        color: 'white',
+        //color: 'white',
         borderBottomColor: '#3399FF',
         borderBottomWidth: 2,
         fontSize: 21,
@@ -112,19 +133,19 @@ const styles = StyleSheet.create({
     buttonSignIn: {
         backgroundColor: '#3399FF',
         height: 40,
-        borderRadius: 5,
+        //borderRadius: 5,
         justifyContent: 'center',
     },
     buttonForgotAndSignUp: {
-        backgroundColor: 'black',
+        //backgroundColor: 'black',
         height: 40,
-        borderRadius: 5,
+        //borderRadius: 5,
         justifyContent: 'center',
     },
     buttonSSO: {
-        backgroundColor: 'black',
+        //backgroundColor: 'black',
         height: 40,
-        borderRadius: 5,
+        //borderRadius: 5,
         justifyContent: 'center',
         borderColor: '#3399FF',
         borderWidth: 3,

@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {SafeAreaView, StatusBar, StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
+import React, { useState } from 'react';
+import { SafeAreaView, StatusBar, StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -18,14 +18,125 @@ import CourseDetail from "./src/components/Courses/CourseDetail/course-detail";
 import Subscription from "./src/components/RelativeComponent/Subcription/subcription";
 import Contact from "./src/components/RelativeComponent/Contact/contact";
 import Favorite from "./src/components/Main/Favorite/favorite";
+import SplashScreen from "./src/components/RelativeComponent/Splash/splash";
+import ScreenKey from "./src/libs/ScreenKey";
+import { themes } from "./src/libs/themes";
+import { DataProvider } from "./src/Provider/DataProvider";
 
+const MainStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-const Stack = createStackNavigator();
+const HomeStack = createStackNavigator();
+const FavoriteStack = createStackNavigator();
+const BrowseStack = createStackNavigator();
+const SearchStack = createStackNavigator();
+const SettingStack = createStackNavigator();
 
-export default function App() {
-    const [tabName,setTabName] = useState('Home');
+export const ThemeContext = React.createContext();
 
-    const tabBar = () => {
+export default function App(props) {
+
+    const [theme, setTheme] = useState(themes.dark);
+
+    const HomeStackNavigation = () => {
+        return (
+            <HomeStack.Navigator
+                screenOptions={{
+                    headerStyle: {
+                        backgroundColor: '#282828',
+                    },
+                    headerTintColor: '#fff',
+                    headerTitleStyle: {
+                        fontWeight: 'bold',
+                    },
+                }}
+                initialRouteName="Home"
+            >
+                <HomeStack.Screen name="Home" component={Home} />
+                <HomeStack.Screen name="CourseDetail" component={CourseDetail} />
+            </HomeStack.Navigator>
+        )
+    }
+
+    const FavoriteStackNavigation = () => {
+        return (
+            <FavoriteStack.Navigator
+                screenOptions={{
+                    headerStyle: {
+                        backgroundColor: '#282828',
+                    },
+                    headerTintColor: '#fff',
+                    headerTitleStyle: {
+                        fontWeight: 'bold',
+                    },
+                }}
+                initialRouteName="Favorite"
+            >
+                <FavoriteStack.Screen name="Favorite" component={Favorite} />
+            </FavoriteStack.Navigator>
+        )
+    }
+
+    const BrowseStackNavigation = () => {
+        return (
+            <BrowseStack.Navigator
+                screenOptions={{
+                    headerStyle: {
+                        backgroundColor: '#282828',
+                    },
+                    headerTintColor: '#fff',
+                    headerTitleStyle: {
+                        fontWeight: 'bold',
+                    },
+                }}
+                initialRouteName="Browse"
+            >
+                <BrowseStack.Screen name="Browse" component={Browse} />
+            </BrowseStack.Navigator>
+        )
+    }
+
+    const SearchStackNavigation = () => {
+        return (
+            <SearchStack.Navigator
+                screenOptions={{
+                    headerStyle: {
+                        backgroundColor: '#282828',
+                    },
+                    headerTintColor: '#fff',
+                    headerTitleStyle: {
+                        fontWeight: 'bold',
+                    },
+                }}
+                initialRouteName="Search"
+            >
+                <SearchStack.Screen name="Search" component={Search} />
+            </SearchStack.Navigator>
+        )
+    }
+
+    const SettingStackNavigation = () => {
+        return (
+            <SettingStack.Navigator
+                screenOptions={{
+                    headerStyle: {
+                        backgroundColor: '#282828',
+                    },
+                    headerTintColor: '#fff',
+                    headerTitleStyle: {
+                        fontWeight: 'bold',
+                    },
+                }}
+                initialRouteName="Setting"
+            >
+                <SettingStack.Screen name="Setting" component={Setting} />
+                <SettingStack.Screen name="Profile" component={Profile} />
+                <SettingStack.Screen name="Subscription" component={Subscription} />
+                <SettingStack.Screen name="Contact" component={Contact} />
+            </SettingStack.Navigator>
+        )
+    }
+
+    const TabBar = (props) => {
         return (
             <Tab.Navigator
                 screenOptions={({ route }) => ({
@@ -58,26 +169,25 @@ export default function App() {
                 tabBarOptions={{
                     activeTintColor: '#3399FF',
                     activeBackgroundColor: 'transact',
-                    inactiveTintColor: 'white',
-                    inactiveBackgroundColor: 'black',
+                    // inactiveTintColor: 'white',
+                    inactiveTintColor: theme.foreground,
+                    // inactiveBackgroundColor: 'black',
+                    inactiveBackgroundColor: theme.background,
                 }}
             >
-                <Tab.Screen name="Home" component={Home} />
-                <Tab.Screen name="Favorite" component={Favorite} />
-                <Tab.Screen name="Browse" component={Browse} />
-                <Tab.Screen name="Search" component={Search} />
-                <Tab.Screen name="Setting" component={Setting} />
+                <Tab.Screen name="Home" component={HomeStackNavigation} option={{ title: "Home" }} />
+                <Tab.Screen name="Favorite" component={FavoriteStackNavigation} option={{ title: "Favorite" }} />
+                <Tab.Screen name="Browse" component={BrowseStackNavigation} option={{ title: "Browse" }} />
+                <Tab.Screen name="Search" component={SearchStackNavigation} option={{ title: "Search" }} />
+                <Tab.Screen name="Setting" component={SettingStackNavigation} option={{ title: "Setting" }} />
             </Tab.Navigator>
         )
     };
 
-    return (
-        <>
-            <StatusBar barStyle="light-content"/>
-            <NavigationContainer style={styles.main}>
-                <Stack.Navigator
-                    screenOptions={{
-                    //title: tabName,
+    const MainStackNavigation = () => {
+        return (
+            <MainStack.Navigator
+                screenOptions={{
                     headerStyle: {
                         backgroundColor: '#282828',
                     },
@@ -85,41 +195,36 @@ export default function App() {
                     headerTitleStyle: {
                         fontWeight: 'bold',
                     },
-                    /*headerRight: () => {
-                        return (
-                            <TouchableOpacity
-                                onPress={() => {this.props.navigation.navigate('Profile')}}
-                            >
-                                <Image
-                                    source={require('./assets/ic_people_author.png')}
-                                    style={{
-                                        height:35,
-                                        width:35,
-                                        borderRadius:50,
-                                        backgroundColor: 'lightblue',
-                                        marginRight: 20,
-                                    }}/>
-                            </TouchableOpacity>
-                        );
-                    }*/
-                    }}>
-                    <Stack.Screen name="Home" component={tabBar}/>
-                    <Stack.Screen name="Login" component={Login}/>
-                    <Stack.Screen name="ForgotPassword" component={ForgotPassword}/>
-                    <Stack.Screen name="Register" component={Register}/>
-                    <Stack.Screen name="Profile" component={Profile}/>
-                    <Stack.Screen name="CourseDetail" component={CourseDetail}/>
-                    <Stack.Screen name="Subscription" component={Subscription}/>
-                    <Stack.Screen name="Contact" component={Contact}/>
-                </Stack.Navigator>
-            </NavigationContainer>
-        </>
+                }}
+                screenOptions={{
+                    headerShown: false
+                }}
+                initialRouteName="SplashScreen"
+            >
+                <MainStack.Screen name="SplashScreen" component={SplashScreen} />
+                <MainStack.Screen name="Login" component={Login} />
+                <MainStack.Screen name="ForgotPassword" component={ForgotPassword} />
+                <MainStack.Screen name="Register" component={Register} />
+                <MainStack.Screen name="TabBar" component={TabBar} />
+            </MainStack.Navigator>
+        )
+    }
+
+    return (
+        <ThemeContext.Provider value={{ theme, setTheme }}>
+            <StatusBar barStyle="light-content" />
+            <DataProvider>
+                <NavigationContainer style={styles.main}>
+                    <MainStackNavigation />
+                </NavigationContainer>
+            </DataProvider>
+        </ThemeContext.Provider>
     );
 };
 
 const styles = StyleSheet.create({
     main: {
-        flex:1,
+        flex: 1,
         justifyContent: 'center',
     }
 });

@@ -5,7 +5,8 @@ import LittleImageButton from "./ImageButton/little-image-button";
 import PopularSkills from "./PopularSkill/popular-skill";
 import Path from "./Paths/path";
 import TopAuthor from "./TopAuthors/top-author";
-import SignInRequired from "./SignInRequired/sign-in-required";
+// import SignInRequired from "./SignInRequired/sign-in-required";
+import { ThemeContext } from "../../../../App";
 
 const Browse = (props) => {
     const dat = [
@@ -40,25 +41,32 @@ const Browse = (props) => {
     };
 
     return (
-        <ScrollView style={styles.browse}>
-            <SignInRequired navigation={props.navigation} />
-            <ImageButton title1='NEW' title2='RELEASES' />
-            <ImageButton title1='RECOMMENDED' title2='FOR YOU' />
-            <ScrollView horizontal={true} style={{ marginBottom: 20, }}>
-                {getLittleScrollView(dat)}
-            </ScrollView>
-            <PopularSkills />
-            <Path navigation={props.navigation} />
-            <TopAuthor navigation={props.navigation} />
-        </ScrollView>
-
-    );
+        <ThemeContext>
+            {
+                ({ theme }) => {
+                    return (
+                        <ScrollView style={{ ...styles.browse, backgroundColor: theme.background }}>
+                            {/* <SignInRequired navigation={props.navigation} /> */}
+                            <ImageButton title1='NEW' title2='RELEASES' />
+                            <ImageButton title1='RECOMMENDED' title2='FOR YOU' />
+                            <ScrollView horizontal={true} style={{ marginBottom: 20, }}>
+                                {getLittleScrollView(dat)}
+                            </ScrollView>
+                            <PopularSkills />
+                            <Path navigation={props.navigation} />
+                            <TopAuthor navigation={props.navigation} />
+                        </ScrollView>
+                    );
+                }
+            }
+        </ThemeContext>
+    )
 };
 
 const styles = StyleSheet.create({
     browse: {
         flex: 1,
-        backgroundColor: 'black',
+        //backgroundColor: 'black',
     },
 
 });
