@@ -131,29 +131,7 @@ const SettingStackNavigation = () => {
     )
 }
 
-const BeginStackNavigation = () => {
-    return (
-        <BeginStack.Navigator
-            screenOptions={{
-                headerStyle: {
-                    backgroundColor: '#282828',
-                },
-                headerTintColor: '#fff',
-                headerTitleStyle: {
-                    fontWeight: 'bold',
-                },
-            }}
-            screenOptions={{
-                headerShown: false
-            }}
-            initialRouteName="SplashScreen"
-        >
-            <BeginStack.Screen name="SplashScreen" component={SplashScreen} />
-        </BeginStack.Navigator>
-    )
-}
-
-const TabBar = () => {
+const TabBar = (props) => {
     return (
         <Tab.Navigator
             screenOptions={({ route }) => ({
@@ -199,23 +177,36 @@ const TabBar = () => {
     )
 };
 
-export default function App(props) {
+const BeginStackNavigation = () => {
+    return (
+        <BeginStack.Navigator
+            screenOptions={{
+                headerStyle: {
+                    backgroundColor: '#282828',
+                },
+                headerTintColor: '#fff',
+                headerTitleStyle: {
+                    fontWeight: 'bold',
+                },
+            }}
+            screenOptions={{
+                headerShown: false
+            }}
+            initialRouteName="SplashScreen"
+        >
+            <BeginStack.Screen name="SplashScreen" component={SplashScreen} />
+            <BeginStack.Screen name="TabBar" component={TabBar} />
+        </BeginStack.Navigator>
+    )
+}
 
-    const [isLoading, setIsLoading] = useState(true);
+export default function App(props) {
 
     return (
         <>
             <StatusBar barStyle="light-content" />
             <NavigationContainer style={styles.main}>
-                {
-                    isLoading ?
-                        (
-                            <BeginStackNavigation />
-                        ) :
-                        (
-                            <TabBar />
-                        )
-                }
+                <BeginStackNavigation />
             </NavigationContainer>
         </>
     );
