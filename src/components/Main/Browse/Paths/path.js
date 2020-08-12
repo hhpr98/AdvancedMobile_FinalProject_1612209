@@ -5,28 +5,6 @@ import { ThemeContext } from "../../../../../App";
 import { DataContext } from "../../../../Provider/DataProvider";
 
 const Path = (props) => {
-    const data = [
-        {
-            name: 'Security in Google Cloud',
-            number: '3 courses',
-        },
-        {
-            name: 'Cisco DCCOR (350-601) for CCNP Data Center',
-            number: '7 courses',
-        },
-        {
-            name: 'ng-conf : Hardwired 2020',
-            number: '31 courses',
-        },
-        {
-            name: 'Managing Source Code with Git',
-            number: '7 courses',
-        },
-        {
-            name: 'Core Python',
-            number: '8 courses',
-        }
-    ];
 
     const getPathItem = (paths) => {
         return paths.map(item =>

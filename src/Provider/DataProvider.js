@@ -25,6 +25,8 @@ const data = {
             number: '8 courses',
         }
     ],
+    topauthors: ['Mr.An', 'Hong Thai', 'John', 'Sylas', 'Mary', 'Hao Pham', 'Truc Nguyen'],
+    popularskills: ['Angular', 'JavaScript', 'C#', 'Java', 'Data Analysis', 'ASP.NET', 'Node.js', 'Design Pattern', 'Python', 'React', '.NET', 'SQL Server', 'Database Administrantion', 'Part Modeling', 'Information Security', 'JS', 'ASP.NET Core', 'TypeScript', 'Machine Learning', 'Android', 'iOS'],
 }
 
 export const DataProvider = (props) => {

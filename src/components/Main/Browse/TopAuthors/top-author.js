@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { ThemeContext } from "../../../../../App";
+import { DataContext } from "../../../../Provider/DataProvider";
 
 const TopAuthor = () => {
-    const data = ['Mr.An', 'Hong Thai', 'John', 'Sylas', 'Mary', 'Hao Pham', 'Truc Nguyen'];
 
     const getAuthorList = (authors) => {
         return (
@@ -27,15 +27,23 @@ const TopAuthor = () => {
             {
                 ({ theme }) => {
                     return (
-                        <View>
-                            <View style={styles.view}>
-                                <Text style={{ ...styles.textTitle, color: theme.foreground }}>TopAuthor</Text>
-                                <ScrollView horizontal={true}>
-                                    {getAuthorList(data)}
-                                </ScrollView>
-                            </View>
-                        </View>
-                    );
+                        <DataContext.Consumer>
+                            {
+                                ({ data }) => {
+                                    return (
+                                        <View>
+                                            <View style={styles.view}>
+                                                <Text style={{ ...styles.textTitle, color: theme.foreground }}>TopAuthor</Text>
+                                                <ScrollView horizontal={true}>
+                                                    {getAuthorList(data.topauthors)}
+                                                </ScrollView>
+                                            </View>
+                                        </View>
+                                    );
+                                }
+                            }
+                        </DataContext.Consumer>
+                    )
                 }
             }
         </ThemeContext.Consumer>
