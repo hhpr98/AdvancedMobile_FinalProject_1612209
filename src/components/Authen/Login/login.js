@@ -28,7 +28,7 @@ const Login = (props) => {
                                 <View style={{ ...styles.viewBorder, backgroundColor: theme.background, borderRadius: theme.boderRadiusLogin }}>
                                     <Text style={styles.text}>Username (or Email)</Text>
                                     <TextInput
-                                        style={{ ...styles.input, color: theme.forecolor }}
+                                        style={{ ...styles.input, color: theme.foreground }}
                                         //placeholder="username"
                                         placeholderTextColor="#4B4541"
                                         onChangeText={user => setUser(user)}
@@ -40,7 +40,7 @@ const Login = (props) => {
                                 <View style={{ ...styles.viewBorder, backgroundColor: theme.background, borderRadius: theme.boderRadiusLogin }}>
                                     <Text style={styles.text}>Password</Text>
                                     <TextInput
-                                        style={{ ...styles.input, color: theme.forecolor }}
+                                        style={{ ...styles.input, color: theme.foreground }}
                                         secureTextEntry={true}
                                         //placeholder="***"
                                         placeholderTextColor="#4B4541"
