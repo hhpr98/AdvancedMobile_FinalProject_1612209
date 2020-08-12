@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {SafeAreaView, StatusBar, StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
+import React, { useState } from 'react';
+import { SafeAreaView, StatusBar, StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -20,98 +20,84 @@ import Contact from "./src/components/RelativeComponent/Contact/contact";
 import Favorite from "./src/components/Main/Favorite/favorite";
 
 const Tab = createBottomTabNavigator();
-const Stack = createStackNavigator();
+const HomeStack = createStackNavigator();
+
+const TabBar = () => {
+    return (
+        <Tab.Navigator
+            screenOptions={({ route }) => ({
+                tabBarIcon: ({ focused, color, size }) => {
+                    let iconName;
+
+                    if (route.name === 'Home') {
+                        iconName = focused ? 'ios-home' : 'md-home';
+                    }
+                    else if (route.name === 'Download') {
+                        iconName = focused ? 'md-cloud-download' : 'md-download';
+                    }
+                    else if (route.name == 'Favorite') {
+                        iconName = focused ? 'ios-heart' : 'md-heart';
+                    }
+                    else if (route.name === 'Browse') {
+                        iconName = focused ? 'ios-list-box' : 'ios-list';
+                    }
+                    else if (route.name === 'Search') {
+                        iconName = focused ? 'ios-search' : 'md-search';
+                    }
+                    else if (route.name === 'Setting') {
+                        iconName = focused ? 'md-settings' : 'ios-settings';
+                    }
+
+                    // You can return any component that you like here!
+                    return <Ionicons name={iconName} size={size} color={color} />;
+                },
+            })}
+            tabBarOptions={{
+                activeTintColor: '#3399FF',
+                activeBackgroundColor: 'transact',
+                inactiveTintColor: 'white',
+                inactiveBackgroundColor: 'black',
+            }}
+        >
+            <Tab.Screen name="Home" component={Home} option={{title: "Home"}}/>
+            <Tab.Screen name="Favorite" component={Favorite} option={{title: "Favorite"}}/>
+            <Tab.Screen name="Browse" component={Browse} option={{title: "Browse"}}/>
+            <Tab.Screen name="Search" component={Search} option={{title: "Search"}}/>
+            <Tab.Screen name="Setting" component={Setting} option={{title: "Setting"}}/>
+        </Tab.Navigator>
+    )
+};
+
+const HomeScreenNavigation = () => {
+    return (
+        <Stack.Navigator
+            screenOptions={{
+                headerStyle: {
+                    backgroundColor: '#282828',
+                },
+                headerTintColor: '#fff',
+                headerTitleStyle: {
+                    fontWeight: 'bold',
+                },
+            }}>
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+            <Stack.Screen name="Register" component={Register} />
+            <Stack.Screen name="Profile" component={Profile} />
+            <Stack.Screen name="CourseDetail" component={CourseDetail} />
+            <Stack.Screen name="Subscription" component={Subscription} />
+            <Stack.Screen name="Contact" component={Contact} />
+        </Stack.Navigator>
+    )
+}
 
 export default function App() {
-    const [tabName,setTabName] = useState('Home');
-
-    const tabBar = () => {
-        return (
-            <Tab.Navigator
-                screenOptions={({ route }) => ({
-                    tabBarIcon: ({ focused, color, size }) => {
-                        let iconName;
-
-                        if (route.name === 'Home') {
-                            iconName = focused ? 'ios-home' : 'md-home';
-                        }
-                        else if (route.name === 'Download') {
-                            iconName = focused ? 'md-cloud-download' : 'md-download';
-                        }
-                        else if (route.name == 'Favorite') {
-                            iconName = focused ? 'ios-heart' : 'md-heart';
-                        }
-                        else if (route.name === 'Browse') {
-                            iconName = focused ? 'ios-list-box' : 'ios-list';
-                        }
-                        else if (route.name === 'Search') {
-                            iconName = focused ? 'ios-search' : 'md-search';
-                        }
-                        else if (route.name === 'Setting') {
-                            iconName = focused ? 'md-settings' : 'ios-settings';
-                        }
-
-                        // You can return any component that you like here!
-                        return <Ionicons name={iconName} size={size} color={color} />;
-                    },
-                })}
-                tabBarOptions={{
-                    activeTintColor: '#3399FF',
-                    activeBackgroundColor: 'transact',
-                    inactiveTintColor: 'white',
-                    inactiveBackgroundColor: 'black',
-                }}
-            >
-                <Tab.Screen name="Home" component={Home} />
-                <Tab.Screen name="Favorite" component={Favorite} />
-                <Tab.Screen name="Browse" component={Browse} />
-                <Tab.Screen name="Search" component={Search} />
-                <Tab.Screen name="Setting" component={Setting} />
-            </Tab.Navigator>
-        )
-    };
 
     return (
         <>
-            <StatusBar barStyle="light-content"/>
+            <StatusBar barStyle="light-content" />
             <NavigationContainer style={styles.main}>
-                <Stack.Navigator
-                    screenOptions={{
-                    //title: tabName,
-                    headerStyle: {
-                        backgroundColor: '#282828',
-                    },
-                    headerTintColor: '#fff',
-                    headerTitleStyle: {
-                        fontWeight: 'bold',
-                    },
-                    /*headerRight: () => {
-                        return (
-                            <TouchableOpacity
-                                onPress={() => {this.props.navigation.navigate('Profile')}}
-                            >
-                                <Image
-                                    source={require('./assets/ic_people_author.png')}
-                                    style={{
-                                        height:35,
-                                        width:35,
-                                        borderRadius:50,
-                                        backgroundColor: 'lightblue',
-                                        marginRight: 20,
-                                    }}/>
-                            </TouchableOpacity>
-                        );
-                    }*/
-                    }}>
-                    <Stack.Screen name="Home" component={tabBar}/>
-                    <Stack.Screen name="Login" component={Login}/>
-                    <Stack.Screen name="ForgotPassword" component={ForgotPassword}/>
-                    <Stack.Screen name="Register" component={Register}/>
-                    <Stack.Screen name="Profile" component={Profile}/>
-                    <Stack.Screen name="CourseDetail" component={CourseDetail}/>
-                    <Stack.Screen name="Subscription" component={Subscription}/>
-                    <Stack.Screen name="Contact" component={Contact}/>
-                </Stack.Navigator>
+                <TabBar/>
             </NavigationContainer>
         </>
     );
@@ -119,7 +105,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
     main: {
-        flex:1,
+        flex: 1,
         justifyContent: 'center',
     }
 });
