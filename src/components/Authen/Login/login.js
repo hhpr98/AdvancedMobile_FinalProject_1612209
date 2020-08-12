@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { ThemeContext } from "../../../../App";
 
 const Login = (props) => {
     const [user, setUser] = useState('');
@@ -13,6 +14,74 @@ const Login = (props) => {
         }
     }
 
+    /*
+    return (
+        <ThemeContext.Consumer>
+            {
+                ({ theme, setTheme }) => {
+                    console.log(theme);
+                    return (
+                        <View style={styles.home}>
+                            <View style={styles.view}>
+
+                                <View style={styles.viewInsert2} />
+
+                                <View style={styles.viewBorder}>
+                                    <Text style={styles.text}>Username (or Email)</Text>
+                                    <TextInput
+                                        style={styles.input}
+                                        placeholder="username"
+                                        placeholderTextColor="#4B4541"
+                                        onChangeText={user => setUser(user)}
+                                    />
+                                </View>
+
+                                <View style={styles.viewInsert} />
+
+                                <View style={styles.viewBorder}>
+                                    <Text style={styles.text}>Password</Text>
+                                    <TextInput
+                                        style={styles.input}
+                                        secureTextEntry={true}
+                                        placeholder="***"
+                                        placeholderTextColor="#4B4541"
+                                        onChangeText={password => setPassword(password)}
+                                    >
+                                    </TextInput>
+                                </View>
+
+                                <View style={styles.viewInsert2} />
+
+                                <TouchableOpacity style={styles.buttonSignIn}
+                                    onPress={() => signInClick()}
+                                >
+                                    <Text style={styles.textSignIn}>SIGN IN</Text>
+                                </TouchableOpacity>
+                                <View style={styles.viewInsert} />
+                                <TouchableOpacity style={styles.buttonForgotAndSignUp}
+                                    onPress={() => props.navigation.navigate('ForgotPassword')}
+                                >
+                                    <Text style={styles.textOrther}>FORGOT PASSWORD</Text>
+                                </TouchableOpacity>
+                                <View style={styles.viewInsert} />
+                                <TouchableOpacity style={styles.buttonSSO}>
+                                    <Text style={styles.textOrther}>USE SINGLE SIGN-ON (SSO)</Text>
+                                </TouchableOpacity>
+                                <View style={styles.viewInsert} />
+                                <TouchableOpacity style={styles.buttonForgotAndSignUp}
+                                    onPress={() => props.navigation.navigate('Register')}
+                                >
+                                    <Text style={styles.textOrther}>SIGN UP FREE</Text>
+                                </TouchableOpacity>
+
+                            </View>
+
+                        </View>
+                    );
+                }
+            }
+        </ThemeContext.Consumer>
+    );*/
     return (
         <View style={styles.home}>
             <View style={styles.view}>

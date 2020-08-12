@@ -20,6 +20,7 @@ import Contact from "./src/components/RelativeComponent/Contact/contact";
 import Favorite from "./src/components/Main/Favorite/favorite";
 import SplashScreen from "./src/components/RelativeComponent/Splash/splash";
 import ScreenKey from "./src/libs/ScreenKey";
+import { themes } from "./src/libs/themes";
 
 const BeginStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -51,7 +52,7 @@ const HomeStackNavigation = () => {
 
 const FavoriteStackNavigation = () => {
     return (
-        <HomeStack.Navigator
+        <FavoriteStack.Navigator
             screenOptions={{
                 headerStyle: {
                     backgroundColor: '#282828',
@@ -63,14 +64,14 @@ const FavoriteStackNavigation = () => {
             }}
             initialRouteName="Favorite"
         >
-            <HomeStack.Screen name="Favorite" component={Favorite} />
-        </HomeStack.Navigator>
+            <FavoriteStack.Screen name="Favorite" component={Favorite} />
+        </FavoriteStack.Navigator>
     )
 }
 
 const BrowseStackNavigation = () => {
     return (
-        <HomeStack.Navigator
+        <BrowseStack.Navigator
             screenOptions={{
                 headerStyle: {
                     backgroundColor: '#282828',
@@ -82,14 +83,14 @@ const BrowseStackNavigation = () => {
             }}
             initialRouteName="Browse"
         >
-            <HomeStack.Screen name="Browse" component={Browse} />
-        </HomeStack.Navigator>
+            <BrowseStack.Screen name="Browse" component={Browse} />
+        </BrowseStack.Navigator>
     )
 }
 
 const SearchStackNavigation = () => {
     return (
-        <HomeStack.Navigator
+        <SearchStack.Navigator
             screenOptions={{
                 headerStyle: {
                     backgroundColor: '#282828',
@@ -101,14 +102,14 @@ const SearchStackNavigation = () => {
             }}
             initialRouteName="Search"
         >
-            <HomeStack.Screen name="Search" component={Search} />
-        </HomeStack.Navigator>
+            <SearchStack.Screen name="Search" component={Search} />
+        </SearchStack.Navigator>
     )
 }
 
 const SettingStackNavigation = () => {
     return (
-        <HomeStack.Navigator
+        <SettingStack.Navigator
             screenOptions={{
                 headerStyle: {
                     backgroundColor: '#282828',
@@ -120,11 +121,11 @@ const SettingStackNavigation = () => {
             }}
             initialRouteName="Setting"
         >
-            <HomeStack.Screen name="Setting" component={Setting} />
-            <HomeStack.Screen name="Profile" component={Profile} />
-            <HomeStack.Screen name="Subscription" component={Subscription} />
-            <HomeStack.Screen name="Contact" component={Contact} />
-        </HomeStack.Navigator>
+            <SettingStack.Screen name="Setting" component={Setting} />
+            <SettingStack.Screen name="Profile" component={Profile} />
+            <SettingStack.Screen name="Subscription" component={Subscription} />
+            <SettingStack.Screen name="Contact" component={Contact} />
+        </SettingStack.Navigator>
     )
 }
 
@@ -200,14 +201,20 @@ const BeginStackNavigation = () => {
     )
 }
 
+export const ThemContext = React.createContext();
+
 export default function App(props) {
+
+    const [theme, setTheme] = useState(themes.light);
 
     return (
         <>
             <StatusBar barStyle="light-content" />
-            <NavigationContainer style={styles.main}>
-                <BeginStackNavigation />
-            </NavigationContainer>
+            <ThemContext.Provider value={{ theme, setTheme }}>
+                <NavigationContainer style={styles.main}>
+                    <BeginStackNavigation />
+                </NavigationContainer>
+            </ThemContext.Provider>
         </>
     );
 };
