@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
-import SectionCoursesItem from "../Home/SectionCoursesItem/section-courses-item";
 import CourseFavoriteItem from "./CourseFavorite/course-favorite-item";
+import { ThemeContext } from "../../../../App";
 
 const Favorite = () => {
 
@@ -55,31 +55,35 @@ const Favorite = () => {
     };
 
     return (
-        <View style={styles.home}>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-around', }}>
-                <Text style={styles.text1}>4 courses (440MB)</Text>
-                <TouchableOpacity
-                    onPress={() => alert('remove!')}
-                >
-                    <Text style={styles.textButton}>Remove all</Text>
-                </TouchableOpacity>
-            </View>
-            <ScrollView>
-                {renderListItems(courses)}
-            </ScrollView>
-        </View>
+        <ThemeContext.Consumer>
+            {
+                ({ theme }) => {
+                    return (
+                        <View style={{ ...styles.home, backgroundColor: theme.background }}>
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-around', }}>
+                                <Text style={{ ...styles.text1, color: theme.forecolor }}>4 courses (440MB)</Text>
+                                <TouchableOpacity
+                                    onPress={() => alert('remove!')}
+                                >
+                                    <Text style={styles.textButton}>Remove all</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <ScrollView>
+                                {renderListItems(courses)}
+                            </ScrollView>
+                        </View>
 
-    );
+                    );
+                }
+            }
+        </ThemeContext.Consumer>
+    )
 };
 
 const styles = StyleSheet.create({
     home: {
         flex: 1,
-        backgroundColor: 'black',
-        //flexDirection:'column',
-        //display:'flex',
-        //justifyContent:'center',
-        //alignItems:'center',
+        //backgroundColor: 'black',
     },
     image: {
         width: 200,
@@ -87,7 +91,7 @@ const styles = StyleSheet.create({
     },
     text1: {
         margin: 20,
-        color: 'white',
+        //color: 'white',
         fontWeight: 'bold',
         fontSize: 17,
     },

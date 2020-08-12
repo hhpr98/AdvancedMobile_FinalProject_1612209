@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import SectionCoursesItem from "../SectionCoursesItem/section-courses-item";
+import { ThemeContext } from "../../../../../App";
 
 const SectionCourses = (props) => {
     const courses = [
@@ -52,20 +53,26 @@ const SectionCourses = (props) => {
     };
 
     return (
-        <View style={styles.cons}>
-            <View style={styles.view}>
-                <Text style={styles.textTitle}>{props.title}</Text>
-                <TouchableOpacity onPress={() => alert('See all clicked !')}>
-                    <Text style={styles.textButton}>See all ></Text>
-                </TouchableOpacity>
-            </View>
-            <ScrollView horizontal={true}>
-                {renderListItems(courses)}
-            </ScrollView>
-        </View>
-
-
-    );
+        <ThemeContext.Consumer>
+            {
+                ({ theme }) => {
+                    return (
+                        <View style={styles.cons}>
+                            <View style={styles.view}>
+                                <Text style={{ ...styles.textTitle, color: theme.foreground }}>{props.title}</Text>
+                                <TouchableOpacity onPress={() => alert('See all clicked !')}>
+                                    <Text style={{ ...styles.textButton, color: theme.foreground }}>See all ></Text>
+                                </TouchableOpacity>
+                            </View>
+                            <ScrollView horizontal={true}>
+                                {renderListItems(courses)}
+                            </ScrollView>
+                        </View>
+                    );
+                }
+            }
+        </ThemeContext.Consumer>
+    )
 };
 
 const styles = StyleSheet.create({
@@ -80,12 +87,12 @@ const styles = StyleSheet.create({
     textTitle: {
         fontWeight: 'bold',
         fontSize: 17,
-        color: 'white',
+        //color: 'white',
         marginLeft: 10,
     },
     textButton: {
         fontSize: 12,
-        color: 'white',
+        //color: 'white',
         marginRight: 10,
     }
 });

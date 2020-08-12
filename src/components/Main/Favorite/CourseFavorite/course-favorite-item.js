@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { ThemeContext } from "../../../../../App";
 
 const CourseFavoriteItem = (props) => {
 
@@ -8,27 +9,35 @@ const CourseFavoriteItem = (props) => {
     };
 
     return (
-        <View style={styles.home}>
-            <Image
-                source={{ uri: props.item.imageURL }}
-                style={styles.image}
-            />
-            <View style={{ margin: 5, marginRight: 30, }}>
-                <Text style={styles.text1}>{props.item.title}</Text>
-                <Text style={styles.text2}>{props.item.author}</Text>
-                <Text style={styles.text2}>{getCourseString(props.item)}</Text>
-            </View>
-        </View>
-    );
+        <ThemeContext.Consumer>
+            {
+                ({ theme }) => {
+                    return (
+                        <View style={{ ...styles.home, backgroundColor: theme.background, borderBottomColor: theme.foreground }}>
+                            <Image
+                                source={{ uri: props.item.imageURL }}
+                                style={styles.image}
+                            />
+                            <View style={{ margin: 5, marginRight: 30, }}>
+                                <Text style={{ ...styles.text1, color: theme.foreground }}>{props.item.title}</Text>
+                                <Text style={{ ...styles.text2, color: theme.foreground }} > {props.item.author}</Text>
+                                <Text style={{ ...styles.text2, color: theme.foreground }} > {getCourseString(props.item)}</Text>
+                            </View>
+                        </View>
+                    );
+                }
+            }
+        </ThemeContext.Consumer >
+    )
 };
 
 const styles = StyleSheet.create({
     home: {
         flex: 1,
-        backgroundColor: 'black',
+        //backgroundColor: 'black',
         flexDirection: 'row',
         marginTop: 20,
-        borderBottomColor: 'white',
+        //borderBottomColor: 'white',
         borderBottomWidth: 1,
     },
     image: {
@@ -37,12 +46,12 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     text1: {
-        color: 'white',
+        //color: 'white',
         fontWeight: 'bold',
         fontSize: 17,
     },
     text2: {
-        color: 'white',
+        //color: 'white',
         fontSize: 14,
     },
     textButton: {

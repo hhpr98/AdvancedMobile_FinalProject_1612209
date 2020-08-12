@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity } from 'react-native';
 import CourseFavoriteItem from "../Favorite/CourseFavorite/course-favorite-item";
+import { ThemeContext } from "../../../../App";
 
 const Search = () => {
     const [text, setText] = useState('Search...');
@@ -41,31 +42,37 @@ const Search = () => {
     };
 
     return (
-        <View style={styles.home}>
-            <View style={{ backgroundColor: '#222222', }}>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={text => setText(text)}
-                    value={text}
-                />
-            </View>
-            <ScrollView>
-                {renderListItems(courses)}
-            </ScrollView>
-        </View>
-    );
+        <ThemeContext>
+            {
+                ({ theme }) => {
+                    return (
+                        <View style={{ ...styles.home, backgroundColor: theme.background }}>
+                            <View style={{ backgroundColor: '#222222', }}>
+                                <TextInput
+                                    style={styles.input}
+                                    onChangeText={text => setText(text)}
+                                    value={text}
+                                />
+                            </View>
+                            <ScrollView>
+                                {renderListItems(courses)}
+                            </ScrollView>
+                        </View>
+                    );
+                }
+            }
+        </ThemeContext>
+    )
 };
 
 const styles = StyleSheet.create({
     home: {
         flexDirection: 'column',
         flex: 1,
-        backgroundColor: 'black'
+        //backgroundColor: 'black'
     },
     input: {
         height: 40,
-        //borderColor: 'gray',
-        //borderWidth: 1,
         margin: 10,
         color: 'white',
         borderBottomColor: 'lightgray',
