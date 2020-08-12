@@ -12,7 +12,7 @@ export default SplashScreen = (props) => {
     useEffect(() => {
         setTimeout(() => {
             // console.log("4s");
-            props.navigation.navigate("TabBar");
+            props.navigation.navigate("Login");
         }, 4000);
     }, [])
 

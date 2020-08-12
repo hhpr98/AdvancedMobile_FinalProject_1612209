@@ -5,6 +5,14 @@ const Login = (props) => {
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
 
+    const signInClick = () => {
+        if (user === "admin" && password === "123") {
+            props.navigation.navigate('TabBar');
+        } else {
+            alert("Wrong username or password!");
+        }
+    }
+
     return (
         <View style={styles.home}>
             <View style={styles.view}>
@@ -15,8 +23,9 @@ const Login = (props) => {
                     <Text style={styles.text}>Username (or Email)</Text>
                     <TextInput
                         style={styles.input}
+                        placeholder="username"
+                        placeholderTextColor="#4B4541"
                         onChangeText={user => setUser(user)}
-                        value={user}
                     />
                 </View>
 
@@ -26,16 +35,18 @@ const Login = (props) => {
                     <Text style={styles.text}>Password</Text>
                     <TextInput
                         style={styles.input}
+                        secureTextEntry={true}
+                        placeholder="***"
+                        placeholderTextColor="#4B4541"
                         onChangeText={password => setPassword(password)}
                     >
-                        {password.split('').map(c => c === ' ' ? ' ' : '*')}
                     </TextInput>
                 </View>
 
                 <View style={styles.viewInsert2} />
 
                 <TouchableOpacity style={styles.buttonSignIn}
-                    onPress={() => props.navigation.navigate('Home')}
+                    onPress={() => signInClick()}
                 >
                     <Text style={styles.textSignIn}>SIGN IN</Text>
                 </TouchableOpacity>

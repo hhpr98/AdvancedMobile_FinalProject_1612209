@@ -43,9 +43,6 @@ const HomeStackNavigation = () => {
             }}
             initialRouteName="Home"
         >
-            {/* <HomeStack.Screen name="Login" component={Login} /> */}
-            {/* <HomeStack.Screen name="ForgotPassword" component={ForgotPassword} /> */}
-            {/* <HomeStack.Screen name="Register" component={Register} /> */}
             <HomeStack.Screen name="Home" component={Home} />
             <HomeStack.Screen name="CourseDetail" component={CourseDetail} />
         </HomeStack.Navigator>
@@ -138,22 +135,22 @@ const TabBar = (props) => {
                 tabBarIcon: ({ focused, color, size }) => {
                     let iconName;
 
-                    if (route.name === 'TabHome') {
+                    if (route.name === 'Home') {
                         iconName = focused ? 'ios-home' : 'md-home';
                     }
-                    else if (route.name === 'TabDownload') {
+                    else if (route.name === 'Download') {
                         iconName = focused ? 'md-cloud-download' : 'md-download';
                     }
-                    else if (route.name == 'TabFavorite') {
+                    else if (route.name == 'Favorite') {
                         iconName = focused ? 'ios-heart' : 'md-heart';
                     }
-                    else if (route.name === 'TabBrowse') {
+                    else if (route.name === 'Browse') {
                         iconName = focused ? 'ios-list-box' : 'ios-list';
                     }
-                    else if (route.name === 'TabSearch') {
+                    else if (route.name === 'Search') {
                         iconName = focused ? 'ios-search' : 'md-search';
                     }
-                    else if (route.name === 'TabSetting') {
+                    else if (route.name === 'Setting') {
                         iconName = focused ? 'md-settings' : 'ios-settings';
                     }
 
@@ -195,6 +192,9 @@ const BeginStackNavigation = () => {
             initialRouteName="SplashScreen"
         >
             <BeginStack.Screen name="SplashScreen" component={SplashScreen} />
+            <HomeStack.Screen name="Login" component={Login} />
+            <HomeStack.Screen name="ForgotPassword" component={ForgotPassword} />
+            <HomeStack.Screen name="Register" component={Register} />
             <BeginStack.Screen name="TabBar" component={TabBar} />
         </BeginStack.Navigator>
     )
