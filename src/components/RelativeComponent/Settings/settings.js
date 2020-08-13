@@ -33,8 +33,7 @@ const Setting = (props) => {
                             </TouchableOpacity>
                             <TouchableOpacity
                                 onPress={() => {
-                                    if (theme.foreground === "white") {
-                                        // console.log("DARKKK");
+                                    if (theme === themes.dark) {
                                         setTheme(themes.light);
                                     }
                                     else {

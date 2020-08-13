@@ -1,42 +1,68 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import SectionCourses from "./SectionCourses/section-courses";
 import Greeting from "./Greeting/greeting";
 import { ThemeContext } from "./../../../../App";
-import { DataContext } from "../../../Provider/DataProvider";
+import { getNewCourse, getMyFavoriteCourse, getTopRateCourse, getTopSellCourse } from "./action";
 
 const Home = (props) => {
+
+    const [isLoading1, setLoading1] = useState(true);
+    const [isLoading2, setLoading2] = useState(true);
+    const [isLoading3, setLoading3] = useState(true);
+    const [topnewcourse, setTopNewCourse] = useState([]);
+    const [topratecourse, setTopRateCourse] = useState([]);
+    const [topsellcourse, setTopSellCourse] = useState([]);
+
+    useEffect(() => {
+        // set loading để báo hiệu ActivityIndicator load
+        setLoading1(true);
+        setLoading2(true);
+        setLoading3(true);
+
+        getNewCourse(10, 1)
+            .then(res => res.json())
+            .then(res => res.message === "OK" ? setTopNewCourse(res.payload) : setTopNewCourse([]))
+            .catch(err => console.log("TOPNEW ERRR: ", err))
+            .finally(() => {
+                // finish loading
+                setLoading1(false);
+            })
+
+        getTopRateCourse(10, 1)
+            .then(res => res.json())
+            .then(res => res.message === "OK" ? setTopRateCourse(res.payload) : setTopRateCourse([]))
+            .catch(err => console.log("TOPRATE ERRR: ", err))
+            .finally(() => {
+                setLoading2(false);
+            })
+
+        getTopSellCourse(10, 1)
+            .then(res => res.json())
+            .then(res => res.message === "OK" ? setTopSellCourse(res.payload) : setTopSellCourse([]))
+            .catch(err => console.log("TOPSELL ERRR: ", err))
+            .finally(() => {
+                setLoading3(false);
+            })
+    }, []);
+
     return (
         <ThemeContext.Consumer>
             {
                 ({ theme }) => {
                     return (
-                        <DataContext.Consumer>
-                            {
-                                ({ data }) => {
-                                    return (
-                                        <ScrollView style={{ ...styles.home, backgroundColor: theme.background }}>
-                                            <Greeting name='Hòa' />
-                                            <SectionCourses navigation={props.navigation} title='Software development' courses={data.section.software} />
-                                            <SectionCourses navigation={props.navigation} title='IT operations' courses={data.section.it} />
-                                            <SectionCourses navigation={props.navigation} title='Data professional' courses={data.section.data} />
-                                            <SectionCourses navigation={props.navigation} title='Security professional' courses={data.section.secure} />
-                                        </ScrollView>
-                                    );
-                                }
-                            }
-                        </DataContext.Consumer>
-                    )
+                        <ScrollView style={{ backgroundColor: theme.background }}>
+                            <Greeting name='Hòa' />
+                            <SectionCourses navigation={props.navigation} title='Suggestion for you' courses={topratecourse} isLoading={isLoading2} />
+                            <SectionCourses navigation={props.navigation} title='Top new courses' courses={topnewcourse} isLoading={isLoading1} />
+                            <SectionCourses navigation={props.navigation} title='Top rate courses' courses={topratecourse} isLoading={isLoading2} />
+                            <SectionCourses navigation={props.navigation} title='Top sell courses' courses={topsellcourse} isLoading={isLoading3} />
+                        </ScrollView>
+                    );
                 }
             }
         </ThemeContext.Consumer>
     );
 };
-
-const styles = StyleSheet.create({
-    home: {
-        //backgroundColor: 'black',
-    }
-});
 
 export default Home;
