@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import CourseDetailItem from "./CourseDetailItem/course-detail-item";
+import { checkOwnerCourse } from "../action";
 
 const CourseDetail = (props) => {
+
+    const [isCheck, setIsCheck] = useState(false);
+
     const item = props.route.params;
     // console.log("ITEM FROM HOME", item);
+    const courseId = item.id;
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRiOTQ2NTZmLTQ4M2EtNDU4Yy04YTRlLTgzZDM4MjZjYTMwMiIsImlhdCI6MTU5NzMwNjk3MywiZXhwIjoxNTk3MzE0MTczfQ.gzYO5r3KmeV2_YHHRT1bEc_RrdPiNhRpYuvxg0S4ggM"
 
     const itemData = [
         {
@@ -78,6 +84,21 @@ const CourseDetail = (props) => {
         }
     ];
 
+    useEffect(() => {
+        setIsCheck(false);
+        checkOwnerCourse(token, courseId)
+            .then(res => res.json())
+            .then(res => {
+                if (res.message === "OK")
+                    setIsCheck(res.payload.isUserOwnCourse)
+                else
+                    alert("Check join this course error! CourseId: " + courseId + " Message: " + res.message)
+            })
+            .catch(err => console.log(console.log("CHECK OWN COURSE ERR: ", err)))
+            .finally(() => {
+            })
+    }, []);
+
     const renderCourseDetailItem = (items) => {
         return (
             items.map(item => <CourseDetailItem item={item} />)
@@ -110,7 +131,16 @@ const CourseDetail = (props) => {
             <Text style={styles.textClone}>DESCRIPTION</Text>
             <Text style={styles.textContent}>{item.description}</Text>
             <Text style={styles.textClone}>CONTENT</Text>
-            <View>{renderCourseDetailItem(itemData)}</View>
+            {
+                isCheck ? (
+                    <View>{renderCourseDetailItem(itemData)}</View>
+                ) : (
+                        <View>
+                            <Text style={{ ...styles.textContent, color: "red" }}>You hasn't join/buy this course!</Text>
+                        </View>
+                    )
+            }
+
         </ScrollView>
     );
 };

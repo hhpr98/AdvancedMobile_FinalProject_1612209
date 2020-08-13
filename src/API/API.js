@@ -19,6 +19,8 @@ const API = {
   GET_TOP_RATE: `${URL}/course/top-rate`,
   // mua nhiều nhất
   GET_TOP_SELL: `${URL}/course/top-sell`,
+  // check xem đã mua/tham gia khóa học chưa?
+  CHECK_JOIN_COURSE: `${URL}/user/check-own-course`,
 };
 
 export default API;
