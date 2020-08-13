@@ -1,22 +1,8 @@
-import React, { useEffect, useState, useReducer } from 'react';
+import React, { useEffect, useState, useReducer, useContext } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
 import CourseDetailItem from "./CourseDetailItem/course-detail-item";
 import { checkOwnerCourse, getCourseWithLesson, getCourseWithLessonUserId } from "../action";
 import storage from "../../../Storage/storage";
-
-
-const initalState = { token: "", userId: "" }
-
-function reducer(state, action) {
-    switch (action.type) {
-        case "GET_TOKEN":
-            return { ...state, token: action.data }
-        case "GET_USERID":
-            return { ...state, userId: action.data }
-        default:
-            throw new Error()
-    }
-}
 
 const CourseDetail = (props) => {
 
@@ -26,30 +12,31 @@ const CourseDetail = (props) => {
     const [author, setAuthor] = useState("");
     const [date, setDate] = useState("0000-00-00T00:00:00");
     const [isLoading, setLoading] = useState(true);
-    // const [token, setAccessToken] = useState("");
-    // const [userId, setUserId] = useState("");
-    const [state, dispatch] = useReducer(reducer, initalState);
 
     const courseId = props.route.params.id;
     // const userId = "4b94656f-483a-458c-8a4e-83d3826ca302";
     // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRiOTQ2NTZmLTQ4M2EtNDU4Yy04YTRlLTgzZDM4MjZjYTMwMiIsImlhdCI6MTU5NzMyNTI2NywiZXhwIjoxNTk3MzMyNDY3fQ.yHU-4iyj9I_IdR_b7Bs7ufUB8rMtWu4RjyXtkg4-wqs"
 
-    useEffect(() => {
-        storage
-            .load({ key: "token" })
-            .then(ret => dispatch({ type: "GET_TOKEN", data: ret }))
-            .catch(err => console.log("A",err.name))
-        storage
-            .load({ key: "userInfo" })
-            .then(ret => dispatch({ type: "GET_USERID", data: ret.id }))
-            .catch(err => console.log("B",err.name))
+    const [token, setToken] = useState("");
+    const [userId, setUserId] = useState("");
 
+    useEffect(() => {
+        console.log("load token");
+        storage
+            .load({ key: "jwt" })
+            .then(ret => {
+                setToken(ret.token);
+                setUserId(ret.userInfo.id);
+            })
+            .catch(err => console.log(err.name))
+            .finally()
     }, []);
 
     useEffect(() => {
+        console.log("load data");
         setIsCheck(false);
         setLoading(true);
-        checkOwnerCourse(state.token, courseId)
+        checkOwnerCourse(courseId)
             .then(res => res.json())
             .then(res => {
                 if (res.message === "OK")
@@ -60,7 +47,7 @@ const CourseDetail = (props) => {
             .catch(err => console.log(console.log("CHECK OWN COURSE ERR: ", err)))
             .finally(() => {
             })
-        getCourseWithLessonUserId(state.token, courseId, state.userId)
+        getCourseWithLessonUserId(token, courseId, userId)
             .then(res => res.json())
             .then(res => {
                 if (res.message === "OK") {
@@ -77,7 +64,7 @@ const CourseDetail = (props) => {
             .finally(() => {
                 setLoading(false);
             })
-    }, [])
+    }, [token, userId])
 
     const renderCourseDetailItem = (items) => {
         return (
@@ -111,15 +98,7 @@ const CourseDetail = (props) => {
             <Text style={styles.textClone}>DESCRIPTION</Text>
             <Text style={styles.textContent}>{infor.description}</Text>
             <Text style={styles.textClone}>CONTENT</Text>
-            {
-                isCheck ? (
-                    <View>{renderCourseDetailItem(dataSectionAndLesson)}</View>
-                ) : (
-                        <View>
-                            <Text style={{ ...styles.textContent, color: "red" }}>You hasn't join/buy this course!</Text>
-                        </View>
-                    )
-            }
+            <View>{renderCourseDetailItem(dataSectionAndLesson)}</View>
 
         </ScrollView>
     );

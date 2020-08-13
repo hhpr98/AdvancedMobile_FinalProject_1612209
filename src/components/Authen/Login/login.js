@@ -17,14 +17,11 @@ const Login = (props) => {
                     // save on storage
                     storage
                         .save({
-                            key: "userInfor",
-                            data: res.userInfo,
-                            expires: 3600 * 24 * 30
-                        });
-                    storage
-                        .save({
-                            key: "token",
-                            data: res.token,
+                            key: "jwt",
+                            data: {
+                                userInfo: res.userInfo,
+                                token: res.token,
+                            },
                             expires: 3600 * 24 * 30
                         });
                     // navigate
