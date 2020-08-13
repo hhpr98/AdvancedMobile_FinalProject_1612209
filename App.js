@@ -199,7 +199,7 @@ export default function App(props) {
                 screenOptions={{
                     headerShown: false
                 }}
-                initialRouteName="SplashScreen"
+                initialRouteName="TabBar"
             >
                 <MainStack.Screen name="SplashScreen" component={SplashScreen} />
                 <MainStack.Screen name="Login" component={Login} />
