@@ -1,11 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useReducer } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
 import CourseDetailItem from "./CourseDetailItem/course-detail-item";
 import { checkOwnerCourse, getCourseWithLesson, getCourseWithLessonUserId } from "../action";
 import storage from "../../../Storage/storage";
 
-const CourseDetail = (props) => {
 
+const initalState = { token: "", userId: "" }
+
+function reducer(state, action) {
+    switch (action.type) {
+        case "GET_TOKEN":
+            return { ...state, token: action.data }
+        case "GET_USERID":
+            return { ...state, userId: action.data }
+        default:
+            throw new Error()
+    }
+}
+
+const CourseDetail = (props) => {
 
     const [isCheck, setIsCheck] = useState(false);
     const [dataSectionAndLesson, setDataSectionAndLesson] = useState([]);
@@ -13,8 +26,9 @@ const CourseDetail = (props) => {
     const [author, setAuthor] = useState("");
     const [date, setDate] = useState("0000-00-00T00:00:00");
     const [isLoading, setLoading] = useState(true);
-    const [token, setAccessToken] = useState("");
-    const [userId, setUserId] = useState("");
+    // const [token, setAccessToken] = useState("");
+    // const [userId, setUserId] = useState("");
+    const [state, dispatch] = useReducer(reducer, initalState);
 
     const courseId = props.route.params.id;
     // const userId = "4b94656f-483a-458c-8a4e-83d3826ca302";
@@ -23,16 +37,19 @@ const CourseDetail = (props) => {
     useEffect(() => {
         storage
             .load({ key: "token" })
-            .then(ret => setAccessToken(ret))
-            .catch(err => console.log(err.name))
+            .then(ret => dispatch({ type: "GET_TOKEN", data: ret }))
+            .catch(err => console.log("A",err.name))
         storage
             .load({ key: "userInfo" })
-            .then(ret => setUserId(ret.id))
-            .catch(err => console.log(err.name))
+            .then(ret => dispatch({ type: "GET_USERID", data: ret.id }))
+            .catch(err => console.log("B",err.name))
 
+    }, []);
+
+    useEffect(() => {
         setIsCheck(false);
         setLoading(true);
-        checkOwnerCourse(token, courseId)
+        checkOwnerCourse(state.token, courseId)
             .then(res => res.json())
             .then(res => {
                 if (res.message === "OK")
@@ -43,7 +60,7 @@ const CourseDetail = (props) => {
             .catch(err => console.log(console.log("CHECK OWN COURSE ERR: ", err)))
             .finally(() => {
             })
-        getCourseWithLessonUserId(token, courseId, userId)
+        getCourseWithLessonUserId(state.token, courseId, state.userId)
             .then(res => res.json())
             .then(res => {
                 if (res.message === "OK") {
@@ -60,7 +77,7 @@ const CourseDetail = (props) => {
             .finally(() => {
                 setLoading(false);
             })
-    }, []);
+    }, [])
 
     const renderCourseDetailItem = (items) => {
         return (
