@@ -3,19 +3,16 @@ import { View, StyleSheet, Text, Image } from 'react-native';
 
 const SectionCoursesItem = (props) => {
     const getCourseString = (item) => {
-        return item.contentPoint + 'point . ' + item.createdAt.substring(0,10) + ' . ' + item.totalHours + 'h';
+        return Math.round(Number(item.contentPoint)) + 'point . ' + item.createdAt.substring(0, 10) + ' . ' + item.totalHours + 'h';
     };
 
     const getImageURL = (item) => {
         return item.imageUrl;
     };
 
-    /*
-    <Image source={require('../../../../../assets/icons8_java.png')} style={styles.image}/>
-     */
-
     return (
         <View style={styles.item}>
+            {/* <Image source={require('../../../../../assets/icons8_java.png')} style={styles.image}/> */}
             <Image
                 source={{ uri: getImageURL(props.item) }}
                 style={styles.image}
