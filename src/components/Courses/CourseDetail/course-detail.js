@@ -8,6 +8,8 @@ const CourseDetail = (props) => {
     const [isCheck, setIsCheck] = useState(false);
     const [dataSectionAndLesson, setDataSectionAndLesson] = useState([]);
     const [infor, setInfor] = useState([]);
+    const [author, setAuthor] = useState("");
+    const [date, setDate] = useState("0000-00-00T00:00:00");
     const [isLoading, setLoading] = useState(true);
 
     const courseId = props.route.params.id;
@@ -34,12 +36,14 @@ const CourseDetail = (props) => {
                 if (res.message === "OK") {
                     setDataSectionAndLesson(res.payload.section);
                     setInfor(res.payload);
+                    setAuthor(res.payload.instructor.name);
+                    setDate(res.payload.createdAt);
                 } else {
                     setDataSectionAndLesson([]);
                     setInfor([]);
                 }
             })
-            .catch(err => console.log("get Course with lesson err:", err))
+            .catch(err => console.log("get Course with lesson userId err:", err))
             .finally(() => {
                 setLoading(false);
             })
@@ -51,7 +55,6 @@ const CourseDetail = (props) => {
             items.map(item => <CourseDetailItem item={item} />)
         )
     }
-
     return (
         <ScrollView style={styles.home}>
             {isLoading && <ActivityIndicator size="large" color="blue" />}
@@ -61,9 +64,9 @@ const CourseDetail = (props) => {
             <Image source={{ uri: infor.imageUrl }} style={{ width: 350, height: 180, alignSelf: "center", resizeMode: "stretch" }} />
             <View style={styles.viewAuthor}>
                 <Image source={require('../../../../assets/ic_people_author.png')} style={styles.image} />
-                <Text style={styles.textAuthor}>{infor["instructor.user.name"]}</Text>
+                <Text style={styles.textAuthor}>{author}</Text>
             </View>
-            <Text style={styles.textInfor}>{Math.round(Number(infor.contentPoint))} point  .  2020-06-15  .  {infor.totalHours} hours</Text>
+            <Text style={styles.textInfor}>{Math.round(Number(infor.contentPoint))} point  .  {date.substring(0, 10)}  .  {infor.totalHours} hours</Text>
             <Text style={{ ...styles.textInfor, fontSize: 17, color: "green" }}>{infor.videoNumber} videos</Text>
             <Text style={styles.textContent}>This course is free for you. Let's enjoy it. Good luck for you!</Text>
             <TouchableOpacity style={styles.button}
