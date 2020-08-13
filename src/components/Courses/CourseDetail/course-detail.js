@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
 import CourseDetailItem from "./CourseDetailItem/course-detail-item";
 import { checkOwnerCourse, getCourseWithLesson, getCourseWithLessonUserId } from "../action";
+import storage from "../../../Storage/storage";
 
 const CourseDetail = (props) => {
+
 
     const [isCheck, setIsCheck] = useState(false);
     const [dataSectionAndLesson, setDataSectionAndLesson] = useState([]);
@@ -11,12 +13,23 @@ const CourseDetail = (props) => {
     const [author, setAuthor] = useState("");
     const [date, setDate] = useState("0000-00-00T00:00:00");
     const [isLoading, setLoading] = useState(true);
+    const [token, setAccessToken] = useState("");
+    const [userId, setUserId] = useState("");
 
     const courseId = props.route.params.id;
-    const userId = "4b94656f-483a-458c-8a4e-83d3826ca302";
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRiOTQ2NTZmLTQ4M2EtNDU4Yy04YTRlLTgzZDM4MjZjYTMwMiIsImlhdCI6MTU5NzMyNTI2NywiZXhwIjoxNTk3MzMyNDY3fQ.yHU-4iyj9I_IdR_b7Bs7ufUB8rMtWu4RjyXtkg4-wqs"
+    // const userId = "4b94656f-483a-458c-8a4e-83d3826ca302";
+    // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRiOTQ2NTZmLTQ4M2EtNDU4Yy04YTRlLTgzZDM4MjZjYTMwMiIsImlhdCI6MTU5NzMyNTI2NywiZXhwIjoxNTk3MzMyNDY3fQ.yHU-4iyj9I_IdR_b7Bs7ufUB8rMtWu4RjyXtkg4-wqs"
 
     useEffect(() => {
+        storage
+            .load({ key: "token" })
+            .then(ret => setAccessToken(ret))
+            .catch(err => console.log(err.name))
+        storage
+            .load({ key: "userInfo" })
+            .then(ret => setUserId(ret.id))
+            .catch(err => console.log(err.name))
+
         setIsCheck(false);
         setLoading(true);
         checkOwnerCourse(token, courseId)
@@ -47,7 +60,6 @@ const CourseDetail = (props) => {
             .finally(() => {
                 setLoading(false);
             })
-
     }, []);
 
     const renderCourseDetailItem = (items) => {
