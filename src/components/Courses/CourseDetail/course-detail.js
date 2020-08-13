@@ -4,6 +4,7 @@ import CourseDetailItem from "./CourseDetailItem/course-detail-item";
 
 const CourseDetail = (props) => {
     const item = props.route.params;
+    // console.log("ITEM FROM HOME", item);
 
     const itemData = [
         {
@@ -88,11 +89,13 @@ const CourseDetail = (props) => {
             <View style={styles.v}>
                 <Text style={styles.text}>{item.title}</Text>
             </View>
+            <Image source={{ uri: item.imageUrl }} style={{ width: 350, height: 180, alignSelf: "center" }} />
             <View style={styles.viewAuthor}>
                 <Image source={require('../../../../assets/ic_people_author.png')} style={styles.image} />
-                <Text style={styles.textAuthor}>{item.author}</Text>
+                <Text style={styles.textAuthor}>{item["instructor.user.name"]}</Text>
             </View>
-            <Text style={styles.textInfor}>{item.level} . {item.released} . {item.duration}</Text>
+            <Text style={styles.textInfor}>{Math.round(Number(item.contentPoint))} point  .  {item.createdAt.substring(0, 10)}  .  {item.totalHours} hours</Text>
+            <Text style={{ ...styles.textInfor, fontSize: 17, color: "green" }}>{item.videoNumber} videos</Text>
             <Text style={styles.textContent}>This course is free for you. Let's enjoy it. Good luck for you!</Text>
             <TouchableOpacity style={styles.button}
                 onPress={() => alert('clicked !')}
@@ -104,6 +107,8 @@ const CourseDetail = (props) => {
             >
                 <Text style={styles.textSignIn}>View related paths & courses</Text>
             </TouchableOpacity>
+            <Text style={styles.textClone}>DESCRIPTION</Text>
+            <Text style={styles.textContent}>{item.description}</Text>
             <Text style={styles.textClone}>CONTENT</Text>
             <View>{renderCourseDetailItem(itemData)}</View>
         </ScrollView>
@@ -117,7 +122,7 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        color: 'white',
+        color: '#3399FF',
         margin: 20,
         fontWeight: 'bold',
         fontSize: 23,

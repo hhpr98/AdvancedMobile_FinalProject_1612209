@@ -52,7 +52,7 @@ export default function App(props) {
                 initialRouteName="Home"
             >
                 <HomeStack.Screen name="Home" component={Home} />
-                <HomeStack.Screen name="CourseDetail" component={CourseDetail} />
+                <HomeStack.Screen name="CourseDetail" component={CourseDetail} options={{ headerShown: false, }} />
             </HomeStack.Navigator>
         )
     }
