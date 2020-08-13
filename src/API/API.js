@@ -23,6 +23,8 @@ const API = {
   CHECK_JOIN_COURSE: `${URL}/user/check-own-course`, // /courseId
   // lấy thông tin khóa học với bài học
   GET_COURSE_DETAIL_WITH_LESSON: `${URL}/course/detail-with-lesson`, // /courseId
+  // lấy thông tin khóa học với bài học + user
+  GET_COURSE_DETAIL_WITH_USEID: `${URL}/course/get-course-detail`, // /courseId/userId
 };
 
 export default API;

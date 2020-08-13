@@ -21,3 +21,15 @@ export const getCourseWithLesson = (token, courseId) => {
         }
     })
 };
+
+export const getCourseWithLessonUserId = (token, courseId, userId) => {
+    return fetch(`${API.GET_COURSE_DETAIL_WITH_USEID}/${courseId}/${userId}`, {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        }
+    })
+};
+

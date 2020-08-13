@@ -7,7 +7,7 @@ const SectionCourses = (props) => {
 
     const renderListItems = (courses) => {
         return courses.map(item =>
-            <TouchableOpacity onPress={() => props.navigation.navigate('CourseDetail', item)}>
+            <TouchableOpacity onPress={() => props.navigation.navigate('CourseDetail', { id: item.id })}>
                 <SectionCoursesItem item={item} />
             </TouchableOpacity>
         );

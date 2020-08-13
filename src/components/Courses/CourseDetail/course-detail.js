@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
 import CourseDetailItem from "./CourseDetailItem/course-detail-item";
-import { checkOwnerCourse, getCourseWithLesson } from "../action";
+import { checkOwnerCourse, getCourseWithLesson, getCourseWithLessonUserId } from "../action";
 
 const CourseDetail = (props) => {
 
     const [isCheck, setIsCheck] = useState(false);
     const [dataSectionAndLesson, setDataSectionAndLesson] = useState([]);
+    const [infor, setInfor] = useState([]);
+    const [isLoading, setLoading] = useState(true);
 
-    const item = props.route.params;
-    const courseId = item.id;
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRiOTQ2NTZmLTQ4M2EtNDU4Yy04YTRlLTgzZDM4MjZjYTMwMiIsImlhdCI6MTU5NzMwOTk4OCwiZXhwIjoxNTk3MzE3MTg4fQ.4uRYUOIHK5EGFJh3wwR3tDTC8aoEFgQn96DNLBRS5HE";
+    const courseId = props.route.params.id;
+    const userId = "4b94656f-483a-458c-8a4e-83d3826ca302";
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRiOTQ2NTZmLTQ4M2EtNDU4Yy04YTRlLTgzZDM4MjZjYTMwMiIsImlhdCI6MTU5NzMxNzkwOSwiZXhwIjoxNTk3MzI1MTA5fQ.NSVHIeG_M8BZhd1-nkSV6w60tKhybRSRIwFjik_Dw7w"
 
     useEffect(() => {
         setIsCheck(false);
+        setLoading(true);
         checkOwnerCourse(token, courseId)
             .then(res => res.json())
             .then(res => {
@@ -25,11 +28,20 @@ const CourseDetail = (props) => {
             .catch(err => console.log(console.log("CHECK OWN COURSE ERR: ", err)))
             .finally(() => {
             })
-        getCourseWithLesson(token, courseId)
+        getCourseWithLessonUserId(token, courseId, userId)
             .then(res => res.json())
-            .then(res => setDataSectionAndLesson(res.payload.section))
+            .then(res => {
+                if (res.message === "OK") {
+                    setDataSectionAndLesson(res.payload.section);
+                    setInfor(res.payload);
+                } else {
+                    setDataSectionAndLesson([]);
+                    setInfor([]);
+                }
+            })
             .catch(err => console.log("get Course with lesson err:", err))
             .finally(() => {
+                setLoading(false);
             })
 
     }, []);
@@ -42,16 +54,17 @@ const CourseDetail = (props) => {
 
     return (
         <ScrollView style={styles.home}>
+            {isLoading && <ActivityIndicator size="large" color="blue" />}
             <View style={styles.v}>
-                <Text style={styles.text}>{item.title}</Text>
+                <Text style={styles.text}>{infor.title}</Text>
             </View>
-            <Image source={{ uri: item.imageUrl }} style={{ width: 350, height: 180, alignSelf: "center", resizeMode: "stretch" }} />
+            <Image source={{ uri: infor.imageUrl }} style={{ width: 350, height: 180, alignSelf: "center", resizeMode: "stretch" }} />
             <View style={styles.viewAuthor}>
                 <Image source={require('../../../../assets/ic_people_author.png')} style={styles.image} />
-                <Text style={styles.textAuthor}>{item["instructor.user.name"]}</Text>
+                <Text style={styles.textAuthor}>{infor["instructor.user.name"]}</Text>
             </View>
-            <Text style={styles.textInfor}>{Math.round(Number(item.contentPoint))} point  .  {item.createdAt.substring(0, 10)}  .  {item.totalHours} hours</Text>
-            <Text style={{ ...styles.textInfor, fontSize: 17, color: "green" }}>{item.videoNumber} videos</Text>
+            <Text style={styles.textInfor}>{Math.round(Number(infor.contentPoint))} point  .  2020-06-15  .  {infor.totalHours} hours</Text>
+            <Text style={{ ...styles.textInfor, fontSize: 17, color: "green" }}>{infor.videoNumber} videos</Text>
             <Text style={styles.textContent}>This course is free for you. Let's enjoy it. Good luck for you!</Text>
             <TouchableOpacity style={styles.button}
                 onPress={() => alert('clicked !')}
@@ -64,7 +77,7 @@ const CourseDetail = (props) => {
                 <Text style={styles.textSignIn}>View related paths & courses</Text>
             </TouchableOpacity>
             <Text style={styles.textClone}>DESCRIPTION</Text>
-            <Text style={styles.textContent}>{item.description}</Text>
+            <Text style={styles.textContent}>{infor.description}</Text>
             <Text style={styles.textClone}>CONTENT</Text>
             {
                 isCheck ? (
