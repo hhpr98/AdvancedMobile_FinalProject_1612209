@@ -1,6 +1,27 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, AsyncStorage } from 'react-native';
 import { ThemeContext } from "../../../../App";
+
+const userId = '8ba790f3-5acd-4a08-bc6a-97a36c124f29';
+const saveUserId = async userId => {
+    try {
+        await AsyncStorage.setItem('userId', userId);
+    } catch (error) {
+        // Error retrieving data
+        console.log(error.message);
+    }
+};
+
+const getUserId = async () => {
+    let userId = '';
+    try {
+        userId = await AsyncStorage.getItem('userId') || 'none';
+    } catch (error) {
+        // Error retrieving data
+        console.log(error.message);
+    }
+    return userId;
+}
 
 const Login = (props) => {
     const [user, setUser] = useState('');
@@ -13,6 +34,11 @@ const Login = (props) => {
             alert("Wrong username or password!");
         }
     }
+
+    useEffect(() => {
+        saveUserId(userId);
+        console.log(getUserId());
+    }, []);
 
     return (
         <ThemeContext.Consumer>
