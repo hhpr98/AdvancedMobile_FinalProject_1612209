@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 export const DataContext = React.createContext();
 
@@ -242,6 +242,9 @@ const data = {
 }
 
 export const DataProvider = (props) => {
+
+    // const [userInfor, setUserInfor] = useState([]);
+    // const [token, setToken] = useState("");
 
     return (
         <DataContext.Provider value={{ data }}>
