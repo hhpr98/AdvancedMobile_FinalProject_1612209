@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, AsyncStorage } from 'react-native';
 import { ThemeContext } from "../../../../App";
+import storage from "../../../Storage/storage";
 
 const Login = (props) => {
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
 
     const signInClick = () => {
+
         if (user === "admin" && password === "123") {
             props.navigation.navigate('TabBar');
         } else {
