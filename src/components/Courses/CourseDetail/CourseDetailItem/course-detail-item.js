@@ -2,12 +2,16 @@ import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
 const CourseDetailItem = (props) => {
+
+    // get phần (part)
+    const section = props.item;
+
     const renderMiniItem = (val) => {
         return val.map(item =>
             //console.log(item)
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', margin: 10 }}>
                 <Text style={{ color: 'white' }}>{item.name}</Text>
-                <Text style={{ color: 'white' }}>{item.len}</Text>
+                <Text style={{ color: 'white' }}>{item.hours} hours</Text>
             </View>
         );
     };
@@ -15,13 +19,13 @@ const CourseDetailItem = (props) => {
     return (
         <View>
             <View style={styles.main}>
-                <Text style={styles.textID}>{props.item.id}</Text>
+                <Text style={styles.textID}>1</Text>
                 <View>
-                    <Text style={styles.text1}>{props.item.title}</Text>
-                    <Text style={styles.text2}>{props.item.length}</Text>
+                    <Text style={styles.text1}>{section.name}</Text>
+                    <Text style={styles.text2}>... hours</Text>
                 </View>
             </View>
-            <View>{renderMiniItem(props.item.ele)}</View>
+            <View>{renderMiniItem(section.lesson)}</View>
         </View>
     );
 };

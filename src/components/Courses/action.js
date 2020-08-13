@@ -10,3 +10,14 @@ export const checkOwnerCourse = (token, courseId) => {
         }
     })
 };
+
+export const getCourseWithLesson = (token, courseId) => {
+    return fetch(`${API.GET_COURSE_DETAIL_WITH_LESSON}/${courseId}`, {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        }
+    })
+};

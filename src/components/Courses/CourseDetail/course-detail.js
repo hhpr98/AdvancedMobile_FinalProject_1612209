@@ -1,88 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import CourseDetailItem from "./CourseDetailItem/course-detail-item";
-import { checkOwnerCourse } from "../action";
+import { checkOwnerCourse, getCourseWithLesson } from "../action";
 
 const CourseDetail = (props) => {
 
     const [isCheck, setIsCheck] = useState(false);
+    const [dataSectionAndLesson, setDataSectionAndLesson] = useState([]);
 
     const item = props.route.params;
-    // console.log("ITEM FROM HOME", item);
     const courseId = item.id;
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRiOTQ2NTZmLTQ4M2EtNDU4Yy04YTRlLTgzZDM4MjZjYTMwMiIsImlhdCI6MTU5NzMwNjk3MywiZXhwIjoxNTk3MzE0MTczfQ.gzYO5r3KmeV2_YHHRT1bEc_RrdPiNhRpYuvxg0S4ggM"
-
-    const itemData = [
-        {
-            id: 1,
-            title: 'Course Overview',
-            length: '2:04',
-            ele: [
-                {
-                    name: 'Course Overview',
-                    len: '2:04',
-                },
-                {
-                    name: 'Course Overview (cont.)',
-                    len: '2:04',
-                },
-                {
-                    name: 'Beginner',
-                    len: '2:04',
-                },
-                {
-                    name: 'Intermediate',
-                    len: '2:04',
-                },
-                {
-                    name: 'Intermediate (part2)',
-                    len: '2:04',
-                }
-            ]
-        },
-        {
-            id: 2,
-            title: 'Course Level',
-            length: '17:23',
-            ele: [
-                {
-                    name: 'Course Overview',
-                    len: '2:04',
-                },
-                {
-                    name: 'Course Overview (cont.)',
-                    len: '2:04',
-                },
-                {
-                    name: 'Beginner',
-                    len: '2:04',
-                },
-                {
-                    name: 'Intermediate',
-                    len: '2:04',
-                },
-                {
-                    name: 'Intermediate (part2)',
-                    len: '2:04',
-                }
-            ]
-        },
-        {
-            id: 3,
-            title: 'End courses',
-            length: '23:11',
-            ele: [
-                {
-                    name: 'end',
-                    len: '2:04',
-                },
-                {
-                    name: 'End(2)',
-                    len: '2:04',
-                },
-            ]
-        }
-    ];
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRiOTQ2NTZmLTQ4M2EtNDU4Yy04YTRlLTgzZDM4MjZjYTMwMiIsImlhdCI6MTU5NzMwOTk4OCwiZXhwIjoxNTk3MzE3MTg4fQ.4uRYUOIHK5EGFJh3wwR3tDTC8aoEFgQn96DNLBRS5HE";
 
     useEffect(() => {
         setIsCheck(false);
@@ -97,13 +25,20 @@ const CourseDetail = (props) => {
             .catch(err => console.log(console.log("CHECK OWN COURSE ERR: ", err)))
             .finally(() => {
             })
+        getCourseWithLesson(token, courseId)
+            .then(res => res.json())
+            .then(res => setDataSectionAndLesson(res.payload.section))
+            .catch(err => console.log("get Course with lesson err:", err))
+            .finally(() => {
+            })
+
     }, []);
 
     const renderCourseDetailItem = (items) => {
         return (
             items.map(item => <CourseDetailItem item={item} />)
-        );
-    };
+        )
+    }
 
     return (
         <ScrollView style={styles.home}>
@@ -124,7 +59,7 @@ const CourseDetail = (props) => {
                 <Text style={styles.textSignIn}>Take a learning check</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button}
-                onPress={() => alert('clicked !')}
+                onPress={() => console.log(dataSectionAndLesson)}
             >
                 <Text style={styles.textSignIn}>View related paths & courses</Text>
             </TouchableOpacity>
@@ -133,7 +68,7 @@ const CourseDetail = (props) => {
             <Text style={styles.textClone}>CONTENT</Text>
             {
                 isCheck ? (
-                    <View>{renderCourseDetailItem(itemData)}</View>
+                    <View>{renderCourseDetailItem(dataSectionAndLesson)}</View>
                 ) : (
                         <View>
                             <Text style={{ ...styles.textContent, color: "red" }}>You hasn't join/buy this course!</Text>
@@ -144,7 +79,6 @@ const CourseDetail = (props) => {
         </ScrollView>
     );
 };
-
 const styles = StyleSheet.create({
     home: {
         flex: 1,
@@ -157,6 +91,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 23,
         alignSelf: 'center',
+        textAlign: "center"
     },
     viewAuthor: {
         borderRadius: 50,

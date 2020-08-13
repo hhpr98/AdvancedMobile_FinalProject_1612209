@@ -20,7 +20,9 @@ const API = {
   // mua nhiều nhất
   GET_TOP_SELL: `${URL}/course/top-sell`,
   // check xem đã mua/tham gia khóa học chưa?
-  CHECK_JOIN_COURSE: `${URL}/user/check-own-course`,
+  CHECK_JOIN_COURSE: `${URL}/user/check-own-course`, // /courseId
+  // lấy thông tin khóa học với bài học
+  GET_COURSE_DETAIL_WITH_LESSON: `${URL}/course/detail-with-lesson`, // /courseId
 };
 
 export default API;
