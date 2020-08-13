@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
 const CourseDetailItem = (props) => {
 
@@ -9,10 +9,13 @@ const CourseDetailItem = (props) => {
     const renderMiniItem = (val) => {
         return val.map(item =>
             //console.log(item)
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', margin: 10 }}>
-                <Text style={{ color: 'white' }}>{item.name}</Text>
-                <Text style={{ color: 'white' }}>{item.hours} hours</Text>
-            </View>
+            <TouchableOpacity 
+            style={{ flexDirection: 'row', justifyContent: 'space-between', margin: 10 }}
+            onPress={()=> alert("URL: " + item.videoUrl)}
+            >
+                <Text style={{ color: 'white',width: 250, }}>{item.name}</Text>
+                <Text style={{ color: 'white', textAlignVertical:"center" }}>{item.hours} hours</Text>
+            </TouchableOpacity>
         );
     };
 
