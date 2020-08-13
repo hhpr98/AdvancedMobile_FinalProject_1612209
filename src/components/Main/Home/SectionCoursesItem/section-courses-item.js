@@ -1,9 +1,13 @@
 import React from 'react';
 import { View, StyleSheet, Text, Image } from 'react-native';
+import StarRating from 'react-native-star-rating';
 
 const SectionCoursesItem = (props) => {
+
+    const point = Math.round(Number(props.item.contentPoint));
+
     const getCourseString = (item) => {
-        return Math.round(Number(item.contentPoint)) + 'point . ' + item.createdAt.substring(0, 10) + ' . ' + item.totalHours + 'h';
+        return point + 'point . ' + item.createdAt.substring(0, 10) + ' . ' + item.totalHours + 'h';
     };
 
     const getImageURL = (item) => {
@@ -21,6 +25,18 @@ const SectionCoursesItem = (props) => {
                 <Text style={styles.text1}>{props.item.title}</Text>
                 <Text style={styles.text2}>{props.item["instructor.user.name"]}</Text>
                 <Text style={styles.text2}>{getCourseString(props.item)}</Text>
+                <StarRating
+                    style={{width: 200, backgroundColor: "red"}}
+                    disabled={false}
+                    maxStars={5}
+                    rating={point > 5 ? 5 : point}
+                    fullStarColor="yellow"
+                    emptyStarColor="white"
+                    starSize={20}
+                    containerStyle={{width:120}}
+                    // starStyle={{marginRight:-7}}
+                // selectedStar={(rating) => this.onStarRatingPress(rating)}
+                />
             </View>
         </View>
     );

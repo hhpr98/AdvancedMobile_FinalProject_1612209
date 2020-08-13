@@ -10,9 +10,7 @@ const Home = (props) => {
     const [isLoading1, setLoading1] = useState(true);
     const [isLoading2, setLoading2] = useState(true);
     const [isLoading3, setLoading3] = useState(true);
-    const [isLoading4, setLoading4] = useState(true);
     const [topnewcourse, setTopNewCourse] = useState([]);
-    const [mycourse, setMyCourse] = useState([]);
     const [topratecourse, setTopRateCourse] = useState([]);
     const [topsellcourse, setTopSellCourse] = useState([]);
 
