@@ -14,18 +14,14 @@ export const getNewCourse = (limit, page) => {
     })
 };
 
-export const getMyFavoriteCourse = (token, limit, page) => {
+export const getMyFavoriteCourse = (token) => {
     return fetch(API.GET_MY_FAVORITE, {
         method: 'GET',
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({
-            limit: limit,
-            page: page
-        })
+        }
     })
 };
 
