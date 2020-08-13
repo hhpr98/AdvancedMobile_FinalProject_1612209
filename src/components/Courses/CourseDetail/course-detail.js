@@ -14,7 +14,7 @@ const CourseDetail = (props) => {
 
     const courseId = props.route.params.id;
     const userId = "4b94656f-483a-458c-8a4e-83d3826ca302";
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRiOTQ2NTZmLTQ4M2EtNDU4Yy04YTRlLTgzZDM4MjZjYTMwMiIsImlhdCI6MTU5NzMxNzkwOSwiZXhwIjoxNTk3MzI1MTA5fQ.NSVHIeG_M8BZhd1-nkSV6w60tKhybRSRIwFjik_Dw7w"
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRiOTQ2NTZmLTQ4M2EtNDU4Yy04YTRlLTgzZDM4MjZjYTMwMiIsImlhdCI6MTU5NzMyNTI2NywiZXhwIjoxNTk3MzMyNDY3fQ.yHU-4iyj9I_IdR_b7Bs7ufUB8rMtWu4RjyXtkg4-wqs"
 
     useEffect(() => {
         setIsCheck(false);
@@ -52,7 +52,7 @@ const CourseDetail = (props) => {
 
     const renderCourseDetailItem = (items) => {
         return (
-            items.map(item => <CourseDetailItem item={item} />)
+            items.map((item, index) => <CourseDetailItem item={item} index={index} />)
         )
     }
     return (
