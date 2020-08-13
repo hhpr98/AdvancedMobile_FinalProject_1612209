@@ -2,18 +2,39 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, AsyncStorage } from 'react-native';
 import { ThemeContext } from "../../../../App";
 import storage from "../../../Storage/storage";
+import { getLogin } from "./action";
 
 const Login = (props) => {
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
 
     const signInClick = () => {
-
-        if (user === "admin" && password === "123") {
-            props.navigation.navigate('TabBar');
-        } else {
-            alert("Wrong username or password!");
-        }
+        // console.log(user + password);
+        getLogin(user, password)
+            .then(res => res.json())
+            .then(res => {
+                if (res.message === "OK") { //login success
+                    // save on storage
+                    storage
+                        .save({
+                            key: "userInfor",
+                            data: res.userInfo,
+                            expires: 3600 * 24 * 30
+                        });
+                    storage
+                        .save({
+                            key: "token",
+                            data: res.token,
+                            expires: 3600 * 24 * 30
+                        });
+                    // navigate
+                    props.navigation.navigate('TabBar');
+                } else {
+                    alert("Wrong username or password!");
+                }
+            })
+            .catch(err => console.log("GET LOGIN ERR", err))
+            .finally()
     }
 
     return (
