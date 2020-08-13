@@ -89,7 +89,7 @@ const CourseDetail = (props) => {
             <View style={styles.v}>
                 <Text style={styles.text}>{item.title}</Text>
             </View>
-            <Image source={{ uri: item.imageUrl }} style={{ width: 350, height: 180, alignSelf: "center" }} />
+            <Image source={{ uri: item.imageUrl }} style={{ width: 350, height: 180, alignSelf: "center", resizeMode: "stretch" }} />
             <View style={styles.viewAuthor}>
                 <Image source={require('../../../../assets/ic_people_author.png')} style={styles.image} />
                 <Text style={styles.textAuthor}>{item["instructor.user.name"]}</Text>
