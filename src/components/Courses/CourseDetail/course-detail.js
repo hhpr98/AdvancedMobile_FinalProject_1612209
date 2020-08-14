@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useReducer, useContext } from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, ActivityIndicator, TextInput } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, ActivityIndicator, TextInput, ImageBackground, Share } from 'react-native';
 import CourseDetailItem from "./CourseDetailItem/course-detail-item";
-import { checkOwnerCourse, getCourseWithLesson, getCourseWithLessonUserId, getFreeCourse } from "../action";
+import { checkOwnerCourse, getCourseWithLesson, getCourseWithLessonUserId, getFreeCourse, userLikeCourse } from "../action";
 import storage from "../../../Storage/storage";
 import StarRating from 'react-native-star-rating';
 
@@ -92,6 +92,38 @@ const CourseDetail = (props) => {
         )
     }
 
+    const onShare = async (mess) => {
+        alert(mess);
+        try {
+            const result = await Share.share({
+                message: mess
+            });
+            if (result.action === Share.sharedAction) {
+                if (result.activityType) {
+                    // shared with activity type of result.activityType
+                } else {
+                    // shared
+                }
+            } else if (result.action === Share.dismissedAction) {
+                // dismissed
+            }
+        } catch (error) {
+            alert(error.message);
+        }
+    };
+
+    const onLikeCourse = () => {
+        userLikeCourse(token, courseId)
+            .then(res => res.json())
+            .then((res) => {
+                if (res.likeStatus === true)
+                    alert("Like this course!");
+                else
+                    alert("Unlike this course!");
+            })
+            .finally()
+    }
+
     return (
         <ScrollView style={styles.home}>
             {isLoading && <ActivityIndicator size="large" color="blue" />}
@@ -106,11 +138,21 @@ const CourseDetail = (props) => {
             <Text style={styles.textInfor}>{Math.round(Number(infor.contentPoint))} point  .  {date.substring(0, 10)}  .  {infor.totalHours} hours</Text>
             <Text style={{ ...styles.textInfor, fontSize: 17, color: "green" }}>{infor.videoNumber} videos</Text>
             <Text style={styles.textContent}>{infor.subtitle}</Text>
-            <TouchableOpacity style={styles.button}
-                onPress={() => alert('clicked !')}
-            >
-                <Text style={styles.textSignIn}>Take a learning check</Text>
-            </TouchableOpacity>
+
+            <View style={{ flexDirection: "row", justifyContent: "space-around", marginTop: 20, }}>
+                <ImageBackground source={require("../../../../assets/ic_detail_like.png")} style={{ width: 50, height: 50, backgroundColor: "white" }}>
+                    <TouchableOpacity style={{ width: 50, height: 50 }} onPress={() => onLikeCourse()} />
+                </ImageBackground>
+                <ImageBackground source={require("../../../../assets/ic_detail_share.png")} style={{ width: 50, height: 50, backgroundColor: "white" }}>
+                    <TouchableOpacity style={{ width: 50, height: 50 }} onPress={() => {
+                        const message = "https://itedu.me/course-detail/" + courseId; // lấy url khóa học dạng web
+                        onShare(message); // share
+                    }} />
+                </ImageBackground>
+                <ImageBackground source={require("../../../../assets/ic_detail_download.png")} style={{ width: 50, height: 50, backgroundColor: "white" }}>
+                    <TouchableOpacity style={{ width: 50, height: 50 }} onPress={() => alert("Download clicked!")} />
+                </ImageBackground>
+            </View>
 
             <Text style={styles.textClone}>DESCRIPTION</Text>
             <Text style={styles.textContent}>{infor.description}</Text>
