@@ -86,6 +86,7 @@ export default function App(props) {
                 initialRouteName="Favorite"
             >
                 <FavoriteStack.Screen name="Favorite" component={Favorite} />
+                <FavoriteStack.Screen name="CourseDetail" component={CourseDetail} options={{ headerShown: false, }} />
             </FavoriteStack.Navigator>
         )
     }

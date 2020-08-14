@@ -1,10 +1,39 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
 import CourseLargeItem from "./CourseFavorite/course-large-item";
 import { ThemeContext } from "../../../../App";
-import { DataContext } from "../../../Provider/DataProvider";
+// import { DataContext } from "../../../Provider/DataProvider";
+import { getMyFavoriteCourse } from "./action";
+import storage from "../../../Storage/storage";
 
 const Favorite = () => {
+
+    const [loading, setLoading] = useState(true);
+    const [token, setToken] = useState("");
+    const [adata, setAData] = useState([]);
+
+    useEffect(() => {
+        storage
+            .load({ key: "jwt" })
+            .then(ret => {
+                setToken(ret.token);
+                const tk = ret.token;
+                LoadData(tk);
+            })
+            .catch(err => console.log(err.name))
+            .finally()
+    }, []);
+
+    const LoadData = (tk) => {
+        setLoading(true);
+        getMyFavoriteCourse(tk)
+            .then(res => res.json())
+            .then(res => setAData(res.payload))
+            .catch(err => console.log("get My favorite course err:", err))
+            .finally(() => {
+                setLoading(false);
+            })
+    }
 
     const renderListCourseItem = (courses) => {
         return courses.map(item =>
@@ -16,41 +45,13 @@ const Favorite = () => {
         );
     };
 
-    const adata = [
-        {
-            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-            "courseTitle": "Toàn tập ngôn ngữ lập trình C#",
-            "coursePrice": 179000,
-            "courseImage": "https://miro.medium.com/max/1600/1*Wn-VNxeuGoRz83wxnJLjOQ.png",
-            "instructorId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-            "instructorName": "Phạm Hoàng Hải",
-            "courseSoldNumber": 28,
-            "courseContentPoint": 4.6,
-            "courseFormalityPoint": 4.6,
-            "coursePresentationPoint": 4.6,
-            "courseAveragePoint": 4.6
-        },
-        {
-            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-            "courseTitle": "Toàn tập ngôn ngữ lập trình C#",
-            "coursePrice": 179000,
-            "courseImage": "https://miro.medium.com/max/1600/1*Wn-VNxeuGoRz83wxnJLjOQ.png",
-            "instructorId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-            "instructorName": "Phạm Hoàng Hải",
-            "courseSoldNumber": 28,
-            "courseContentPoint": 4.6,
-            "courseFormalityPoint": 4.6,
-            "coursePresentationPoint": 4.6,
-            "courseAveragePoint": 3.1
-        }
-    ]
-
     return (
         <ThemeContext.Consumer>
             {
                 ({ theme }) => {
                     return (
                         <View style={{ ...styles.home, backgroundColor: theme.background }}>
+                            {loading && <ActivityIndicator size="large" color="blue" />}
                             <ScrollView>
                                 {renderListCourseItem(adata)}
                             </ScrollView>
