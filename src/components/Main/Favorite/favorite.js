@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, ActivityIndicator, RefreshControl } from 'react-native';
 import CourseLargeItem from "./CourseFavorite/course-large-item";
 import { ThemeContext } from "../../../../App";
 // import { DataContext } from "../../../Provider/DataProvider";
@@ -35,6 +35,22 @@ const Favorite = (props) => {
             })
     }
 
+    // refreshing data : docs: https://reactnative.dev/docs/refreshcontrol
+    const [refreshing, setRefreshing] = useState(false);
+
+    const wait = (timeout) => {
+        return new Promise(resolve => {
+            setTimeout(resolve, timeout);
+        });
+    }
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        LoadData(token);
+        wait(2000).then(() => setRefreshing(false));
+    }, []);
+
+
     const renderListCourseItem = (courses) => {
         return courses.map(item =>
             <TouchableOpacity
@@ -52,7 +68,11 @@ const Favorite = (props) => {
                     return (
                         <View style={{ ...styles.home, backgroundColor: theme.background }}>
                             {loading && <ActivityIndicator size="large" color="blue" />}
-                            <ScrollView>
+                            <ScrollView
+                                refreshControl={
+                                    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                                }
+                            >
                                 {renderListCourseItem(adata)}
                             </ScrollView>
                         </View>
