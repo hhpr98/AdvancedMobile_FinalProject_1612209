@@ -65,16 +65,36 @@ export default PlayingVideo = (props) => {
         <View style={styles.home}>
             {loading && <ActivityIndicator size="large" color="blue" />}
             <Text style={styles.text}>{lessonDetail.name}</Text>
-            <Video
-                source={{ uri: videoUrl }}
-                rate={1.0}
-                volume={50}
-                resizeMode="cover"
-                shouldPlay={false}
-                useNativeControls
-                isLooping
-                style={{ width: "100%", height: "50%", backgroundColor: "lightgray" }}
-            />
+            {
+                type === 0 ?
+                    (<Video
+                        source={{ uri: videoUrl }}
+                        rate={1.0}
+                        volume={50}
+                        resizeMode="cover"
+                        shouldPlay={false}
+                        useNativeControls
+                        isLooping
+                        style={{ width: "100%", height: "50%", backgroundColor: "lightgray" }}
+                    />) : (
+                        <YoutubePlayer
+                            ref={playerRef}
+                            height={300}
+                            width={400}
+                            videoId={idYoutube}
+                            play={false}
+                            onChangeState={event => console.log(event)}
+                            onReady={() => console.log("ready")}
+                            onError={e => console.log(e)}
+                            onPlaybackQualityChange={q => console.log(q)}
+                            volume={50}
+                            playbackRate={1}
+                            initialPlayerParams={{
+                                cc_lang_pref: "us",
+                                showClosedCaptions: true
+                            }}
+                        />)
+            }
         </View>
     )
 }
