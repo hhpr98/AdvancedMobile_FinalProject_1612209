@@ -6,7 +6,7 @@ import { ThemeContext } from "../../../../App";
 import { getMyFavoriteCourse } from "./action";
 import storage from "../../../Storage/storage";
 
-const Favorite = () => {
+const Favorite = (props) => {
 
     const [loading, setLoading] = useState(true);
     const [token, setToken] = useState("");
@@ -38,9 +38,9 @@ const Favorite = () => {
     const renderListCourseItem = (courses) => {
         return courses.map(item =>
             <TouchableOpacity
-            //onPress={()=>props.navigation.navigate('CourseDetail',item)}
+                onPress={() => props.navigation.navigate('CourseDetail', { id: item.id })}
             >
-                <CourseLargeItem item={item} />
+                <CourseLargeItem navigation={props.navigation} item={item} />
             </TouchableOpacity>
         );
     };
