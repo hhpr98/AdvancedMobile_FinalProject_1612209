@@ -21,22 +21,23 @@ const CourseDetail = (props) => {
     const [userId, setUserId] = useState("");
 
     useEffect(() => {
-        console.log("load token");
         storage
             .load({ key: "jwt" })
             .then(ret => {
                 setToken(ret.token);
                 setUserId(ret.userInfo.id);
+                const tk = ret.token;
+                const usid = ret.userInfo.id;
+                LoadData(tk, usid);
             })
             .catch(err => console.log(err.name))
             .finally()
     }, []);
 
-    useEffect(() => {
-        console.log("load data");
+    const LoadData = (tk, usid) => {
         setIsCheck(false);
         setLoading(true);
-        checkOwnerCourse(courseId)
+        checkOwnerCourse(tk, usid)
             .then(res => res.json())
             .then(res => {
                 if (res.message === "OK")
@@ -47,7 +48,7 @@ const CourseDetail = (props) => {
             .catch(err => console.log(console.log("CHECK OWN COURSE ERR: ", err)))
             .finally(() => {
             })
-        getCourseWithLessonUserId(token, courseId, userId)
+        getCourseWithLessonUserId(tk, courseId, usid)
             .then(res => res.json())
             .then(res => {
                 if (res.message === "OK") {
@@ -64,7 +65,7 @@ const CourseDetail = (props) => {
             .finally(() => {
                 setLoading(false);
             })
-    }, [token, userId])
+    }
 
     const renderCourseDetailItem = (items) => {
         return (
