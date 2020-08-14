@@ -25,6 +25,12 @@ const API = {
   GET_COURSE_DETAIL_WITH_LESSON: `${URL}/course/detail-with-lesson`, // /courseId
   // lấy thông tin khóa học với bài học + user
   GET_COURSE_DETAIL_WITH_USEID: `${URL}/course/get-course-detail`, // /courseId/userId
+
+  // lesson
+  // thông tin bài học
+  GET_LESSON_DETAIL: `${URL}/lesson/detail`, // /courseId/lessonId
+  // thông tin video bài học 
+  GET_LESSON_VIDEO: `${URL}/lesson/video`, // /courseId/lessonId
 };
 
 export default API;
