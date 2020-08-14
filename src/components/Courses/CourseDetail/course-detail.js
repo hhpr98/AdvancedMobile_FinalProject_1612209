@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useReducer, useContext } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, ActivityIndicator, TextInput } from 'react-native';
 import CourseDetailItem from "./CourseDetailItem/course-detail-item";
-import { checkOwnerCourse, getCourseWithLesson, getCourseWithLessonUserId } from "../action";
+import { checkOwnerCourse, getCourseWithLesson, getCourseWithLessonUserId, getFreeCourse } from "../action";
 import storage from "../../../Storage/storage";
 import StarRating from 'react-native-star-rating';
 
@@ -111,11 +111,7 @@ const CourseDetail = (props) => {
             >
                 <Text style={styles.textSignIn}>Take a learning check</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button}
-                onPress={() => alert(infor.typeUploadVideoLesson)}
-            >
-                <Text style={styles.textSignIn}>View related paths & courses</Text>
-            </TouchableOpacity>
+
             <Text style={styles.textClone}>DESCRIPTION</Text>
             <Text style={styles.textContent}>{infor.description}</Text>
             <Text style={styles.textClone}>CONTENT</Text>
@@ -125,9 +121,28 @@ const CourseDetail = (props) => {
                         <View>{renderCourseDetailItem(dataSectionAndLesson)}</View>
                     </>
                 ) : (
-                        <View>
+                        <>
                             <Text style={{ ...styles.textContent, color: "red" }}>You hasn't join/buy this course!</Text>
-                        </View>
+                            <TouchableOpacity style={styles.button}
+                                onPress={() => {
+                                    getFreeCourse(token, courseId)
+                                        .then(res => res.json())
+                                        .then(() => {
+                                            if (res.message === "OK" || res.message == "Bạn đã từng đăng ký khóa học này.") {
+                                                setIsCheck(true); //show detail course
+                                                alert("Register this course success. An email has send to you!");
+                                            } else {
+                                                alert("Register this course fail!");
+                                            }
+                                        })
+                                        .catch(err => console.log("GET FREE COURSE FAILL", err))
+                                        .finally()
+                                }
+                                }
+                            >
+                                <Text style={styles.textSignIn}>Register for free!</Text>
+                            </TouchableOpacity>
+                        </>
                     )
             }
             <Text style={styles.textClone}>RATING</Text>

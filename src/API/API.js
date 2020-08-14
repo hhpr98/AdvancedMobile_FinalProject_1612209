@@ -7,6 +7,8 @@ const API = {
   REGISTER: `${URL}/user/register`,
   SEND_ACTIVE_EMAIL: `${URL}/user/send-active-email`,
 
+  // user
+
   // infor
   GET_INTRO_PAGE: `${URL}/user/intro-page`,
 
@@ -31,6 +33,11 @@ const API = {
   GET_LESSON_DETAIL: `${URL}/lesson/detail`, // /courseId/lessonId
   // thông tin video bài học 
   GET_LESSON_VIDEO: `${URL}/lesson/video`, // /courseId/lessonId
+
+  // payment
+  // đăng kí khóa học
+  GET_FREE_COURSE: `${URL}/payment/get-free-courses`
+
 };
 
 export default API;

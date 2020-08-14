@@ -31,6 +31,18 @@ export const getCourseWithLessonUserId = (token, courseId, userId) => {
             Authorization: `Bearer ${token}`
         }
     })
-
 };
 
+export const getFreeCourse = (token, courseId) => {
+    return fetch(API.GET_FREE_COURSE, {
+        method: "POST",
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            courseId: courseId
+        })
+    })
+}
