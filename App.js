@@ -217,7 +217,7 @@ export default function App(props) {
             <StatusBar barStyle="light-content" />
             <DataProvider>
                 <NavigationContainer style={styles.main}>
-                    <PlayingVideo />
+                    <MainStackNavigation />
                 </NavigationContainer>
             </DataProvider>
         </ThemeContext.Provider>

@@ -5,8 +5,8 @@ import storage from "../../../Storage/storage";
 import { getLogin } from "./action";
 
 const Login = (props) => {
-    const [user, setUser] = useState('');
-    const [password, setPassword] = useState('');
+    const [user, setUser] = useState('nguyenhuuhoa1998@gmail.com');
+    const [password, setPassword] = useState('abcxyz123@');
 
     const signInClick = () => {
         // console.log(user + password);
@@ -50,6 +50,7 @@ const Login = (props) => {
                                     <TextInput
                                         style={{ ...styles.input, color: theme.foreground }}
                                         //placeholder="username"
+                                        //defaultValue="nguyenhuuhoa1998@gmail.com"
                                         placeholderTextColor="#4B4541"
                                         onChangeText={user => setUser(user)}
                                     />
@@ -63,6 +64,7 @@ const Login = (props) => {
                                         style={{ ...styles.input, color: theme.foreground }}
                                         secureTextEntry={true}
                                         //placeholder="***"
+                                        //defaultValue="abcxyz123@"
                                         placeholderTextColor="#4B4541"
                                         onChangeText={password => setPassword(password)}
                                     >
@@ -74,7 +76,7 @@ const Login = (props) => {
                                 <TouchableOpacity style={{ ...styles.buttonSignIn, borderRadius: theme.boderRadiusLogin }}
                                     onPress={() => signInClick()}
                                 >
-                                    <Text style={styles.textSignIn}>SIGN IN</Text>
+                                    <Text style={styles.textSignIn}>SIGN IN (đang auto)</Text>
                                 </TouchableOpacity>
                                 <View style={{ ...styles.viewInsert, backgroundColor: theme.background }} />
                                 <TouchableOpacity style={{ ...styles.buttonForgotAndSignUp, backgroundColor: theme.background, borderRadius: theme.boderRadiusLogin }}
