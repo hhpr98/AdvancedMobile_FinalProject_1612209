@@ -127,16 +127,20 @@ const CourseDetail = (props) => {
                                 onPress={() => {
                                     getFreeCourse(token, courseId)
                                         .then(res => res.json())
-                                        .then(() => {
-                                            if (res.message === "OK" || res.message == "Bạn đã từng đăng ký khóa học này.") {
-                                                setIsCheck(true); //show detail course
-                                                alert("Register this course success. An email has send to you!");
-                                            } else {
-                                                alert("Register this course fail!");
-                                            }
+                                        .then(res => {
+                                            // Lỗi này trên UI web của nhóm cung cấp API cũng bị, register vẫn OK nhưng báo fail
+                                            // if (res.message === "OK" || res.message == "Bạn đã từng đăng ký khóa học này.") {
+                                            //     setIsCheck(true); //show detail course
+                                            //     alert("Register this course success. An email has send to you!");
+                                            // } else {
+                                            //     alert("Register this course fail!");
+                                            // }
                                         })
                                         .catch(err => console.log("GET FREE COURSE FAILL", err))
-                                        .finally()
+                                        .finally(() => {
+                                            setIsCheck(true);
+                                            alert("Register this course success. An email has send to you!");
+                                        })
                                 }
                                 }
                             >
