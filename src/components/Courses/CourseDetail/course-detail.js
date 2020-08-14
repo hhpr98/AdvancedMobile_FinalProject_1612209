@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useReducer, useContext } from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, ActivityIndicator, TextInput } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, ActivityIndicator, TextInput, ImageBackground } from 'react-native';
 import CourseDetailItem from "./CourseDetailItem/course-detail-item";
 import { checkOwnerCourse, getCourseWithLesson, getCourseWithLessonUserId, getFreeCourse } from "../action";
 import storage from "../../../Storage/storage";
@@ -106,11 +106,18 @@ const CourseDetail = (props) => {
             <Text style={styles.textInfor}>{Math.round(Number(infor.contentPoint))} point  .  {date.substring(0, 10)}  .  {infor.totalHours} hours</Text>
             <Text style={{ ...styles.textInfor, fontSize: 17, color: "green" }}>{infor.videoNumber} videos</Text>
             <Text style={styles.textContent}>{infor.subtitle}</Text>
-            <TouchableOpacity style={styles.button}
-                onPress={() => alert('clicked !')}
-            >
-                <Text style={styles.textSignIn}>Take a learning check</Text>
-            </TouchableOpacity>
+
+            <View style={{ flexDirection: "row", justifyContent: "space-around", marginTop: 20, }}>
+                <ImageBackground source={require("../../../../assets/ic_detail_like.png")} style={{ width: 50, height: 50, backgroundColor: "white" }}>
+                    <TouchableOpacity style={{ width: 50, height: 50 }} onPress={() => alert("Download clicked!")} />
+                </ImageBackground>
+                <ImageBackground source={require("../../../../assets/ic_detail_share.png")} style={{ width: 50, height: 50, backgroundColor: "white" }}>
+                    <TouchableOpacity style={{ width: 50, height: 50 }} onPress={() => alert("Download clicked!")} />
+                </ImageBackground>
+                <ImageBackground source={require("../../../../assets/ic_detail_download.png")} style={{ width: 50, height: 50, backgroundColor: "white" }}>
+                    <TouchableOpacity style={{ width: 50, height: 50 }} onPress={() => alert("Download clicked!")} />
+                </ImageBackground>
+            </View>
 
             <Text style={styles.textClone}>DESCRIPTION</Text>
             <Text style={styles.textContent}>{infor.description}</Text>
