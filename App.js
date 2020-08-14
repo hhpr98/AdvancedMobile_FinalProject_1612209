@@ -54,6 +54,7 @@ export default function App(props) {
             >
                 <HomeStack.Screen name="Home" component={Home} />
                 <HomeStack.Screen name="CourseDetail" component={CourseDetail} options={{ headerShown: false, }} />
+                <HomeStack.Screen name="PlayingVideo" component={PlayingVideo} options={{ headerShown: false, }} />
             </HomeStack.Navigator>
         )
     }
@@ -216,7 +217,7 @@ export default function App(props) {
             <StatusBar barStyle="light-content" />
             <DataProvider>
                 <NavigationContainer style={styles.main}>
-                    <MainStackNavigation />
+                    <PlayingVideo />
                 </NavigationContainer>
             </DataProvider>
         </ThemeContext.Provider>

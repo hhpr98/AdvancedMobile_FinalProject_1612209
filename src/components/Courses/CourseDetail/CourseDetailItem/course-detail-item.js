@@ -18,7 +18,10 @@ const CourseDetailItem = (props) => {
             //console.log(item)
             <TouchableOpacity
                 style={{ flexDirection: 'row', justifyContent: 'space-between', margin: 10 }}
-                onPress={() => alert("URL: " + item.videoUrl)}
+                onPress={() =>
+                    //alert("URL: " + item.videoUrl)
+                    props.navigation.navigate("PlayingVideo", { courseId: item.courseId, lessonId: item.id })
+                }
             >
                 <Text style={{ color: 'white', textAlignVertical: "center" }}>{'\u2B24'} </Text>
                 <Text style={{ color: 'white', width: 250, }}>{item.name}</Text>

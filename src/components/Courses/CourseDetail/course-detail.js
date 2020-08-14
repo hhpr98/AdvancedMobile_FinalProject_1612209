@@ -73,7 +73,7 @@ const CourseDetail = (props) => {
 
     const renderCourseDetailItem = (items) => {
         return (
-            items.map((item, index) => <CourseDetailItem item={item} index={index} />)
+            items.map((item, index) => <CourseDetailItem navigation={props.navigation} item={item} index={index} />)
         )
     }
 
