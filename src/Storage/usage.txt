@@ -1,0 +1,30 @@
+import storage from "../../../Storage/storage";
+
+        storage
+            .save({
+                key: "test",
+                data: "test1 data",
+                expires: 3600 * 24 * 30
+            })
+
+        storage
+            .load({ key: "test1" })
+            .then(result => {
+                // found data goes to then()
+                console.log(result);
+            })
+            .catch(err => {
+                // any exception including data not found
+                // goes to catch()
+                // console.warn(err.message);
+                switch (err.name) {
+                    case 'NotFoundError':
+                        // TODO
+                        console.log("NotFound Key");
+                        break;
+                    case 'ExpiredError':
+                        // TODO
+                        console.log("Expired");
+                        break;
+                }
+            })

@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useReducer, useContext } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
 import CourseDetailItem from "./CourseDetailItem/course-detail-item";
 import { checkOwnerCourse, getCourseWithLesson, getCourseWithLessonUserId } from "../action";
+import storage from "../../../Storage/storage";
 
 const CourseDetail = (props) => {
 
@@ -9,17 +10,34 @@ const CourseDetail = (props) => {
     const [dataSectionAndLesson, setDataSectionAndLesson] = useState([]);
     const [infor, setInfor] = useState([]);
     const [author, setAuthor] = useState("");
+    const [avartar, setAvatar] = useState("../../../../assets/ic_people_author.png");
     const [date, setDate] = useState("0000-00-00T00:00:00");
     const [isLoading, setLoading] = useState(true);
 
     const courseId = props.route.params.id;
-    const userId = "4b94656f-483a-458c-8a4e-83d3826ca302";
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRiOTQ2NTZmLTQ4M2EtNDU4Yy04YTRlLTgzZDM4MjZjYTMwMiIsImlhdCI6MTU5NzMyNTI2NywiZXhwIjoxNTk3MzMyNDY3fQ.yHU-4iyj9I_IdR_b7Bs7ufUB8rMtWu4RjyXtkg4-wqs"
+
+
+    const [token, setToken] = useState("");
+    const [userId, setUserId] = useState("");
 
     useEffect(() => {
+        storage
+            .load({ key: "jwt" })
+            .then(ret => {
+                setToken(ret.token);
+                setUserId(ret.userInfo.id);
+                const tk = ret.token;
+                const usid = ret.userInfo.id;
+                LoadData(tk, usid);
+            })
+            .catch(err => console.log(err.name))
+            .finally()
+    }, []);
+
+    const LoadData = (tk, usid) => {
         setIsCheck(false);
         setLoading(true);
-        checkOwnerCourse(token, courseId)
+        checkOwnerCourse(tk, usid)
             .then(res => res.json())
             .then(res => {
                 if (res.message === "OK")
@@ -30,13 +48,14 @@ const CourseDetail = (props) => {
             .catch(err => console.log(console.log("CHECK OWN COURSE ERR: ", err)))
             .finally(() => {
             })
-        getCourseWithLessonUserId(token, courseId, userId)
+        getCourseWithLessonUserId(tk, courseId, usid)
             .then(res => res.json())
             .then(res => {
                 if (res.message === "OK") {
                     setDataSectionAndLesson(res.payload.section);
                     setInfor(res.payload);
                     setAuthor(res.payload.instructor.name);
+                    setAvatar(res.payload.instructor.avatar);
                     setDate(res.payload.createdAt);
                 } else {
                     setDataSectionAndLesson([]);
@@ -47,8 +66,7 @@ const CourseDetail = (props) => {
             .finally(() => {
                 setLoading(false);
             })
-
-    }, []);
+    }
 
     const renderCourseDetailItem = (items) => {
         return (
@@ -63,12 +81,12 @@ const CourseDetail = (props) => {
             </View>
             <Image source={{ uri: infor.imageUrl }} style={{ width: 350, height: 180, alignSelf: "center", resizeMode: "stretch" }} />
             <View style={styles.viewAuthor}>
-                <Image source={require('../../../../assets/ic_people_author.png')} style={styles.image} />
+                <Image source={{ uri: avartar }} style={styles.image} />
                 <Text style={styles.textAuthor}>{author}</Text>
             </View>
             <Text style={styles.textInfor}>{Math.round(Number(infor.contentPoint))} point  .  {date.substring(0, 10)}  .  {infor.totalHours} hours</Text>
             <Text style={{ ...styles.textInfor, fontSize: 17, color: "green" }}>{infor.videoNumber} videos</Text>
-            <Text style={styles.textContent}>This course is free for you. Let's enjoy it. Good luck for you!</Text>
+            <Text style={styles.textContent}>{infor.subtitle}</Text>
             <TouchableOpacity style={styles.button}
                 onPress={() => alert('clicked !')}
             >
