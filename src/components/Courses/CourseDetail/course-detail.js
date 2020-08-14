@@ -10,12 +10,11 @@ const CourseDetail = (props) => {
     const [dataSectionAndLesson, setDataSectionAndLesson] = useState([]);
     const [infor, setInfor] = useState([]);
     const [author, setAuthor] = useState("");
+    const [avartar, setAvatar] = useState("../../../../assets/ic_people_author.png");
     const [date, setDate] = useState("0000-00-00T00:00:00");
     const [isLoading, setLoading] = useState(true);
 
     const courseId = props.route.params.id;
-    // const userId = "4b94656f-483a-458c-8a4e-83d3826ca302";
-    // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRiOTQ2NTZmLTQ4M2EtNDU4Yy04YTRlLTgzZDM4MjZjYTMwMiIsImlhdCI6MTU5NzMyNTI2NywiZXhwIjoxNTk3MzMyNDY3fQ.yHU-4iyj9I_IdR_b7Bs7ufUB8rMtWu4RjyXtkg4-wqs"
 
     const [token, setToken] = useState("");
     const [userId, setUserId] = useState("");
@@ -55,6 +54,7 @@ const CourseDetail = (props) => {
                     setDataSectionAndLesson(res.payload.section);
                     setInfor(res.payload);
                     setAuthor(res.payload.instructor.name);
+                    setAvatar(res.payload.instructor.avatar);
                     setDate(res.payload.createdAt);
                 } else {
                     setDataSectionAndLesson([]);
@@ -80,12 +80,12 @@ const CourseDetail = (props) => {
             </View>
             <Image source={{ uri: infor.imageUrl }} style={{ width: 350, height: 180, alignSelf: "center", resizeMode: "stretch" }} />
             <View style={styles.viewAuthor}>
-                <Image source={require('../../../../assets/ic_people_author.png')} style={styles.image} />
+                <Image source={{ uri: avartar }} style={styles.image} />
                 <Text style={styles.textAuthor}>{author}</Text>
             </View>
             <Text style={styles.textInfor}>{Math.round(Number(infor.contentPoint))} point  .  {date.substring(0, 10)}  .  {infor.totalHours} hours</Text>
             <Text style={{ ...styles.textInfor, fontSize: 17, color: "green" }}>{infor.videoNumber} videos</Text>
-            <Text style={styles.textContent}>This course is free for you. Let's enjoy it. Good luck for you!</Text>
+            <Text style={styles.textContent}>{infor.subtitle}</Text>
             <TouchableOpacity style={styles.button}
                 onPress={() => alert('clicked !')}
             >
