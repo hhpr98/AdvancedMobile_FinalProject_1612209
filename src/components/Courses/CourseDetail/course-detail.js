@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useReducer, useContext } from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, ActivityIndicator, Button } from 'react-native';
 import CourseDetailItem from "./CourseDetailItem/course-detail-item";
 import { checkOwnerCourse, getCourseWithLesson, getCourseWithLessonUserId } from "../action";
 import storage from "../../../Storage/storage";
+import StarRating from 'react-native-star-rating';
+import { TextInput } from 'react-native-gesture-handler';
 
 const CourseDetail = (props) => {
 
@@ -13,6 +15,7 @@ const CourseDetail = (props) => {
     const [avartar, setAvatar] = useState("../../../../assets/ic_people_author.png");
     const [date, setDate] = useState("0000-00-00T00:00:00");
     const [isLoading, setLoading] = useState(true);
+    const [ratingList, setRatingList] = useState([]);
 
     const courseId = props.route.params.id;
 
@@ -21,6 +24,7 @@ const CourseDetail = (props) => {
     const [userId, setUserId] = useState("");
 
     useEffect(() => {
+        setIsCheck(false);
         storage
             .load({ key: "jwt" })
             .then(ret => {
@@ -35,13 +39,13 @@ const CourseDetail = (props) => {
     }, []);
 
     const LoadData = (tk, usid) => {
-        setIsCheck(false);
         setLoading(true);
         checkOwnerCourse(tk, usid)
             .then(res => res.json())
             .then(res => {
                 if (res.message === "OK")
-                    setIsCheck(res.payload.isUserOwnCourse)
+                    {setIsCheck(res.payload.isUserOwnCourse)
+                        console.log(res.payload.isUserOwnCourse)}
                 else
                     alert("Check join this course error! CourseId: " + courseId + " Message: " + res.message)
             })
@@ -57,6 +61,7 @@ const CourseDetail = (props) => {
                     setAuthor(res.payload.instructor.name);
                     setAvatar(res.payload.instructor.avatar);
                     setDate(res.payload.createdAt);
+                    setRatingList(res.payload.ratings.ratingList.slice(0, 10));
                 } else {
                     setDataSectionAndLesson([]);
                     setInfor([]);
@@ -73,6 +78,21 @@ const CourseDetail = (props) => {
             items.map((item, index) => <CourseDetailItem item={item} index={index} />)
         )
     }
+
+    const renderRatingList = (ratingList) => {
+        return (
+            ratingList.map(item =>
+                <View style={{ borderBottomColor: "white", borderBottomWidth: 0.5, margin: 10, }}>
+                    <View style={{ flexDirection: "row", justifyContent: "flex-start" }}>
+                        <Image source={{ uri: item.user.avatar }} style={{ ...styles.image, alignSelf: "center" }} />
+                        <Text style={{ ...styles.textRating, alignSelf: "center", color: "green" }}>{item.user.name}</Text>
+                    </View>
+                    <Text style={styles.textRating}>{item.content}</Text>
+                </View>
+            )
+        )
+    }
+
     return (
         <ScrollView style={styles.home}>
             {isLoading && <ActivityIndicator size="large" color="blue" />}
@@ -102,15 +122,39 @@ const CourseDetail = (props) => {
             <Text style={styles.textClone}>CONTENT</Text>
             {
                 isCheck ? (
-                    <View>{renderCourseDetailItem(dataSectionAndLesson)}</View>
+                    <>
+                        <View>{renderCourseDetailItem(dataSectionAndLesson)}</View>
+                    </>
                 ) : (
                         <View>
                             <Text style={{ ...styles.textContent, color: "red" }}>You hasn't join/buy this course!</Text>
                         </View>
                     )
             }
+            <Text style={styles.textClone}>RATING</Text>
+            <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                <Text style={styles.textContent}>Rating cho khóa học</Text>
+                <StarRating
+                    style={{ width: 200, backgroundColor: "red" }}
+                    disabled={false}
+                    maxStars={5}
+                    rating={Math.round(Number(infor.contentPoint))}
+                    fullStarColor="yellow"
+                    emptyStarColor="white"
+                    starSize={27}
+                    containerStyle={{ width: 150, alignSelf: "center" }}
+                />
+            </View>
+            <View style={{ flexDirection: "row", justifyContent: "space-around", marginBottom: 30 }}>
+                <TextInput style={{ backgroundColor: "white", alignSelf: "center", width: 200, height: 70, }} onChange={() => console.log("changed")}></TextInput>
+                <TouchableOpacity style={{ alignSelf: "center", }}>
+                    <Text style={{ color: "blue", alignSelf: "center" }}>Thêm bình luận</Text>
+                </TouchableOpacity>
+            </View>
+            <View>{renderRatingList(ratingList)}</View>
 
-        </ScrollView>
+
+        </ScrollView >
     );
 };
 const styles = StyleSheet.create({
@@ -155,6 +199,11 @@ const styles = StyleSheet.create({
     textContent: {
         color: 'white',
         fontSize: 17,
+        margin: 20,
+    },
+    textRating: {
+        color: 'white',
+        fontSize: 13,
         margin: 20,
     },
     button: {
