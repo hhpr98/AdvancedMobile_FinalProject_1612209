@@ -22,6 +22,7 @@ import SplashScreen from "./src/components/RelativeComponent/Splash/splash";
 import ScreenKey from "./src/libs/ScreenKey";
 import { themes } from "./src/libs/themes";
 import { DataProvider } from "./src/Provider/DataProvider";
+import PlayingVideo from "./src/components/RelativeComponent/PlayingVideo/playing-lesson";
 
 const MainStack = createStackNavigator();
 const Tab = createBottomTabNavigator();

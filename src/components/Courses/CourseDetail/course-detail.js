@@ -1,10 +1,9 @@
 import React, { useEffect, useState, useReducer, useContext } from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, ActivityIndicator, Button } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, ActivityIndicator, TextInput } from 'react-native';
 import CourseDetailItem from "./CourseDetailItem/course-detail-item";
 import { checkOwnerCourse, getCourseWithLesson, getCourseWithLessonUserId } from "../action";
 import storage from "../../../Storage/storage";
 import StarRating from 'react-native-star-rating';
-import { TextInput } from 'react-native-gesture-handler';
 
 const CourseDetail = (props) => {
 
