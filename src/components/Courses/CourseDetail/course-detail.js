@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useReducer, useContext } from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, ActivityIndicator, TextInput, ImageBackground } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, ActivityIndicator, TextInput, ImageBackground, Share } from 'react-native';
 import CourseDetailItem from "./CourseDetailItem/course-detail-item";
 import { checkOwnerCourse, getCourseWithLesson, getCourseWithLessonUserId, getFreeCourse } from "../action";
 import storage from "../../../Storage/storage";
@@ -92,6 +92,26 @@ const CourseDetail = (props) => {
         )
     }
 
+    const onShare = async (mess) => {
+        alert(mess);
+        try {
+            const result = await Share.share({
+                message: mess
+            });
+            if (result.action === Share.sharedAction) {
+                if (result.activityType) {
+                    // shared with activity type of result.activityType
+                } else {
+                    // shared
+                }
+            } else if (result.action === Share.dismissedAction) {
+                // dismissed
+            }
+        } catch (error) {
+            alert(error.message);
+        }
+    };
+
     return (
         <ScrollView style={styles.home}>
             {isLoading && <ActivityIndicator size="large" color="blue" />}
@@ -112,7 +132,10 @@ const CourseDetail = (props) => {
                     <TouchableOpacity style={{ width: 50, height: 50 }} onPress={() => alert("Download clicked!")} />
                 </ImageBackground>
                 <ImageBackground source={require("../../../../assets/ic_detail_share.png")} style={{ width: 50, height: 50, backgroundColor: "white" }}>
-                    <TouchableOpacity style={{ width: 50, height: 50 }} onPress={() => alert("Download clicked!")} />
+                    <TouchableOpacity style={{ width: 50, height: 50 }} onPress={() => {
+                        const message = "https://itedu.me/course-detail/" + courseId;
+                        onShare(message);
+                    }} />
                 </ImageBackground>
                 <ImageBackground source={require("../../../../assets/ic_detail_download.png")} style={{ width: 50, height: 50, backgroundColor: "white" }}>
                     <TouchableOpacity style={{ width: 50, height: 50 }} onPress={() => alert("Download clicked!")} />
