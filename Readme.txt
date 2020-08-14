@@ -21,6 +21,12 @@ Deadline 2: Xây dựng ứng dụng offline cho toàn bộ ứng dụng
 -----------------------------------------------
 
 Deadline 3: Xây dựng ứng dụng online cho toàn bộ ứng dụng
+  - Commit ID: a17a08b
+  - Video demo: https://youtu.be/9hYGb73f91w
+
+-----------------------------------------------
+
+Deadline 4: Hoàn thành ứng dụng
   - Commit ID: 
   - Video demo: 
 
