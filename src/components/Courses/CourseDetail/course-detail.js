@@ -40,12 +40,11 @@ const CourseDetail = (props) => {
 
     const LoadData = (tk, usid) => {
         setLoading(true);
-        checkOwnerCourse(tk, usid)
+        checkOwnerCourse(tk, courseId)
             .then(res => res.json())
             .then(res => {
                 if (res.message === "OK")
-                    {setIsCheck(res.payload.isUserOwnCourse)
-                        console.log(res.payload.isUserOwnCourse)}
+                    setIsCheck(res.payload.isUserOwnCourse)
                 else
                     alert("Check join this course error! CourseId: " + courseId + " Message: " + res.message)
             })
