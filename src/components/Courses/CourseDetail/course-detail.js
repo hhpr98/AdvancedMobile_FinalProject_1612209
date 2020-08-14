@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useReducer, useContext } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, ActivityIndicator, TextInput, ImageBackground, Share } from 'react-native';
 import CourseDetailItem from "./CourseDetailItem/course-detail-item";
-import { checkOwnerCourse, getCourseWithLesson, getCourseWithLessonUserId, getFreeCourse } from "../action";
+import { checkOwnerCourse, getCourseWithLesson, getCourseWithLessonUserId, getFreeCourse, userLikeCourse } from "../action";
 import storage from "../../../Storage/storage";
 import StarRating from 'react-native-star-rating';
 
@@ -112,6 +112,18 @@ const CourseDetail = (props) => {
         }
     };
 
+    const onLikeCourse = () => {
+        userLikeCourse(token, courseId)
+            .then(res => res.json())
+            .then((res) => {
+                if (res.likeStatus === true)
+                    alert("Like this course!");
+                else
+                    alert("Unlike this course!");
+            })
+            .finally()
+    }
+
     return (
         <ScrollView style={styles.home}>
             {isLoading && <ActivityIndicator size="large" color="blue" />}
@@ -129,12 +141,12 @@ const CourseDetail = (props) => {
 
             <View style={{ flexDirection: "row", justifyContent: "space-around", marginTop: 20, }}>
                 <ImageBackground source={require("../../../../assets/ic_detail_like.png")} style={{ width: 50, height: 50, backgroundColor: "white" }}>
-                    <TouchableOpacity style={{ width: 50, height: 50 }} onPress={() => alert("Download clicked!")} />
+                    <TouchableOpacity style={{ width: 50, height: 50 }} onPress={() => onLikeCourse()} />
                 </ImageBackground>
                 <ImageBackground source={require("../../../../assets/ic_detail_share.png")} style={{ width: 50, height: 50, backgroundColor: "white" }}>
                     <TouchableOpacity style={{ width: 50, height: 50 }} onPress={() => {
-                        const message = "https://itedu.me/course-detail/" + courseId;
-                        onShare(message);
+                        const message = "https://itedu.me/course-detail/" + courseId; // lấy url khóa học dạng web
+                        onShare(message); // share
                     }} />
                 </ImageBackground>
                 <ImageBackground source={require("../../../../assets/ic_detail_download.png")} style={{ width: 50, height: 50, backgroundColor: "white" }}>
