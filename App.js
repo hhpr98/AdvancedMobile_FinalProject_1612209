@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, StatusBar, StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import { SafeAreaView, StatusBar, StyleSheet, Button, TouchableOpacity, Text, ImageBackground } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -43,7 +43,7 @@ export default function App(props) {
             <HomeStack.Navigator
                 screenOptions={{
                     headerStyle: {
-                        backgroundColor: '#282828',
+                        backgroundColor: '#3399FF',
                     },
                     headerTintColor: '#fff',
                     headerTitleStyle: {
@@ -52,10 +52,21 @@ export default function App(props) {
                 }}
                 initialRouteName="Home"
             >
-                <HomeStack.Screen name="Home" component={Home} />
+                <HomeStack.Screen name="Home" component={Home}
+                    options={({ navigation }) => ({
+                        headerRight: () => (
+                            <ImageBackground source={{ uri: "https://icons.iconarchive.com/icons/dtafalonso/android-lollipop/512/Downloads-icon.png" }} style={{ width: 80, height: 30, resizeMode: "stretch"}}>
+                                <TouchableOpacity onPress={() => navigation.navigate("Download")}>
+                                    <Text style={{ color: "white" }}></Text>
+                                </TouchableOpacity>
+                            </ImageBackground>
+
+                        ),
+                    })} />
                 <HomeStack.Screen name="CourseDetail" component={CourseDetail} options={{ headerShown: false, }} />
                 <HomeStack.Screen name="PlayingVideoYoutube" component={PlayingVideoYoutube} options={{ headerShown: false, }} />
                 <HomeStack.Screen name="PlayingVideoGoogleStorage" component={PlayingVideoGoogleStorage} options={{ headerShown: false, }} />
+                <HomeStack.Screen name="Download" component={Download} options={{ headerShown: false, }} />
             </HomeStack.Navigator>
         )
     }
@@ -65,7 +76,7 @@ export default function App(props) {
             <FavoriteStack.Navigator
                 screenOptions={{
                     headerStyle: {
-                        backgroundColor: '#282828',
+                        backgroundColor: '#3399FF',
                     },
                     headerTintColor: '#fff',
                     headerTitleStyle: {
@@ -75,6 +86,7 @@ export default function App(props) {
                 initialRouteName="Favorite"
             >
                 <FavoriteStack.Screen name="Favorite" component={Favorite} />
+                <FavoriteStack.Screen name="CourseDetail" component={CourseDetail} options={{ headerShown: false, }} />
             </FavoriteStack.Navigator>
         )
     }
@@ -84,7 +96,7 @@ export default function App(props) {
             <BrowseStack.Navigator
                 screenOptions={{
                     headerStyle: {
-                        backgroundColor: '#282828',
+                        backgroundColor: '#3399FF',
                     },
                     headerTintColor: '#fff',
                     headerTitleStyle: {
@@ -103,7 +115,7 @@ export default function App(props) {
             <SearchStack.Navigator
                 screenOptions={{
                     headerStyle: {
-                        backgroundColor: '#282828',
+                        backgroundColor: '#3399FF',
                     },
                     headerTintColor: '#fff',
                     headerTitleStyle: {
@@ -122,7 +134,7 @@ export default function App(props) {
             <SettingStack.Navigator
                 screenOptions={{
                     headerStyle: {
-                        backgroundColor: '#282828',
+                        backgroundColor: '#3399FF',
                     },
                     headerTintColor: '#fff',
                     headerTitleStyle: {

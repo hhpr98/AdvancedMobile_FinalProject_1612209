@@ -1,17 +1,62 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
-import CourseFavoriteItem from "./CourseFavorite/course-favorite-item";
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, ActivityIndicator, RefreshControl } from 'react-native';
+import CourseLargeItem from "./CourseFavorite/course-large-item";
 import { ThemeContext } from "../../../../App";
-import { DataContext } from "../../../Provider/DataProvider";
+// import { DataContext } from "../../../Provider/DataProvider";
+import { getMyFavoriteCourse } from "./action";
+import storage from "../../../Storage/storage";
 
-const Favorite = () => {
+const Favorite = (props) => {
 
-    const renderListItems = (courses) => {
+    const [loading, setLoading] = useState(true);
+    const [token, setToken] = useState("");
+    const [adata, setAData] = useState([]);
+
+    useEffect(() => {
+        storage
+            .load({ key: "jwt" })
+            .then(ret => {
+                setToken(ret.token);
+                const tk = ret.token;
+                LoadData(tk);
+            })
+            .catch(err => console.log(err.name))
+            .finally()
+    }, []);
+
+    const LoadData = (tk) => {
+        setLoading(true);
+        getMyFavoriteCourse(tk)
+            .then(res => res.json())
+            .then(res => setAData(res.payload))
+            .catch(err => console.log("get My favorite course err:", err))
+            .finally(() => {
+                setLoading(false);
+            })
+    }
+
+    // refreshing data : docs: https://reactnative.dev/docs/refreshcontrol
+    const [refreshing, setRefreshing] = useState(false);
+
+    const wait = (timeout) => {
+        return new Promise(resolve => {
+            setTimeout(resolve, timeout);
+        });
+    }
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        LoadData(token);
+        wait(2000).then(() => setRefreshing(false));
+    }, []);
+
+
+    const renderListCourseItem = (courses) => {
         return courses.map(item =>
             <TouchableOpacity
-            //onPress={()=>props.navigation.navigate('CourseDetail',item)}
+                onPress={() => props.navigation.navigate('CourseDetail', { id: item.id })}
             >
-                <CourseFavoriteItem item={item} />
+                <CourseLargeItem navigation={props.navigation} item={item} />
             </TouchableOpacity>
         );
     };
@@ -21,29 +66,18 @@ const Favorite = () => {
             {
                 ({ theme }) => {
                     return (
-                        <DataContext.Consumer>
-                            {
-                                ({ data }) => {
-                                    return (
-                                        <View style={{ ...styles.home, backgroundColor: theme.background }}>
-                                            <View style={{ flexDirection: 'row', justifyContent: 'space-around', }}>
-                                                <Text style={{ ...styles.text1, color: theme.foreground }}>4 courses (440MB)</Text>
-                                                <TouchableOpacity
-                                                    onPress={() => alert('remove!')}
-                                                >
-                                                    <Text style={styles.textButton}>Remove all</Text>
-                                                </TouchableOpacity>
-                                            </View>
-                                            <ScrollView>
-                                                {renderListItems(data.favoritecourses)}
-                                            </ScrollView>
-                                        </View>
-
-                                    );
+                        <View style={{ ...styles.home, backgroundColor: theme.background }}>
+                            {loading && <ActivityIndicator size="large" color="blue" />}
+                            <ScrollView
+                                refreshControl={
+                                    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
                                 }
-                            }
-                        </DataContext.Consumer>
-                    )
+                            >
+                                {renderListCourseItem(adata)}
+                            </ScrollView>
+                        </View>
+
+                    );
                 }
             }
         </ThemeContext.Consumer>
