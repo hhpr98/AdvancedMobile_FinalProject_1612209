@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { ThemeContext } from "../../../../../App";
 
-const CourseFavoriteItem = (props) => {
+const CourseLargeItem = (props) => {
 
     const getCourseString = (item) => {
         return item.level + ' . ' + item.released + ' . ' + item.duration;
@@ -62,4 +62,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default CourseFavoriteItem;
+export default CourseLargeItem;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
-import CourseFavoriteItem from "./CourseFavorite/course-favorite-item";
+import CourseLargeItem from "./CourseFavorite/course-large-item";
 import { ThemeContext } from "../../../../App";
 import { DataContext } from "../../../Provider/DataProvider";
 
@@ -11,7 +11,7 @@ const Favorite = () => {
             <TouchableOpacity
             //onPress={()=>props.navigation.navigate('CourseDetail',item)}
             >
-                <CourseFavoriteItem item={item} />
+                <CourseLargeItem item={item} />
             </TouchableOpacity>
         );
     };
