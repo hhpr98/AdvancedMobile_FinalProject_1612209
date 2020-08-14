@@ -15,9 +15,9 @@ const CourseDetail = (props) => {
     const [date, setDate] = useState("0000-00-00T00:00:00");
     const [isLoading, setLoading] = useState(true);
     const [ratingList, setRatingList] = useState([]);
+    const [typeVideo, setTypeVideo] = useState(1); // 1:storage, 2:youtube
 
     const courseId = props.route.params.id;
-
 
     const [token, setToken] = useState("");
     const [userId, setUserId] = useState("");
@@ -60,6 +60,7 @@ const CourseDetail = (props) => {
                     setAvatar(res.payload.instructor.avatar);
                     setDate(res.payload.createdAt);
                     setRatingList(res.payload.ratings.ratingList.slice(0, 10));
+                    setTypeVideo(res.payload.typeUploadVideoLesson);
                 } else {
                     setDataSectionAndLesson([]);
                     setInfor([]);
@@ -73,7 +74,7 @@ const CourseDetail = (props) => {
 
     const renderCourseDetailItem = (items) => {
         return (
-            items.map((item, index) => <CourseDetailItem navigation={props.navigation} item={item} index={index} />)
+            items.map((item, index) => <CourseDetailItem navigation={props.navigation} item={item} index={index} type={typeVideo} />)
         )
     }
 
@@ -111,7 +112,7 @@ const CourseDetail = (props) => {
                 <Text style={styles.textSignIn}>Take a learning check</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button}
-                onPress={() => console.log(dataSectionAndLesson)}
+                onPress={() => alert(infor.typeUploadVideoLesson)}
             >
                 <Text style={styles.textSignIn}>View related paths & courses</Text>
             </TouchableOpacity>

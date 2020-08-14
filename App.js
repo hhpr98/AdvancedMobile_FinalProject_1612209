@@ -22,7 +22,7 @@ import SplashScreen from "./src/components/RelativeComponent/Splash/splash";
 import ScreenKey from "./src/libs/ScreenKey";
 import { themes } from "./src/libs/themes";
 import { DataProvider } from "./src/Provider/DataProvider";
-import PlayingVideo from "./src/components/RelativeComponent/PlayingVideo/playing-lesson";
+import { PlayingVideoYoutube, PlayingVideoGoogleStorage } from "./src/components/RelativeComponent/PlayingVideo/playing-lesson";
 
 const MainStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -54,7 +54,8 @@ export default function App(props) {
             >
                 <HomeStack.Screen name="Home" component={Home} />
                 <HomeStack.Screen name="CourseDetail" component={CourseDetail} options={{ headerShown: false, }} />
-                <HomeStack.Screen name="PlayingVideo" component={PlayingVideo} options={{ headerShown: false, }} />
+                <HomeStack.Screen name="PlayingVideoYoutube" component={PlayingVideoYoutube} options={{ headerShown: false, }} />
+                <HomeStack.Screen name="PlayingVideoGoogleStorage" component={PlayingVideoGoogleStorage} options={{ headerShown: false, }} />
             </HomeStack.Navigator>
         )
     }

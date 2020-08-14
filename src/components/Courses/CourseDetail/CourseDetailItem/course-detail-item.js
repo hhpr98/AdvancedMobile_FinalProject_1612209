@@ -18,9 +18,16 @@ const CourseDetailItem = (props) => {
             //console.log(item)
             <TouchableOpacity
                 style={{ flexDirection: 'row', justifyContent: 'space-between', margin: 10 }}
-                onPress={() =>
+                onPress={() => {
+
                     //alert("URL: " + item.videoUrl)
-                    props.navigation.navigate("PlayingVideo", { courseId: item.courseId, lessonId: item.id })
+                    //alert("Type:" + props.type)
+                    //props.navigation.navigate("PlayingVideo", { courseId: item.courseId, lessonId: item.id })
+                    if (props.type === 1)
+                        props.navigation.navigate("PlayingVideoGoogleStorage", { courseId: item.courseId, lessonId: item.id })
+                    else
+                        props.navigation.navigate("PlayingVideoYoutube", { courseId: item.courseId, lessonId: item.id })
+                }
                 }
             >
                 <Text style={{ color: 'white', textAlignVertical: "center" }}>{'\u2B24'} </Text>

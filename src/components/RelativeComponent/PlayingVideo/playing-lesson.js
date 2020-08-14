@@ -4,10 +4,10 @@ import storage from "../../../Storage/storage";
 import { getLessonDetail, getLessonVideo } from "./action";
 // import Video from 'react-native-video';
 import YoutubePlayer from "react-native-youtube-iframe";
-import WebView from "react-native-webview";
+// import WebView from "react-native-webview";
 import { Video } from 'expo-av';
 
-export default PlayingVideo = (props) => {
+export const PlayingVideoYoutube = (props) => {
 
     const courseId = props.route.params.courseId;
     const lessonId = props.route.params.lessonId;
@@ -18,11 +18,9 @@ export default PlayingVideo = (props) => {
     const [lessonVideo, setLessonVideo] = useState([]);
     const [videoUrl, setVideoUrl] = useState("");
     const [idYoutube, setIdYoutube] = useState("");
-    const [type, setType] = useState(0); // 0: storage, 1:youtube
     const playerRef = useRef(null);
 
     useEffect(() => {
-        console.log(lessonVideo.videoUrl)
         storage
             .load({ key: "jwt" })
             .then(ret => {
@@ -46,15 +44,83 @@ export default PlayingVideo = (props) => {
             .then(res => {
                 setLessonVideo(res.payload);
                 setVideoUrl(res.payload.videoUrl);
-                const emble = res.payload.videoUrl;
-                if (emble.includes("youtube")) {
-                    setType(1);
-                    var n = emble.lastIndexOf("embed/");
-                    const sub = emble.substring(n + 6, emble.end);
-                    setIdYoutube(sub);
-                } else setType(0);
+                const emble = res.payload.videoUrl; // emble.includes("youtube"
+                var idx = emble.lastIndexOf("embed/");
+                const sub = emble.substring(idx + 6, emble.end);
+                setIdYoutube(sub);
             })
+            .catch(err => console.log("GET LESSON VIDEO API ERR", err))
+            .finally(() => {
+                setLoading(false)
+            })
+    }
+
+    return (
+        <View style={styles.home}>
+            {loading && <ActivityIndicator size="large" color="blue" />}
+            <Text style={styles.text}>{lessonDetail.name}</Text>
+            {
+                loading ? <></> : (
+                    <YoutubePlayer
+                        ref={playerRef}
+                        height={300}
+                        width={400}
+                        videoId={idYoutube}
+                        play={false}
+                        onChangeState={event => console.log(event)}
+                        onReady={() => console.log("ready")}
+                        onError={e => console.log(e)}
+                        onPlaybackQualityChange={q => console.log(q)}
+                        volume={50}
+                        playbackRate={1}
+                        initialPlayerParams={{
+                            cc_lang_pref: "us",
+                            showClosedCaptions: true
+                        }}
+                    />
+                )
+            }
+        </View>
+    )
+}
+
+export const PlayingVideoGoogleStorage = (props) => {
+
+    const courseId = props.route.params.courseId;
+    const lessonId = props.route.params.lessonId;
+
+    const [token, setToken] = useState("");
+    const [loading, setLoading] = useState(true);
+    const [lessonDetail, setLessonDetail] = useState([]);
+    const [lessonVideo, setLessonVideo] = useState([]);
+    const [videoUrl, setVideoUrl] = useState("");
+
+    useEffect(() => {
+        storage
+            .load({ key: "jwt" })
+            .then(ret => {
+                setToken(ret.token);
+                const tk = ret.token;
+                LoadData(tk);
+            })
+            .catch(err => console.log(err.name))
+            .finally()
+    }, []);
+
+    const LoadData = (tk) => {
+        setLoading(true);
+        getLessonDetail(tk, courseId, lessonId)
+            .then(res => res.json())
+            .then(res => setLessonDetail(res.payload))
             .catch(err => console.log("GET LESSON DETAIL API ERR", err))
+            .finally()
+        getLessonVideo(tk, courseId, lessonId)
+            .then(res => res.json())
+            .then(res => {
+                setLessonVideo(res.payload);
+                setVideoUrl(res.payload.videoUrl);
+            })
+            .catch(err => console.log("GET LESSON VIDEO API ERR", err))
             .finally(() => {
                 setLoading(false)
             })
@@ -66,8 +132,8 @@ export default PlayingVideo = (props) => {
             {loading && <ActivityIndicator size="large" color="blue" />}
             <Text style={styles.text}>{lessonDetail.name}</Text>
             {
-                type === 0 ?
-                    (<Video
+                loading ? <></> : (
+                    <Video
                         source={{ uri: videoUrl }}
                         rate={1.0}
                         volume={50}
@@ -76,24 +142,8 @@ export default PlayingVideo = (props) => {
                         useNativeControls
                         isLooping
                         style={{ width: "100%", height: "50%", backgroundColor: "lightgray" }}
-                    />) : (
-                        <YoutubePlayer
-                            ref={playerRef}
-                            height={300}
-                            width={400}
-                            videoId={idYoutube}
-                            play={false}
-                            onChangeState={event => console.log(event)}
-                            onReady={() => console.log("ready")}
-                            onError={e => console.log(e)}
-                            onPlaybackQualityChange={q => console.log(q)}
-                            volume={50}
-                            playbackRate={1}
-                            initialPlayerParams={{
-                                cc_lang_pref: "us",
-                                showClosedCaptions: true
-                            }}
-                        />)
+                    />
+                )
             }
         </View>
     )
@@ -121,24 +171,3 @@ const styles = StyleSheet.create({
     },
 });
 
-/* // Youtube player only play youtube and need webview
-
-        <YoutubePlayer
-            ref={playerRef}
-            height={300}
-            width={400}
-            videoId={"7beJYPZefyE"}
-            play={playing}
-            onChangeState={event => console.log(event)}
-            onReady={() => console.log("ready")}
-            onError={e => console.log(e)}
-            onPlaybackQualityChange={q => console.log(q)}
-            volume={50}
-            playbackRate={1}
-            initialPlayerParams={{
-                cc_lang_pref: "us",
-                showClosedCaptions: true
-            }}
-        />
-
-*/
