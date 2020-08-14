@@ -66,7 +66,7 @@ export const PlayingVideoYoutube = (props) => {
                         height={300}
                         width={400}
                         videoId={idYoutube}
-                        play={false}
+                        play={true}
                         onChangeState={event => console.log(event)}
                         onReady={() => console.log("ready")}
                         onError={e => console.log(e)}
@@ -138,7 +138,7 @@ export const PlayingVideoGoogleStorage = (props) => {
                         rate={1.0}
                         volume={50}
                         resizeMode="cover"
-                        shouldPlay={false}
+                        shouldPlay={true}
                         useNativeControls
                         isLooping
                         style={{ width: "100%", height: "50%", backgroundColor: "lightgray" }}
