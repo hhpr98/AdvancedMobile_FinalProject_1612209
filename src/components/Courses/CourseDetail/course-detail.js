@@ -16,6 +16,7 @@ const CourseDetail = (props) => {
 
     const courseId = props.route.params.id;
 
+
     const [token, setToken] = useState("");
     const [userId, setUserId] = useState("");
 
@@ -99,7 +100,15 @@ const CourseDetail = (props) => {
             <Text style={styles.textClone}>DESCRIPTION</Text>
             <Text style={styles.textContent}>{infor.description}</Text>
             <Text style={styles.textClone}>CONTENT</Text>
-            <View>{renderCourseDetailItem(dataSectionAndLesson)}</View>
+            {
+                isCheck ? (
+                    <View>{renderCourseDetailItem(dataSectionAndLesson)}</View>
+                ) : (
+                        <View>
+                            <Text style={{ ...styles.textContent, color: "red" }}>You hasn't join/buy this course!</Text>
+                        </View>
+                    )
+            }
 
         </ScrollView>
     );
