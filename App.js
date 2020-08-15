@@ -55,7 +55,7 @@ export default function App(props) {
                 <HomeStack.Screen name="Home" component={Home}
                     options={({ navigation }) => ({
                         headerRight: () => (
-                            <ImageBackground source={{ uri: "https://icons.iconarchive.com/icons/dtafalonso/android-lollipop/512/Downloads-icon.png" }} style={{ width: 80, height: 30, resizeMode: "stretch"}}>
+                            <ImageBackground source={{ uri: "https://icons.iconarchive.com/icons/dtafalonso/android-lollipop/512/Downloads-icon.png" }} style={{ width: 80, height: 30, resizeMode: "stretch" }}>
                                 <TouchableOpacity onPress={() => navigation.navigate("Download")}>
                                     <Text style={{ color: "white" }}></Text>
                                 </TouchableOpacity>
@@ -125,6 +125,10 @@ export default function App(props) {
                 initialRouteName="Search"
             >
                 <SearchStack.Screen name="Search" component={Search} />
+                <SearchStack.Screen name="CourseDetail" component={CourseDetail} options={{ headerShown: false, }} />
+                <SearchStack.Screen name="PlayingVideoYoutube" component={PlayingVideoYoutube} options={{ headerShown: false, }} />
+                <SearchStack.Screen name="PlayingVideoGoogleStorage" component={PlayingVideoGoogleStorage} options={{ headerShown: false, }} />
+
             </SearchStack.Navigator>
         )
     }

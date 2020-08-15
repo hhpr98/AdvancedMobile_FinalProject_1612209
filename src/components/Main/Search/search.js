@@ -71,7 +71,7 @@ const Search = (props) => {
                                 {type === 0 ?
                                     <>
                                         <Text>Loại 0</Text>
-                                        <SearchCourse />
+                                        <SearchCourse navigation={props.navigation} courseSearchData={courseData} />
                                     </> : <></>}
                                 {type === 1 ?
                                     <>
