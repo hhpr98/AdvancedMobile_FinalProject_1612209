@@ -7,6 +7,7 @@ import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'reac
 import storage from "../../../Storage/storage";
 import { searchWithKeyword } from "./action";
 import SearchCourse from "./SearchCourse/search-course";
+import SearchAuthor from "./SearchAuthor/search-author";
 
 const Search = (props) => {
     const [text, setText] = useState("");
@@ -70,16 +71,18 @@ const Search = (props) => {
                             <ScrollView>
                                 {type === 0 ?
                                     <>
-                                        <Text>Loại 0</Text>
                                         <SearchCourse navigation={props.navigation} courseSearchData={courseData} />
+                                        <View style={{ marginTop: 20, }}></View>
+                                        <SearchAuthor courseSearchAuthor={instructorData} />
+
                                     </> : <></>}
                                 {type === 1 ?
                                     <>
-                                        <Text>Loại 1</Text>
+                                        <SearchCourse navigation={props.navigation} courseSearchData={courseData} />
                                     </> : <></>}
                                 {type === 2 ?
                                     <>
-                                        <Text>Loại 2</Text>
+                                        <SearchAuthor courseSearchAuthor={instructorData} />
                                     </> : <></>}
                             </ScrollView>
                         </View>

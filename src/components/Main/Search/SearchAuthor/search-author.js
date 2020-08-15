@@ -1,26 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { ThemeContext } from "../../../../../App";
-import SearchCourseItem from "../SearchCourse/search-course-item";
+import SearchAuthorItem from "../SearchAuthor/search-author-item";
 
-const SearchCourse = (props) => {
+const SearchAuthor = (props) => {
 
-    const data = props.courseSearchData.data;
-    const totalInPage = props.courseSearchData.totalInPage;
-    const total = props.courseSearchData.total;
+    const data = props.courseSearchAuthor.data;
+    const totalInPage = props.courseSearchAuthor.totalInPage;
+    const total = props.courseSearchAuthor.total;
 
-    const size = props.courseSearchData.length === 0 ? 0 : data.length;
+    const size = props.courseSearchAuthor.length === 0 ? 0 : data.length;
     // giải thích cái size cho chính mình sau này :v
     // lúc chưa load đc, thì props.courseSearchData.length = 0 (tức chưa có dòng nào tên là data (props.courseSearchData.data)
     // nên lấy size của nó báo lỗi đỏ
 
-    const renderCourse = () => {
+    const renderAuthor = () => {
         return data.map(item =>
-            <TouchableOpacity
-                onPress={() => props.navigation.navigate('CourseDetail', { id: item.id })}
-            >
-                <SearchCourseItem navigation={props.navigation} item={item} />
-            </TouchableOpacity>
+            <View>
+                <SearchAuthorItem item={item} />
+            </View>
         );
     }
 
@@ -31,7 +29,7 @@ const SearchCourse = (props) => {
                     return (
                         <View style={{ ...styles.home, backgroundColor: theme.background }}>
                             <View style={{ width: 400, height: 50, marginLeft: 10, borderBottomColor: "#3399FF", borderBottomWidth: 2, }}>
-                                <Text style={{ color: "white", width: 100, height: 30, margin: 10, fontWeight: "bold", backgroundColor: "#3399FF", fontSize: 17, textAlign: "center" }}>Course</Text>
+                                <Text style={{ color: "white", width: 100, height: 30, margin: 10, fontWeight: "bold", backgroundColor: "#3399FF", fontSize: 17, textAlign: "center" }}>Author</Text>
                             </View>
                             {
                                 size === 0 ?
@@ -41,7 +39,7 @@ const SearchCourse = (props) => {
 
                                     </> :
                                     <>
-                                        {renderCourse()}
+                                        {renderAuthor()}
                                     </>
                             }
                         </View>
@@ -60,4 +58,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default SearchCourse;
+export default SearchAuthor;
