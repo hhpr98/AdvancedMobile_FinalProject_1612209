@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { StyleSheet, View, Text, Image, ScrollView, ActivityIndicator, ImageBackground } from 'react-native';
 import { ThemeContext } from "../../../App";
 import storage from "../../Storage/storage";
-import { ScrollView } from 'react-native-gesture-handler';
+import { getInformation, updateInformation } from "./action";
 
 const Profile = () => {
 
+    const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState("");
     const [avatar, setAvatar] = useState("https://cdn.iconscout.com/icon/free/png-256/github-153-675523.png");
     const [name, setName] = useState("");
@@ -18,14 +19,30 @@ const Profile = () => {
             .load({ key: "jwt" })
             .then(ret => {
                 setEmail(ret.userInfo.email);
-                setAvatar(ret.userInfo.avatar);
-                setName(ret.userInfo.name);
-                setPhone(ret.userInfo.phone);
-                setPoint(ret.userInfo.point);
                 setToken(ret.token);
+                const tk = ret.token;
+                LoadData(tk);
+
             })
             .catch(err => console.log(err.name))
     }, [])
+
+    const LoadData = (tk) => {
+        setLoading(true);
+        getInformation(tk)
+            .then(res => res.json())
+            .then(res => {
+                if (res.message === "OK") {
+
+                    setAvatar(res.payload.avatar);
+                    setName(res.payload.name);
+                    setPhone(res.payload.phone);
+                    setPoint(res.payload.point);
+                }
+            })
+            .catch(err => console.log("GET INFORMATION ERR", err))
+            .finally(() => setLoading(false))
+    }
 
     return (
         <ThemeContext.Consumer>
@@ -33,11 +50,12 @@ const Profile = () => {
                 ({ theme }) => {
                     return (
                         <ScrollView style={{ ...styles.home, backgroundColor: theme.background }}>
+                            {loading && <ActivityIndicator size="large" color="blue" />}
                             <View style={styles.head}>
                                 <Image source={{ uri: avatar }} style={{ ...styles.image, backgroundColor: theme.foreground }} />
                                 <Text style={{ ...styles.textHead, color: theme.foreground }}>{name}</Text>
                             </View>
-                            <Text style={{ ...styles.text1, color: theme.foreground }}>Basic information</Text>
+                            <Text style={{ ...styles.text1, color: "red", marginTop: 50, }}>BASIC INFORMATION</Text>
                             <Text style={{ ...styles.text2, color: theme.foreground }}>EMAIL</Text>
                             <Text style={{ ...styles.text3, color: theme.foreground }}>{email}</Text>
                             <Text style={{ ...styles.text2, color: theme.foreground }}>PHONE NUMBER</Text>

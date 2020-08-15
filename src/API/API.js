@@ -8,6 +8,10 @@ const API = {
   SEND_ACTIVE_EMAIL: `${URL}/user/send-active-email`,
 
   // user
+  // get thông tin cá nhân
+  GET_INFORMATION: `${URL}/user/me`,
+  // cập nhật thông tin cá nhân
+  UPDATE_INFORMATION: `${URL}/user/update-profile`,
 
   // infor
   // infor_page
