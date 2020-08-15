@@ -17,7 +17,7 @@ const Path = (props) => {
             .then(res => res.message === "OK" ? setDataCategory(res.payload) : setDataCategory([]))
             .catch(err => console.log("GET ALL CATEGORY ERR:", err))
             .finally(() => setLoading(false))
-    });
+    }, []);
 
     const getPathItem = (paths) => {
         return paths.map(item =>
