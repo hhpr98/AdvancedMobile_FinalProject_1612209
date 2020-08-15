@@ -17,7 +17,7 @@ const SearchAuthorItem = (props) => {
                                 source={{ uri: item.avatar }}
                                 style={styles.image}
                             />
-                            <View style={{ margin: 5, marginRight: 30, }}>
+                            <View style={{ margin: 5, marginLeft: 30, }}>
                                 <Text style={{ ...styles.text1, color: theme.foreground }}>{item.name}</Text>
                                 <Text style={{ ...styles.text2, color: theme.foreground }} > {item.numcourses} courses</Text>
                             </View>
@@ -35,13 +35,16 @@ const styles = StyleSheet.create({
         //backgroundColor: 'black',
         flexDirection: 'row',
         marginTop: 20,
+        marginLeft: 50,
+        justifyContent: "flex-start",
         //borderBottomColor: 'white',
         borderBottomWidth: 1,
     },
     image: {
-        width: 150,
-        height: 100,
+        width: 80,
+        height: 80,
         marginBottom: 10,
+        borderRadius: 50,
     },
     text1: {
         //color: 'white',
@@ -51,12 +54,6 @@ const styles = StyleSheet.create({
     text2: {
         //color: 'white',
         fontSize: 14,
-    },
-    textButton: {
-        margin: 20,
-        color: '#3399FF',
-        fontWeight: 'bold',
-        fontSize: 17,
     },
 });
 
