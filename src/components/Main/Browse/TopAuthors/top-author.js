@@ -1,9 +1,22 @@
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
 import { ThemeContext } from "../../../../../App";
-import { DataContext } from "../../../../Provider/DataProvider";
+// import { DataContext } from "../../../../Provider/DataProvider";
+import { getAllInstructor } from "../action";
 
 const TopAuthor = () => {
+
+    const [loading, setLoading] = useState(true);
+    const [dataAuthor, setDataAuthor] = useState([]);
+
+    useEffect(() => {
+        setLoading(true);
+        getAllInstructor()
+            .then(res => res.json())
+            .then(res => res.message === "OK" ? setDataAuthor(res.payload) : setDataAuthor([]))
+            .catch(err => console.log("GET AUTHOR ERR:", err))
+            .finally(() => setLoading(false))
+    }, []);
 
     const getAuthorList = (authors) => {
         return (
@@ -12,8 +25,8 @@ const TopAuthor = () => {
                     ({ theme }) => {
                         return authors.map(item =>
                             <TouchableOpacity onPress={() => alert(item)}>
-                                <Image style={{ ...styles.image, backgroundColor: theme.foreground }} source={require('../../../../../assets/ic_people_author.png')} />
-                                <Text style={{ ...styles.textAuthor, color: theme.foreground }}>{item}</Text>
+                                <Image style={{ ...styles.image, backgroundColor: theme.foreground }} source={{ uri: item["user.avatar"] }} />
+                                <Text style={{ ...styles.textAuthor, color: theme.foreground }}>{item["user.name"]}</Text>
                             </TouchableOpacity>
                         )
                     }
@@ -27,23 +40,16 @@ const TopAuthor = () => {
             {
                 ({ theme }) => {
                     return (
-                        <DataContext.Consumer>
-                            {
-                                ({ data }) => {
-                                    return (
-                                        <View>
-                                            <View style={styles.view}>
-                                                <Text style={{ ...styles.textTitle, color: theme.foreground }}>TopAuthor</Text>
-                                                <ScrollView horizontal={true}>
-                                                    {getAuthorList(data.topauthors)}
-                                                </ScrollView>
-                                            </View>
-                                        </View>
-                                    );
-                                }
-                            }
-                        </DataContext.Consumer>
-                    )
+                        <View>
+                            <View style={styles.view}>
+                                <Text style={{ ...styles.textTitle, color: theme.foreground }}>Top Author</Text>
+                                <ScrollView horizontal={true}>
+                                    {loading && <ActivityIndicator size="large" color="blue" />}
+                                    {getAuthorList(dataAuthor)}
+                                </ScrollView>
+                            </View>
+                        </View>
+                    );
                 }
             }
         </ThemeContext.Consumer>

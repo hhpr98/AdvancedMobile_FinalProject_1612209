@@ -10,6 +10,7 @@ const API = {
   // user
 
   // infor
+  // infor_page
   GET_INTRO_PAGE: `${URL}/user/intro-page`,
 
   // course
@@ -38,7 +39,12 @@ const API = {
 
   // payment
   // đăng kí khóa học
-  GET_FREE_COURSE: `${URL}/payment/get-free-courses`
+  GET_FREE_COURSE: `${URL}/payment/get-free-courses`,
+
+  // instructor
+  // lấy thông tin toàn bộ giảng viên
+  GET_ALL_INSTRUCTOR: `${URL}/instructor`,
+
 
 };
 
