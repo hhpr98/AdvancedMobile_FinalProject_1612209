@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "AdvancedMobile_FinalProject_1612209",
+    "name": "App Learning",
     "slug": "AdvancedMobile_FinalProject_1612209",
     "platforms": [
       "ios",
       "android",
       "web"
     ],
-    "version": "1.0.0",
+    "version": "0.1.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/ic_app.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",

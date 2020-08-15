@@ -53,7 +53,9 @@ const API = {
   // lấy tất cả category
   GET_ALL_CATEGORY: `${URL}/category/all`,
 
-
+  // search
+  // search với từ khóa nhất định
+  SEARCH_V2: `${URL}/course/searchV2`,
 };
 
 export default API;
