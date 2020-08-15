@@ -28,7 +28,10 @@ const Favorite = (props) => {
         setLoading(true);
         getMyFavoriteCourse(tk)
             .then(res => res.json())
-            .then(res => setAData(res.payload))
+            .then(res => {
+                console.log(res);
+                res.message === "OK" ? setAData(res.payload) : setAData([]);
+            })
             .catch(err => console.log("get My favorite course err:", err))
             .finally(() => {
                 setLoading(false);
@@ -46,7 +49,15 @@ const Favorite = (props) => {
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
-        LoadData(token);
+        storage
+            .load({ key: "jwt" })
+            .then(ret => {
+                setToken(ret.token);
+                const tk = ret.token;
+                LoadData(tk);
+            })
+            .catch(err => console.log(err.name))
+            .finally()
         wait(2000).then(() => setRefreshing(false));
     }, []);
 
