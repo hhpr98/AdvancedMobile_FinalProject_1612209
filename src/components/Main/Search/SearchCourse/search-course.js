@@ -10,6 +10,9 @@ const SearchCourse = (props) => {
     const total = props.courseSearchData.total;
 
     const size = props.courseSearchData.length === 0 ? 0 : data.length;
+    // giải thích cái size cho chính mình sau này :v
+    // lúc chưa load đc, thì props.courseSearchData.length = 0 (tức chưa có dòng nào tên là data (props.courseSearchData.data)
+    // nên lấy size của nó báo lỗi đỏ
 
     const renderCourse = () => {
         return data.map(item =>
@@ -27,7 +30,9 @@ const SearchCourse = (props) => {
                 ({ theme }) => {
                     return (
                         <View style={{ ...styles.home, backgroundColor: theme.background }}>
-                            <Text style={{ color: theme.foreground, width: 150, margin: 30, fontWeight: "bold" }}>Course</Text>
+                            <View style={{ width: 400, height: 50, marginLeft: 10, borderBottomColor: "#3399FF", borderBottomWidth: 2, }}>
+                                <Text style={{ color: "white", width: 85, height: 30, margin: 10, fontWeight: "bold", backgroundColor: "#3399FF", fontSize: 17 }}>Course</Text>
+                            </View>
                             {
                                 size === 0 ?
                                     <>
