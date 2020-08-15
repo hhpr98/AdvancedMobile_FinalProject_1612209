@@ -59,7 +59,7 @@ const CourseDetail = (props) => {
             })
         getLikeCourseStatus(tk, courseId)
             .then(res => res.json())
-            .then(res => res.message === "OK" ? setLikeStatus(res.likeStatus) : setLikeStatus(true))
+            .then(res => { if (res.message === "OK") setLikeStatus(res.likeStatus) })
             .catch(err => console.log("get Like status err:", err))
         getCourseWithLessonUserId(tk, courseId, usid)
             .then(res => res.json())

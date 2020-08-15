@@ -63,7 +63,7 @@ export const userLikeCourse = (token, courseId) => {
 
 export const getLikeCourseStatus = (token, courseId) => {
     return fetch(`${API.GET_LIKE_STATUS}/${courseId}`, {
-        method: "POST",
+        method: "GET",
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
