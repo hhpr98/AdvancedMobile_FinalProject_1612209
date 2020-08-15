@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, Image, ScrollView, ActivityIndicator, ImageBackground } from 'react-native';
+import { StyleSheet, View, Text, Image, ScrollView, ActivityIndicator, ImageBackground, TextInput } from 'react-native';
 import { ThemeContext } from "../../../App";
 import storage from "../../Storage/storage";
 import { getInformation, updateInformation } from "./action";
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Profile = () => {
 
     const [loading, setLoading] = useState(false);
+    const [isUpdate, setIsUpdate] = useState(false);
     const [email, setEmail] = useState("");
     const [avatar, setAvatar] = useState("https://cdn.iconscout.com/icon/free/png-256/github-153-675523.png");
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("NaN");
     const [point, setPoint] = useState(0);
     const [token, setToken] = useState("");
+
+    const [txtName, setTxtName] = useState("");
+    const [txtAvatar, setTxtAvatar] = useState("");
+    const [txtPhone, setTxtPhone] = useState("");
 
     useEffect(() => {
         storage
@@ -62,6 +68,68 @@ const Profile = () => {
                             <Text style={{ ...styles.text3, color: theme.foreground }}>{phone}</Text>
                             <Text style={{ ...styles.text2, color: theme.foreground }}>POINTS</Text>
                             <Text style={{ ...styles.text3, color: theme.foreground }}>{point}</Text>
+
+                            <ImageBackground source={require("../../../assets/ic_profile_down.png")} style={{ width: 50, height: 50, alignSelf: "center" }}>
+                                <TouchableOpacity
+                                    style={{ width: 50, height: 50 }}
+                                    onPress={() => setIsUpdate(!isUpdate)}
+                                >
+                                </TouchableOpacity>
+                            </ImageBackground>
+
+                            {
+                                isUpdate ?
+                                    <>
+                                        <Text style={{ ...styles.text1, color: "red", marginTop: 50, }}>UPDATE INFORMATION</Text>
+                                        <View style={{ ...styles.viewInsert2, backgroundColor: theme.background }} />
+                                        <View style={{ backgroundColor: theme.background, borderRadius: theme.boderRadiusLogin }}>
+                                            <Text style={styles.text}>Full name</Text>
+                                            <TextInput
+                                                style={{ ...styles.input, color: theme.foreground }}
+                                                onChangeText={user => setTxtName(user)}
+                                            />
+                                        </View>
+                                        <View style={{ backgroundColor: theme.background, borderRadius: theme.boderRadiusLogin }}>
+                                            <Text style={styles.text}>URL avatar</Text>
+                                            <TextInput
+                                                style={{ ...styles.input, color: theme.foreground }}
+                                                onChangeText={user => setTxtAvatar(user)}
+                                            />
+                                        </View>
+                                        <View style={{ backgroundColor: theme.background, borderRadius: theme.boderRadiusLogin }}>
+                                            <Text style={styles.text}>Phonenumber</Text>
+                                            <TextInput
+                                                style={{ ...styles.input, color: theme.foreground }}
+                                                onChangeText={user => setTxtPhone(user)}
+                                            />
+                                        </View>
+                                        <View style={{ ...styles.viewInsert2, backgroundColor: theme.background }} />
+                                        <ImageBackground source={require("../../../assets/ic_profile_update.png")} style={{ width: 50, height: 50, alignSelf: "center" }}>
+                                            <TouchableOpacity
+                                                style={{ width: 50, height: 50 }}
+                                                onPress={() => {
+                                                    updateInformation(token, txtName, txtAvatar, txtPhone)
+                                                        .then(res => res.json())
+                                                        .then(res => {
+                                                            if (res.message === "OK") {
+                                                                alert("Cập nhật thành công!")
+                                                                setIsUpdate(!isUpdate)
+                                                                LoadData(token);
+                                                            }
+                                                            else {
+                                                                alert(res.message);
+                                                            }
+                                                        })
+
+                                                }
+                                                }>
+                                            </TouchableOpacity>
+                                        </ImageBackground>
+                                        <View style={{ ...styles.viewInsert2, backgroundColor: theme.background }} />
+                                    </> :
+                                    <>
+                                    </>
+                            }
                         </ScrollView>
                     );
                 }
@@ -118,6 +186,24 @@ const styles = StyleSheet.create({
     },
 
     // copy style from login screen
+    viewInsert2: {
+        //backgroundColor: 'black',
+        height: 50,
+    },
+    text: {
+        color: '#3399FF',
+        marginLeft: 50,
+    },
+    input: {
+        height: 30,
+        margin: 10,
+        //color: 'white',
+        borderBottomColor: '#3399FF',
+        borderBottomWidth: 2,
+        fontSize: 21,
+        width: 300,
+        alignSelf: "center"
+    },
 
 });
 
