@@ -45,6 +45,10 @@ const API = {
   // lấy thông tin toàn bộ giảng viên
   GET_ALL_INSTRUCTOR: `${URL}/instructor`,
 
+  // category
+  // lấy tất cả category
+  GET_ALL_CATEGORY: `${URL}/category/all`,
+
 
 };
 

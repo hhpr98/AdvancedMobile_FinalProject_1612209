@@ -24,10 +24,10 @@ const TopAuthor = () => {
                 {
                     ({ theme }) => {
                         return authors.map(item =>
-                            <TouchableOpacity onPress={() => alert(item)}>
+                            <View>
                                 <Image style={{ ...styles.image, backgroundColor: theme.foreground }} source={{ uri: item["user.avatar"] }} />
                                 <Text style={{ ...styles.textAuthor, color: theme.foreground }}>{item["user.name"]}</Text>
-                            </TouchableOpacity>
+                            </View>
                         )
                     }
                 }
