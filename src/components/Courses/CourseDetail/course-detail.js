@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useReducer, useContext } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, ActivityIndicator, TextInput, ImageBackground, Share } from 'react-native';
 import CourseDetailItem from "./CourseDetailItem/course-detail-item";
-import { checkOwnerCourse, getCourseWithLesson, getCourseWithLessonUserId, getFreeCourse, userLikeCourse } from "../action";
+import { checkOwnerCourse, getCourseWithLesson, getCourseWithLessonUserId, getFreeCourse, userLikeCourse, getLikeCourseStatus } from "../action";
 import storage from "../../../Storage/storage";
 import StarRating from 'react-native-star-rating';
 
@@ -16,6 +16,7 @@ const CourseDetail = (props) => {
     const [isLoading, setLoading] = useState(true);
     const [ratingList, setRatingList] = useState([]);
     const [typeVideo, setTypeVideo] = useState(1); // 1:storage, 2:youtube
+    const [likeStatus, setLikeStatus] = useState(false);
 
     const courseId = props.route.params.id;
 
@@ -50,6 +51,10 @@ const CourseDetail = (props) => {
             .catch(err => console.log(console.log("CHECK OWN COURSE ERR: ", err)))
             .finally(() => {
             })
+        getLikeCourseStatus(tk, courseId)
+            .then(res => res.json())
+            .then(res => res.message === "OK" ? setLikeStatus(res.likeStatus) : setLikeStatus(true))
+            .catch(err => console.log("get Like status err:", err))
         getCourseWithLessonUserId(tk, courseId, usid)
             .then(res => res.json())
             .then(res => {
@@ -116,10 +121,12 @@ const CourseDetail = (props) => {
         userLikeCourse(token, courseId)
             .then(res => res.json())
             .then((res) => {
-                if (res.likeStatus === true)
-                    alert("Like this course!");
+                if (res.likeStatus === true) 
+                    //alert("Like this course!");
+                    setLikeStatus(true);
                 else
-                    alert("Unlike this course!");
+                    //alert("Unlike this course!");
+                    setLikeStatus(false);
             })
             .finally()
     }
@@ -140,9 +147,16 @@ const CourseDetail = (props) => {
             <Text style={styles.textContent}>{infor.subtitle}</Text>
 
             <View style={{ flexDirection: "row", justifyContent: "space-around", marginTop: 20, }}>
-                <ImageBackground source={require("../../../../assets/ic_detail_like.png")} style={{ width: 50, height: 50, backgroundColor: "white" }}>
-                    <TouchableOpacity style={{ width: 50, height: 50 }} onPress={() => onLikeCourse()} />
-                </ImageBackground>
+                {
+                    likeStatus ?
+                        <ImageBackground source={require("../../../../assets/ic_detail_like.png")} style={{ width: 50, height: 50, backgroundColor: "white" }}>
+                            <TouchableOpacity style={{ width: 50, height: 50 }} onPress={() => onLikeCourse()} />
+                        </ImageBackground> :
+                        <ImageBackground source={require("../../../../assets/ic_detail_unlike.png")} style={{ width: 50, height: 50, backgroundColor: "white" }}>
+                            <TouchableOpacity style={{ width: 50, height: 50 }} onPress={() => onLikeCourse()} />
+                        </ImageBackground>
+                }
+
                 <ImageBackground source={require("../../../../assets/ic_detail_share.png")} style={{ width: 50, height: 50, backgroundColor: "white" }}>
                     <TouchableOpacity style={{ width: 50, height: 50 }} onPress={() => {
                         const message = "https://itedu.me/course-detail/" + courseId; // lấy url khóa học dạng web

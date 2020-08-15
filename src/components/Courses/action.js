@@ -60,3 +60,14 @@ export const userLikeCourse = (token, courseId) => {
         })
     })
 }
+
+export const getLikeCourseStatus = (token, courseId) => {
+    return fetch(API.GET_LIKE_STATUS, {
+        method: "POST",
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        }
+    })
+}
