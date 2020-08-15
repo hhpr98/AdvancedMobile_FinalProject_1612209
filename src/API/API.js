@@ -36,6 +36,8 @@ const API = {
   USER_LIKE_COURSE: `${URL}/user/like-course`,
   // lấy tình trạng like/unlike khóa học
   GET_LIKE_STATUS: `${URL}/user/get-course-like-status`, // /courseId
+  // Người dùng đánh giá khóa học
+  RATING_AN_COURSE: `${URL}/course/rating-course`,
 
   // lesson
   // thông tin bài học

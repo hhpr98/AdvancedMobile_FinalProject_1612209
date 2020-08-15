@@ -62,12 +62,30 @@ export const userLikeCourse = (token, courseId) => {
 }
 
 export const getLikeCourseStatus = (token, courseId) => {
-    return fetch(API.GET_LIKE_STATUS, {
+    return fetch(`${API.GET_LIKE_STATUS}/${courseId}`, {
         method: "POST",
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`
         }
+    })
+}
+
+export const ratingACourse = (token, courseId, rating, cmt) => {
+    return fetch(API.RATING_AN_COURSE, {
+        method: "POST",
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            courseId: courseId,
+            formalityPoint: rating,
+            contentPoint: rating,
+            presentationPoint: rating,
+            content: cmt
+        })
     })
 }
