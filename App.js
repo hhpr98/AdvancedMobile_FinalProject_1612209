@@ -190,10 +190,10 @@ export default function App(props) {
                     inactiveBackgroundColor: theme.background,
                 }}
             >
+                <Tab.Screen name="Search" component={SearchStackNavigation} option={{ title: "Search" }} />
                 <Tab.Screen name="Home" component={HomeStackNavigation} option={{ title: "Home" }} />
                 <Tab.Screen name="Favorite" component={FavoriteStackNavigation} option={{ title: "Favorite" }} />
                 <Tab.Screen name="Browse" component={BrowseStackNavigation} option={{ title: "Browse" }} />
-                <Tab.Screen name="Search" component={SearchStackNavigation} option={{ title: "Search" }} />
                 <Tab.Screen name="Setting" component={SettingStackNavigation} option={{ title: "Setting" }} />
             </Tab.Navigator>
         )
