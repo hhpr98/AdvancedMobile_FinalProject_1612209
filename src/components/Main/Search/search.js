@@ -1,25 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity, ImageBackground } from 'react-native';
-import CourseLargeItem from "../Favorite/CourseFavorite/course-large-item";
 import { ThemeContext } from "../../../../App";
 // import { DataContext } from "../../../Provider/DataProvider";
 // import SearchBar from "react-native-elements";
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
+import storage from "../../../Storage/storage";
+import { searchWithKeyword } from "./action";
+import SearchCourse from "./SearchCourse/search-course";
 
 const Search = (props) => {
     const [text, setText] = useState("");
     const [type, setType] = useState(0);
-    const [isNoData, setIsNoData] = useState(true);
+    const [token, setToken] = useState("");
+    const [courseData, setCourseData] = useState([]);
+    const [instructorData, setInstructorData] = useState([]);
 
-    const renderListItems = (courses) => {
-        return courses.map(item =>
-            <TouchableOpacity
-            //onPress={()=>props.navigation.navigate('CourseDetail',item)}
-            >
-                <CourseLargeItem item={item} />
-            </TouchableOpacity>
-        );
-    };
+    useEffect(() => {
+        storage
+            .load({ key: "jwt" })
+            .then(ret => setToken(ret.token))
+            .catch(err => console.log(err.name))
+    }, []);
+
+    const onSearchClick = () => {
+        searchWithKeyword(token, text)
+            .then(res => res.json())
+            .then(res => {
+                if (res.message === "OK") {
+                    setCourseData(res.payload.courses);
+                    setInstructorData(res.payload.instructors);
+                }
+            })
+            .catch(err => console.log("SEARCH WITH KEYWORD FAIL:", err))
+    }
 
     return (
         <ThemeContext>
@@ -34,12 +47,12 @@ const Search = (props) => {
                                     placeholder="Search..."
                                 />
                                 <ImageBackground source={require("../../../../assets/ic_search.png")} style={{ width: 50, height: 50, alignSelf: "center" }}>
-                                    <TouchableOpacity style={{ width: 50, height: 50, }} onPress={() => alert("search clicked!")}>
+                                    <TouchableOpacity style={{ width: 50, height: 50, }} onPress={() => onSearchClick()}>
                                     </TouchableOpacity>
                                 </ImageBackground>
                             </View>
                             <RadioForm
-                                style={{ marginTop: 5, justifyContent: "space-around", backgroundColor: "white" }}
+                                style={{ justifyContent: "space-around", backgroundColor: "white" }}
                                 radio_props={[
                                     { label: 'Tất cả', value: 0 },
                                     { label: 'Khóa học', value: 1 },
@@ -55,29 +68,19 @@ const Search = (props) => {
                             >
                             </RadioForm>
                             <ScrollView>
-                                {
-                                    isNoData ?
-                                        <>
-                                            <Text style={{ color: "red" }}>NO DATA</Text>
-                                        </> :
-                                        <>
-                                            {type === 0 ?
-                                                <>
-                                                    <Text>Loại 0</Text>
-                                                </> : <></>}
-                                            {type === 1 ?
-                                                <>
-                                                    <Text>Loại 1</Text>
-                                                </> : <></>}
-                                            {type === 2 ?
-                                                <>
-                                                    <Text>Loại 2</Text>
-                                                </> : <></>}
-                                        </>
-                                }
-
-
-
+                                {type === 0 ?
+                                    <>
+                                        <Text>Loại 0</Text>
+                                        <SearchCourse />
+                                    </> : <></>}
+                                {type === 1 ?
+                                    <>
+                                        <Text>Loại 1</Text>
+                                    </> : <></>}
+                                {type === 2 ?
+                                    <>
+                                        <Text>Loại 2</Text>
+                                    </> : <></>}
                             </ScrollView>
                         </View>
                     );
