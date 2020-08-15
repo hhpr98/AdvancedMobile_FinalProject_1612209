@@ -8,7 +8,7 @@ const PathItem = (props) => {
             <Image source={require('../../../../../../assets/icons8_web.png')} style={styles.image} />
             <View style={{ margin: 5, }}>
                 <Text style={styles.text1}>{props.item.name}</Text>
-                <Text style={styles.text2}>{props.item.number}</Text>
+                <Text style={styles.text2}>Created at: {props.item.createdAt.substring(0, 10)}</Text>
             </View>
         </View>
     );

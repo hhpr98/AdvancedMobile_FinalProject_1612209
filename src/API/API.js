@@ -8,8 +8,13 @@ const API = {
   SEND_ACTIVE_EMAIL: `${URL}/user/send-active-email`,
 
   // user
+  // get thông tin cá nhân
+  GET_INFORMATION: `${URL}/user/me`,
+  // cập nhật thông tin cá nhân
+  UPDATE_INFORMATION: `${URL}/user/update-profile`,
 
   // infor
+  // infor_page
   GET_INTRO_PAGE: `${URL}/user/intro-page`,
 
   // course
@@ -38,7 +43,16 @@ const API = {
 
   // payment
   // đăng kí khóa học
-  GET_FREE_COURSE: `${URL}/payment/get-free-courses`
+  GET_FREE_COURSE: `${URL}/payment/get-free-courses`,
+
+  // instructor
+  // lấy thông tin toàn bộ giảng viên
+  GET_ALL_INSTRUCTOR: `${URL}/instructor`,
+
+  // category
+  // lấy tất cả category
+  GET_ALL_CATEGORY: `${URL}/category/all`,
+
 
 };
 
