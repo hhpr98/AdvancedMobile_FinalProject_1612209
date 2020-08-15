@@ -1,26 +1,50 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, Image } from 'react-native';
 import { ThemeContext } from "../../../App";
+import storage from "../../Storage/storage";
+import { ScrollView } from 'react-native-gesture-handler';
 
 const Profile = () => {
+
+    const [email, setEmail] = useState("");
+    const [avatar, setAvatar] = useState("https://cdn.iconscout.com/icon/free/png-256/github-153-675523.png");
+    const [name, setName] = useState("");
+    const [phone, setPhone] = useState("NaN");
+    const [point, setPoint] = useState(0);
+    const [token, setToken] = useState("");
+
+    useEffect(() => {
+        storage
+            .load({ key: "jwt" })
+            .then(ret => {
+                setEmail(ret.userInfo.email);
+                setAvatar(ret.userInfo.avatar);
+                setName(ret.userInfo.name);
+                setPhone(ret.userInfo.phone);
+                setPoint(ret.userInfo.point);
+                setToken(ret.token);
+            })
+            .catch(err => console.log(err.name))
+    }, [])
+
     return (
         <ThemeContext.Consumer>
             {
                 ({ theme }) => {
                     return (
-                        <View style={{ ...styles.home, backgroundColor: theme.background }}>
+                        <ScrollView style={{ ...styles.home, backgroundColor: theme.background }}>
                             <View style={styles.head}>
-                                <Image source={require('../../../assets/ic_people_author.png')} style={{ ...styles.image, backgroundColor: theme.foreground }} />
-                                <Text style={{ ...styles.textHead, color: theme.foreground }}>Nguyễn Hữu Hòa</Text>
+                                <Image source={{ uri: avatar }} style={{ ...styles.image, backgroundColor: theme.foreground }} />
+                                <Text style={{ ...styles.textHead, color: theme.foreground }}>{name}</Text>
                             </View>
-                            <Text style={{ ...styles.text1, color: theme.foreground }}>Activity insights (last 30 days)</Text>
-                            <Text style={{ ...styles.text2, color: theme.foreground }}>TOTAL ACTIVE DAYS</Text>
-                            <Text style={{ ...styles.text3, color: theme.foreground }}>0</Text>
-                            <Text style={{ ...styles.text2, color: theme.foreground }}>MOST ACTIVE TIME OF DAYS</Text>
-                            <Text style={{ ...styles.text3, color: theme.foreground }}>7:00 AM</Text>
-                            <Text style={{ ...styles.text2, color: theme.foreground }}>MOST VIEWD SUBJECT</Text>
-                            <Text style={{ ...styles.text3, color: theme.foreground }}>N/A</Text>
-                        </View>
+                            <Text style={{ ...styles.text1, color: theme.foreground }}>Basic information</Text>
+                            <Text style={{ ...styles.text2, color: theme.foreground }}>EMAIL</Text>
+                            <Text style={{ ...styles.text3, color: theme.foreground }}>{email}</Text>
+                            <Text style={{ ...styles.text2, color: theme.foreground }}>PHONE NUMBER</Text>
+                            <Text style={{ ...styles.text3, color: theme.foreground }}>{phone}</Text>
+                            <Text style={{ ...styles.text2, color: theme.foreground }}>POINTS</Text>
+                            <Text style={{ ...styles.text3, color: theme.foreground }}>{point}</Text>
+                        </ScrollView>
                     );
                 }
             }
@@ -73,7 +97,10 @@ const styles = StyleSheet.create({
         height: 100,
         borderRadius: 100,
         //backgroundColor: '#333333'
-    }
+    },
+
+    // copy style from login screen
+
 });
 
 export default Profile;

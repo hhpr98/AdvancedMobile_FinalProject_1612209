@@ -4,11 +4,24 @@ import ToggleSwitch from 'toggle-switch-react-native';
 import { ThemeContext } from "../../../../App";
 import RNPickerSelect from 'react-native-picker-select';
 import { themes } from "../../../libs/themes";
+import storage from "../../../Storage/storage";
 
 const Setting = (props) => {
 
     const [wifiStreamToggle, setWifiStreamToggle] = useState(true);
     const [downloadStreamToggle, setDownloadStreamToggle] = useState(true);
+    const [name, setName] = useState("");
+    const [avatar, setAvatar] = useState("");
+
+    useEffect(() => {
+        storage
+            .load({ key: "jwt" })
+            .then(ret => {
+                setName(ret.userInfo.name);
+                setAvatar(ret.userInfo.avatar);
+            })
+            .catch(err => console.log(err.name))
+    }, [])
 
     return (
         <ThemeContext.Consumer>
@@ -18,12 +31,11 @@ const Setting = (props) => {
                         <ScrollView style={{ ...styles.home, backgroundColor: theme.background }}>
                             <TouchableOpacity style={styles.head} onPress={() => props.navigation.navigate('Profile')}>
                                 <Image
-                                    source={require('../../../../assets/ic_people_author.png')}
+                                    source={{ uri: avatar }}
                                     style={{ ...styles.image, backgroundColor: theme.foreground }}
                                 />
-                                <Text style={{ ...styles.textHead, color: theme.foreground }}>Nguyễn Hữu Hòa</Text>
+                                <Text style={{ ...styles.textHead, color: theme.foreground }}>{name}</Text>
                             </TouchableOpacity>
-                            <Text style={{ ...styles.textBig, color: theme.foreground }}>Account</Text>
                             <TouchableOpacity onPress={() => props.navigation.navigate('Subscription')}>
                                 <Text style={{ ...styles.textBig, color: theme.foreground }}>Subcription</Text>
                                 <Text style={{ ...styles.textLittle, color: theme.foreground }}>My youtube channel</Text>
