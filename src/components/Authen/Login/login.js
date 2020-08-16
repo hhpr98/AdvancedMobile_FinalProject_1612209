@@ -86,7 +86,7 @@ const Login = (props) => {
                                 </TouchableOpacity>
                                 <View style={{ ...styles.viewInsert, backgroundColor: theme.background }} />
                                 <TouchableOpacity style={{ ...styles.buttonSSO, backgroundColor: theme.background, borderRadius: theme.boderRadiusLogin }}>
-                                    <Text style={styles.textOrther}>USE SINGLE SIGN-ON (SSO)</Text>
+                                    <Text style={styles.textOrther}>USE GOOGLE SIGN IN (SSO)</Text>
                                 </TouchableOpacity>
                                 <View style={{ ...styles.viewInsert, backgroundColor: theme.background }} />
                                 <TouchableOpacity style={{ ...styles.buttonForgotAndSignUp, backgroundColor: theme.background, borderRadius: theme.boderRadiusLogin }}
