@@ -21,6 +21,10 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "android": {
+      "package": "com.nguyenhuuhoa.applearning",
+      "versionCode": 1
+    },
     "ios": {
       "supportsTablet": true
     }
