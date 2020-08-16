@@ -53,7 +53,7 @@ const Profile = () => {
     return (
         <ThemeContext.Consumer>
             {
-                ({ theme }) => {
+                ({ theme, language }) => {
                     return (
                         <ScrollView style={{ ...styles.home, backgroundColor: theme.background }}>
                             {loading && <ActivityIndicator size="large" color="blue" />}
@@ -61,10 +61,10 @@ const Profile = () => {
                                 <Image source={{ uri: avatar }} style={{ ...styles.image, backgroundColor: theme.foreground }} />
                                 <Text style={{ ...styles.textHead, color: theme.foreground }}>{name}</Text>
                             </View>
-                            <Text style={{ ...styles.text1, color: "red", marginTop: 50, }}>BASIC INFORMATION</Text>
+                            <Text style={{ ...styles.text1, color: "red", marginTop: 50, }}>{language.profilescreen.basic}</Text>
                             <Text style={{ ...styles.text2, color: theme.foreground }}>EMAIL</Text>
                             <Text style={{ ...styles.text3, color: theme.foreground }}>{email}</Text>
-                            <Text style={{ ...styles.text2, color: theme.foreground }}>PHONE NUMBER</Text>
+                            <Text style={{ ...styles.text2, color: theme.foreground }}>{language.profilescreen.phone}</Text>
                             <Text style={{ ...styles.text3, color: theme.foreground }}>{phone}</Text>
                             <Text style={{ ...styles.text2, color: theme.foreground }}>POINTS</Text>
                             <Text style={{ ...styles.text3, color: theme.foreground }}>{point}</Text>
@@ -80,24 +80,24 @@ const Profile = () => {
                             {
                                 isUpdate ?
                                     <>
-                                        <Text style={{ ...styles.text1, color: "red", marginTop: 50, }}>UPDATE INFORMATION</Text>
+                                        <Text style={{ ...styles.text1, color: "red", marginTop: 50, }}>{language.profilescreen.update}</Text>
                                         <View style={{ ...styles.viewInsert2, backgroundColor: theme.background }} />
                                         <View style={{ backgroundColor: theme.background, borderRadius: theme.boderRadiusLogin }}>
-                                            <Text style={styles.text}>Full name</Text>
+                                            <Text style={styles.text}>{language.profilescreen.fullname}</Text>
                                             <TextInput
                                                 style={{ ...styles.input, color: theme.foreground }}
                                                 onChangeText={user => setTxtName(user)}
                                             />
                                         </View>
                                         <View style={{ backgroundColor: theme.background, borderRadius: theme.boderRadiusLogin }}>
-                                            <Text style={styles.text}>URL avatar</Text>
+                                            <Text style={styles.text}>{language.profilescreen.urlava}</Text>
                                             <TextInput
                                                 style={{ ...styles.input, color: theme.foreground }}
                                                 onChangeText={user => setTxtAvatar(user)}
                                             />
                                         </View>
                                         <View style={{ backgroundColor: theme.background, borderRadius: theme.boderRadiusLogin }}>
-                                            <Text style={styles.text}>Phonenumber</Text>
+                                            <Text style={styles.text}>{language.profilescreen.phonenumber}</Text>
                                             <TextInput
                                                 style={{ ...styles.input, color: theme.foreground }}
                                                 onChangeText={user => setTxtPhone(user)}

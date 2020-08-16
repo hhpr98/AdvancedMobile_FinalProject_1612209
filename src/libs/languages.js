@@ -63,6 +63,22 @@ export const languages = {
             path: "Path",
             pathitem: "Created at:",
             topauthor: "Top Author"
+        },
+        downloadscreen: {
+            status: "No downloads",
+            detail: "Courses you download will appear here"
+        },
+        profilescreen: {
+            basic: "BASIC INFORMATION",
+            phone: "PHONE NUMBER",
+            update: "UPDATE INFORMATION",
+            fullname: "Full name",
+            urlava: "URL avatar",
+            phonenumber: "Phonenumber",
+            currentpassword: "Current Password",
+            newpassword: "New Password",
+            renewpassword: "reNew Password",
+            update2: "UPDATE PASSWORD"
         }
     },
     vi: {
@@ -129,6 +145,22 @@ export const languages = {
             path: "Danh mục",
             pathitem: "Tạo vào:",
             topauthor: "Top tác giả nổi bật"
+        },
+        downloadscreen: {
+            status: "Không có mục download",
+            detail: "Các khóa học đã download sẽ xuất hiện ở đây"
+        },
+        profilescreen: {
+            basic: "THÔNG TIN CƠ BẢN",
+            phone: "SỐ ĐIỆN THOẠI",
+            update: "CẬP NHẬT THÔNG TIN CÁ NHÂN",
+            fullname: "Tên đầy đủ",
+            urlava: "URL ảnh đại diện",
+            phonenumber: "Số điện thoại",
+            currentpassword: "Mật khẩu hiện tại",
+            newpassword: "Mật khẩu mới",
+            renewpassword: "Nhập lại mật khẩu",
+            update2: "CẬP NHẬT MẬT KHẨU"
         }
     }
 }
