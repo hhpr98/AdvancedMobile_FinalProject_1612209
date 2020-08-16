@@ -39,7 +39,7 @@ export const ThemeContext = React.createContext();
 export default function App(props) {
 
     const [theme, setTheme] = useState(themes.dark);
-    const [language, setLanguage] = useState(languages.vi);
+    const [language, setLanguage] = useState(languages.en);
 
     const HomeStackNavigation = () => {
         return (
@@ -162,6 +162,56 @@ export default function App(props) {
         return (
             <Tab.Navigator
                 screenOptions={({ route }) => ({
+                    tabBarLabel: ({ focused }) => {
+                        switch (route.name) {
+                            case 'Home':
+                                return focused ? (
+                                    <Text style={{ color: "#3399FF" }}>{language.homescreen.tab1}</Text>
+                                ) : (
+                                        <Text style={{ color: "#3399FF" }}>{language.homescreen.tab1}</Text>
+                                    );
+                                break;
+                            case 'Download':
+                                return focused ? (
+                                    <Text style={{ color: "#3399FF" }}>{language.homescreen.tab2}</Text>
+                                ) : (
+                                        <Text style={{ color: "#3399FF" }}>{language.homescreen.tab2}</Text>
+                                    );
+                                break;
+                            case 'Favorite':
+                                return focused ? (
+                                    <Text style={{ color: "#3399FF" }}>{language.homescreen.tab3}</Text>
+                                ) : (
+                                        <Text style={{ color: "#3399FF" }}>{language.homescreen.tab3}</Text>
+                                    );
+                                break;
+                            case 'Browse':
+                                return focused ? (
+                                    <Text style={{ color: "#3399FF" }}>{language.homescreen.tab4}</Text>
+                                ) : (
+                                        <Text style={{ color: "#3399FF" }}>{language.homescreen.tab4}</Text>
+                                    );
+                                break;
+                            case 'Search':
+                                return focused ? (
+                                    <Text style={{ color: "#3399FF" }}>{language.homescreen.tab5}</Text>
+                                ) : (
+                                        <Text style={{ color: "#3399FF" }}>{language.homescreen.tab5}</Text>
+                                    );
+                                break;
+                            case 'Setting':
+                                return focused ? (
+                                    <Text style={{ color: "#3399FF" }}>{language.homescreen.tab6}</Text>
+                                ) : (
+                                        <Text style={{ color: "#3399FF" }}>{language.homescreen.tab6}</Text>
+                                    );
+                                break;
+
+                            default:
+                                return null;
+                                break;
+                        }
+                    },
                     tabBarIcon: ({ focused, color, size }) => {
                         let iconName;
 
@@ -202,7 +252,7 @@ export default function App(props) {
                 <Tab.Screen name="Browse" component={BrowseStackNavigation} option={{ title: "Browse" }} />
                 <Tab.Screen name="Search" component={SearchStackNavigation} option={{ title: "Search" }} />
                 <Tab.Screen name="Setting" component={SettingStackNavigation} option={{ title: "Setting" }} />
-            </Tab.Navigator>
+            </Tab.Navigator >
         )
     };
 
