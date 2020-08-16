@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import { getRegister } from "../action";
 
 const Register = (props) => {
     const [email, setEmail] = useState('');
@@ -7,6 +8,44 @@ const Register = (props) => {
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [rePassword, setRePassword] = useState('');
+
+    const onRegister = () => {
+        if (email === "") {
+            alert("Email not be empty");
+            return;
+        }
+
+        if (username === "") {
+            alert("User name not be empty");
+            return;
+        }
+
+        if (password === "") {
+            alert("Password not be empty");
+            return;
+        }
+
+        if (password.length < 6) {
+            alert("Password must at least 6 character.");
+            return;
+        }
+
+        if (password !== rePassword) {
+            alert("Repassword must same as password.");
+            return;
+        }
+
+        getRegister(username, email, password, phone)
+            .then(res => res.json())
+            .then(res => {
+                if (res.message === "OK") {
+                    props.navigation.navigate("ActivateAccount", { email: email });
+                } else {
+                    alert(res.message);
+                }
+            })
+            .catch(err => console.log("SEND LOGIN ERR", err))
+    }
 
     return (
         <View style={styles.home}>
@@ -76,7 +115,7 @@ const Register = (props) => {
 
                 <View style={styles.viewInsert2} />
 
-                <TouchableOpacity style={styles.buttonSignIn}>
+                <TouchableOpacity style={styles.buttonSignIn} onPress={() => onRegister()}>
                     <Text style={styles.textSignIn}>REGISTER</Text>
                 </TouchableOpacity>
 

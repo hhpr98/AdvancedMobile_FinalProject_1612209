@@ -23,6 +23,7 @@ import ScreenKey from "./src/libs/ScreenKey";
 import { themes } from "./src/libs/themes";
 import { DataProvider } from "./src/Provider/DataProvider";
 import { PlayingVideoYoutube, PlayingVideoGoogleStorage } from "./src/components/RelativeComponent/PlayingVideo/playing-lesson";
+import ActivateAccount from "./src/components/Authen/Activate/activate-account";
 
 const MainStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -224,6 +225,7 @@ export default function App(props) {
                 <MainStack.Screen name="Login" component={Login} />
                 <MainStack.Screen name="ForgotPassword" component={ForgotPassword} />
                 <MainStack.Screen name="Register" component={Register} />
+                <MainStack.Screen name="ActivateAccount" component={ActivateAccount} />
                 <MainStack.Screen name="TabBar" component={TabBar} />
             </MainStack.Navigator>
         )
