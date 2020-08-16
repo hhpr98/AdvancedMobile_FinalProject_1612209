@@ -73,7 +73,7 @@ export const languages = {
             tab1: "Trang chủ",
             tab2: "Download",
             tab3: "Yêu thích",
-            tab4: "Browse",
+            tab4: "Danh mục",
             tab5: "Tìm kiếm",
             tab6: "Cài đặt",
             course1: "Gợi ý cho bạn",
