@@ -41,6 +41,22 @@ export const languages = {
             sete: "Advanced Options",
             setf: "App version",
             setg: "SIGN OUT",
+        },
+        searchscreen: {
+            placeholder: "Search...",
+            label1: "All",
+            label2: "Only courses",
+            label3: "Only author",
+            coursesearch: "Courses",
+            authorsearch: "Authors",
+            nodata: "NODATA",
+            coursecourse: {
+                point: "point",
+                hours: "hours"
+            },
+            authorcourse: {
+                coursenumber: "courses"
+            }
         }
     },
     vi: {
@@ -85,6 +101,22 @@ export const languages = {
             sete: "Cài đặt nâng cao",
             setf: "Phiên bản ứng dụng",
             setg: "ĐĂNG XUẤT",
+        },
+        searchscreen: {
+            placeholder: "Tìm kiếm...",
+            label1: "Tất cả",
+            label2: "Khóa học",
+            label3: "Tác giả",
+            coursesearch: "Khóa học",
+            authorsearch: "Tác giả",
+            nodata: "KHÔNG CÓ DỮ LIỆU",
+            coursecourse: {
+                point: "point",
+                hours: "giờ"
+            },
+            authorcourse: {
+                coursenumber: "khóa học"
+            }
         }
     }
 }

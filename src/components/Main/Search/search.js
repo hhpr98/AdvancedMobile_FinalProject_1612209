@@ -38,14 +38,14 @@ const Search = (props) => {
     return (
         <ThemeContext>
             {
-                ({ theme }) => {
+                ({ theme, language }) => {
                     return (
                         <View style={{ ...styles.home, backgroundColor: theme.background }}>
                             <View style={{ backgroundColor: theme.foreground, flexDirection: "row", justifyContent: "space-around" }}>
                                 <TextInput
                                     style={{ ...styles.input, color: theme.background }}
                                     onChangeText={text => setText(text)}
-                                    placeholder="Search..."
+                                    placeholder={language.searchscreen.placeholder}
                                 />
                                 <ImageBackground source={require("../../../../assets/ic_search.png")} style={{ width: 50, height: 50, alignSelf: "center" }}>
                                     <TouchableOpacity style={{ width: 50, height: 50, }} onPress={() => onSearchClick()}>
@@ -55,9 +55,9 @@ const Search = (props) => {
                             <RadioForm
                                 style={{ justifyContent: "space-around", backgroundColor: "white" }}
                                 radio_props={[
-                                    { label: 'Tất cả', value: 0 },
-                                    { label: 'Khóa học', value: 1 },
-                                    { label: 'Tác giả', value: 2 }
+                                    { label: language.searchscreen.label1, value: 0 },
+                                    { label: language.searchscreen.label2, value: 1 },
+                                    { label: language.searchscreen.label3, value: 2 }
                                 ]}
                                 initial={0}
                                 formHorizontal={true}

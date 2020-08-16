@@ -10,7 +10,7 @@ const SearchAuthorItem = (props) => {
     return (
         <ThemeContext.Consumer>
             {
-                ({ theme }) => {
+                ({ theme, language }) => {
                     return (
                         <View style={{ ...styles.home, backgroundColor: theme.background, borderBottomColor: theme.foreground }}>
                             <Image
@@ -19,7 +19,7 @@ const SearchAuthorItem = (props) => {
                             />
                             <View style={{ margin: 5, marginLeft: 30, }}>
                                 <Text style={{ ...styles.text1, color: theme.foreground }}>{item.name}</Text>
-                                <Text style={{ ...styles.text2, color: theme.foreground }} > {item.numcourses} courses</Text>
+                                <Text style={{ ...styles.text2, color: theme.foreground }} > {item.numcourses} {language.searchscreen.authorcourse.coursenumber}</Text>
                             </View>
                         </View>
                     );

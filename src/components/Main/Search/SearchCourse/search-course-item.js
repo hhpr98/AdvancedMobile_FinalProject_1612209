@@ -8,14 +8,16 @@ const SearchCourseItem = (props) => {
     const item = props.item;
     const point = Math.round(Number(item.contentPoint));
 
-    const getCourseString = () => {
-        return point + ' point . ' + item.totalHours + ' hours  .  ' + item.price + ' (VNĐ)';
-    };
+
 
     return (
         <ThemeContext.Consumer>
             {
-                ({ theme }) => {
+                ({ theme, language }) => {
+                    const getCourseString = () => {
+                        return point + ' ' + language.searchscreen.coursecourse.point + ' . ' + item.totalHours + ' ' + language.searchscreen.coursecourse.hours + '  .  ' + item.price + ' (VNĐ)';
+                    };
+
                     return (
                         <View style={{ ...styles.home, backgroundColor: theme.background, borderBottomColor: theme.foreground }}>
                             <Image

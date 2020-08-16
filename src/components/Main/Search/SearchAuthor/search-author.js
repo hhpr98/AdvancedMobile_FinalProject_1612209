@@ -25,17 +25,17 @@ const SearchAuthor = (props) => {
     return (
         <ThemeContext>
             {
-                ({ theme }) => {
+                ({ theme, language }) => {
                     return (
                         <View style={{ ...styles.home, backgroundColor: theme.background }}>
                             <View style={{ width: 400, height: 50, marginLeft: 10, borderBottomColor: "#3399FF", borderBottomWidth: 2, }}>
-                                <Text style={{ color: "white", width: 100, height: 30, margin: 10, fontWeight: "bold", backgroundColor: "#3399FF", fontSize: 17, textAlign: "center" }}>Author</Text>
+                                <Text style={{ color: "white", width: 100, height: 30, margin: 10, fontWeight: "bold", backgroundColor: "#3399FF", fontSize: 17, textAlign: "center" }}>{language.searchscreen.authorsearch}</Text>
                             </View>
                             {
                                 size === 0 ?
                                     <>
                                         <Image style={{ width: 100, height: 100, alignSelf: "center", marginTop: 10, }} source={require("../../../../../assets/ic_search_nodata.png")} />
-                                        <Text style={{ color: theme.foreground, alignSelf: "center", marginTop: 10, }}>NODATA</Text>
+                                        <Text style={{ color: theme.foreground, alignSelf: "center", marginTop: 10, }}>{language.searchscreen.nodata}</Text>
 
                                     </> :
                                     <>
