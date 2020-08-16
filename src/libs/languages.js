@@ -4,7 +4,7 @@ export const languages = {
         loginscreen: {
             usernametext: "Email",
             passwordtext: "Password",
-            buttonlogintext: "SIGN IN (đang auto)",
+            buttonlogintext: "SIGN IN",
             buttonforgottext: "FORGOT PASSWORD",
             buttongoogletext: "USE GOOGLE SIGN IN (SSO)",
             buttonsignuptext: "SIGN UP FREE",
