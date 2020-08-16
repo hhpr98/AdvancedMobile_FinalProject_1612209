@@ -5,7 +5,8 @@ const API = {
   // authentication
   LOGIN: `${URL}/user/login`,
   REGISTER: `${URL}/user/register`,
-  SEND_ACTIVE_EMAIL: `${URL}/user/send-active-email`,
+  SEND_ACTIVE_EMAIL: `${URL}/user/send-activate-email`,
+  ACTIVE_EMAIL: `${URL}/user/activate-email`,
 
   // user
   // get thông tin cá nhân

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, AsyncStorage } from 'react-native';
 import { ThemeContext } from "../../../../App";
 import storage from "../../../Storage/storage";
-import { getLogin } from "./action";
+import { getLogin } from "../action";
 
 const Login = (props) => {
     const [user, setUser] = useState('nguyenhuuhoa1998@gmail.com');
