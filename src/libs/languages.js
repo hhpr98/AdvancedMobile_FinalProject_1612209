@@ -57,6 +57,12 @@ export const languages = {
             authorcourse: {
                 coursenumber: "courses"
             }
+        },
+        browsescreen: {
+            popularskill: "Popular Skills",
+            path: "Path",
+            pathitem: "Created at:",
+            topauthor: "Top Author"
         }
     },
     vi: {
@@ -117,6 +123,12 @@ export const languages = {
             authorcourse: {
                 coursenumber: "khóa học"
             }
+        },
+        browsescreen: {
+            popularskill: "   Các kĩ năng cần thiết",
+            path: "Danh mục",
+            pathitem: "Tạo vào:",
+            topauthor: "Top tác giả nổi bật"
         }
     }
 }
