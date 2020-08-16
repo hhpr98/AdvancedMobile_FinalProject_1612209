@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity, ImageBackground, ActivityIndicator } from 'react-native';
 import { ThemeContext } from "../../../../App";
 // import { DataContext } from "../../../Provider/DataProvider";
 // import SearchBar from "react-native-elements";
@@ -15,6 +15,7 @@ const Search = (props) => {
     const [token, setToken] = useState("");
     const [courseData, setCourseData] = useState([]);
     const [instructorData, setInstructorData] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         storage
@@ -24,6 +25,7 @@ const Search = (props) => {
     }, []);
 
     const onSearchClick = () => {
+        setLoading(true);
         searchWithKeyword(token, text)
             .then(res => res.json())
             .then(res => {
@@ -33,6 +35,7 @@ const Search = (props) => {
                 }
             })
             .catch(err => console.log("SEARCH WITH KEYWORD FAIL:", err))
+            .finally(() => setLoading(false));
     }
 
     return (
@@ -69,6 +72,7 @@ const Search = (props) => {
                             >
                             </RadioForm>
                             <ScrollView>
+                                {loading && <ActivityIndicator size="large" color="yellow" />}
                                 {type === 0 ?
                                     <>
                                         <SearchCourse navigation={props.navigation} courseSearchData={courseData} />
