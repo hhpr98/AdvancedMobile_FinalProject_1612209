@@ -21,8 +21,10 @@ import Favorite from "./src/components/Main/Favorite/favorite";
 import SplashScreen from "./src/components/RelativeComponent/Splash/splash";
 import ScreenKey from "./src/libs/ScreenKey";
 import { themes } from "./src/libs/themes";
+import { languages } from "./src/libs/languages";
 import { DataProvider } from "./src/Provider/DataProvider";
 import { PlayingVideoYoutube, PlayingVideoGoogleStorage } from "./src/components/RelativeComponent/PlayingVideo/playing-lesson";
+import ActivateAccount from "./src/components/Authen/Activate/activate-account";
 
 const MainStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -37,6 +39,7 @@ export const ThemeContext = React.createContext();
 export default function App(props) {
 
     const [theme, setTheme] = useState(themes.dark);
+    const [language, setLanguage] = useState(languages.en);
 
     const HomeStackNavigation = () => {
         return (
@@ -159,6 +162,56 @@ export default function App(props) {
         return (
             <Tab.Navigator
                 screenOptions={({ route }) => ({
+                    tabBarLabel: ({ focused }) => {
+                        switch (route.name) {
+                            case 'Home':
+                                return focused ? (
+                                    <Text style={{ color: "#3399FF" }}>{language.homescreen.tab1}</Text>
+                                ) : (
+                                        <Text style={{ color: "#3399FF" }}>{language.homescreen.tab1}</Text>
+                                    );
+                                break;
+                            case 'Download':
+                                return focused ? (
+                                    <Text style={{ color: "#3399FF" }}>{language.homescreen.tab2}</Text>
+                                ) : (
+                                        <Text style={{ color: "#3399FF" }}>{language.homescreen.tab2}</Text>
+                                    );
+                                break;
+                            case 'Favorite':
+                                return focused ? (
+                                    <Text style={{ color: "#3399FF" }}>{language.homescreen.tab3}</Text>
+                                ) : (
+                                        <Text style={{ color: "#3399FF" }}>{language.homescreen.tab3}</Text>
+                                    );
+                                break;
+                            case 'Browse':
+                                return focused ? (
+                                    <Text style={{ color: "#3399FF" }}>{language.homescreen.tab4}</Text>
+                                ) : (
+                                        <Text style={{ color: "#3399FF" }}>{language.homescreen.tab4}</Text>
+                                    );
+                                break;
+                            case 'Search':
+                                return focused ? (
+                                    <Text style={{ color: "#3399FF" }}>{language.homescreen.tab5}</Text>
+                                ) : (
+                                        <Text style={{ color: "#3399FF" }}>{language.homescreen.tab5}</Text>
+                                    );
+                                break;
+                            case 'Setting':
+                                return focused ? (
+                                    <Text style={{ color: "#3399FF" }}>{language.homescreen.tab6}</Text>
+                                ) : (
+                                        <Text style={{ color: "#3399FF" }}>{language.homescreen.tab6}</Text>
+                                    );
+                                break;
+
+                            default:
+                                return null;
+                                break;
+                        }
+                    },
                     tabBarIcon: ({ focused, color, size }) => {
                         let iconName;
 
@@ -199,7 +252,7 @@ export default function App(props) {
                 <Tab.Screen name="Browse" component={BrowseStackNavigation} option={{ title: "Browse" }} />
                 <Tab.Screen name="Search" component={SearchStackNavigation} option={{ title: "Search" }} />
                 <Tab.Screen name="Setting" component={SettingStackNavigation} option={{ title: "Setting" }} />
-            </Tab.Navigator>
+            </Tab.Navigator >
         )
     };
 
@@ -224,13 +277,14 @@ export default function App(props) {
                 <MainStack.Screen name="Login" component={Login} />
                 <MainStack.Screen name="ForgotPassword" component={ForgotPassword} />
                 <MainStack.Screen name="Register" component={Register} />
+                <MainStack.Screen name="ActivateAccount" component={ActivateAccount} />
                 <MainStack.Screen name="TabBar" component={TabBar} />
             </MainStack.Navigator>
         )
     }
 
     return (
-        <ThemeContext.Provider value={{ theme, setTheme }}>
+        <ThemeContext.Provider value={{ theme, setTheme, language, setLanguage }}>
             <StatusBar barStyle="light-content" />
             <DataProvider>
                 <NavigationContainer style={styles.main}>

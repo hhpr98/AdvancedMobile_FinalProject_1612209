@@ -49,14 +49,14 @@ const Home = (props) => {
     return (
         <ThemeContext.Consumer>
             {
-                ({ theme }) => {
+                ({ theme, language }) => {
                     return (
                         <ScrollView style={{ backgroundColor: theme.background }}>
                             <Greeting name='Hòa' />
-                            <SectionCourses navigation={props.navigation} title='Suggestion for you' courses={topratecourse} isLoading={isLoading2} />
-                            <SectionCourses navigation={props.navigation} title='Top new courses' courses={topnewcourse} isLoading={isLoading1} />
-                            <SectionCourses navigation={props.navigation} title='Top rate courses' courses={topratecourse} isLoading={isLoading2} />
-                            <SectionCourses navigation={props.navigation} title='Top sell courses' courses={topsellcourse} isLoading={isLoading3} />
+                            <SectionCourses navigation={props.navigation} title={language.homescreen.course1} courses={topratecourse} isLoading={isLoading2} />
+                            <SectionCourses navigation={props.navigation} title={language.homescreen.course2} courses={topnewcourse} isLoading={isLoading1} />
+                            <SectionCourses navigation={props.navigation} title={language.homescreen.course3} courses={topratecourse} isLoading={isLoading2} />
+                            <SectionCourses navigation={props.navigation} title={language.homescreen.course4} courses={topsellcourse} isLoading={isLoading3} />
                         </ScrollView>
                     );
                 }

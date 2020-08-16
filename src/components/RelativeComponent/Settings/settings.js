@@ -4,6 +4,7 @@ import ToggleSwitch from 'toggle-switch-react-native';
 import { ThemeContext } from "../../../../App";
 import RNPickerSelect from 'react-native-picker-select';
 import { themes } from "../../../libs/themes";
+import { languages } from "../../../libs/languages";
 import storage from "../../../Storage/storage";
 
 const Setting = (props) => {
@@ -26,7 +27,7 @@ const Setting = (props) => {
     return (
         <ThemeContext.Consumer>
             {
-                ({ theme, setTheme }) => {
+                ({ theme, setTheme, language, setLanguage }) => {
                     return (
                         <ScrollView style={{ ...styles.home, backgroundColor: theme.background }}>
                             <TouchableOpacity style={styles.head} onPress={() => props.navigation.navigate('Profile')}>
@@ -37,11 +38,11 @@ const Setting = (props) => {
                                 <Text style={{ ...styles.textHead, color: theme.foreground }}>{name}</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => props.navigation.navigate('Subscription')}>
-                                <Text style={{ ...styles.textBig, color: theme.foreground }}>Subcription</Text>
-                                <Text style={{ ...styles.textLittle, color: theme.foreground }}>My youtube channel</Text>
+                                <Text style={{ ...styles.textBig, color: theme.foreground }}>{language.settingscreen.set1}</Text>
+                                <Text style={{ ...styles.textLittle, color: theme.foreground }}>{language.settingscreen.set11}</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => props.navigation.navigate('Contact')}>
-                                <Text style={{ ...styles.textBig, color: theme.foreground }}>Contact</Text>
+                                <Text style={{ ...styles.textBig, color: theme.foreground }}>{language.settingscreen.set2}</Text>
                             </TouchableOpacity>
                             <TouchableOpacity
                                 onPress={() => {
@@ -53,15 +54,26 @@ const Setting = (props) => {
                                     }
                                 }}
                             >
-                                <Text style={{ ...styles.textBig, color: theme.foreground }}>Theme</Text>
-                                <Text style={{ ...styles.textLittle, color: theme.foreground }}>Click to change theme</Text>
+                                <Text style={{ ...styles.textBig, color: theme.foreground }}>{language.settingscreen.set3}</Text>
+                                <Text style={{ ...styles.textLittle, color: theme.foreground }}>{theme.texttheme}</Text>
                             </TouchableOpacity>
-                            <Text style={{ ...styles.textBig, color: theme.foreground }}>Comunicate Preferences</Text>
+                            <Text style={{ ...styles.textBig, color: theme.foreground }}>{language.settingscreen.set4}</Text>
                             <View style={{ ...styles.line, borderColor: theme.background, borderBottomColor: theme.foreground }} />
-                            <Text style={{ ...styles.textBig, color: theme.foreground }}>Default caption language</Text>
-                            <Text style={{ ...styles.textLittle, color: theme.foreground }}>English</Text>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    if (language === languages.en) {
+                                        setLanguage(languages.vi);
+                                    }
+                                    else {
+                                        setLanguage(languages.en);
+                                    }
+                                }}
+                            >
+                                <Text style={{ ...styles.textBig, color: theme.foreground }}>{language.settingscreen.set5}</Text>
+                                <Text style={{ ...styles.textLittle, color: theme.foreground }}>{language.name}</Text>
+                            </TouchableOpacity>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                <Text style={{ ...styles.textBig, color: theme.foreground }}>Require Wi-Fi for streaming</Text>
+                                <Text style={{ ...styles.textBig, color: theme.foreground }}>{language.settingscreen.set6}</Text>
                                 <ToggleSwitch style={{ marginRight: 50, }}
                                     isOn={wifiStreamToggle}
                                     onColor="#3399FF"
@@ -72,7 +84,7 @@ const Setting = (props) => {
                                 />
                             </View>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                <Text style={{ ...styles.textBig, color: theme.foreground }}>Require Wi-Fi for downloading</Text>
+                                <Text style={{ ...styles.textBig, color: theme.foreground }}>{language.settingscreen.set7}</Text>
                                 <ToggleSwitch style={{ marginRight: 50, }}
                                     isOn={downloadStreamToggle}
                                     onColor="#3399FF"
@@ -82,22 +94,21 @@ const Setting = (props) => {
                                     onToggle={() => setDownloadStreamToggle(!downloadStreamToggle)}
                                 />
                             </View>
-                            <Text style={{ ...styles.textBig, color: theme.foreground }}>Recommended content push notifications</Text>
-                            <Text style={{ ...styles.textLittle, color: theme.foreground }}>Receive notifications about recommended contents.</Text>
-                            <Text style={{ ...styles.textBig, color: theme.foreground }}>Show quiz at the end of video</Text>
-                            <Text style={{ ...styles.textBig, color: theme.foreground }}>Download location</Text>
-                            <Text style={{ ...styles.textLittle, color: theme.foreground }}>Default location (30.5GB free of 64GB)</Text>
-                            <Text style={{ ...styles.textBig, color: theme.foreground }}>Default caption language</Text>
-                            <Text style={{ ...styles.textBig, color: theme.foreground }}>Caption</Text>
-                            <Text style={{ ...styles.textBig, color: theme.foreground }}>Notifications</Text>
-                            <Text style={{ ...styles.textBig, color: theme.foreground }}>Advanced Options</Text>
+                            <Text style={{ ...styles.textBig, color: theme.foreground }}>{language.settingscreen.set8}</Text>
+                            <Text style={{ ...styles.textLittle, color: theme.foreground }}>{language.settingscreen.set81}</Text>
+                            <Text style={{ ...styles.textBig, color: theme.foreground }}>{language.settingscreen.set9}</Text>
+                            <Text style={{ ...styles.textBig, color: theme.foreground }}>{language.settingscreen.seta}</Text>
+                            <Text style={{ ...styles.textLittle, color: theme.foreground }}>{language.settingscreen.setb}</Text>
+                            <Text style={{ ...styles.textBig, color: theme.foreground }}>{language.settingscreen.setc}</Text>
+                            <Text style={{ ...styles.textBig, color: theme.foreground }}>{language.settingscreen.setd}</Text>
+                            <Text style={{ ...styles.textBig, color: theme.foreground }}>{language.settingscreen.sete}</Text>
                             <View style={{ ...styles.line, borderColor: theme.background, borderBottomColor: theme.foreground }} />
-                            <Text style={{ ...styles.textBig, color: theme.foreground }}>App version</Text>
-                            <Text style={{ ...styles.textLittle, color: theme.foreground }}>0.1.3</Text>
+                            <Text style={{ ...styles.textBig, color: theme.foreground }}>{language.settingscreen.setf}</Text>
+                            <Text style={{ ...styles.textLittle, color: theme.foreground }}>0.1.0</Text>
                             <View style={{ ...styles.line, borderColor: theme.background, borderBottomColor: theme.foreground }} />
 
                             <TouchableOpacity style={styles.buttonSignOut} onPress={() => props.navigation.navigate("Login")}>
-                                <Text style={styles.textSignOut}>SIGN OUT</Text>
+                                <Text style={styles.textSignOut}>{language.settingscreen.setg}</Text>
                             </TouchableOpacity>
                         </ScrollView>
                     );

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, AsyncStorage } from 'react-native';
 import { ThemeContext } from "../../../../App";
 import storage from "../../../Storage/storage";
-import { getLogin } from "./action";
+import { getLogin } from "../action";
+import { languages } from '../../../libs/languages';
 
 const Login = (props) => {
     const [user, setUser] = useState('nguyenhuuhoa1998@gmail.com');
@@ -37,7 +38,7 @@ const Login = (props) => {
     return (
         <ThemeContext.Consumer>
             {
-                ({ theme, setTheme }) => {
+                ({ theme, language }) => {
                     // console.log(theme);
                     return (
                         <View style={{ ...styles.home, backgroundColor: theme.background }}>
@@ -46,7 +47,7 @@ const Login = (props) => {
                                 <View style={{ ...styles.viewInsert2, backgroundColor: theme.background }} />
 
                                 <View style={{ ...styles.viewBorder, backgroundColor: theme.background, borderRadius: theme.boderRadiusLogin }}>
-                                    <Text style={styles.text}>Username (or Email)</Text>
+                                    <Text style={styles.text}>{language.loginscreen.usernametext}</Text>
                                     <TextInput
                                         style={{ ...styles.input, color: theme.foreground }}
                                         //placeholder="username"
@@ -59,7 +60,7 @@ const Login = (props) => {
                                 <View style={{ ...styles.viewInsert, backgroundColor: theme.background }} />
 
                                 <View style={{ ...styles.viewBorder, backgroundColor: theme.background, borderRadius: theme.boderRadiusLogin }}>
-                                    <Text style={styles.text}>Password</Text>
+                                    <Text style={styles.text}>{language.loginscreen.passwordtext}</Text>
                                     <TextInput
                                         style={{ ...styles.input, color: theme.foreground }}
                                         secureTextEntry={true}
@@ -76,23 +77,23 @@ const Login = (props) => {
                                 <TouchableOpacity style={{ ...styles.buttonSignIn, borderRadius: theme.boderRadiusLogin }}
                                     onPress={() => signInClick()}
                                 >
-                                    <Text style={styles.textSignIn}>SIGN IN (đang auto)</Text>
+                                    <Text style={styles.textSignIn}>{language.loginscreen.buttonlogintext}</Text>
                                 </TouchableOpacity>
                                 <View style={{ ...styles.viewInsert, backgroundColor: theme.background }} />
                                 <TouchableOpacity style={{ ...styles.buttonForgotAndSignUp, backgroundColor: theme.background, borderRadius: theme.boderRadiusLogin }}
                                     onPress={() => props.navigation.navigate('ForgotPassword')}
                                 >
-                                    <Text style={styles.textOrther}>FORGOT PASSWORD</Text>
+                                    <Text style={styles.textOrther}>{language.loginscreen.buttonforgottext}</Text>
                                 </TouchableOpacity>
                                 <View style={{ ...styles.viewInsert, backgroundColor: theme.background }} />
                                 <TouchableOpacity style={{ ...styles.buttonSSO, backgroundColor: theme.background, borderRadius: theme.boderRadiusLogin }}>
-                                    <Text style={styles.textOrther}>USE SINGLE SIGN-ON (SSO)</Text>
+                                    <Text style={styles.textOrther}>{language.loginscreen.buttongoogletext}</Text>
                                 </TouchableOpacity>
                                 <View style={{ ...styles.viewInsert, backgroundColor: theme.background }} />
                                 <TouchableOpacity style={{ ...styles.buttonForgotAndSignUp, backgroundColor: theme.background, borderRadius: theme.boderRadiusLogin }}
                                     onPress={() => props.navigation.navigate('Register')}
                                 >
-                                    <Text style={styles.textOrther}>SIGN UP FREE</Text>
+                                    <Text style={styles.textOrther}>{language.loginscreen.buttonsignuptext}</Text>
                                 </TouchableOpacity>
 
                             </View>

@@ -1,16 +1,53 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import { getRegister, sendActivateEmail } from "../action";
 
 const Register = (props) => {
     const [email, setEmail] = useState('');
-    const [firstname, setFirstname] = useState('');
-    const [lastname, setLastname] = useState('');
-    const [company, setCompany] = useState('');
+    const [username, setUsername] = useState('');
     const [phone, setPhone] = useState('');
-    const [country, setCountry] = useState('');
-    const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
     const [rePassword, setRePassword] = useState('');
+
+    const onRegister = () => {
+        if (email === "") {
+            alert("Email not be empty");
+            return;
+        }
+
+        if (username === "") {
+            alert("User name not be empty");
+            return;
+        }
+
+        if (password === "") {
+            alert("Password not be empty");
+            return;
+        }
+
+        if (password.length < 6) {
+            alert("Password must at least 6 character.");
+            return;
+        }
+
+        if (password !== rePassword) {
+            alert("Repassword must same as password.");
+            return;
+        }
+
+        getRegister(username, email, password, phone)
+            .then(res => res.json())
+            .then(res => {
+                if (res.message === "OK") {
+                    sendActivateEmail(email)
+                        .catch(err => console.log("SEND EMAIL FIRST TIME ERRRR", err));
+                    props.navigation.navigate("ActivateAccount", { email: email });
+                } else {
+                    alert(res.message);
+                }
+            })
+            .catch(err => console.log("SEND LOGIN ERR", err))
+    }
 
     return (
         <View style={styles.home}>
@@ -25,63 +62,6 @@ const Register = (props) => {
                     <TextInput
                         style={styles.input}
                         onChangeText={email => setEmail(email)}
-                        value={email}
-                    />
-                </View>
-
-                <View style={styles.viewInsert} />
-
-                <View style={styles.viewBorder}>
-                    <Text style={styles.text}>Firstname *</Text>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={firstname => setFirstname(firstname)}
-                        value={firstname}
-                    >
-                    </TextInput>
-                </View>
-
-                <View style={styles.viewInsert} />
-
-                <View style={styles.viewBorder}>
-                    <Text style={styles.text}>Lastname *</Text>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={lastname => setLastname(lastname)}
-                        value={lastname}
-                    />
-                </View>
-
-                <View style={styles.viewInsert} />
-
-                <View style={styles.viewBorder}>
-                    <Text style={styles.text}>Company *</Text>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={company => setCompany(company)}
-                        value={company}
-                    />
-                </View>
-
-                <View style={styles.viewInsert} />
-
-                <View style={styles.viewBorder}>
-                    <Text style={styles.text}>Phone</Text>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={phone => setPhone(phone)}
-                        value={phone}
-                    />
-                </View>
-
-                <View style={styles.viewInsert} />
-
-                <View style={styles.viewBorder}>
-                    <Text style={styles.text}>Country *</Text>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={country => setCountry(country)}
-                        value={country}
                     />
                 </View>
 
@@ -91,8 +71,18 @@ const Register = (props) => {
                     <Text style={styles.text}>Username *</Text>
                     <TextInput
                         style={styles.input}
-                        onChangeText={user => setUser(user)}
-                        value={user}
+                        onChangeText={userName => setUsername(userName)}
+                    >
+                    </TextInput>
+                </View>
+
+                <View style={styles.viewInsert} />
+
+                <View style={styles.viewBorder}>
+                    <Text style={styles.text}>Phone</Text>
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={phone => setPhone(phone)}
                     />
                 </View>
 
@@ -103,8 +93,8 @@ const Register = (props) => {
                     <TextInput
                         style={styles.input}
                         onChangeText={password => setPassword(password)}
+                        secureTextEntry={true}
                     >
-                        {password.split('').map(c => c === ' ' ? ' ' : '*')}
                     </TextInput>
                 </View>
 
@@ -116,8 +106,8 @@ const Register = (props) => {
                     <TextInput
                         style={styles.input}
                         onChangeText={rePassword => setRePassword(rePassword)}
+                        secureTextEntry={true}
                     >
-                        {rePassword.split('').map(c => c === ' ' ? ' ' : '*')}
                     </TextInput>
                 </View>
 
@@ -127,7 +117,7 @@ const Register = (props) => {
 
                 <View style={styles.viewInsert2} />
 
-                <TouchableOpacity style={styles.buttonSignIn}>
+                <TouchableOpacity style={styles.buttonSignIn} onPress={() => onRegister()}>
                     <Text style={styles.textSignIn}>REGISTER</Text>
                 </TouchableOpacity>
 
