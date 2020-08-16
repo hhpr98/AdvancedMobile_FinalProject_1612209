@@ -30,14 +30,11 @@ const Path = (props) => {
     return (
         <ThemeContext.Consumer>
             {
-                ({ theme }) => {
+                ({ theme, language }) => {
                     return (
                         <View>
                             <View style={styles.view}>
-                                <Text style={{ ...styles.textTitle, color: theme.foreground }}>Path</Text>
-                                {/* <TouchableOpacity onPress={() => alert('See all clicked!')}>
-                                    <Text style={{ ...styles.textButton, color: theme.foreground }}>See all ></Text>
-                                </TouchableOpacity> */}
+                                <Text style={{ ...styles.textTitle, color: theme.foreground }}>{language.browsescreen.path}</Text>
                             </View>
                             <ScrollView horizontal={true}>
                                 {loading && <ActivityIndicator size="large" color="blue" />}
@@ -63,11 +60,6 @@ const styles = StyleSheet.create({
         //color: 'white',
         marginLeft: 10,
     },
-    textButton: {
-        fontSize: 12,
-        //color: 'white',
-        marginRight: 10,
-    }
 });
 
 export default Path;

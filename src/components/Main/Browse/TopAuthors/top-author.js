@@ -38,11 +38,11 @@ const TopAuthor = () => {
     return (
         <ThemeContext.Consumer>
             {
-                ({ theme }) => {
+                ({ theme, language }) => {
                     return (
                         <View>
                             <View style={styles.view}>
-                                <Text style={{ ...styles.textTitle, color: theme.foreground }}>Top Author</Text>
+                                <Text style={{ ...styles.textTitle, color: theme.foreground }}>{language.browsescreen.topauthor}</Text>
                                 <ScrollView horizontal={true}>
                                     {loading && <ActivityIndicator size="large" color="blue" />}
                                     {getAuthorList(dataAuthor)}

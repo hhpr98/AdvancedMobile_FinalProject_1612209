@@ -56,3 +56,19 @@ export const acctivateEmail = (email, token) => {
         })
     })
 };
+
+export const changePassword = (token, id, old, newp) => {
+    return fetch(API.CHANGE_PASSWORD, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            id: id,
+            oldPass: old,
+            newPass: newp
+        })
+    })
+}

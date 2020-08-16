@@ -4,6 +4,7 @@ import { ThemeContext } from "../../../App";
 import storage from "../../Storage/storage";
 import { getInformation, updateInformation } from "./action";
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { changePassword } from "../Authen/action";
 
 const Profile = () => {
 
@@ -15,10 +16,15 @@ const Profile = () => {
     const [phone, setPhone] = useState("NaN");
     const [point, setPoint] = useState(0);
     const [token, setToken] = useState("");
+    const [userId, setUserId] = useState("");
 
     const [txtName, setTxtName] = useState("");
     const [txtAvatar, setTxtAvatar] = useState("");
     const [txtPhone, setTxtPhone] = useState("");
+
+    const [currentpassword, setCurrentPassword] = useState("");
+    const [newpassword, setNewPassword] = useState("");
+    const [renewpassword, setRenewPassword] = useState("");
 
     useEffect(() => {
         storage
@@ -26,6 +32,7 @@ const Profile = () => {
             .then(ret => {
                 setEmail(ret.userInfo.email);
                 setToken(ret.token);
+                setUserId(ret.userInfo.id);
                 const tk = ret.token;
                 LoadData(tk);
 
@@ -53,7 +60,7 @@ const Profile = () => {
     return (
         <ThemeContext.Consumer>
             {
-                ({ theme }) => {
+                ({ theme, language }) => {
                     return (
                         <ScrollView style={{ ...styles.home, backgroundColor: theme.background }}>
                             {loading && <ActivityIndicator size="large" color="blue" />}
@@ -61,10 +68,10 @@ const Profile = () => {
                                 <Image source={{ uri: avatar }} style={{ ...styles.image, backgroundColor: theme.foreground }} />
                                 <Text style={{ ...styles.textHead, color: theme.foreground }}>{name}</Text>
                             </View>
-                            <Text style={{ ...styles.text1, color: "red", marginTop: 50, }}>BASIC INFORMATION</Text>
+                            <Text style={{ ...styles.text1, color: "red", marginTop: 50, }}>{language.profilescreen.basic}</Text>
                             <Text style={{ ...styles.text2, color: theme.foreground }}>EMAIL</Text>
                             <Text style={{ ...styles.text3, color: theme.foreground }}>{email}</Text>
-                            <Text style={{ ...styles.text2, color: theme.foreground }}>PHONE NUMBER</Text>
+                            <Text style={{ ...styles.text2, color: theme.foreground }}>{language.profilescreen.phone}</Text>
                             <Text style={{ ...styles.text3, color: theme.foreground }}>{phone}</Text>
                             <Text style={{ ...styles.text2, color: theme.foreground }}>POINTS</Text>
                             <Text style={{ ...styles.text3, color: theme.foreground }}>{point}</Text>
@@ -80,24 +87,24 @@ const Profile = () => {
                             {
                                 isUpdate ?
                                     <>
-                                        <Text style={{ ...styles.text1, color: "red", marginTop: 50, }}>UPDATE INFORMATION</Text>
+                                        <Text style={{ ...styles.text1, color: "red", marginTop: 50, }}>{language.profilescreen.update}</Text>
                                         <View style={{ ...styles.viewInsert2, backgroundColor: theme.background }} />
                                         <View style={{ backgroundColor: theme.background, borderRadius: theme.boderRadiusLogin }}>
-                                            <Text style={styles.text}>Full name</Text>
+                                            <Text style={styles.text}>{language.profilescreen.fullname}</Text>
                                             <TextInput
                                                 style={{ ...styles.input, color: theme.foreground }}
                                                 onChangeText={user => setTxtName(user)}
                                             />
                                         </View>
                                         <View style={{ backgroundColor: theme.background, borderRadius: theme.boderRadiusLogin }}>
-                                            <Text style={styles.text}>URL avatar</Text>
+                                            <Text style={styles.text}>{language.profilescreen.urlava}</Text>
                                             <TextInput
                                                 style={{ ...styles.input, color: theme.foreground }}
                                                 onChangeText={user => setTxtAvatar(user)}
                                             />
                                         </View>
                                         <View style={{ backgroundColor: theme.background, borderRadius: theme.boderRadiusLogin }}>
-                                            <Text style={styles.text}>Phonenumber</Text>
+                                            <Text style={styles.text}>{language.profilescreen.phonenumber}</Text>
                                             <TextInput
                                                 style={{ ...styles.input, color: theme.foreground }}
                                                 onChangeText={user => setTxtPhone(user)}
@@ -123,6 +130,55 @@ const Profile = () => {
 
                                                 }
                                                 }>
+                                            </TouchableOpacity>
+                                        </ImageBackground>
+                                        <View style={{ ...styles.viewInsert2, backgroundColor: theme.background }} />
+
+                                        <Text style={{ ...styles.text1, color: "red", marginTop: 50, }}>{language.profilescreen.update2}</Text>
+                                        <View style={{ ...styles.viewInsert2, backgroundColor: theme.background }} />
+                                        <View style={{ backgroundColor: theme.background, borderRadius: theme.boderRadiusLogin }}>
+                                            <Text style={styles.text}>{language.profilescreen.currentpassword}</Text>
+                                            <TextInput
+                                                style={{ ...styles.input, color: theme.foreground }}
+                                                onChangeText={user => setCurrentPassword(user)}
+                                                secureTextEntry={true}
+                                            />
+                                        </View>
+                                        <View style={{ backgroundColor: theme.background, borderRadius: theme.boderRadiusLogin }}>
+                                            <Text style={styles.text}>{language.profilescreen.newpassword}</Text>
+                                            <TextInput
+                                                style={{ ...styles.input, color: theme.foreground }}
+                                                onChangeText={user => setNewPassword(user)}
+                                                secureTextEntry={true}
+                                            />
+                                        </View>
+                                        <View style={{ backgroundColor: theme.background, borderRadius: theme.boderRadiusLogin }}>
+                                            <Text style={styles.text}>{language.profilescreen.renewpassword}</Text>
+                                            <TextInput
+                                                style={{ ...styles.input, color: theme.foreground }}
+                                                secureTextEntry={true}
+                                                onChangeText={user => setRenewPassword(user)}
+                                            />
+                                        </View>
+                                        <View style={{ ...styles.viewInsert2, backgroundColor: theme.background }} />
+                                        <ImageBackground source={require("../../../assets/ic_profile_update.png")} style={{ width: 50, height: 50, alignSelf: "center" }}>
+                                            <TouchableOpacity
+                                                style={{ width: 50, height: 50 }}
+                                                onPress={() => {
+                                                    if (newpassword !== renewpassword) {
+                                                        alert("Mật khẩu nhập lại phải trùng với mật khẩu mới");
+                                                    } else {
+                                                        changePassword(token, userId, currentpassword, newpassword)
+                                                            .then(res => res.json())
+                                                            .then(res => {
+                                                                if (res.message === "Mật khẩu đã được đổi") {
+                                                                    setIsUpdate(!isUpdate)
+                                                                }
+                                                                alert(res.message);
+                                                            })
+                                                            .catch(err => console.log("CHANGE PASSWORD ERR", err));
+                                                    }
+                                                }}>
                                             </TouchableOpacity>
                                         </ImageBackground>
                                         <View style={{ ...styles.viewInsert2, backgroundColor: theme.background }} />

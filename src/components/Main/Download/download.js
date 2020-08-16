@@ -1,14 +1,23 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
+import { ThemeContext } from "../../../../App";
 
 const Download = () => {
 
     return (
-        <View style={styles.home}>
-            <Image source={require('../../../../assets/icon8_download.png')} style={styles.image} />
-            <Text style={styles.text1}>No downloads</Text>
-            <Text style={styles.text2}>Courses you download will appear here</Text>
-        </View>
+        <ThemeContext.Consumer>
+            {
+                ({ theme, language }) => {
+                    return (
+                        <View style={styles.home}>
+                            <Image source={require('../../../../assets/icon8_download.png')} style={styles.image} />
+                            <Text style={styles.text1}>{language.downloadscreen.status}</Text>
+                            <Text style={styles.text2}>{language.downloadscreen.detail}</Text>
+                        </View>
+                    )
+                }
+            }
+        </ThemeContext.Consumer>
 
     );
 };
@@ -17,8 +26,6 @@ const styles = StyleSheet.create({
     home: {
         flex: 1,
         backgroundColor: 'black',
-        //flexDirection:'column',
-        //display:'flex',
         justifyContent: 'center',
         alignItems: 'center',
     },

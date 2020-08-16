@@ -1,15 +1,33 @@
-import React from 'react';
-import { View, Text, StyleSheet, ImageBackground } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Text, StyleSheet, ImageBackground } from 'react-native';
+import { ThemeContext } from "../../../../../App";
+import storage from "../../../../Storage/storage";
 
 const Greeting = (props) => {
-    const content = "This app is using for learing. For more information, please click Contact tab or call 772211. Let enjoys!";
-    //const img = {uri: '../../../../../assets/ic_homegreeting_background.jpg'};
+
+    const [name, setName] = useState("");
+
+    useEffect(() => {
+        storage
+            .load({ key: "jwt" })
+            .then(ret => setName(ret.userInfo.name))
+            .catch(err => console.log(err.name))
+    }, [])
+
 
     return (
-        <ImageBackground style={styles.image} source={require('../../../../../assets/ic_browse_1.jpg')}>
-            <Text style={styles.title}>Hello {props.name} ! Welcome to Learning App!</Text>
-            <Text style={styles.content}>{content}</Text>
-        </ImageBackground>
+        <ThemeContext.Consumer>
+            {
+                ({ theme, language }) => {
+                    return (
+                        <ImageBackground style={styles.image} source={require('../../../../../assets/ic_browse_1.jpg')}>
+                            <Text style={styles.title}>Hello {name} ! Welcome to Learning App!</Text>
+                            <Text style={styles.content}>{language.greeting.content}</Text>
+                        </ImageBackground>
+                    )
+                }
+            }
+        </ThemeContext.Consumer>
 
     );
 };

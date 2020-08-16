@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, StatusBar, StyleSheet, Button, TouchableOpacity, Text, ImageBackground } from 'react-native';
+import { StatusBar, StyleSheet, TouchableOpacity, Text, ImageBackground } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -41,7 +41,7 @@ export const ThemeContext = React.createContext();
 export default function App(props) {
 
     const [theme, setTheme] = useState(themes.dark);
-    const [language, setLanguage] = useState(languages.en);
+    const [language, setLanguage] = useState(languages.vi);
 
     const HomeStackNavigation = () => {
         return (

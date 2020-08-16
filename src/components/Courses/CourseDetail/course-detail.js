@@ -4,6 +4,7 @@ import CourseDetailItem from "./CourseDetailItem/course-detail-item";
 import { checkOwnerCourse, getCourseWithLesson, getCourseWithLessonUserId, getFreeCourse, userLikeCourse, getLikeCourseStatus, ratingACourse } from "../action";
 import storage from "../../../Storage/storage";
 import StarRating from 'react-native-star-rating';
+import { ThemeContext } from "../../../../App";
 
 const CourseDetail = (props) => {
 
@@ -104,7 +105,7 @@ const CourseDetail = (props) => {
     }
 
     const onShare = async (mess) => {
-        alert(mess);
+        //alert(mess);
         try {
             const result = await Share.share({
                 message: mess
@@ -138,131 +139,138 @@ const CourseDetail = (props) => {
     }
 
     return (
-        <ScrollView style={styles.home}>
-            {isLoading && <ActivityIndicator size="large" color="blue" />}
-            <View style={styles.v}>
-                <Text style={styles.text}>{infor.title}</Text>
-            </View>
-            <Image source={{ uri: infor.imageUrl }} style={{ width: 350, height: 180, alignSelf: "center", resizeMode: "stretch" }} />
-            <View style={styles.viewAuthor}>
-                <Image source={{ uri: avartar }} style={styles.image} />
-                <Text style={styles.textAuthor}>{author}</Text>
-            </View>
-            <Text style={styles.textInfor}>{Math.round(Number(infor.contentPoint))} point  .  {date.substring(0, 10)}  .  {infor.totalHours} hours</Text>
-            <Text style={{ ...styles.textInfor, fontSize: 17, color: "green" }}>{infor.videoNumber} videos</Text>
-            <StarRating
-                style={{ width: 200, backgroundColor: "red" }}
-                disabled={false}
-                maxStars={5}
-                rating={Math.round(Number(infor.contentPoint))}
-                fullStarColor="yellow"
-                emptyStarColor="white"
-                starSize={27}
-                containerStyle={{ width: 150, marginLeft: 20, }}
-            />
-            <Text style={styles.textContent}>{infor.subtitle}</Text>
-
-            <View style={{ flexDirection: "row", justifyContent: "space-around", marginTop: 20, }}>
-                {
-                    likeStatus ?
-                        <ImageBackground source={require("../../../../assets/ic_detail_like.png")} style={{ width: 50, height: 50, backgroundColor: "white" }}>
-                            <TouchableOpacity style={{ width: 50, height: 50 }} onPress={() => onLikeCourse()} />
-                        </ImageBackground> :
-                        <ImageBackground source={require("../../../../assets/ic_detail_unlike.png")} style={{ width: 50, height: 50, backgroundColor: "white" }}>
-                            <TouchableOpacity style={{ width: 50, height: 50 }} onPress={() => onLikeCourse()} />
-                        </ImageBackground>
-                }
-
-                <ImageBackground source={require("../../../../assets/ic_detail_share.png")} style={{ width: 50, height: 50, backgroundColor: "white" }}>
-                    <TouchableOpacity style={{ width: 50, height: 50 }} onPress={() => {
-                        const message = "https://itedu.me/course-detail/" + courseId; // lấy url khóa học dạng web
-                        onShare(message); // share
-                    }} />
-                </ImageBackground>
-                <ImageBackground source={require("../../../../assets/ic_detail_download.png")} style={{ width: 50, height: 50, backgroundColor: "white" }}>
-                    <TouchableOpacity style={{ width: 50, height: 50 }} onPress={() => alert("Download clicked!")} />
-                </ImageBackground>
-            </View>
-
-            <Text style={styles.textClone}>DESCRIPTION</Text>
-            <Text style={styles.textContent}>{infor.description}</Text>
-            <Text style={styles.textClone}>CONTENT</Text>
+        <ThemeContext.Consumer>
             {
-                isCheck ? (
-                    <>
-                        <View>{renderCourseDetailItem(dataSectionAndLesson)}</View>
-                    </>
-                ) : (
-                        <>
-                            <Text style={{ ...styles.textContent, color: "red" }}>You hasn't join/buy this course!</Text>
-                            <TouchableOpacity style={styles.button}
-                                onPress={() => {
-                                    getFreeCourse(token, courseId)
-                                        .then(res => res.json())
-                                        .then(res => {
-                                            // Lỗi này trên UI web của nhóm cung cấp API cũng bị, register vẫn OK nhưng báo fail
-                                            // if (res.message === "OK" || res.message == "Bạn đã từng đăng ký khóa học này.") {
-                                            //     setIsCheck(true); //show detail course
-                                            //     alert("Register this course success. An email has send to you!");
-                                            // } else {
-                                            //     alert("Register this course fail!");
-                                            // }
-                                        })
-                                        .catch(err => console.log("GET FREE COURSE FAILL", err))
-                                        .finally(() => {
-                                            setIsCheck(true);
-                                            alert("Register this course success. An email has send to you!");
-                                        })
-                                }
-                                }
-                            >
-                                <Text style={styles.textSignIn}>Register for free!</Text>
-                            </TouchableOpacity>
-                        </>
-                    )
-            }
-            <Text style={styles.textClone}>RATING</Text>
-            <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-                <Text style={styles.textContent}>Rating this course</Text>
-                <StarRating
-                    style={{ width: 200, backgroundColor: "red" }}
-                    disabled={false}
-                    maxStars={5}
-                    rating={myrating}
-                    fullStarColor="yellow"
-                    emptyStarColor="white"
-                    starSize={27}
-                    containerStyle={{ width: 150, alignSelf: "center" }}
-                    selectedStar={numstar => setMyRating(numstar)}
-                />
-            </View>
-            <View style={{ flexDirection: "row", justifyContent: "space-around", marginBottom: 30 }}>
-                <TextInput style={{ backgroundColor: "white", alignSelf: "center", width: 200, height: 50, }} onChangeText={txt => setMyCmt(txt)}></TextInput>
-                <TouchableOpacity
-                    style={{ alignSelf: "center", }}
-                    onPress={() => {
-                        ratingACourse(token, courseId, myrating, mycmt)
-                            .catch(err => console.log("RATING ERR:", err))
-                        const tempRatingList = [...ratingList];
-                        tempRatingList.unshift({
-                            content: mycmt,
-                            user: {
-                                avartar: myavatar,
+                ({ theme, language }) => {
+                    return (
+                        <ScrollView style={styles.home}>
+                            {isLoading && <ActivityIndicator size="large" color="blue" />}
+                            <View style={styles.v}>
+                                <Text style={styles.text}>{infor.title}</Text>
+                            </View>
+                            <Image source={{ uri: infor.imageUrl }} style={{ width: 350, height: 180, alignSelf: "center", resizeMode: "stretch" }} />
+                            <View style={styles.viewAuthor}>
+                                <Image source={{ uri: avartar }} style={styles.image} />
+                                <Text style={styles.textAuthor}>{author}</Text>
+                            </View>
+                            <Text style={styles.textInfor}>{Math.round(Number(infor.contentPoint))} point  .  {date.substring(0, 10)}  .  {infor.totalHours} {language.coursedetail.hours}</Text>
+                            <Text style={{ ...styles.textInfor, fontSize: 17, color: "green" }}>{infor.videoNumber} videos</Text>
+                            <StarRating
+                                style={{ width: 200, backgroundColor: "red" }}
+                                disabled={false}
+                                maxStars={5}
+                                rating={Math.round(Number(infor.contentPoint))}
+                                fullStarColor="yellow"
+                                emptyStarColor="white"
+                                starSize={27}
+                                containerStyle={{ width: 150, marginLeft: 20, }}
+                            />
+                            <Text style={styles.textContent}>{infor.subtitle}</Text>
 
-                                name: myname
+                            <View style={{ flexDirection: "row", justifyContent: "space-around", marginTop: 20, }}>
+                                {
+                                    likeStatus ?
+                                        <ImageBackground source={require("../../../../assets/ic_detail_like.png")} style={{ width: 50, height: 50, backgroundColor: "white" }}>
+                                            <TouchableOpacity style={{ width: 50, height: 50 }} onPress={() => onLikeCourse()} />
+                                        </ImageBackground> :
+                                        <ImageBackground source={require("../../../../assets/ic_detail_unlike.png")} style={{ width: 50, height: 50, backgroundColor: "white" }}>
+                                            <TouchableOpacity style={{ width: 50, height: 50 }} onPress={() => onLikeCourse()} />
+                                        </ImageBackground>
+                                }
+
+                                <ImageBackground source={require("../../../../assets/ic_detail_share.png")} style={{ width: 50, height: 50, backgroundColor: "white" }}>
+                                    <TouchableOpacity style={{ width: 50, height: 50 }} onPress={() => {
+                                        const message = "https://itedu.me/course-detail/" + courseId; // lấy url khóa học dạng web
+                                        onShare(message); // share
+                                    }} />
+                                </ImageBackground>
+                                <ImageBackground source={require("../../../../assets/ic_detail_download.png")} style={{ width: 50, height: 50, backgroundColor: "white" }}>
+                                    <TouchableOpacity style={{ width: 50, height: 50 }} onPress={() => alert("Download clicked!")} />
+                                </ImageBackground>
+                            </View>
+
+                            <Text style={styles.textClone}>{language.coursedetail.description}</Text>
+                            <Text style={styles.textContent}>{infor.description}</Text>
+                            <Text style={styles.textClone}>{language.coursedetail.content}</Text>
+                            {
+                                isCheck ? (
+                                    <>
+                                        <View>{renderCourseDetailItem(dataSectionAndLesson)}</View>
+                                    </>
+                                ) : (
+                                        <>
+                                            <Text style={{ ...styles.textContent, color: "red" }}>{language.coursedetail.join}</Text>
+                                            <TouchableOpacity style={styles.button}
+                                                onPress={() => {
+                                                    getFreeCourse(token, courseId)
+                                                        .then(res => res.json())
+                                                        .then(res => {
+                                                            // Lỗi này trên UI web của nhóm cung cấp API cũng bị, register vẫn OK nhưng báo fail
+                                                            // if (res.message === "OK" || res.message == "Bạn đã từng đăng ký khóa học này.") {
+                                                            //     setIsCheck(true); //show detail course
+                                                            //     alert("Register this course success. An email has send to you!");
+                                                            // } else {
+                                                            //     alert("Register this course fail!");
+                                                            // }
+                                                        })
+                                                        .catch(err => console.log("GET FREE COURSE FAILL", err))
+                                                        .finally(() => {
+                                                            setIsCheck(true);
+                                                            alert("Register this course success. An email has send to you!");
+                                                        })
+                                                }
+                                                }
+                                            >
+                                                <Text style={styles.textSignIn}>{language.coursedetail.reg}</Text>
+                                            </TouchableOpacity>
+                                        </>
+                                    )
                             }
-                        })
-                        // console.log(tempRatingList);
-                        setRatingList(tempRatingList);
-                    }}
-                >
-                    <Text style={{ color: "blue", alignSelf: "center" }}>Add comment</Text>
-                </TouchableOpacity>
-            </View>
-            <View>{renderRatingList(ratingList)}</View>
+                            <Text style={styles.textClone}>{language.coursedetail.rate.title}</Text>
+                            <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                                <Text style={styles.textContent}>{language.coursedetail.rate.ratethiscourse}</Text>
+                                <StarRating
+                                    style={{ width: 200, backgroundColor: "red" }}
+                                    disabled={false}
+                                    maxStars={5}
+                                    rating={myrating}
+                                    fullStarColor="yellow"
+                                    emptyStarColor="white"
+                                    starSize={27}
+                                    containerStyle={{ width: 150, alignSelf: "center" }}
+                                    selectedStar={numstar => setMyRating(numstar)}
+                                />
+                            </View>
+                            <View style={{ flexDirection: "row", justifyContent: "space-around", marginBottom: 30 }}>
+                                <TextInput style={{ backgroundColor: "white", alignSelf: "center", width: 200, height: 50, }} onChangeText={txt => setMyCmt(txt)}></TextInput>
+                                <TouchableOpacity
+                                    style={{ alignSelf: "center", }}
+                                    onPress={() => {
+                                        ratingACourse(token, courseId, myrating, mycmt)
+                                            .catch(err => console.log("RATING ERR:", err))
+                                        const tempRatingList = [...ratingList];
+                                        tempRatingList.unshift({
+                                            content: mycmt,
+                                            user: {
+                                                avartar: myavatar,
 
+                                                name: myname
+                                            }
+                                        })
+                                        // console.log(tempRatingList);
+                                        setRatingList(tempRatingList);
+                                    }}
+                                >
+                                    <Text style={{ color: "blue", alignSelf: "center" }}>{language.coursedetail.rate.cmt}</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View>{renderRatingList(ratingList)}</View>
 
-        </ScrollView >
+                        </ScrollView >
+                    )
+                }
+            }
+        </ThemeContext.Consumer>
     );
 };
 const styles = StyleSheet.create({

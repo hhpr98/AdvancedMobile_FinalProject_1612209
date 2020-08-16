@@ -13,14 +13,14 @@ const PopularSkills = () => {
     return (
         <ThemeContext.Consumer>
             {
-                ({ theme }) => {
+                ({ theme, language }) => {
                     return (
                         <DataContext.Consumer>
                             {
                                 ({ data }) => {
                                     return (
                                         <View style={styles.view}>
-                                            <Text style={{ ...styles.text, color: theme.foreground }}>Popular Skills</Text>
+                                            <Text style={{ ...styles.text, color: theme.foreground }}>{language.browsescreen.popularskill}</Text>
                                             <ScrollView horizontal={true}>
                                                 {getPopularSkillsItem(data.popularskills)}
                                             </ScrollView>

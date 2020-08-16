@@ -1,16 +1,25 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
+import { ThemeContext } from "../../../../../../App";
 
 const PathItem = (props) => {
 
     return (
-        <View style={styles.item}>
-            <Image source={require('../../../../../../assets/icons8_web.png')} style={styles.image} />
-            <View style={{ margin: 5, }}>
-                <Text style={styles.text1}>{props.item.name}</Text>
-                <Text style={styles.text2}>Created at: {props.item.createdAt.substring(0, 10)}</Text>
-            </View>
-        </View>
+        <ThemeContext.Consumer>
+            {
+                ({ theme, language }) => {
+                    return (
+                        <View style={styles.item}>
+                            <Image source={require('../../../../../../assets/icons8_web.png')} style={styles.image} />
+                            <View style={{ margin: 5, }}>
+                                <Text style={styles.text1}>{props.item.name}</Text>
+                                <Text style={styles.text2}>{language.browsescreen.pathitem} {props.item.createdAt.substring(0, 10)}</Text>
+                            </View>
+                        </View>
+                    )
+                }
+            }
+        </ThemeContext.Consumer>
     );
 };
 

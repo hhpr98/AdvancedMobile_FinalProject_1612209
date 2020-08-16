@@ -57,6 +57,43 @@ export const languages = {
             authorcourse: {
                 coursenumber: "courses"
             }
+        },
+        browsescreen: {
+            popularskill: "Popular Skills",
+            path: "Path",
+            pathitem: "Created at:",
+            topauthor: "Top Author"
+        },
+        downloadscreen: {
+            status: "No downloads",
+            detail: "Courses you download will appear here"
+        },
+        profilescreen: {
+            basic: "BASIC INFORMATION",
+            phone: "PHONE NUMBER",
+            update: "UPDATE INFORMATION",
+            fullname: "Full name",
+            urlava: "URL avatar",
+            phonenumber: "Phonenumber",
+            currentpassword: "Current Password",
+            newpassword: "New Password",
+            renewpassword: "reNew Password",
+            update2: "UPDATE PASSWORD"
+        },
+        coursedetail: {
+            hours: "hours",
+            description: "DESCRIPTION",
+            content: "CONTENT",
+            join: "You hasn't join/buy this course!",
+            reg: "Register for free!",
+            rate: {
+                title: "RATING",
+                ratethiscourse: "Rating this course",
+                cmt: "Add comment"
+            }
+        },
+        greeting: {
+            content: "This app is using for learing. For more information, please click Contact tab or call 0353133147. Let enjoys!",
         }
     },
     vi: {
@@ -117,6 +154,43 @@ export const languages = {
             authorcourse: {
                 coursenumber: "khóa học"
             }
+        },
+        browsescreen: {
+            popularskill: "   Các kĩ năng cần thiết",
+            path: "Danh mục",
+            pathitem: "Tạo vào:",
+            topauthor: "Top tác giả nổi bật"
+        },
+        downloadscreen: {
+            status: "Không có mục download",
+            detail: "Các khóa học đã download sẽ xuất hiện ở đây"
+        },
+        profilescreen: {
+            basic: "THÔNG TIN CƠ BẢN",
+            phone: "SỐ ĐIỆN THOẠI",
+            update: "CẬP NHẬT THÔNG TIN CÁ NHÂN",
+            fullname: "Tên đầy đủ",
+            urlava: "URL ảnh đại diện",
+            phonenumber: "Số điện thoại",
+            currentpassword: "Mật khẩu hiện tại",
+            newpassword: "Mật khẩu mới",
+            renewpassword: "Nhập lại mật khẩu",
+            update2: "CẬP NHẬT MẬT KHẨU"
+        },
+        coursedetail: {
+            hours: "giờ",
+            description: "MÔ TẢ",
+            content: "NỘI DUNG",
+            join: "Bạn chưa đăng kí/mua khóa học này!",
+            reg: "Đăng kí miễn phí!",
+            rate: {
+                title: "ĐÁNH GIÁ",
+                ratethiscourse: "Đánh giá khóa học này",
+                cmt: "Thêm bình luận"
+            }
+        },
+        greeting: {
+            content: "Ứng dụng phục vụ cho việc học tập. Để biết thêm thông tin, vui lòng liên hệ 0353133147. Chúc vui!",
         }
     }
 }

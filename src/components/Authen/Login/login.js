@@ -6,8 +6,8 @@ import { getLogin } from "../action";
 import { languages } from '../../../libs/languages';
 
 const Login = (props) => {
-    const [user, setUser] = useState('nguyenhuuhoa1998@gmail.com');
-    const [password, setPassword] = useState('abcxyz123@');
+    const [user, setUser] = useState('');
+    const [password, setPassword] = useState('');
 
     const signInClick = () => {
         // console.log(user + password);

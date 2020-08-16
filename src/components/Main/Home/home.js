@@ -52,7 +52,7 @@ const Home = (props) => {
                 ({ theme, language }) => {
                     return (
                         <ScrollView style={{ backgroundColor: theme.background }}>
-                            <Greeting name='Hòa' />
+                            <Greeting />
                             <SectionCourses navigation={props.navigation} title={language.homescreen.course1} courses={topratecourse} isLoading={isLoading2} />
                             <SectionCourses navigation={props.navigation} title={language.homescreen.course2} courses={topnewcourse} isLoading={isLoading1} />
                             <SectionCourses navigation={props.navigation} title={language.homescreen.course3} courses={topratecourse} isLoading={isLoading2} />
