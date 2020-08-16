@@ -21,7 +21,7 @@ const Path = (props) => {
 
     const getPathItem = (paths) => {
         return paths.map(item =>
-            <TouchableOpacity onPress={() => alert(item.id)}>
+            <TouchableOpacity onPress={() => props.navigation.navigate("PathList", { pathId: item.id, pathTitle: item.name })}>
                 <PathItem item={item} />
             </TouchableOpacity>
         )
