@@ -91,6 +91,9 @@ export const languages = {
                 ratethiscourse: "Rating this course",
                 cmt: "Add comment"
             }
+        },
+        greeting: {
+            content: "This app is using for learing. For more information, please click Contact tab or call 0353133147. Let enjoys!",
         }
     },
     vi: {
@@ -185,6 +188,9 @@ export const languages = {
                 ratethiscourse: "Đánh giá khóa học này",
                 cmt: "Thêm bình luận"
             }
+        },
+        greeting: {
+            content: "Ứng dụng phục vụ cho việc học tập. Để biết thêm thông tin, vui lòng liên hệ 0353133147. Chúc vui!",
         }
     }
 }
