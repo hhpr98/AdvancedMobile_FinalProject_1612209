@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView } from 'react-native';
-import { getRegister } from "../action";
+import { getRegister, sendActivateEmail } from "../action";
 
 const Register = (props) => {
     const [email, setEmail] = useState('');
@@ -39,6 +39,8 @@ const Register = (props) => {
             .then(res => res.json())
             .then(res => {
                 if (res.message === "OK") {
+                    sendActivateEmail(email)
+                        .catch(err => console.log("SEND EMAIL FIRST TIME ERRRR", err));
                     props.navigation.navigate("ActivateAccount", { email: email });
                 } else {
                     alert(res.message);

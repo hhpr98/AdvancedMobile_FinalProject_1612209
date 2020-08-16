@@ -1,16 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
+import { sendActivateEmail, acctivateEmail } from "../action";
 
 const ActivateAccount = (props) => {
 
     const email = props.route.params.email;
-    console.log(email);
+    // console.log(email);
 
     const [jwt, setJwt] = useState("");
 
+    const onActivate = () => {
+        acctivateEmail(email, jwt)
+            .then(res => res.json())
+            .then(res => {
+                if (res.message === "OK") {
+                    alert("Activation success!");
+                    props.navigation.navigate("Login");
+                } else {
+                    alert(res.message);
+                }
+            })
+            .catch(err => console.log("ACTIVATE API FAILLLLL", err));
+
+    }
 
     const onCancelClick = () => {
         props.navigation.navigate("Login");
+    }
+
+    const onResendEmail = () => {
+        sendActivateEmail(email)
+            .then(res => res.json())
+            .then(res => {
+                if (res.message === "OK") {
+                    alert("Success! Check your email address!")
+                } else {
+                    alert(res.message);
+                }
+            })
+            .catch(err => console.log("SEND EMAIL TIME ERRRR", err));
     }
 
     return (
@@ -35,8 +63,8 @@ const ActivateAccount = (props) => {
 
                 <View style={styles.viewInsert2} />
 
-                <TouchableOpacity style={styles.buttonSignIn}>
-                    <Text style={styles.textSignIn}>SEND EMAIL</Text>
+                <TouchableOpacity style={styles.buttonSignIn} onPress={() => onActivate()}>
+                    <Text style={styles.textSignIn}>ACTIVATE</Text>
                 </TouchableOpacity>
 
                 <View style={styles.viewInsert} />
@@ -58,7 +86,7 @@ const ActivateAccount = (props) => {
 
                 <View style={styles.viewInsert2} />
 
-                <TouchableOpacity style={styles.buttonSignIn2}>
+                <TouchableOpacity style={styles.buttonSignIn2} onPress={() => onResendEmail()}>
                     <Text style={styles.textSignIn}>Resend link</Text>
                 </TouchableOpacity>
             </View>
