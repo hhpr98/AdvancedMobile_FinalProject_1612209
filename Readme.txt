@@ -3,7 +3,8 @@ Nguyễn Hữu Hòa
 1612209
 ------------------------------------------------
 
-Hướng dẫn để cài đặt và chạy ứng dụng
+Hướng dẫn để cài đặt và chạy ứng dụng : 
+https://youtu.be/iYEDjBD42A4
 
 ------------------------------------------------
 
@@ -28,6 +29,6 @@ Deadline 3: Xây dựng ứng dụng online cho toàn bộ ứng dụng
 
 Deadline 4: Hoàn thành ứng dụng
   - Commit ID: 
-  - Video demo: 
+  - Video demo: https://youtu.be/iYEDjBD42A4
 
 -----------------------------------------------
