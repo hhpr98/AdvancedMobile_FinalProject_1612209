@@ -2,6 +2,7 @@ import React, { useEffect, useState, useReducer } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
 import SectionCoursesItem from "../SectionCoursesItem/section-courses-item";
 import { ThemeContext } from "../../../../../App";
+import { SeeAll } from "../SeeAll/see-all";
 
 const SectionCourses = (props) => {
 
@@ -16,14 +17,14 @@ const SectionCourses = (props) => {
     return (
         <ThemeContext.Consumer>
             {
-                ({ theme }) => {
+                ({ theme, language }) => {
                     return (
                         <View style={styles.cons}>
                             <View style={styles.view}>
                                 {props.isLoading && <ActivityIndicator size="large" color="blue" />}
                                 <Text style={{ ...styles.textTitle, color: theme.foreground }}>{props.title}</Text>
-                                <TouchableOpacity onPress={() => alert('See all clicked !')}>
-                                    <Text style={{ ...styles.textButton, color: theme.foreground }}>See all ></Text>
+                                <TouchableOpacity onPress={() => props.navigation.navigate('SeeAll', { title: props.title })}>
+                                    <Text style={{ ...styles.textButton, color: theme.foreground }}>{language.homescreen.seeall}</Text>
                                 </TouchableOpacity>
                             </View>
                             <ScrollView horizontal={true}>

@@ -51,23 +51,25 @@ const PathList = (props) => {
             {
                 ({ theme, language }) => {
                     return (
-                        <ScrollView style={{ ...styles.home, backgroundColor: theme.background }}>
-                            {loading ?? <ActivityIndicator size="large" color="blue" />}
+                        <View style={{ ...styles.home, backgroundColor: theme.background }}>
                             <View style={{ width: 400, height: 50, marginLeft: 10, borderBottomColor: "#3399FF", borderBottomWidth: 2, }}>
                                 <Text style={{ color: "white", width: 200, height: 30, margin: 10, fontWeight: "bold", backgroundColor: "#3399FF", fontSize: 17, textAlign: "center" }}>{pathTitle}</Text>
                             </View>
-                            {
-                                size === 0 ?
-                                    <>
-                                        <Image style={{ width: 100, height: 100, alignSelf: "center", marginTop: 10, }} source={require("../../../../../../assets/ic_search_nodata.png")} />
-                                        <Text style={{ color: theme.foreground, alignSelf: "center", marginTop: 10, }}>{language.searchscreen.nodata}</Text>
+                            <ScrollView>
+                                {loading && <ActivityIndicator size="large" color="blue" />}
+                                {
+                                    size === 0 ?
+                                        <>
+                                            <Image style={{ width: 100, height: 100, alignSelf: "center", marginTop: 10, }} source={require("../../../../../../assets/ic_search_nodata.png")} />
+                                            <Text style={{ color: theme.foreground, alignSelf: "center", marginTop: 10, }}>{language.searchscreen.nodata}</Text>
 
-                                    </> :
-                                    <>
-                                        {renderCourse(listData)}
-                                    </>
-                            }
-                        </ScrollView>
+                                        </> :
+                                        <>
+                                            {renderCourse(listData)}
+                                        </>
+                                }
+                            </ScrollView>
+                        </View>
                     );
                 }
             }

@@ -26,6 +26,7 @@ import { DataProvider } from "./src/Provider/DataProvider";
 import { PlayingVideoYoutube, PlayingVideoGoogleStorage } from "./src/components/RelativeComponent/PlayingVideo/playing-lesson";
 import ActivateAccount from "./src/components/Authen/Activate/activate-account";
 import PathList from './src/components/Main/Browse/Paths/PathList/path-list';
+import SeeAll from './src/components/Main/Home/SeeAll/see-all';
 
 const MainStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -71,6 +72,7 @@ export default function App(props) {
                 <HomeStack.Screen name="PlayingVideoYoutube" component={PlayingVideoYoutube} options={{ headerShown: false, }} />
                 <HomeStack.Screen name="PlayingVideoGoogleStorage" component={PlayingVideoGoogleStorage} options={{ headerShown: false, }} />
                 <HomeStack.Screen name="Download" component={Download} options={{ headerShown: false, }} />
+                <HomeStack.Screen name="SeeAll" component={SeeAll} options={{ headerShown: false, }} />
             </HomeStack.Navigator>
         )
     }
