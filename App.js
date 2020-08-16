@@ -41,7 +41,7 @@ export const ThemeContext = React.createContext();
 export default function App(props) {
 
     const [theme, setTheme] = useState(themes.dark);
-    const [language, setLanguage] = useState(languages.vi);
+    const [language, setLanguage] = useState(languages.en);
 
     const HomeStackNavigation = () => {
         return (

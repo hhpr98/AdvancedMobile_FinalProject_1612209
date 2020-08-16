@@ -79,6 +79,18 @@ export const languages = {
             newpassword: "New Password",
             renewpassword: "reNew Password",
             update2: "UPDATE PASSWORD"
+        },
+        coursedetail: {
+            hours: "hours",
+            description: "DESCRIPTION",
+            content: "CONTENT",
+            join: "You hasn't join/buy this course!",
+            reg: "Register for free!",
+            rate: {
+                title: "RATING",
+                ratethiscourse: "Rating this course",
+                cmt: "Add comment"
+            }
         }
     },
     vi: {
@@ -161,6 +173,18 @@ export const languages = {
             newpassword: "Mật khẩu mới",
             renewpassword: "Nhập lại mật khẩu",
             update2: "CẬP NHẬT MẬT KHẨU"
+        },
+        coursedetail: {
+            hours: "giờ",
+            description: "MÔ TẢ",
+            content: "NỘI DUNG",
+            join: "Bạn chưa đăng kí/mua khóa học này!",
+            reg: "Đăng kí miễn phí!",
+            rate: {
+                title: "ĐÁNH GIÁ",
+                ratethiscourse: "Đánh giá khóa học này",
+                cmt: "Thêm bình luận"
+            }
         }
     }
 }
