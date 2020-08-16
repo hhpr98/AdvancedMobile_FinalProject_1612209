@@ -21,6 +21,7 @@ import Favorite from "./src/components/Main/Favorite/favorite";
 import SplashScreen from "./src/components/RelativeComponent/Splash/splash";
 import ScreenKey from "./src/libs/ScreenKey";
 import { themes } from "./src/libs/themes";
+import { languages } from "./src/libs/languages";
 import { DataProvider } from "./src/Provider/DataProvider";
 import { PlayingVideoYoutube, PlayingVideoGoogleStorage } from "./src/components/RelativeComponent/PlayingVideo/playing-lesson";
 import ActivateAccount from "./src/components/Authen/Activate/activate-account";
@@ -38,6 +39,7 @@ export const ThemeContext = React.createContext();
 export default function App(props) {
 
     const [theme, setTheme] = useState(themes.dark);
+    const [language, setLanguage] = useState(languages.vi);
 
     const HomeStackNavigation = () => {
         return (
@@ -232,7 +234,7 @@ export default function App(props) {
     }
 
     return (
-        <ThemeContext.Provider value={{ theme, setTheme }}>
+        <ThemeContext.Provider value={{ theme, setTheme, language, setLanguage }}>
             <StatusBar barStyle="light-content" />
             <DataProvider>
                 <NavigationContainer style={styles.main}>
