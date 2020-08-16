@@ -7,6 +7,7 @@ const API = {
   REGISTER: `${URL}/user/register`,
   SEND_ACTIVE_EMAIL: `${URL}/user/send-activate-email`,
   ACTIVE_EMAIL: `${URL}/user/activate-email`,
+  CHANGE_PASSWORD: `${URL}/user/change-password`,
 
   // user
   // get thông tin cá nhân
