@@ -111,7 +111,12 @@ const Setting = (props) => {
                             <Text style={{ ...styles.textLittle, color: theme.foreground }}>0.1.0</Text>
                             <View style={{ ...styles.line, borderColor: theme.background, borderBottomColor: theme.foreground }} />
 
-                            <TouchableOpacity style={styles.buttonSignOut} onPress={() => props.navigation.navigate("Login")}>
+                            <TouchableOpacity style={styles.buttonSignOut} onPress={() => {
+                                storage
+                                    .remove({ key: "jwt" })
+                                    .catch(err => console.log(err));
+                                props.navigation.navigate("Login");
+                            }}>
                                 <Text style={styles.textSignOut}>{language.settingscreen.setg}</Text>
                             </TouchableOpacity>
                         </ScrollView>
