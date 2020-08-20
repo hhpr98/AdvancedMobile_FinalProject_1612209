@@ -29,7 +29,6 @@ const Favorite = (props) => {
         getMyFavoriteCourse(tk)
             .then(res => res.json())
             .then(res => {
-                console.log(res);
                 res.message === "OK" ? setAData(res.payload) : setAData([]);
             })
             .catch(err => console.log("get My favorite course err:", err))
