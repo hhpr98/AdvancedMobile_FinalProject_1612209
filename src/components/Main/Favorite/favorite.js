@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, ActivityIndicator, RefreshControl } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator, RefreshControl } from 'react-native';
 import CourseLargeItem from "./CourseFavorite/course-large-item";
-import { ThemeContext } from "../../../../App";
+import { ThemeContext } from "../../../Provider/ThemeProvider";
 // import { DataContext } from "../../../Provider/DataProvider";
 import { getMyFavoriteCourse } from "./action";
 import storage from "../../../Storage/storage";

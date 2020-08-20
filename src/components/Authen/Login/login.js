@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, AsyncStorage } from 'react-native';
-import { ThemeContext } from "../../../../App";
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { ThemeContext } from "../../../Provider/ThemeProvider";
 import storage from "../../../Storage/storage";
 import { getLogin } from "../action";
-import { languages } from '../../../libs/languages';
 
 const Login = (props) => {
     const [user, setUser] = useState('');

@@ -6,7 +6,7 @@ import PopularSkills from "./PopularSkill/popular-skill";
 import Path from "./Paths/path";
 import TopAuthor from "./TopAuthors/top-author";
 // import SignInRequired from "./SignInRequired/sign-in-required";
-import { ThemeContext } from "../../../../App";
+import { ThemeContext } from "../../../Provider/ThemeProvider";
 
 const Browse = (props) => {
     const dat = [

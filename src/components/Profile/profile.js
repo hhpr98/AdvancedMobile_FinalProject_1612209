@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, Image, ScrollView, ActivityIndicator, ImageBackground, TextInput } from 'react-native';
-import { ThemeContext } from "../../../App";
+import { ThemeContext } from "../../Provider/ThemeProvider";
 import storage from "../../Storage/storage";
 import { getInformation, updateInformation } from "./action";
 import { TouchableOpacity } from 'react-native-gesture-handler';

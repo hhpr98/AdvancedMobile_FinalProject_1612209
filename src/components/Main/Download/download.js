@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import { ThemeContext } from "../../../../App";
+import { ThemeContext } from "../../../Provider/ThemeProvider";
 
 const Download = () => {
 

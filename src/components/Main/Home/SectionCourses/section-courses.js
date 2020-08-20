@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useReducer } from 'react';
+import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
 import SectionCoursesItem from "../SectionCoursesItem/section-courses-item";
-import { ThemeContext } from "../../../../../App";
+import { ThemeContext } from "../../../../Provider/ThemeProvider";
 import { SeeAll } from "../SeeAll/see-all";
 
 const SectionCourses = (props) => {

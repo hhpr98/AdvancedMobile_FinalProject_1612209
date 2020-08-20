@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { ThemeContext } from "../../../../../App";
+import { ThemeContext } from "../../../../Provider/ThemeProvider";
 import SearchCourseItem from "../SearchCourse/search-course-item";
 
 const SearchCourse = (props) => {
@@ -27,7 +27,7 @@ const SearchCourse = (props) => {
     return (
         <ThemeContext>
             {
-                ({ theme,language }) => {
+                ({ theme, language }) => {
                     return (
                         <View style={{ ...styles.home, backgroundColor: theme.background }}>
                             <View style={{ width: 400, height: 50, marginLeft: 10, borderBottomColor: "#3399FF", borderBottomWidth: 2, }}>

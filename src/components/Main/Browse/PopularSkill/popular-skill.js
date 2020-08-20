@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import PopularSkillsItem from "./PopularSkillItem/popular-skill-item";
-import { ThemeContext } from "../../../../../App";
+import { ThemeContext } from "../../../../Provider/ThemeProvider";
 import { DataContext } from "../../../../Provider/DataProvider";
 
 const PopularSkills = () => {

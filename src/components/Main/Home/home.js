@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import SectionCourses from "./SectionCourses/section-courses";
 import Greeting from "./Greeting/greeting";
-import { ThemeContext } from "./../../../../App";
+import { ThemeContext } from "../../../Provider/ThemeProvider";
 import { getNewCourse, getMyFavoriteCourse, getTopRateCourse, getTopSellCourse } from "./action";
 
 const Home = (props) => {

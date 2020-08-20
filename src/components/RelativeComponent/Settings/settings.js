@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
 import ToggleSwitch from 'toggle-switch-react-native';
-import { ThemeContext } from "../../../../App";
-import RNPickerSelect from 'react-native-picker-select';
+import { ThemeContext } from "../../../Provider/ThemeProvider";
+// import RNPickerSelect from 'react-native-picker-select';
 import { themes } from "../../../libs/themes";
 import { languages } from "../../../libs/languages";
 import storage from "../../../Storage/storage";

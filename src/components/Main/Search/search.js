@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity, ImageBackground, ActivityIndicator } from 'react-native';
-import { ThemeContext } from "../../../../App";
+import { View, StyleSheet, TextInput, ScrollView, TouchableOpacity, ImageBackground, ActivityIndicator } from 'react-native';
+import { ThemeContext } from "../../../Provider/ThemeProvider";
 // import { DataContext } from "../../../Provider/DataProvider";
 // import SearchBar from "react-native-elements";
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
