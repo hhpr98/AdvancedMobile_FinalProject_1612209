@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
 import ToggleSwitch from 'toggle-switch-react-native';
 import { ThemeContext } from "../../../Provider/ThemeProvider";
 // import RNPickerSelect from 'react-native-picker-select';
@@ -13,8 +13,10 @@ const Setting = (props) => {
     const [downloadStreamToggle, setDownloadStreamToggle] = useState(true);
     const [name, setName] = useState("");
     const [avatar, setAvatar] = useState("");
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+        setLoading(true);
         storage
             .load({ key: "jwt" })
             .then(ret => {
@@ -22,6 +24,7 @@ const Setting = (props) => {
                 setAvatar(ret.userInfo.avatar);
             })
             .catch(err => console.log(err.name))
+            .finally(() => setLoading(false))
     }, [])
 
     return (
@@ -30,6 +33,7 @@ const Setting = (props) => {
                 ({ theme, setTheme, language, setLanguage }) => {
                     return (
                         <ScrollView style={{ ...styles.home, backgroundColor: theme.background }}>
+                            {loading && <ActivityIndicator size="large" color="blue" />}
                             <TouchableOpacity style={styles.head} onPress={() => props.navigation.navigate('Profile')}>
                                 <Image
                                     source={{ uri: avatar }}
