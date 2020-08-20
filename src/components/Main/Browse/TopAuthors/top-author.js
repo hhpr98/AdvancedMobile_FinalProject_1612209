@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
-import { ThemeContext } from "../../../../../App";
+import { ThemeContext } from "../../../../Provider/ThemeProvider";
 // import { DataContext } from "../../../../Provider/DataProvider";
 import { getAllInstructor } from "../action";
 

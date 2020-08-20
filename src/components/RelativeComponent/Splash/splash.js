@@ -1,13 +1,8 @@
-import React, { useState, useEffect, useInterval } from "react";
+import React, { useEffect } from "react";
 import { View, StyleSheet, Image, Text } from "react-native";
 import * as Progress from 'react-native-progress';
 
 export default SplashScreen = (props) => {
-
-    // if (this.state.loading >= 100) {
-    //     clearInterval(this.timer);
-    //     // this.props.navigation.navigate("TabBar");
-    // }
 
     useEffect(() => {
         setTimeout(() => {
@@ -18,9 +13,8 @@ export default SplashScreen = (props) => {
 
     return (
         <View style={styles.container} >
-            <Text style={{ alignSelf: "center", fontSize: 34, color: "red", fontWeight: "bold" }}>APP LEARNING</Text>
-            <Image source={require("../../../../assets/ic_app.png")} style={{ alignSelf: "center" }} />
-            {/* <Text style={{ alignSelf: "center", fontSize: 17, color: "blue" }}>Loading.....{loading}</Text> */}
+            <Text style={{ alignSelf: "center", fontSize: 34, color: "red", fontWeight: "bold", marginBottom: 20, }}>APP LEARNING</Text>
+            <Image source={require("../../../../assets/ic_app.png")} style={{ alignSelf: "center", marginBottom: 20, }} />
             <Progress.Bar style={{ alignSelf: "center" }} progress={0.9} width={200} indeterminate={true} />
         </View>
     )

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
-import { ThemeContext } from "../../../../../../App";
+import { ThemeContext } from "../../../../../Provider/ThemeProvider";
 import PathListItem from "./path-list-item";
 import { searchWithCourseId } from "../../../Search/action";
 import storage from "../../../../../Storage/storage";

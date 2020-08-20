@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { ThemeContext } from "../../../../../App";
+import { ThemeContext } from "../../../../Provider/ThemeProvider";
 import SearchAuthorItem from "../SearchAuthor/search-author-item";
 
 const SearchAuthor = (props) => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, ActivityIndicator, RefreshControl } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator, RefreshControl } from 'react-native';
 import CourseLargeItem from "./CourseFavorite/course-large-item";
-import { ThemeContext } from "../../../../App";
+import { ThemeContext } from "../../../Provider/ThemeProvider";
 // import { DataContext } from "../../../Provider/DataProvider";
 import { getMyFavoriteCourse } from "./action";
 import storage from "../../../Storage/storage";
@@ -29,7 +29,6 @@ const Favorite = (props) => {
         getMyFavoriteCourse(tk)
             .then(res => res.json())
             .then(res => {
-                console.log(res);
                 res.message === "OK" ? setAData(res.payload) : setAData([]);
             })
             .catch(err => console.log("get My favorite course err:", err))

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
 import PathItem from "./PathItem/path-item";
-import { ThemeContext } from "../../../../../App";
+import { ThemeContext } from "../../../../Provider/ThemeProvider";
 // import { DataContext } from "../../../../Provider/DataProvider";
 import { getAllCategory } from "../action";
 

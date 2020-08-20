@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
-import { ThemeContext } from "../../../../../App";
+import { ThemeContext } from "../../../../Provider/ThemeProvider";
 import SeeAllItem from "./see-all-item";
 import { getNewCourse, getTopRateCourse, getTopSellCourse } from "../action";
 
@@ -57,7 +57,7 @@ const SeeAll = (props) => {
     return (
         <ThemeContext>
             {
-                ({ theme, language }) => {
+                ({ theme }) => {
                     return (
                         <ScrollView style={{ ...styles.home, backgroundColor: theme.background }}>
                             {loading && <ActivityIndicator size="large" color="blue" />}

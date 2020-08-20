@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, Image, ScrollView, ActivityIndicator, ImageBackground, TextInput } from 'react-native';
-import { ThemeContext } from "../../../App";
+import { ThemeContext } from "../../Provider/ThemeProvider";
 import storage from "../../Storage/storage";
 import { getInformation, updateInformation } from "./action";
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -79,7 +79,18 @@ const Profile = () => {
                             <ImageBackground source={require("../../../assets/ic_profile_down.png")} style={{ width: 50, height: 50, alignSelf: "center" }}>
                                 <TouchableOpacity
                                     style={{ width: 50, height: 50 }}
-                                    onPress={() => setIsUpdate(!isUpdate)}
+                                    onPress={() => {
+                                        if (isUpdate === false) {
+                                            setTxtName(name);
+                                            setTxtAvatar(avatar);
+                                            setTxtPhone(phone);
+                                        } else {
+                                            setTxtName("");
+                                            setTxtAvatar("");
+                                            setTxtPhone("");
+                                        }
+                                        setIsUpdate(!isUpdate);
+                                    }}
                                 >
                                 </TouchableOpacity>
                             </ImageBackground>
@@ -94,6 +105,7 @@ const Profile = () => {
                                             <TextInput
                                                 style={{ ...styles.input, color: theme.foreground }}
                                                 onChangeText={user => setTxtName(user)}
+                                                defaultValue={txtName}
                                             />
                                         </View>
                                         <View style={{ backgroundColor: theme.background, borderRadius: theme.boderRadiusLogin }}>
@@ -101,6 +113,7 @@ const Profile = () => {
                                             <TextInput
                                                 style={{ ...styles.input, color: theme.foreground }}
                                                 onChangeText={user => setTxtAvatar(user)}
+                                                defaultValue={txtAvatar}
                                             />
                                         </View>
                                         <View style={{ backgroundColor: theme.background, borderRadius: theme.boderRadiusLogin }}>
@@ -108,6 +121,7 @@ const Profile = () => {
                                             <TextInput
                                                 style={{ ...styles.input, color: theme.foreground }}
                                                 onChangeText={user => setTxtPhone(user)}
+                                                defaultValue={txtPhone}
                                             />
                                         </View>
                                         <View style={{ ...styles.viewInsert2, backgroundColor: theme.background }} />
@@ -119,8 +133,11 @@ const Profile = () => {
                                                         .then(res => res.json())
                                                         .then(res => {
                                                             if (res.message === "OK") {
-                                                                alert("Cập nhật thành công!")
-                                                                setIsUpdate(!isUpdate)
+                                                                alert("Cập nhật thành công!");
+                                                                setIsUpdate(false);
+                                                                setTxtAvatar("");
+                                                                setTxtName("");
+                                                                setPhone("");
                                                                 LoadData(token);
                                                             }
                                                             else {
@@ -172,7 +189,10 @@ const Profile = () => {
                                                             .then(res => res.json())
                                                             .then(res => {
                                                                 if (res.message === "Mật khẩu đã được đổi") {
-                                                                    setIsUpdate(!isUpdate)
+                                                                    setIsUpdate(false);
+                                                                    setTxtAvatar("");
+                                                                    setTxtName("");
+                                                                    setPhone("");
                                                                 }
                                                                 alert(res.message);
                                                             })

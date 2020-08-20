@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
 import ToggleSwitch from 'toggle-switch-react-native';
-import { ThemeContext } from "../../../../App";
-import RNPickerSelect from 'react-native-picker-select';
+import { ThemeContext } from "../../../Provider/ThemeProvider";
+// import RNPickerSelect from 'react-native-picker-select';
 import { themes } from "../../../libs/themes";
 import { languages } from "../../../libs/languages";
 import storage from "../../../Storage/storage";
@@ -13,8 +13,10 @@ const Setting = (props) => {
     const [downloadStreamToggle, setDownloadStreamToggle] = useState(true);
     const [name, setName] = useState("");
     const [avatar, setAvatar] = useState("");
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+        setLoading(true);
         storage
             .load({ key: "jwt" })
             .then(ret => {
@@ -22,6 +24,7 @@ const Setting = (props) => {
                 setAvatar(ret.userInfo.avatar);
             })
             .catch(err => console.log(err.name))
+            .finally(() => setLoading(false))
     }, [])
 
     return (
@@ -30,6 +33,7 @@ const Setting = (props) => {
                 ({ theme, setTheme, language, setLanguage }) => {
                     return (
                         <ScrollView style={{ ...styles.home, backgroundColor: theme.background }}>
+                            {loading && <ActivityIndicator size="large" color="blue" />}
                             <TouchableOpacity style={styles.head} onPress={() => props.navigation.navigate('Profile')}>
                                 <Image
                                     source={{ uri: avatar }}
@@ -74,22 +78,22 @@ const Setting = (props) => {
                             </TouchableOpacity>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                 <Text style={{ ...styles.textBig, color: theme.foreground }}>{language.settingscreen.set6}</Text>
-                                <ToggleSwitch style={{ marginRight: 50, }}
+                                <ToggleSwitch style={{ marginRight: 50 }}
                                     isOn={wifiStreamToggle}
                                     onColor="#3399FF"
-                                    offColor="black"
-                                    labelStyle={{ ...styles.textBig, color: theme.foreground }}
+                                    offColor="red"
+                                    labelStyle={{ ...styles.textBig, color: theme.foreground, alignSelf: "center" }}
                                     size="small"
                                     onToggle={() => setWifiStreamToggle(!wifiStreamToggle)}
                                 />
                             </View>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                 <Text style={{ ...styles.textBig, color: theme.foreground }}>{language.settingscreen.set7}</Text>
-                                <ToggleSwitch style={{ marginRight: 50, }}
+                                <ToggleSwitch style={{ marginRight: 50 }}
                                     isOn={downloadStreamToggle}
                                     onColor="#3399FF"
-                                    offColor="black"
-                                    labelStyle={{ ...styles.textBig, color: theme.foreground }}
+                                    offColor="red"
+                                    labelStyle={{ ...styles.textBig, color: theme.foreground, alignSelf: "center" }}
                                     size="small"
                                     onToggle={() => setDownloadStreamToggle(!downloadStreamToggle)}
                                 />
@@ -107,7 +111,12 @@ const Setting = (props) => {
                             <Text style={{ ...styles.textLittle, color: theme.foreground }}>0.1.0</Text>
                             <View style={{ ...styles.line, borderColor: theme.background, borderBottomColor: theme.foreground }} />
 
-                            <TouchableOpacity style={styles.buttonSignOut} onPress={() => props.navigation.navigate("Login")}>
+                            <TouchableOpacity style={styles.buttonSignOut} onPress={() => {
+                                storage
+                                    .remove({ key: "jwt" })
+                                    .catch(err => console.log(err));
+                                props.navigation.navigate("Login");
+                            }}>
                                 <Text style={styles.textSignOut}>{language.settingscreen.setg}</Text>
                             </TouchableOpacity>
                         </ScrollView>

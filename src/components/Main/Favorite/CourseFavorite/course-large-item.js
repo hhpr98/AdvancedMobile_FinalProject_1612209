@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { ThemeContext } from "../../../../../App";
+import { ThemeContext } from "../../../../Provider/ThemeProvider";
 import StarRating from 'react-native-star-rating';
 
 const CourseLargeItem = (props) => {

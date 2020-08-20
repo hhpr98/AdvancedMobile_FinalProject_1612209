@@ -4,7 +4,7 @@ import CourseDetailItem from "./CourseDetailItem/course-detail-item";
 import { checkOwnerCourse, getCourseWithLesson, getCourseWithLessonUserId, getFreeCourse, userLikeCourse, getLikeCourseStatus, ratingACourse } from "../action";
 import storage from "../../../Storage/storage";
 import StarRating from 'react-native-star-rating';
-import { ThemeContext } from "../../../../App";
+import { ThemeContext } from "../../../Provider/ThemeProvider";
 
 const CourseDetail = (props) => {
 
