@@ -1,14 +1,28 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { forgotPasswordSend } from "../action";
 
 const ForgotPassword = (props) => {
     const [email, setEmail] = useState('');
+
+    const OnSendEmailClick = () => {
+        forgotPasswordSend(email)
+            .then(res => res.json())
+            .then(res => {
+                if (res.message === "Email đã được gửi đi") {
+                    props.navigation.navigate("ForgotPasswordVerify", { email: email });
+                } else {
+                    alert(res.message);
+                }
+            })
+            .catch(err => console.log("SEND FORGOT PASSWORD API FAILLLL", err))
+    }
 
     return (
         <View style={styles.home}>
             <View style={styles.view}>
 
-                <Text style={styles.textHeader}>Forgot password</Text>
+                <Text style={styles.textHeader}>FORGOT PASSWORD</Text>
 
                 <View style={styles.viewInsert2} />
 
@@ -22,19 +36,24 @@ const ForgotPassword = (props) => {
                     <TextInput
                         style={styles.input}
                         onChangeText={email => setEmail(email)}
-                        value={email}
                     />
                 </View>
 
                 <View style={styles.viewInsert2} />
 
-                <TouchableOpacity style={styles.buttonSignIn}>
+                <TouchableOpacity
+                    style={styles.buttonSignIn}
+                    onPress={() => OnSendEmailClick()}
+                >
                     <Text style={styles.textSignIn}>SEND EMAIL</Text>
                 </TouchableOpacity>
 
                 <View style={styles.viewInsert} />
 
-                <TouchableOpacity style={styles.buttonCancel}>
+                <TouchableOpacity
+                    style={styles.buttonCancel}
+                    onPress={() => props.navigation.navigate("Login")}
+                >
                     <Text style={styles.textSignIn}>CANCEL</Text>
                 </TouchableOpacity>
 
@@ -83,7 +102,8 @@ const styles = StyleSheet.create({
     textFooter: {
         color: 'white',
         fontSize: 15,
-        alignSelf: 'flex-start'
+        alignSelf: 'flex-start',
+        textAlign: 'center'
     },
     textSignIn: {
         color: 'white',

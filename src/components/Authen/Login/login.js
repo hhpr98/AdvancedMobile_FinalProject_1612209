@@ -9,7 +9,12 @@ const Login = (props) => {
     const [password, setPassword] = useState('');
 
     const signInClick = () => {
-        // console.log(user + password);
+
+        if (user === "") {
+            alert("Không được bỏ trống email");
+            return;
+        }
+
         getLogin(user, password)
             .then(res => res.json())
             .then(res => {
@@ -24,10 +29,13 @@ const Login = (props) => {
                             },
                             expires: 3600 * 24 * 30
                         });
+                    // remove data input type
+                    setUser("");
+                    setPassword("");
                     // navigate
                     props.navigation.navigate('TabBar');
                 } else {
-                    alert("Wrong username or password!");
+                    alert("Sai tên đăng nhập hoặc mật khẩu!");
                 }
             })
             .catch(err => console.log("GET LOGIN ERR", err))
@@ -49,8 +57,7 @@ const Login = (props) => {
                                     <Text style={styles.text}>{language.loginscreen.usernametext}</Text>
                                     <TextInput
                                         style={{ ...styles.input, color: theme.foreground }}
-                                        //placeholder="username"
-                                        //defaultValue="nguyenhuuhoa1998@gmail.com"
+                                        defaultValue={user}
                                         placeholderTextColor="#4B4541"
                                         onChangeText={user => setUser(user)}
                                     />
@@ -63,8 +70,7 @@ const Login = (props) => {
                                     <TextInput
                                         style={{ ...styles.input, color: theme.foreground }}
                                         secureTextEntry={true}
-                                        //placeholder="***"
-                                        //defaultValue="abcxyz123@"
+                                        defaultValue={password}
                                         placeholderTextColor="#4B4541"
                                         onChangeText={password => setPassword(password)}
                                     >

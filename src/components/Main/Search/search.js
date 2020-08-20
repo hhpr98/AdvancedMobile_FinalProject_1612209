@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput, ScrollView, TouchableOpacity, ImageBackgro
 import { ThemeContext } from "../../../Provider/ThemeProvider";
 // import { DataContext } from "../../../Provider/DataProvider";
 // import SearchBar from "react-native-elements";
-import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
+import RadioForm from 'react-native-simple-radio-button';
 import storage from "../../../Storage/storage";
 import { searchWithKeyword } from "./action";
 import SearchCourse from "./SearchCourse/search-course";
@@ -44,11 +44,13 @@ const Search = (props) => {
                 ({ theme, language }) => {
                     return (
                         <View style={{ ...styles.home, backgroundColor: theme.background }}>
-                            <View style={{ backgroundColor: theme.foreground, flexDirection: "row", justifyContent: "space-around" }}>
+                            <View style={{ backgroundColor: "lightblue", flexDirection: "row", justifyContent: "space-around" }}>
                                 <TextInput
-                                    style={{ ...styles.input, color: theme.background }}
+                                    style={{ ...styles.input, color: "black" }}
                                     onChangeText={text => setText(text)}
                                     placeholder={language.searchscreen.placeholder}
+                                    placeholderTextColor="white"
+                                    borderBottomColor="white"
                                 />
                                 <ImageBackground source={require("../../../../assets/ic_search.png")} style={{ width: 50, height: 50, alignSelf: "center" }}>
                                     <TouchableOpacity style={{ width: 50, height: 50, }} onPress={() => onSearchClick()}>
@@ -56,7 +58,7 @@ const Search = (props) => {
                                 </ImageBackground>
                             </View>
                             <RadioForm
-                                style={{ justifyContent: "space-around", backgroundColor: "white" }}
+                                style={{ justifyContent: "space-around", backgroundColor: "lightblue", marginBottom: 20, }}
                                 radio_props={[
                                     { label: language.searchscreen.label1, value: 0 },
                                     { label: language.searchscreen.label2, value: 1 },
