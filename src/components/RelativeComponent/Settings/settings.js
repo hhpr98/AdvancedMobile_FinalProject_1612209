@@ -74,22 +74,22 @@ const Setting = (props) => {
                             </TouchableOpacity>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                 <Text style={{ ...styles.textBig, color: theme.foreground }}>{language.settingscreen.set6}</Text>
-                                <ToggleSwitch style={{ marginRight: 50, }}
+                                <ToggleSwitch style={{ marginRight: 50 }}
                                     isOn={wifiStreamToggle}
                                     onColor="#3399FF"
-                                    offColor="black"
-                                    labelStyle={{ ...styles.textBig, color: theme.foreground }}
+                                    offColor="red"
+                                    labelStyle={{ ...styles.textBig, color: theme.foreground, alignSelf: "center" }}
                                     size="small"
                                     onToggle={() => setWifiStreamToggle(!wifiStreamToggle)}
                                 />
                             </View>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                 <Text style={{ ...styles.textBig, color: theme.foreground }}>{language.settingscreen.set7}</Text>
-                                <ToggleSwitch style={{ marginRight: 50, }}
+                                <ToggleSwitch style={{ marginRight: 50 }}
                                     isOn={downloadStreamToggle}
                                     onColor="#3399FF"
-                                    offColor="black"
-                                    labelStyle={{ ...styles.textBig, color: theme.foreground }}
+                                    offColor="red"
+                                    labelStyle={{ ...styles.textBig, color: theme.foreground, alignSelf: "center" }}
                                     size="small"
                                     onToggle={() => setDownloadStreamToggle(!downloadStreamToggle)}
                                 />
