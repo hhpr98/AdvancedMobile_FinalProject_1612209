@@ -14,7 +14,7 @@ const ActivateAccount = (props) => {
             .then(res => res.json())
             .then(res => {
                 if (res.message === "OK") {
-                    alert("Activation success!");
+                    alert("Kích hoạt tài khoản thành công!");
                     props.navigation.navigate("Login");
                 } else {
                     alert(res.message);

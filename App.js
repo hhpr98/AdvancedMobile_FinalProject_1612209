@@ -11,7 +11,9 @@ import Browse from "./src/components/Main/Browse/browse";
 import Search from "./src/components/Main/Search/search";
 import Login from "./src/components/Authen/Login/login";
 import Register from "./src/components/Authen/Register/register";
-import ForgotPassword from "./src/components/Authen/ForgotPassword/forgot-password";
+import ForgotPassword from "./src/components/Authen/ForgotPassword/forgot-password-send";
+import ForgotPasswordVerify from "./src/components/Authen/ForgotPassword/forgot-password-get-jwt";
+import ForgotPasswordReset from "./src/components/Authen/ForgotPassword/forgot-password-reset";
 import Profile from "./src/components/Profile/profile";
 import Setting from "./src/components/RelativeComponent/Settings/settings";
 import CourseDetail from "./src/components/Courses/CourseDetail/course-detail";
@@ -282,6 +284,8 @@ const MainStackNavigation = () => {
             <MainStack.Screen name="SplashScreen" component={SplashScreen} />
             <MainStack.Screen name="Login" component={Login} />
             <MainStack.Screen name="ForgotPassword" component={ForgotPassword} />
+            <MainStack.Screen name="ForgotPasswordVerify" component={ForgotPasswordVerify} />
+            <MainStack.Screen name="ForgotPasswordReset" component={ForgotPasswordReset} />
             <MainStack.Screen name="Register" component={Register} />
             <MainStack.Screen name="ActivateAccount" component={ActivateAccount} />
             <MainStack.Screen name="TabBar" component={TabBar} />

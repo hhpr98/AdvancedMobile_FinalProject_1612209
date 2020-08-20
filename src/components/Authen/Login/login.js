@@ -9,7 +9,6 @@ const Login = (props) => {
     const [password, setPassword] = useState('');
 
     const signInClick = () => {
-        // console.log(user + password);
         getLogin(user, password)
             .then(res => res.json())
             .then(res => {
@@ -27,7 +26,7 @@ const Login = (props) => {
                     // navigate
                     props.navigation.navigate('TabBar');
                 } else {
-                    alert("Wrong username or password!");
+                    alert("Sai tên đăng nhập hoặc mật khẩu!");
                 }
             })
             .catch(err => console.log("GET LOGIN ERR", err))

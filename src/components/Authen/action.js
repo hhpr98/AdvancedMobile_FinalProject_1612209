@@ -70,5 +70,42 @@ export const changePassword = (token, id, old, newp) => {
             oldPass: old,
             newPass: newp
         })
-    })
+    });
+}
+
+export const forgotPasswordSend = (email) => {
+    return fetch(API.FORGOT_PASSWORD_SEND, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            email: email
+        })
+    });
+}
+
+export const forgotPasswordGetInfor = (jwt) => {
+    return fetch(`${API.FORGOT_PASSWORD_GETINFO}/${jwt}`, {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        }
+    });
+}
+
+export const forgotPasswordReset = (userId, newPassword) => {
+    return fetch(API.FORGOT_PASSWORD_RESET, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            id: userId,
+            password: newPassword
+        })
+    });
 }

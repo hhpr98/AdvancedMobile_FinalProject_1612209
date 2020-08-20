@@ -8,6 +8,10 @@ const API = {
   SEND_ACTIVE_EMAIL: `${URL}/user/send-activate-email`,
   ACTIVE_EMAIL: `${URL}/user/activate-email`,
   CHANGE_PASSWORD: `${URL}/user/change-password`,
+  FORGOT_PASSWORD_SEND: `${URL}/user/forget-pass/send-email`,
+  FORGOT_PASSWORD_GETINFO: `${URL}/user/forget-pass/jwt`, // /{jwt}
+  FORGOT_PASSWORD_RESET: `${URL}/user/reset-password`,
+
 
   // user
   // get thông tin cá nhân
