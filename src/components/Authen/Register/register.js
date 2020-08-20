@@ -39,8 +39,9 @@ const Register = (props) => {
             .then(res => res.json())
             .then(res => {
                 if (res.message === "OK") {
-                    sendActivateEmail(email)
-                        .catch(err => console.log("SEND EMAIL FIRST TIME ERRRR", err));
+                    // sendActivateEmail(email)
+                    //     .catch(err => console.log("SEND EMAIL FIRST TIME ERRRR", err));
+                    // api register đã tự gửi send JWT
                     props.navigation.navigate("ActivateAccount", { email: email });
                 } else {
                     alert(res.message);
