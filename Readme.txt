@@ -1,11 +1,12 @@
 ------------------------------------------------
-Nguyễn Hữu Hòa
-1612209
+1612209 - Nguyễn Hữu Hòa
+1612209@student.hcmus.edu.vn
 ------------------------------------------------
 
 Hướng dẫn để cài đặt và chạy ứng dụng : 
 https://youtu.be/iYEDjBD42A4
 
+Apk file : 
 ------------------------------------------------
 
 Deadline 1: Mock-up UI/UX cho toàn bộ ứng dụng
@@ -28,7 +29,15 @@ Deadline 3: Xây dựng ứng dụng online cho toàn bộ ứng dụng
 -----------------------------------------------
 
 Deadline 4: Hoàn thành ứng dụng
-  - Commit ID: 
+  - Commit ID: a09a665
   - Video demo: https://youtu.be/iYEDjBD42A4
+
+-----------------------------------------------
+
+-----------------------------------------------
+
+Deadline 4: Hoàn thành ứng dụng
+  - Commit ID: 
+  - Video demo: 
 
 -----------------------------------------------
