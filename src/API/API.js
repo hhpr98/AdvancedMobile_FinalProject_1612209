@@ -12,7 +12,6 @@ const API = {
   FORGOT_PASSWORD_GETINFO: `${URL}/user/forget-pass/jwt`, // /{jwt}
   FORGOT_PASSWORD_RESET: `${URL}/user/reset-password`,
 
-
   // user
   // get thông tin cá nhân
   GET_INFORMATION: `${URL}/user/me`,
@@ -66,6 +65,8 @@ const API = {
   // search
   // search với từ khóa nhất định
   SEARCH_V2: `${URL}/course/searchV2`,
+  HISTORY_SEARCH: `${URL}/course/search-history`,
+  DELETE_HISTORY_SEARCH: `${URL}/course/delete-search-history`, // /{id}
 };
 
 export default API;
