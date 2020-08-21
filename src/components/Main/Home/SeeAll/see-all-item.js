@@ -23,8 +23,8 @@ const SeeAllItem = (props) => {
                                 style={styles.image}
                             />
                             <View style={{ margin: 5, marginRight: 30, }}>
-                                <Text style={{ ...styles.text1, color: theme.foreground }}>{item.courseTitle}</Text>
-                                <Text style={{ ...styles.text2, color: theme.foreground }} > {item.name}</Text>
+                                <Text style={{ ...styles.text1, color: theme.foreground, width: 250, }}>{item.title}</Text>
+                                <Text style={{ ...styles.text2, color: theme.foreground }} > {item["instructor.user.name"]}</Text>
                                 <Text style={{ ...styles.text2, color: theme.foreground }} > {getCourseString()}</Text>
                                 <StarRating
                                     style={{ width: 200, backgroundColor: "red" }}
