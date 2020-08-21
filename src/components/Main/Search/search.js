@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, TextInput, ScrollView, TouchableOpacity, ImageBackground, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, TextInput, ScrollView, TouchableOpacity, ImageBackground, ActivityIndicator, Text } from 'react-native';
 import { ThemeContext } from "../../../Provider/ThemeProvider";
 // import { DataContext } from "../../../Provider/DataProvider";
 // import SearchBar from "react-native-elements";
 import RadioForm from 'react-native-simple-radio-button';
 import storage from "../../../Storage/storage";
-import { searchWithKeyword } from "./action";
+import { searchWithKeyword, getHistorySearch } from "./action";
 import SearchCourse from "./SearchCourse/search-course";
 import SearchAuthor from "./SearchAuthor/search-author";
+// import SearchHistory from "./SearchHistory/search-history";
 
 const Search = (props) => {
     const [text, setText] = useState("");
@@ -16,16 +17,54 @@ const Search = (props) => {
     const [courseData, setCourseData] = useState([]);
     const [instructorData, setInstructorData] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [dataHistory, setDataHistory] = useState([]);
 
     useEffect(() => {
         storage
             .load({ key: "jwt" })
-            .then(ret => setToken(ret.token))
+            .then(ret => {
+                setToken(ret.token);
+                const tk = ret.token;
+                LoadSearchHistory(tk);
+            })
             .catch(err => console.log(err.name))
     }, []);
 
+    const LoadSearchHistory = (tk) => {
+        getHistorySearch(tk)
+            .then(res => res.json())
+            .then(res => {
+                if (res.message === "OK") {
+                    setDataHistory(res.payload.data.slice(10));
+                }
+            })
+            .catch(err => console.log("GET SEARCH HISTORY API FAILLLLL", err))
+    }
+
+    const renderSearchHistoryItem = (items) => {
+        console.log(items)
+        return items.map(item => {
+            <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                <TouchableOpacity
+                    onPress={() => setText(item.content)}
+                    style={{ width: 300, height: 40 }}
+                >
+                    <Text style={{ color: "red" }}>{item.content}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => alert("xóa")}
+                    style={{ width: 40, height: 40 }}
+                >
+                    <Text style={{ color: "#3399FF" }}>delete</Text>
+                </TouchableOpacity>
+            </View>
+        })
+    }
+
     const onSearchClick = () => {
         setLoading(true);
+        setModalVisible(false);
         searchWithKeyword(token, text)
             .then(res => res.json())
             .then(res => {
@@ -35,7 +74,9 @@ const Search = (props) => {
                 }
             })
             .catch(err => console.log("SEARCH WITH KEYWORD FAIL:", err))
-            .finally(() => setLoading(false));
+            .finally(() => {
+                setLoading(false);
+            });
     }
 
     return (
@@ -45,18 +86,34 @@ const Search = (props) => {
                     return (
                         <View style={{ ...styles.home, backgroundColor: theme.background }}>
                             <View style={{ backgroundColor: "lightblue", flexDirection: "row", justifyContent: "space-around" }}>
+                                <ImageBackground source={require("../../../../assets/ic_search_history.png")} style={{ width: 30, height: 30, alignSelf: "center", marginLeft: 10, }}>
+                                    <TouchableOpacity style={{ width: 30, height: 30, }} onPress={() => setModalVisible(true)}>
+                                    </TouchableOpacity>
+                                </ImageBackground>
+
                                 <TextInput
                                     style={{ ...styles.input, color: "black" }}
                                     onChangeText={text => setText(text)}
                                     placeholder={language.searchscreen.placeholder}
                                     placeholderTextColor="white"
                                     borderBottomColor="white"
+                                    value={text}
                                 />
-                                <ImageBackground source={require("../../../../assets/ic_search.png")} style={{ width: 50, height: 50, alignSelf: "center" }}>
-                                    <TouchableOpacity style={{ width: 50, height: 50, }} onPress={() => onSearchClick()}>
+                                <ImageBackground source={require("../../../../assets/ic_search.png")} style={{ width: 40, height: 40, alignSelf: "center" }}>
+                                    <TouchableOpacity style={{ width: 40, height: 40, }} onPress={() => onSearchClick()}>
                                     </TouchableOpacity>
                                 </ImageBackground>
                             </View>
+
+                            {
+                                modalVisible ?
+                                    <>
+                                        {renderSearchHistoryItem(dataHistory)}
+                                    </> :
+                                    <>
+                                    </>
+                            }
+
                             <RadioForm
                                 style={{ justifyContent: "space-around", backgroundColor: "lightblue", marginBottom: 20, }}
                                 radio_props={[
@@ -73,6 +130,9 @@ const Search = (props) => {
                                 onPress={(value) => setType(value)}
                             >
                             </RadioForm>
+
+                            {/* <SearchHistory modalVisible setModalVisible setText dataHistory setDataHistory loading /> */}
+
                             <ScrollView>
                                 {loading && <ActivityIndicator size="large" color="yellow" />}
                                 {type === 0 ?
@@ -112,7 +172,7 @@ const styles = StyleSheet.create({
         //color: 'white',
         borderBottomColor: 'lightgray',
         borderBottomWidth: 3,
-    }
+    },
 });
 
 export default Search;

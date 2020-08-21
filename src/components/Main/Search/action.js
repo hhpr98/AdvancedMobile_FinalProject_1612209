@@ -64,3 +64,27 @@ export const searchWithCourseId = (token, pathId) => {
         })
     })
 }
+
+export const getHistorySearch = (token) => {
+
+    return fetch(API.HISTORY_SEARCH, {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        }
+    })
+}
+
+export const deleteAnSearchHistory = (token, id) => {
+
+    return fetch(`${API.DELETE_HISTORY_SEARCH}/{id}`, {
+        method: 'DELETE',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        }
+    })
+}
