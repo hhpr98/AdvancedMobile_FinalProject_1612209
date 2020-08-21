@@ -34,9 +34,7 @@ Deadline 4: Hoàn thành ứng dụng
 
 -----------------------------------------------
 
------------------------------------------------
-
-Deadline 4: Hoàn thành ứng dụng
+Chỉnh sửa sau deadline: 
   - Commit ID: 
   - Video demo: 
 
