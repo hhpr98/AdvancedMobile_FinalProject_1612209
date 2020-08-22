@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import ImageButton from "./ImageButton/image-button";
 import LittleImageButton from "./ImageButton/little-image-button";
 import PopularSkills from "./PopularSkill/popular-skill";
