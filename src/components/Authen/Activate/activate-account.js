@@ -83,6 +83,7 @@ const ActivateAccount = (props) => {
                                     <Text style={styles.text}>Email</Text>
                                     <TextInput
                                         style={styles.input}
+                                        editable={false}
                                         //onChangeText={email => setEmail(email)}
                                         defaultValue={email}
                                     />
