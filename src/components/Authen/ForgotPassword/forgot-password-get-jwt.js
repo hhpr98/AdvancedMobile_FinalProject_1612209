@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { forgotPasswordGetInfor } from "../action";
+import { ThemeContext } from "../../../Provider/ThemeProvider";
 
 const ForgotPasswordVerify = (props) => {
 
@@ -21,47 +22,55 @@ const ForgotPasswordVerify = (props) => {
     }
 
     return (
-        <View style={styles.home}>
-            <View style={styles.view}>
+        <ThemeContext.Consumer>
+            {
+                ({ language }) => {
+                    return (
+                        <View style={styles.home}>
+                            <View style={styles.view}>
 
-                <Text style={styles.textHeader}>VERIFY</Text>
+                                <Text style={styles.textHeader}>{language.forgotverifyscreen.title}</Text>
 
-                <View style={styles.viewInsert2} />
+                                <View style={styles.viewInsert2} />
 
-                <Text style={styles.textFooter}>Enter your jwt in email to reset password</Text>
+                                <Text style={styles.textFooter}>{language.forgotverifyscreen.subtitle}</Text>
 
-                <View style={styles.viewInsert2} />
+                                <View style={styles.viewInsert2} />
 
-                <View style={styles.viewBorder}>
-                    <Text style={styles.text}>Jwt token</Text>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={jwt => setJwt(jwt)}
-                    />
-                </View>
+                                <View style={styles.viewBorder}>
+                                    <Text style={styles.text}>{language.forgotverifyscreen.jwtlabel}</Text>
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={jwt => setJwt(jwt)}
+                                    />
+                                </View>
 
-                <View style={styles.viewInsert2} />
+                                <View style={styles.viewInsert2} />
 
-                <TouchableOpacity
-                    style={styles.buttonSignIn}
-                    onPress={() => OnVerifyClick()}
-                >
-                    <Text style={styles.textSignIn}>CONFIRM</Text>
-                </TouchableOpacity>
+                                <TouchableOpacity
+                                    style={styles.buttonSignIn}
+                                    onPress={() => OnVerifyClick()}
+                                >
+                                    <Text style={styles.textSignIn}>{language.forgotverifyscreen.confirmbutton}</Text>
+                                </TouchableOpacity>
 
-                <View style={styles.viewInsert} />
+                                <View style={styles.viewInsert} />
 
-                <TouchableOpacity
-                    style={styles.buttonCancel}
-                    onPress={() => props.navigation.navigate("Login")}
-                >
-                    <Text style={styles.textSignIn}>CANCEL</Text>
-                </TouchableOpacity>
+                                <TouchableOpacity
+                                    style={styles.buttonCancel}
+                                    onPress={() => props.navigation.navigate("Login")}
+                                >
+                                    <Text style={styles.textSignIn}>{language.forgotverifyscreen.cancelbutton}</Text>
+                                </TouchableOpacity>
 
-                <View style={styles.viewInsert2} />
+                                <View style={styles.viewInsert2} />
 
-            </View>
-        </View>
+                            </View>
+                        </View>
+                    )
+                }
+            }
+        </ThemeContext.Consumer>
     );
 };
 

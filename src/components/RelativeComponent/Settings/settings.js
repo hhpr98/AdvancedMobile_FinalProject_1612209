@@ -103,7 +103,9 @@ const Setting = (props) => {
                             <Text style={{ ...styles.textBig, color: theme.foreground }}>{language.settingscreen.set9}</Text>
                             <Text style={{ ...styles.textBig, color: theme.foreground }}>{language.settingscreen.seta}</Text>
                             <Text style={{ ...styles.textLittle, color: theme.foreground }}>{language.settingscreen.setb}</Text>
-                            <Text style={{ ...styles.textBig, color: theme.foreground }}>{language.settingscreen.setc}</Text>
+                            <TouchableOpacity onPress={() => props.navigation.navigate("FeedBack")}>
+                                <Text style={{ ...styles.textBig, color: theme.foreground }}>{language.settingscreen.setc}</Text>
+                            </TouchableOpacity>
                             <Text style={{ ...styles.textBig, color: theme.foreground }}>{language.settingscreen.setd}</Text>
                             <Text style={{ ...styles.textBig, color: theme.foreground }}>{language.settingscreen.sete}</Text>
                             <View style={{ ...styles.line, borderColor: theme.background, borderBottomColor: theme.foreground }} />

@@ -27,6 +27,7 @@ import { PlayingVideoYoutube, PlayingVideoGoogleStorage } from "./src/components
 import ActivateAccount from "./src/components/Authen/Activate/activate-account";
 import PathList from './src/components/Main/Browse/Paths/PathList/path-list';
 import SeeAll from './src/components/Main/Home/SeeAll/see-all';
+import FeedBack from "./src/components/RelativeComponent/Feedback/send-feedback";
 
 const MainStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -154,6 +155,7 @@ const SettingStackNavigation = () => {
             <SettingStack.Screen name="Profile" component={Profile} />
             <SettingStack.Screen name="Subscription" component={Subscription} />
             <SettingStack.Screen name="Contact" component={Contact} />
+            <SettingStack.Screen name="FeedBack" component={FeedBack} />
         </SettingStack.Navigator>
     )
 }

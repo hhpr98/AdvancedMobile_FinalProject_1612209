@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { forgotPasswordReset } from "../action";
+import { ThemeContext } from "../../../Provider/ThemeProvider";
 
 const ForgotPasswordReset = (props) => {
 
@@ -33,59 +34,67 @@ const ForgotPasswordReset = (props) => {
     }
 
     return (
-        <View style={styles.home}>
-            <View style={styles.view}>
+        <ThemeContext.Consumer>
+            {
+                ({ language }) => {
+                    return (
+                        <View style={styles.home}>
+                            <View style={styles.view}>
 
-                <Text style={styles.textHeader}>Forgot password</Text>
+                                <Text style={styles.textHeader}>{language.forgotresetscreen.title}</Text>
 
-                <View style={styles.viewInsert2} />
+                                <View style={styles.viewInsert2} />
 
-                <Text style={styles.textFooter}>Change your new password</Text>
+                                <Text style={styles.textFooter}>{language.forgotresetscreen.subtitle}</Text>
 
-                <View style={styles.viewInsert2} />
+                                <View style={styles.viewInsert2} />
 
-                <View style={styles.viewBorder}>
-                    <Text style={styles.text}>New Password</Text>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={pass => setNewPassword(pass)}
-                        secureTextEntry={true}
-                    />
-                </View>
+                                <View style={styles.viewBorder}>
+                                    <Text style={styles.text}>{language.forgotresetscreen.newpassword}</Text>
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={pass => setNewPassword(pass)}
+                                        secureTextEntry={true}
+                                    />
+                                </View>
 
-                <View style={styles.viewInsert} />
+                                <View style={styles.viewInsert} />
 
-                <View style={styles.viewBorder}>
-                    <Text style={styles.text}>Renew Password</Text>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={pass => setRenewPassword(pass)}
-                        secureTextEntry={true}
-                    />
-                </View>
+                                <View style={styles.viewBorder}>
+                                    <Text style={styles.text}>{language.forgotresetscreen.renewpassword}</Text>
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={pass => setRenewPassword(pass)}
+                                        secureTextEntry={true}
+                                    />
+                                </View>
 
-                <View style={styles.viewInsert2} />
+                                <View style={styles.viewInsert2} />
 
-                <TouchableOpacity
-                    style={styles.buttonSignIn}
-                    onPress={() => OnResetPasswordClick()}
-                >
-                    <Text style={styles.textSignIn}>RESET PASSWORD</Text>
-                </TouchableOpacity>
+                                <TouchableOpacity
+                                    style={styles.buttonSignIn}
+                                    onPress={() => OnResetPasswordClick()}
+                                >
+                                    <Text style={styles.textSignIn}>{language.forgotresetscreen.resetbutton}</Text>
+                                </TouchableOpacity>
 
-                <View style={styles.viewInsert} />
+                                <View style={styles.viewInsert} />
 
-                <TouchableOpacity
-                    style={styles.buttonCancel}
-                    onPress={() => props.navigation.navigate("Login")}
-                >
-                    <Text style={styles.textSignIn}>CANCEL</Text>
-                </TouchableOpacity>
+                                <TouchableOpacity
+                                    style={styles.buttonCancel}
+                                    onPress={() => props.navigation.navigate("Login")}
+                                >
+                                    <Text style={styles.textSignIn}>{language.forgotresetscreen.cancelbutton}</Text>
+                                </TouchableOpacity>
 
-                <View style={styles.viewInsert2} />
+                                <View style={styles.viewInsert2} />
 
-            </View>
-        </View>
+                            </View>
+                        </View>
+                    )
+                }
+            }
+        </ThemeContext.Consumer>
     );
 };
 

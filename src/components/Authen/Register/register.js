@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import { getRegister, sendActivateEmail } from "../action";
+import { ThemeContext } from "../../../Provider/ThemeProvider";
 
 const Register = (props) => {
     const [email, setEmail] = useState('');
@@ -51,81 +52,89 @@ const Register = (props) => {
     }
 
     return (
-        <View style={styles.home}>
-            <ScrollView style={styles.view}>
+        <ThemeContext.Consumer>
+            {
+                ({ language }) => {
+                    return (
+                        <View style={styles.home}>
+                            <ScrollView style={styles.view}>
 
-                <Text style={styles.textHeader}>Create your free account</Text>
+                                <Text style={styles.textHeader}>{language.registerscreen.title}</Text>
 
-                <View style={styles.viewInsert} />
+                                <View style={styles.viewInsert} />
 
-                <View style={styles.viewBorder}>
-                    <Text style={styles.text}>Email *</Text>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={email => setEmail(email)}
-                    />
-                </View>
+                                <View style={styles.viewBorder}>
+                                    <Text style={styles.text}>Email *</Text>
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={email => setEmail(email)}
+                                    />
+                                </View>
 
-                <View style={styles.viewInsert} />
+                                <View style={styles.viewInsert} />
 
-                <View style={styles.viewBorder}>
-                    <Text style={styles.text}>Username *</Text>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={userName => setUsername(userName)}
-                    >
-                    </TextInput>
-                </View>
+                                <View style={styles.viewBorder}>
+                                    <Text style={styles.text}>{language.registerscreen.username}</Text>
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={userName => setUsername(userName)}
+                                    >
+                                    </TextInput>
+                                </View>
 
-                <View style={styles.viewInsert} />
+                                <View style={styles.viewInsert} />
 
-                <View style={styles.viewBorder}>
-                    <Text style={styles.text}>Phone</Text>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={phone => setPhone(phone)}
-                    />
-                </View>
+                                <View style={styles.viewBorder}>
+                                    <Text style={styles.text}>{language.registerscreen.phone}</Text>
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={phone => setPhone(phone)}
+                                    />
+                                </View>
 
-                <View style={styles.viewInsert} />
+                                <View style={styles.viewInsert} />
 
-                <View style={styles.viewBorder}>
-                    <Text style={styles.text}>Password *</Text>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={password => setPassword(password)}
-                        secureTextEntry={true}
-                    >
-                    </TextInput>
-                </View>
+                                <View style={styles.viewBorder}>
+                                    <Text style={styles.text}>{language.registerscreen.password}</Text>
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={password => setPassword(password)}
+                                        secureTextEntry={true}
+                                    >
+                                    </TextInput>
+                                </View>
 
-                <View style={styles.viewInsert} />
+                                <View style={styles.viewInsert} />
 
 
-                <View style={styles.viewBorder}>
-                    <Text style={styles.text}>RePassword *</Text>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={rePassword => setRePassword(rePassword)}
-                        secureTextEntry={true}
-                    >
-                    </TextInput>
-                </View>
+                                <View style={styles.viewBorder}>
+                                    <Text style={styles.text}>{language.registerscreen.repassword}</Text>
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={rePassword => setRePassword(rePassword)}
+                                        secureTextEntry={true}
+                                    >
+                                    </TextInput>
+                                </View>
 
-                <View style={styles.viewInsert} />
+                                <View style={styles.viewInsert} />
 
-                <Text style={styles.textFooter}>* Required field</Text>
+                                <Text style={styles.textFooter}>{language.registerscreen.required}</Text>
 
-                <View style={styles.viewInsert2} />
+                                <View style={styles.viewInsert2} />
 
-                <TouchableOpacity style={styles.buttonSignIn} onPress={() => onRegister()}>
-                    <Text style={styles.textSignIn}>REGISTER</Text>
-                </TouchableOpacity>
+                                <TouchableOpacity style={styles.buttonSignIn} onPress={() => onRegister()}>
+                                    <Text style={styles.textSignIn}>{language.registerscreen.registerbutton}</Text>
+                                </TouchableOpacity>
 
-                <View style={styles.viewInsert2} />
+                                <View style={styles.viewInsert2} />
 
-            </ScrollView>
-        </View>
+                            </ScrollView>
+                        </View>
+                    )
+                }
+            }
+        </ThemeContext.Consumer>
     );
 };
 

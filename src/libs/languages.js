@@ -36,7 +36,7 @@ export const languages = {
             set9: "Show quiz at the end of video",
             seta: "Download location",
             setb: "Default location (30.5GB free of 64GB)",
-            setc: "Caption",
+            setc: "Send feedback",
             setd: "Notifications",
             sete: "Advanced Options",
             setf: "App version",
@@ -94,6 +94,43 @@ export const languages = {
         },
         greeting: {
             content: "This app is using for learing. For more information, please click Contact tab or call 0353133147. Let enjoys!",
+        },
+        activatescreen: {
+            title: "Activate account",
+            subtitle: "Enter your jwt token in your email to activate account",
+            activatebutton: "ACTIVATE",
+            cancelbutton: "CANCEL",
+            resendbutton: "Resend link",
+        },
+        forgotsendscreen: {
+            title: "FORGOT PASSWORD",
+            subtitle: "Enter your email address and we'll send you link to reset your password",
+            sendbutton: "SEND EMAIL",
+            cancelbutton: "CANCEL",
+        },
+        forgotverifyscreen: {
+            title: "VERIFY",
+            subtitle: "Enter your jwt in email to reset password",
+            jwtlabel: "Jwt token",
+            confirmbutton: "CONFIRM",
+            cancelbutton: "CANCEL"
+        },
+        forgotresetscreen: {
+            title: "Forgot password",
+            subtitle: "Change your new password",
+            newpassword: "New Password",
+            renewpassword: "Renew Password",
+            resetbutton: "RESET PASSWORD",
+            cancelbutton: "CANCEL"
+        },
+        registerscreen: {
+            title: "Create your free account",
+            username: "Username *",
+            phone: "Phone",
+            password: "Password *",
+            repassword: "RePassword *",
+            required: "* Required field",
+            registerbutton: "REGISTER",
         }
     },
     vi: {
@@ -133,7 +170,7 @@ export const languages = {
             set9: "Hiển thị bài tập nhỏ cuối mỗi video",
             seta: "Nơi download",
             setb: "Thư mục mặc định (30.5GB trên tổng 64GB)",
-            setc: "Tiêu đề",
+            setc: "Gửi phản hồi",
             setd: "Thông báo",
             sete: "Cài đặt nâng cao",
             setf: "Phiên bản ứng dụng",
@@ -191,6 +228,43 @@ export const languages = {
         },
         greeting: {
             content: "Ứng dụng phục vụ cho việc học tập. Để biết thêm thông tin, vui lòng liên hệ 0353133147. Chúc vui!",
+        },
+        activatescreen: {
+            title: "Kích hoạt tài khoản",
+            subtitle: "Nhập mã jwt được gửi từ email của bạn để kích hoạt tài khoản",
+            activatebutton: "KÍCH HOẠT",
+            cancelbutton: "HỦY BỎ",
+            resendbutton: "Gửi lại",
+        },
+        forgotsendscreen: {
+            title: "QUÊN MẬT KHẨU",
+            subtitle: "Nhập vào email của bạn và chúng tôi sẽ gửi link cấp lại mật khẩu cho bạn",
+            sendbutton: "GỬI EMAIL",
+            cancelbutton: "HỦY BỎ",
+        },
+        forgotverifyscreen: {
+            title: "XÁC NHẬN",
+            subtitle: "Nhập mã jwt trong email của bạn để cấp lại mật khẩu",
+            jwtlabel: "Mã jwt",
+            confirmbutton: "XÁC NHẬN",
+            cancelbutton: "HỦY BỎ"
+        },
+        forgotresetscreen: {
+            title: "Quên mật khẩu",
+            subtitle: "Thay đổi mật khẩu mới",
+            newpassword: "Mật khẩu mới",
+            renewpassword: "Nhập lại mật khẩu",
+            resetbutton: "Cấp lại mật khẩu",
+            cancelbutton: "HỦY BỎ"
+        },
+        registerscreen: {
+            title: "Tạo tài khoản miễn phí",
+            username: "Họ tên *",
+            phone: "Số điện thoại",
+            password: "Mật khẩu *",
+            repassword: "Nhập lại mật khẩu *",
+            required: "* Không được bỏ trống",
+            registerbutton: "ĐĂNG KÍ",
         }
     }
 }

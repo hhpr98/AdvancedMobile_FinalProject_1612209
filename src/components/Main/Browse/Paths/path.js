@@ -51,7 +51,7 @@ const Path = (props) => {
 const styles = StyleSheet.create({
     view: {
         flexDirection: 'row',
-        marginLeft: 10,
+        // marginLeft: 10,
         justifyContent: 'space-between',
     },
     textTitle: {

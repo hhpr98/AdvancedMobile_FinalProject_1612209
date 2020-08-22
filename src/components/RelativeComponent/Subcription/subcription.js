@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image } from 'react-native';
 
-const Subscription = () => {
+const Subscription = (props) => {
     return (
         <View style={styles.home}>
             <View style={styles.head}>
