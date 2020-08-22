@@ -46,7 +46,6 @@ const Login = (props) => {
         <ThemeContext.Consumer>
             {
                 ({ theme, language }) => {
-                    // console.log(theme);
                     return (
                         <View style={{ ...styles.home, backgroundColor: theme.background }}>
                             <View style={styles.view}>

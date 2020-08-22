@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { forgotPasswordSend } from "../action";
+import { ThemeContext } from "../../../Provider/ThemeProvider";
 
 const ForgotPassword = (props) => {
     const [email, setEmail] = useState('');
@@ -19,48 +20,55 @@ const ForgotPassword = (props) => {
     }
 
     return (
-        <View style={styles.home}>
-            <View style={styles.view}>
+        <ThemeContext.Consumer>
+            {
+                ({ language }) => {
+                    return (
+                        <View style={styles.home}>
+                            <View style={styles.view}>
 
-                <Text style={styles.textHeader}>FORGOT PASSWORD</Text>
+                                <Text style={styles.textHeader}>{language.forgotsendscreen.title}</Text>
 
-                <View style={styles.viewInsert2} />
+                                <View style={styles.viewInsert2} />
 
-                <Text style={styles.textFooter}>Enter your email address and we'll send you link to reset your
-                    password</Text>
+                                <Text style={styles.textFooter}>{language.forgotsendscreen.subtitle}</Text>
 
-                <View style={styles.viewInsert2} />
+                                <View style={styles.viewInsert2} />
 
-                <View style={styles.viewBorder}>
-                    <Text style={styles.text}>Email</Text>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={email => setEmail(email)}
-                    />
-                </View>
+                                <View style={styles.viewBorder}>
+                                    <Text style={styles.text}>Email</Text>
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={email => setEmail(email)}
+                                    />
+                                </View>
 
-                <View style={styles.viewInsert2} />
+                                <View style={styles.viewInsert2} />
 
-                <TouchableOpacity
-                    style={styles.buttonSignIn}
-                    onPress={() => OnSendEmailClick()}
-                >
-                    <Text style={styles.textSignIn}>SEND EMAIL</Text>
-                </TouchableOpacity>
+                                <TouchableOpacity
+                                    style={styles.buttonSignIn}
+                                    onPress={() => OnSendEmailClick()}
+                                >
+                                    <Text style={styles.textSignIn}>{language.forgotsendscreen.sendbutton}</Text>
+                                </TouchableOpacity>
 
-                <View style={styles.viewInsert} />
+                                <View style={styles.viewInsert} />
 
-                <TouchableOpacity
-                    style={styles.buttonCancel}
-                    onPress={() => props.navigation.navigate("Login")}
-                >
-                    <Text style={styles.textSignIn}>CANCEL</Text>
-                </TouchableOpacity>
+                                <TouchableOpacity
+                                    style={styles.buttonCancel}
+                                    onPress={() => props.navigation.navigate("Login")}
+                                >
+                                    <Text style={styles.textSignIn}>{language.forgotsendscreen.cancelbutton}</Text>
+                                </TouchableOpacity>
 
-                <View style={styles.viewInsert2} />
+                                <View style={styles.viewInsert2} />
 
-            </View>
-        </View>
+                            </View>
+                        </View>
+                    )
+                }
+            }
+        </ThemeContext.Consumer>
     );
 };
 

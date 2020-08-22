@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { sendActivateEmail, acctivateEmail } from "../action";
+import { ThemeContext } from "../../../Provider/ThemeProvider";
 
 const ActivateAccount = (props) => {
 
@@ -21,7 +22,6 @@ const ActivateAccount = (props) => {
                 }
             })
             .catch(err => console.log("ACTIVATE API FAILLLLL", err));
-
     }
 
     const onCancelClick = () => {
@@ -33,7 +33,7 @@ const ActivateAccount = (props) => {
             .then(res => res.json())
             .then(res => {
                 if (res.message === "OK") {
-                    alert("Success! Check your email address!")
+                    alert("Thành công! Kiểm tra email của bạn!")
                 } else {
                     alert(res.message);
                 }
@@ -42,55 +42,63 @@ const ActivateAccount = (props) => {
     }
 
     return (
-        <View style={styles.home}>
-            <View style={styles.view}>
+        <ThemeContext.Consumer>
+            {
+                ({ language }) => {
+                    return (
+                        <View style={styles.home}>
+                            <View style={styles.view}>
 
-                <Text style={styles.textHeader}>Activate account</Text>
+                                <Text style={styles.textHeader}>{language.activatescreen.title}</Text>
 
-                <View style={styles.viewInsert2} />
+                                <View style={styles.viewInsert2} />
 
-                <Text style={styles.textFooter}>Enter your jwt token in your email to activate account</Text>
+                                <Text style={styles.textFooter}>{language.activatescreen.subtitle}</Text>
 
-                <View style={styles.viewInsert2} />
+                                <View style={styles.viewInsert2} />
 
-                <View style={styles.viewBorder}>
-                    <Text style={styles.text}>Jwt</Text>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={jwt => setJwt(jwt)}
-                    />
-                </View>
+                                <View style={styles.viewBorder}>
+                                    <Text style={styles.text}>Jwt</Text>
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={jwt => setJwt(jwt)}
+                                    />
+                                </View>
 
-                <View style={styles.viewInsert2} />
+                                <View style={styles.viewInsert2} />
 
-                <TouchableOpacity style={styles.buttonSignIn} onPress={() => onActivate()}>
-                    <Text style={styles.textSignIn}>ACTIVATE</Text>
-                </TouchableOpacity>
+                                <TouchableOpacity style={styles.buttonSignIn} onPress={() => onActivate()}>
+                                    <Text style={styles.textSignIn}>{language.activatescreen.activatebutton}</Text>
+                                </TouchableOpacity>
 
-                <View style={styles.viewInsert} />
+                                <View style={styles.viewInsert} />
 
-                <TouchableOpacity style={styles.buttonCancel} onPress={() => onCancelClick()}>
-                    <Text style={styles.textSignIn}>CANCEL</Text>
-                </TouchableOpacity>
+                                <TouchableOpacity style={styles.buttonCancel} onPress={() => onCancelClick()}>
+                                    <Text style={styles.textSignIn}>{language.activatescreen.cancelbutton}</Text>
+                                </TouchableOpacity>
 
-                <View style={styles.viewInsert2} />
+                                <View style={styles.viewInsert2} />
 
-                <View style={styles.viewBorder}>
-                    <Text style={styles.text}>Email</Text>
-                    <TextInput
-                        style={styles.input}
-                        //onChangeText={email => setEmail(email)}
-                        defaultValue={email}
-                    />
-                </View>
+                                <View style={styles.viewBorder}>
+                                    <Text style={styles.text}>Email</Text>
+                                    <TextInput
+                                        style={styles.input}
+                                        //onChangeText={email => setEmail(email)}
+                                        defaultValue={email}
+                                    />
+                                </View>
 
-                <View style={styles.viewInsert2} />
+                                <View style={styles.viewInsert2} />
 
-                <TouchableOpacity style={styles.buttonSignIn2} onPress={() => onResendEmail()}>
-                    <Text style={styles.textSignIn}>Resend link</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
+                                <TouchableOpacity style={styles.buttonSignIn2} onPress={() => onResendEmail()}>
+                                    <Text style={styles.textSignIn}>{language.activatescreen.resendbutton}</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    )
+                }
+            }
+        </ThemeContext.Consumer>
     );
 };
 
