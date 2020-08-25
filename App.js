@@ -28,6 +28,7 @@ import ActivateAccount from "./src/components/Authen/Activate/activate-account";
 import PathList from './src/components/Main/Browse/Paths/PathList/path-list';
 import SeeAll from './src/components/Main/Home/SeeAll/see-all';
 import FeedBack from "./src/components/RelativeComponent/Feedback/send-feedback";
+import GoogleAuth from "./src/components/Authen/GoogleAuth/google-auth";
 
 const MainStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -290,6 +291,7 @@ const MainStackNavigation = () => {
             <MainStack.Screen name="ForgotPasswordReset" component={ForgotPasswordReset} />
             <MainStack.Screen name="Register" component={Register} />
             <MainStack.Screen name="ActivateAccount" component={ActivateAccount} />
+            <MainStack.Screen name="GoogleAuth" component={GoogleAuth} />
             <MainStack.Screen name="TabBar" component={TabBar} />
         </MainStack.Navigator>
     )
