@@ -9,6 +9,7 @@ import { searchWithKeyword, getHistorySearch } from "./action";
 import SearchCourse from "./SearchCourse/search-course";
 import SearchAuthor from "./SearchAuthor/search-author";
 // import SearchHistory from "./SearchHistory/search-history";
+import SearchHistory from "./SearchHistory/search-his";
 
 const Search = (props) => {
     const [text, setText] = useState("");
@@ -23,11 +24,7 @@ const Search = (props) => {
     useEffect(() => {
         storage
             .load({ key: "jwt" })
-            .then(ret => {
-                setToken(ret.token);
-                const tk = ret.token;
-                LoadSearchHistory(tk);
-            })
+            .then(ret => setToken(ret.token))
             .catch(err => console.log(err.name))
     }, []);
 
@@ -36,30 +33,10 @@ const Search = (props) => {
             .then(res => res.json())
             .then(res => {
                 if (res.message === "OK") {
-                    setDataHistory(res.payload.data.slice(10));
+                    setDataHistory(res.payload.data.slice(0, 7));
                 }
             })
             .catch(err => console.log("GET SEARCH HISTORY API FAILLLLL", err))
-    }
-
-    const renderSearchHistoryItem = (items) => {
-        console.log(items)
-        return items.map(item => {
-            <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-                <TouchableOpacity
-                    onPress={() => setText(item.content)}
-                    style={{ width: 300, height: 40 }}
-                >
-                    <Text style={{ color: "red" }}>{item.content}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={() => alert("xóa")}
-                    style={{ width: 40, height: 40 }}
-                >
-                    <Text style={{ color: "#3399FF" }}>delete</Text>
-                </TouchableOpacity>
-            </View>
-        })
     }
 
     const onSearchClick = () => {
@@ -87,7 +64,10 @@ const Search = (props) => {
                         <View style={{ ...styles.home, backgroundColor: theme.background }}>
                             <View style={{ backgroundColor: "lightblue", flexDirection: "row", justifyContent: "space-around" }}>
                                 <ImageBackground source={require("../../../../assets/ic_search_history.png")} style={{ width: 30, height: 30, alignSelf: "center", marginLeft: 10, }}>
-                                    <TouchableOpacity style={{ width: 30, height: 30, }} onPress={() => setModalVisible(true)}>
+                                    <TouchableOpacity style={{ width: 30, height: 30, }} onPress={() => {
+                                        setModalVisible(!modalVisible);
+                                        LoadSearchHistory(token);
+                                    }}>
                                     </TouchableOpacity>
                                 </ImageBackground>
 
@@ -108,10 +88,8 @@ const Search = (props) => {
                             {
                                 modalVisible ?
                                     <>
-                                        {renderSearchHistoryItem(dataHistory)}
-                                    </> :
-                                    <>
-                                    </>
+                                        <SearchHistory dataHistory={dataHistory} setDataHistory={setDataHistory} setText={setText} />
+                                    </> : <></>
                             }
 
                             <RadioForm
