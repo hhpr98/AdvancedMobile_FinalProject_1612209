@@ -88,7 +88,7 @@ const Search = (props) => {
                             {
                                 modalVisible ?
                                     <>
-                                        <SearchHistory dataHistory={dataHistory} setDataHistory={setDataHistory} setText={setText} />
+                                        <SearchHistory dataHistory={dataHistory} setDataHistory={setDataHistory} setText={setText} token={token} />
                                     </> : <></>
                             }
 
