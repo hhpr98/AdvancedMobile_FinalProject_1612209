@@ -6,7 +6,7 @@ import StarRating from 'react-native-star-rating';
 const CourseLargeItem = (props) => {
 
     const item = props.item;
-    const point = Math.round(Number(item.courseAveragePoint));
+    const point = Math.round(Number(item.courseContentPoint));
 
     const getCourseString = () => {
         return point + ' point . ' + item.coursePrice + ' (VNĐ)';
