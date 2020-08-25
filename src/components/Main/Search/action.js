@@ -79,7 +79,7 @@ export const getHistorySearch = (token) => {
 
 export const deleteAnSearchHistory = (token, id) => {
 
-    return fetch(`${API.DELETE_HISTORY_SEARCH}/{id}`, {
+    return fetch(`${API.DELETE_HISTORY_SEARCH}/${id}`, {
         method: 'DELETE',
         headers: {
             Accept: 'application/json',

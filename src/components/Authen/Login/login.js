@@ -90,7 +90,9 @@ const Login = (props) => {
                                     <Text style={styles.textOrther}>{language.loginscreen.buttonforgottext}</Text>
                                 </TouchableOpacity>
                                 <View style={{ ...styles.viewInsert, backgroundColor: theme.background }} />
-                                <TouchableOpacity style={{ ...styles.buttonSSO, backgroundColor: theme.background, borderRadius: theme.boderRadiusLogin }}>
+                                <TouchableOpacity style={{ ...styles.buttonSSO, backgroundColor: theme.background, borderRadius: theme.boderRadiusLogin }}
+                                    onPress={() => props.navigation.navigate('GoogleAuth')}
+                                >
                                     <Text style={styles.textOrther}>{language.loginscreen.buttongoogletext}</Text>
                                 </TouchableOpacity>
                                 <View style={{ ...styles.viewInsert, backgroundColor: theme.background }} />

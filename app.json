@@ -23,7 +23,8 @@
     ],
     "android": {
       "package": "com.nguyenhuuhoa.applearning",
-      "versionCode": 1
+      "versionCode": 1,
+      "googleServicesFile": "./Credentials/client_secret_297482195046-atg02prarlpfel1efkak9cb8eqt7g5h9.apps.googleusercontent.com.json"
     },
     "ios": {
       "supportsTablet": true
