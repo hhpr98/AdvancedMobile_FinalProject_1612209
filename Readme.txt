@@ -3,10 +3,10 @@
 1612209@student.hcmus.edu.vn
 ------------------------------------------------
 
-Hướng dẫn để cài đặt và chạy ứng dụng : 
-https://youtu.be/iYEDjBD42A4
+Hướng dẫn để cài đặt và chạy ứng dụng (updated):
+https://youtu.be/D3Wdk8J4mts
 
-Apk file : 
+Apk file : https://github.com/hhpr98/AdvancedMobile_FinalProject_1612209/blob/master/AppBuild/v3.apk
 ------------------------------------------------
 
 Deadline 1: Mock-up UI/UX cho toàn bộ ứng dụng
@@ -35,7 +35,7 @@ Deadline 4: Hoàn thành ứng dụng
 -----------------------------------------------
 
 Chỉnh sửa sau deadline: 
-  - Commit ID: 
-  - Video demo: 
+  - Commit ID: 0360fda
+  - Video demo: https://youtu.be/D3Wdk8J4mts
 
 -----------------------------------------------
