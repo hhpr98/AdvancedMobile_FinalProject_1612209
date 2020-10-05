@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, TextInput, ScrollView, TouchableOpacity, ImageBackground, ActivityIndicator, Text } from 'react-native';
 import { ThemeContext } from "../../../Provider/ThemeProvider";
 // import { DataContext } from "../../../Provider/DataProvider";
-// import SearchBar from "react-native-elements";
 import RadioForm from 'react-native-simple-radio-button';
 import storage from "../../../Storage/storage";
 import { searchWithKeyword, getHistorySearch } from "./action";
