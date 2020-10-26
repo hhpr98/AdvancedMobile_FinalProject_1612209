@@ -1,3 +1,5 @@
+* Cập nhật: API do nhóm itedu.me cung cấp không truy cập được nữa, app tạm thời không hoạt động
+
 ------------------------------------------------
 1612209 - Nguyễn Hữu Hòa
 1612209@student.hcmus.edu.vn
